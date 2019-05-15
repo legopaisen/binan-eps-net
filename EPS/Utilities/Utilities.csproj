@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0E04869D-378B-4F6D-97B8-61EC252693FD}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{6A845B4B-9A1B-4BA1-918E-0C9DAE8E1464}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EPS</RootNamespace>
-    <AssemblyName>EPS</AssemblyName>
+    <RootNamespace>Utilities</RootNamespace>
+    <AssemblyName>Utilities</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>aEPs.ico</ApplicationIcon>
+    <StartupObject />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -68,31 +68,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmMenu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMenu.Designer.cs">
-      <DependentUpon>frmMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="AppsettingsManager.cs" />
+    <Compile Include="AuditTrail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmMenu.resx">
-      <DependentUpon>frmMenu.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -100,30 +92,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="aEPs.ico" />
-    <None Include="Resources\bps-nav_logout.png" />
-    <None Include="Resources\bps-nav_exit.png" />
-    <None Include="Resources\2012_aeps.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Common\DataConnector\DataConnector\DataConnector.csproj">
       <Project>{7c12da36-676a-49b3-b59d-c07c96539620}</Project>
       <Name>DataConnector</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common\EncryptUtilities\EncryptUtilities.csproj">
-      <Project>{eb833d79-9d87-48ec-b396-79aace685253}</Project>
-      <Name>EncryptUtilities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Common\StringUtilities\StringUtilities.csproj">
       <Project>{f7cab867-edef-4e74-91bf-6c5385dcf513}</Project>
       <Name>StringUtilities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tables\Tables.csproj">
-      <Project>{e3052cdd-4fbb-44ca-9674-580cc45be0a7}</Project>
-      <Name>Tables</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
