@@ -70,11 +70,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmBarangay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBarangay.Designer.cs">
+      <DependentUpon>frmBarangay.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmConfig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmConfig.Designer.cs">
       <DependentUpon>frmConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStructureType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStructureType.Designer.cs">
+      <DependentUpon>frmStructureType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserlvlAccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserlvlAccess.Designer.cs">
+      <DependentUpon>frmUserlvlAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserlvltbl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserlvltbl.Designer.cs">
+      <DependentUpon>frmUserlvltbl.cs</DependentUpon>
     </Compile>
     <Compile Include="frmUsers.cs">
       <SubType>Form</SubType>
@@ -83,8 +107,20 @@
       <DependentUpon>frmUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmBarangay.resx">
+      <DependentUpon>frmBarangay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmConfig.resx">
       <DependentUpon>frmConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStructureType.resx">
+      <DependentUpon>frmStructureType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserlvlAccess.resx">
+      <DependentUpon>frmUserlvlAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserlvltbl.resx">
+      <DependentUpon>frmUserlvltbl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>

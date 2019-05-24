@@ -90,6 +90,7 @@
             // 
             // txtSubject
             // 
+            this.txtSubject.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtSubject.Location = new System.Drawing.Point(77, 216);
             this.txtSubject.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubject.Name = "txtSubject";
@@ -108,6 +109,7 @@
             // 
             // txtValue
             // 
+            this.txtValue.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtValue.Location = new System.Drawing.Point(317, 216);
             this.txtValue.Margin = new System.Windows.Forms.Padding(4);
             this.txtValue.Name = "txtValue";

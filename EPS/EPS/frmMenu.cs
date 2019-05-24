@@ -49,5 +49,29 @@ namespace EPS
             frmConfig frmconfig = new frmConfig();
             frmconfig.ShowDialog();
         }
+
+        private void userLevelTableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUserlvltbl frmuserlvltbl = new frmUserlvltbl();
+            frmuserlvltbl.ShowDialog();
+        }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBarangay frmbarangay = new frmBarangay();
+            frmbarangay.ShowDialog();
+        }
+
+        private void structureTpeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmStructureType frmstructuretype = new frmStructureType();
+            frmstructuretype.ShowDialog();
+        }
+
+        private void userLevelAccessToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUserlvlAccess frmuserlvlaccess = new frmUserlvlAccess();
+            frmuserlvlaccess.ShowDialog();
+        }
     }
 }

@@ -39,6 +39,8 @@ namespace Tables
             pSet.Close();
             dgConfig.ClearSelection();
             ClearFields();
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
         }
 
         private void ClearFields()
@@ -98,31 +100,35 @@ namespace Tables
                     return;
                 }
 
-                int iCode = 0;
-                string sCode = "";
-                OracleResultSet pSet = new OracleResultSet();
-                pSet.Query = "select max(subj_code) from config";
-                if (pSet.Execute())
-                    if (pSet.Read())
-                    {
-                        iCode = Convert.ToInt16(pSet.GetString(0));
-                        iCode++;
-                        sCode = iCode.ToString("00");
-                    }
-                    else
-                        sCode = "01";
-                pSet.Close();
 
-                pSet.Query  = "insert into config values ";
-                pSet.Query += "('" + sCode + "', ";
-                pSet.Query += " '" + StringUtilities.HandleApostrophe(txtSubject.Text.Trim()) + "', ";
-                pSet.Query += " '" + StringUtilities.HandleApostrophe(txtValue.Text.Trim()) + "','') ";
-                pSet.ExecuteNonQuery();
+                if (MessageBox.Show("Are you sure you want to save?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    int iCode = 0;
+                    string sCode = "";
+                    OracleResultSet pSet = new OracleResultSet();
+                    pSet.Query = "select max(subj_code) from config";
+                    if (pSet.Execute())
+                        if (pSet.Read())
+                        {
+                            iCode = Convert.ToInt16(pSet.GetString(0));
+                            iCode++;
+                            sCode = iCode.ToString("00");
+                        }
+                        else
+                            sCode = "01";
+                    pSet.Close();
 
-                //pApp->AuditTrail("SS-A", "CONFIG", "Subj Code : " + m_sSubjCode);
-                MessageBox.Show("System setting successfully saved.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btnExit.PerformClick();
-                
+                    pSet.Query = "insert into config values ";
+                    pSet.Query += "('" + sCode + "', ";
+                    pSet.Query += " '" + StringUtilities.HandleApostrophe(txtSubject.Text.Trim()) + "', ";
+                    pSet.Query += " '" + StringUtilities.HandleApostrophe(txtValue.Text.Trim()) + "','') ";
+                    pSet.ExecuteNonQuery();
+
+                    //pApp->AuditTrail("SS-A", "CONFIG", "Subj Code : " + m_sSubjCode);
+                    MessageBox.Show("System setting successfully saved.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnExit.PerformClick();
+
+                }
             }
         }
 
@@ -221,5 +227,6 @@ namespace Tables
                 this.Close();
             }
         }
+
     }
 }

@@ -34,7 +34,6 @@
             this.engineeringRecordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.postingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelPostedPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.applicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renewalApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,8 +107,7 @@
             this.recordsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.engineeringRecordsToolStripMenuItem,
             this.postingToolStripMenuItem,
-            this.cancelPostedPaymentToolStripMenuItem,
-            this.toolStripSeparator1});
+            this.cancelPostedPaymentToolStripMenuItem});
             this.recordsToolStripMenuItem.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.recordsToolStripMenuItem.Name = "recordsToolStripMenuItem";
             this.recordsToolStripMenuItem.Size = new System.Drawing.Size(69, 22);
@@ -132,11 +130,6 @@
             this.cancelPostedPaymentToolStripMenuItem.Name = "cancelPostedPaymentToolStripMenuItem";
             this.cancelPostedPaymentToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.cancelPostedPaymentToolStripMenuItem.Text = "Cancel posted payment";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(218, 6);
             // 
             // applicationsToolStripMenuItem
             // 
@@ -268,12 +261,14 @@
             this.userLevelTableToolStripMenuItem.Name = "userLevelTableToolStripMenuItem";
             this.userLevelTableToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.userLevelTableToolStripMenuItem.Text = "User Level Table";
+            this.userLevelTableToolStripMenuItem.Click += new System.EventHandler(this.userLevelTableToolStripMenuItem_Click);
             // 
             // userLevelAccessToolStripMenuItem
             // 
             this.userLevelAccessToolStripMenuItem.Name = "userLevelAccessToolStripMenuItem";
             this.userLevelAccessToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.userLevelAccessToolStripMenuItem.Text = "User Level Access";
+            this.userLevelAccessToolStripMenuItem.Click += new System.EventHandler(this.userLevelAccessToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -309,12 +304,14 @@
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
             this.usersToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.usersToolStripMenuItem.Text = "Barangay";
+            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
             // structureTpeToolStripMenuItem
             // 
             this.structureTpeToolStripMenuItem.Name = "structureTpeToolStripMenuItem";
             this.structureTpeToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.structureTpeToolStripMenuItem.Text = "Structure Type";
+            this.structureTpeToolStripMenuItem.Click += new System.EventHandler(this.structureTpeToolStripMenuItem_Click);
             // 
             // categoryToolStripMenuItem
             // 
@@ -428,7 +425,7 @@
             // pnlButton
             // 
             this.pnlButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlButton.BackColor = System.Drawing.Color.Aqua;
+            this.pnlButton.BackColor = System.Drawing.Color.White;
             this.pnlButton.Controls.Add(this.btnExit);
             this.pnlButton.Controls.Add(this.btnLO);
             this.pnlButton.Controls.Add(this.btnReports);
@@ -437,7 +434,7 @@
             this.pnlButton.Controls.Add(this.btnER);
             this.pnlButton.Controls.Add(this.btnNewApp);
             this.pnlButton.Location = new System.Drawing.Point(0, 388);
-            this.pnlButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlButton.Margin = new System.Windows.Forms.Padding(4);
             this.pnlButton.Name = "pnlButton";
             this.pnlButton.Size = new System.Drawing.Size(1016, 73);
             this.pnlButton.TabIndex = 2;
@@ -448,7 +445,7 @@
             this.btnExit.Image = global::EPS.Properties.Resources.bps_nav_exit;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnExit.Location = new System.Drawing.Point(836, 3);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(128, 68);
             this.btnExit.TabIndex = 0;
@@ -463,7 +460,7 @@
             this.btnLO.Image = global::EPS.Properties.Resources.bps_nav_logout;
             this.btnLO.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnLO.Location = new System.Drawing.Point(704, 3);
-            this.btnLO.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLO.Margin = new System.Windows.Forms.Padding(4);
             this.btnLO.Name = "btnLO";
             this.btnLO.Size = new System.Drawing.Size(128, 68);
             this.btnLO.TabIndex = 0;
@@ -476,7 +473,7 @@
             this.btnReports.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReports.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnReports.Location = new System.Drawing.Point(572, 3);
-            this.btnReports.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnReports.Margin = new System.Windows.Forms.Padding(4);
             this.btnReports.Name = "btnReports";
             this.btnReports.Size = new System.Drawing.Size(128, 68);
             this.btnReports.TabIndex = 0;
@@ -489,7 +486,7 @@
             this.btnCOO.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCOO.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCOO.Location = new System.Drawing.Point(440, 3);
-            this.btnCOO.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCOO.Margin = new System.Windows.Forms.Padding(4);
             this.btnCOO.Name = "btnCOO";
             this.btnCOO.Size = new System.Drawing.Size(128, 68);
             this.btnCOO.TabIndex = 0;
@@ -502,7 +499,7 @@
             this.btnAOF.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAOF.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnAOF.Location = new System.Drawing.Point(308, 3);
-            this.btnAOF.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAOF.Margin = new System.Windows.Forms.Padding(4);
             this.btnAOF.Name = "btnAOF";
             this.btnAOF.Size = new System.Drawing.Size(128, 68);
             this.btnAOF.TabIndex = 0;
@@ -515,7 +512,7 @@
             this.btnER.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnER.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnER.Location = new System.Drawing.Point(176, 3);
-            this.btnER.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnER.Margin = new System.Windows.Forms.Padding(4);
             this.btnER.Name = "btnER";
             this.btnER.Size = new System.Drawing.Size(128, 68);
             this.btnER.TabIndex = 0;
@@ -528,7 +525,7 @@
             this.btnNewApp.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewApp.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnNewApp.Location = new System.Drawing.Point(44, 3);
-            this.btnNewApp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNewApp.Margin = new System.Windows.Forms.Padding(4);
             this.btnNewApp.Name = "btnNewApp";
             this.btnNewApp.Size = new System.Drawing.Size(128, 68);
             this.btnNewApp.TabIndex = 0;
@@ -549,7 +546,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MS;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Engineering Permit System";
@@ -574,7 +571,6 @@
         private System.Windows.Forms.ToolStripMenuItem engineeringRecordsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem postingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancelPostedPaymentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem newApplicationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renewalApplicationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem permitBillingToolStripMenuItem;
