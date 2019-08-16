@@ -1,0 +1,1835 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.A_TRAIL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="A_TRAIL">
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="MODULE_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="TRANS_DATE" Type="date" />
+          <Property Name="TRANS_TIME" Type="varchar2" MaxLength="15" />
+          <Property Name="TABLE_FLD" Type="varchar2" MaxLength="30" />
+          <Property Name="OBJECT_FLD" Type="varchar2" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.A_TRAIL_TABLE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="A_TRAIL_TABLE">
+          <Property Name="MODULE_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="MODULE_DESC" Type="varchar2" MaxLength="100" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.ACT_USE_SPLIT_TMP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ACT_USE_SPLIT_TMP">
+          <Property Name="ARPN" Type="varchar2" MaxLength="20" />
+          <Property Name="ACT_USE" Type="varchar2" MaxLength="20" />
+          <Property Name="ASS_VALUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.ACTIVE_MODULES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ACTIVE_MODULES">
+          <Property Name="MODULE_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="TIME_IN" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.ASSESS_RATE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ASSESS_RATE">
+          <Property Name="ARPN" Type="varchar2" MaxLength="20" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_RATE" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.ASSESSED_VALUE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ASSESSED_VALUE">
+          <Property Name="PIN" Type="varchar2" MaxLength="40" />
+          <Property Name="ARPN" Type="varchar2" MaxLength="20" />
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="ACT_USE" Type="varchar2" MaxLength="20" />
+          <Property Name="ASS_VALUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="TAX_RATE" Type="float" Precision="126" Scale="0" />
+          <Property Name="SEF_RATE" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.ASSESSED_VALUE_TMP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ASSESSED_VALUE_TMP">
+          <Property Name="PIN" Type="varchar2" MaxLength="40" />
+          <Property Name="ARPN" Type="varchar2" MaxLength="20" />
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="ACT_USE" Type="varchar2" MaxLength="20" />
+          <Property Name="ASS_VALUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="TAX_RATE" Type="float" Precision="126" Scale="0" />
+          <Property Name="SEF_RATE" Type="float" Precision="126" Scale="0" />
+          <Property Name="TERM" Type="varchar2" MaxLength="1" />
+          <Property Name="QTR" Type="varchar2" MaxLength="3" />
+          <Property Name="IDLE_TAG" Type="number" Precision="38" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BANK_TABLE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BANK_TABLE">
+          <Property Name="BANK_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="BANK_NM" Type="varchar2" MaxLength="60" />
+          <Property Name="BANK_BRANCH" Type="varchar2" MaxLength="40" />
+          <Property Name="BANK_ADD" Type="varchar2" MaxLength="60" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BILL_HIST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILL_HIST">
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="PAYER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="REFERENCE" Type="varchar2" MaxLength="20" />
+          <Property Name="REF_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_INT" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_SURCH" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_AMT_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="DATE_BILLED" Type="date" />
+          <Property Name="TIME_BILLED" Type="varchar2" MaxLength="20" />
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="500" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PAYMENT_TERM" Type="varchar2" MaxLength="1" />
+          <Property Name="QTR_PAID" Type="varchar2" MaxLength="3" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="TAXABLE_AMOUNT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BILL_MAJOR_FEES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILL_MAJOR_FEES">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="140" />
+          <Property Name="FEES_TYPE" Type="varchar2" MaxLength="100" />
+          <Property Name="RECORD_KEEP" Type="varchar2" MaxLength="2" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="GEN_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BILL_MAJOR_FEES_X' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILL_MAJOR_FEES_X">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="140" />
+          <Property Name="FEES_TYPE" Type="varchar2" MaxLength="100" />
+          <Property Name="RECORD_KEEP" Type="varchar2" MaxLength="2" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="GEN_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BILL_SCHEDULES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILL_SCHEDULES">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="QTY1" Type="number" Precision="10" Scale="0" />
+          <Property Name="QTY2" Type="number" Precision="10" Scale="0" />
+          <Property Name="RANGE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT1" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE_DESC" Type="varchar2" MaxLength="40" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BILL_SCHEDULES_X' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILL_SCHEDULES_X">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="QTY1" Type="number" Precision="10" Scale="0" />
+          <Property Name="QTY2" Type="number" Precision="10" Scale="0" />
+          <Property Name="RANGE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT1" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE_DESC" Type="varchar2" MaxLength="40" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BILL_SERIAL_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILL_SERIAL_TBL">
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="NUM_CODE" Type="number" Precision="10" Scale="0" />
+          <Property Name="BILL_SERIAL" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BILL_SUBCATEGORIES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILL_SUBCATEGORIES">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="200" />
+          <Property Name="FEES_TERM" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_MEANS" Type="varchar2" MaxLength="2" />
+          <Property Name="FEES_UNIT" Type="varchar2" MaxLength="100" />
+          <Property Name="CUMULATIVE" Type="varchar2" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BILL_SUBCATEGORIES_X' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILL_SUBCATEGORIES_X">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="200" />
+          <Property Name="FEES_TERM" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_MEANS" Type="varchar2" MaxLength="2" />
+          <Property Name="FEES_UNIT" Type="varchar2" MaxLength="100" />
+          <Property Name="CUMULATIVE" Type="varchar2" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BILLING' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILLING">
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="PAYER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="REFERENCE" Type="varchar2" MaxLength="20" />
+          <Property Name="REF_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_INT" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_SURCH" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_AMT_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="DATE_BILLED" Type="date" />
+          <Property Name="TIME_BILLED" Type="varchar2" MaxLength="20" />
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="500" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PAYMENT_TERM" Type="varchar2" MaxLength="1" />
+          <Property Name="QTR_PAID" Type="varchar2" MaxLength="3" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="TAXABLE_AMOUNT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BILLING_REF_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILLING_REF_TBL">
+          <Property Name="BILL_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="BILL_DESC" Type="varchar2" MaxLength="100" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="SEQ_ORDER" Type="number" Precision="38" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BILLOFFICERS_REV_ACCT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILLOFFICERS_REV_ACCT">
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_DESC" Type="varchar2" MaxLength="100" />
+          <Property Name="BILL_CODE" Type="varchar2" MaxLength="2" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BNS_TAX_MEMO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BNS_TAX_MEMO">
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="100" />
+          <Property Name="REF_CODE" Type="varchar2" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BRGY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BRGY">
+          <Property Name="BRGY_CODE" Type="varchar2" MaxLength="4" />
+          <Property Name="BRGY_NM" Type="varchar2" MaxLength="40" />
+          <Property Name="DIST_CODE" Type="varchar2" MaxLength="3" />
+        </EntityType>-->
+        <EntityType Name="BUSINESS_CONFIG">
+          <Key>
+            <PropertyRef Name="BUSS_CONFIGNO" />
+          </Key>
+          <Property Name="BUSS_CONFIGNO" Type="varchar2" MaxLength="5" Nullable="false" />
+          <Property Name="CONFIG_DESC" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="CONFIG_VALUE" Type="varchar2" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BUSINESSES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BUSINESSES">
+          <Property Name="BIN" Type="varchar2" MaxLength="19" />
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="BNS_NM" Type="varchar2" MaxLength="50" />
+          <Property Name="BNS_STAT" Type="varchar2" MaxLength="3" />
+          <Property Name="LOC_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="LOC_STREET" Type="varchar2" MaxLength="60" />
+          <Property Name="LOC_BRGY" Type="varchar2" MaxLength="40" />
+          <Property Name="ORGN_KIND" Type="varchar2" MaxLength="25" />
+          <Property Name="GROSS" Type="float" Precision="126" Scale="0" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="BNS_CODE" Type="varchar2" MaxLength="8" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.BUSINESSES_TMP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BUSINESSES_TMP">
+          <Property Name="BIN" Type="varchar2" MaxLength="19" />
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="BNS_NM" Type="varchar2" MaxLength="4000" />
+          <Property Name="BNS_STAT" Type="varchar2" MaxLength="4000" />
+          <Property Name="LOC_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="LOC_STREET" Type="varchar2" MaxLength="60" />
+          <Property Name="LOC_BRGY" Type="varchar2" MaxLength="40" />
+          <Property Name="ORGN_KIND" Type="varchar2" MaxLength="30" />
+          <Property Name="GROSS" Type="float" Precision="126" Scale="0" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="BNS_CODE" Type="varchar2" MaxLength="8" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CANC_CHECK_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CANC_CHECK_TBL">
+          <Property Name="CHK_REF" Type="varchar2" MaxLength="20" />
+          <Property Name="CHK_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_LN" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_FN" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_MI" Type="varchar2" MaxLength="1" />
+          <Property Name="CHK_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="DT_CREATE" Type="date" />
+          <Property Name="BANK_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="DEBIT_CREDIT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CANC_PAY_TENDERED' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CANC_PAY_TENDERED">
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="PAYMENT_TYPE" Type="varchar2" MaxLength="3" />
+          <Property Name="ORIG_AMT_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="CASH_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="CHECK_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="TAX_CREDIT_USED" Type="float" Precision="126" Scale="0" />
+          <Property Name="TOTAL_AMT_TENDERED" Type="float" Precision="126" Scale="0" />
+          <Property Name="CREDIT_SAVED" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CANC_PAYMENT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CANC_PAYMENT">
+          <Property Name="PAYER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="BILLED_SYSTEM" Type="varchar2" MaxLength="15" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_INT" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_SURCH" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_AMT_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="PAYMENT_TYPE" Type="varchar2" MaxLength="3" />
+          <Property Name="DATA_MODE" Type="varchar2" MaxLength="3" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="PAYMENT_TERM" Type="varchar2" MaxLength="1" />
+          <Property Name="QTR_PAID" Type="varchar2" MaxLength="1" />
+          <Property Name="DATE_POSTED" Type="date" />
+          <Property Name="TIME_POSTED" Type="varchar2" MaxLength="11" />
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="500" />
+          <Property Name="REFNO" Type="varchar2" MaxLength="25" />
+          <Property Name="TAXABLE_AMOUNT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CANC_PAYMENTX' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CANC_PAYMENTX">
+          <Property Name="PAYER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="BILLED_SYSTEM" Type="varchar2" MaxLength="10" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DUE" Type="number" Precision="10" Scale="0" />
+          <Property Name="FEES_INT" Type="number" Precision="10" Scale="0" />
+          <Property Name="FEES_SURCH" Type="number" Precision="10" Scale="0" />
+          <Property Name="FEES_AMT_DUE" Type="number" Precision="10" Scale="0" />
+          <Property Name="PAYMENT_TYPE" Type="varchar2" MaxLength="3" />
+          <Property Name="DATA_MODE" Type="varchar2" MaxLength="3" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="PAYMENT_TERM" Type="varchar2" MaxLength="1" />
+          <Property Name="QTR_PAID" Type="varchar2" MaxLength="1" />
+          <Property Name="DATE_POSTED" Type="date" />
+          <Property Name="TIME_POSTED" Type="varchar2" MaxLength="11" />
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="120" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CHECK_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CHECK_TBL">
+          <Property Name="CHK_REF" Type="varchar2" MaxLength="20" />
+          <Property Name="CHK_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_LN" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_FN" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_MI" Type="varchar2" MaxLength="1" />
+          <Property Name="CHK_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="DT_CREATE" Type="date" />
+          <Property Name="BANK_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="DEBIT_CREDIT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CHECK_TBL_X' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CHECK_TBL_X">
+          <Property Name="CHK_REF" Type="varchar2" MaxLength="20" />
+          <Property Name="CHK_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_LN" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_FN" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_MI" Type="varchar2" MaxLength="1" />
+          <Property Name="CHK_AMT" Type="number" Precision="10" Scale="0" />
+          <Property Name="DT_CREATE" Type="date" />
+          <Property Name="BANK_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="DEBIT_CREDIT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CHK_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CHK_TBL">
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="CHK_DATE" Type="date" />
+          <Property Name="CHK_TYPE" Type="varchar2" MaxLength="2" />
+          <Property Name="CHK_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="CASH_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="BANK_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="TELLER" Type="varchar2" MaxLength="20" />
+          <Property Name="DT_ACCEPTED" Type="date" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CHK_TBL_TEMP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CHK_TBL_TEMP">
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="CHK_DATE" Type="date" />
+          <Property Name="CHK_TYPE" Type="varchar2" MaxLength="2" />
+          <Property Name="CHK_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="CASH_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="BANK_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="TELLER" Type="varchar2" MaxLength="20" />
+          <Property Name="DT_ACCEPTED" Type="date" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CONFIG' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CONFIG">
+          <Property Name="SUBJ_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="SUBJ_DESC" Type="varchar2" MaxLength="50" />
+          <Property Name="VALUE_FLD" Type="varchar2" MaxLength="50" />
+          <Property Name="SECURITY_FLD" Type="varchar2" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CONNECTIVITY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CONNECTIVITY">
+          <Property Name="CONNECTIVITY" Type="char" MaxLength="1" />
+          <Property Name="BILLING" Type="char" MaxLength="1" />
+          <Property Name="SYSTEM_NM" Type="char" MaxLength="4" />
+          <Property Name="FEES_CODE" Type="char" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CUR_BNS_REFCODE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CUR_BNS_REFCODE">
+          <Property Name="BNS_REF_CODE" Type="varchar2" MaxLength="7" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.CUR_RPT_REFCODE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CUR_RPT_REFCODE">
+          <Property Name="RPT_REF_CODE" Type="varchar2" MaxLength="6" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.DATE_SETTING' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DATE_SETTING">
+          <Property Name="CUR_DATE" Type="date" />
+          <Property Name="CUR_TIME" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.DBCR_MEMO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DBCR_MEMO">
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="12" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="DEBIT" Type="float" Precision="126" Scale="0" />
+          <Property Name="CREDIT" Type="float" Precision="126" Scale="0" />
+          <Property Name="BALANCE" Type="float" Precision="126" Scale="0" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="100" />
+          <Property Name="CR_MEMO_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="TELLER" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_CREATED" Type="date" />
+          <Property Name="TIME_CREATED" Type="varchar2" MaxLength="5" />
+          <Property Name="SERVED" Type="varchar2" MaxLength="1" />
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="MULTI_PAY" Type="varchar2" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ARCS02101.DEATH_INFO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DEATH_INFO">
+          <Key>
+            <PropertyRef Name="OR_NO" />
+            <PropertyRef Name="D_NAME" />
+          </Key>
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="D_NAME" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="D_NATIONALITY" Type="varchar2" MaxLength="100" />
+          <Property Name="AGE" Type="number" Precision="38" Scale="0" />
+          <Property Name="SEX" Type="varchar2" MaxLength="10" />
+          <Property Name="CEMETERY" Type="varchar2" MaxLength="100" />
+          <Property Name="DISINTERMENT" Type="varchar2" MaxLength="100" />
+          <Property Name="INFECTIOUS" Type="varchar2" MaxLength="1" />
+          <Property Name="EMBALMED" Type="varchar2" MaxLength="1" />
+          <Property Name="DISPOSITION" Type="varchar2" MaxLength="100" />
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="DEATH_DATE" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ARCS02101.DEATH_INFO_TMP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DEATH_INFO_TMP">
+          <Key>
+            <PropertyRef Name="OR_NO" />
+            <PropertyRef Name="D_NAME" />
+          </Key>
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="D_NAME" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="D_NATIONALITY" Type="varchar2" MaxLength="100" />
+          <Property Name="AGE" Type="number" Precision="38" Scale="0" />
+          <Property Name="SEX" Type="varchar2" MaxLength="10" />
+          <Property Name="CEMETERY" Type="varchar2" MaxLength="100" />
+          <Property Name="DISINTERMENT" Type="varchar2" MaxLength="100" />
+          <Property Name="INFECTIOUS" Type="varchar2" MaxLength="1" />
+          <Property Name="EMBALMED" Type="varchar2" MaxLength="1" />
+          <Property Name="DISPOSITION" Type="varchar2" MaxLength="100" />
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="DEATH_DATE" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ARCS02101.DEBIT_CREDIT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DEBIT_CREDIT">
+          <Key>
+            <PropertyRef Name="PAYER_CODE" />
+            <PropertyRef Name="OR_NO" />
+            <PropertyRef Name="DATE_POSTED" />
+            <PropertyRef Name="TIME_POSTED" />
+            <PropertyRef Name="USER_CODE" />
+          </Key>
+          <Property Name="PAYER_CODE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="DEBIT" Type="float" Precision="126" Scale="0" />
+          <Property Name="CREDIT" Type="float" Precision="126" Scale="0" />
+          <Property Name="BALANCE" Type="float" Precision="126" Scale="0" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="120" />
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_POSTED" Type="date" Nullable="false" />
+          <Property Name="TIME_POSTED" Type="varchar2" MaxLength="11" Nullable="false" />
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ARCS02101.DEBIT_CREDIT_X' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DEBIT_CREDIT_X">
+          <Key>
+            <PropertyRef Name="PAYER_CODE" />
+            <PropertyRef Name="OR_NO" />
+            <PropertyRef Name="DATE_POSTED" />
+            <PropertyRef Name="TIME_POSTED" />
+            <PropertyRef Name="USER_CODE" />
+          </Key>
+          <Property Name="PAYER_CODE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="DEBIT" Type="float" Precision="126" Scale="0" />
+          <Property Name="CREDIT" Type="float" Precision="126" Scale="0" />
+          <Property Name="BALANCE" Type="float" Precision="126" Scale="0" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="120" />
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_POSTED" Type="date" Nullable="false" />
+          <Property Name="TIME_POSTED" Type="varchar2" MaxLength="11" Nullable="false" />
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.DENOM' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DENOM">
+          <Property Name="CODE_FLD" Type="varchar2" MaxLength="20" />
+          <Property Name="TRAN_DATE" Type="date" />
+          <Property Name="BILL1000" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL500" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL100" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL50" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL20" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL10" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL5" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL2" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL1" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL50C" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL25C" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL10C" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL5C" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL1C" Type="number" Precision="6" Scale="0" />
+          <Property Name="BILL_OTHERS" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ARCS02101.DISTRICTS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DISTRICTS">
+          <Key>
+            <PropertyRef Name="DIST_CODE" />
+            <PropertyRef Name="DIST_NM" />
+          </Key>
+          <Property Name="DIST_CODE" Type="varchar2" MaxLength="2" Nullable="false" />
+          <Property Name="DIST_NM" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.EPS_ACCOUNTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EPS_ACCOUNTS">
+          <Property Name="EPS_ACCT_CODE" Type="char" MaxLength="10" />
+          <Property Name="MRS_ACCT_CODE" Type="char" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.EPS_BILLING' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EPS_BILLING">
+          <Property Name="ARN" Type="char" MaxLength="20" />
+          <Property Name="ACCT_CODE" Type="char" MaxLength="10" />
+          <Property Name="MRS_ACCT_CODE" Type="char" MaxLength="10" />
+          <Property Name="ACCT_LN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_FN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_MI" Type="char" MaxLength="1" />
+          <Property Name="ACCT_HOUSE_NO" Type="char" MaxLength="10" />
+          <Property Name="ACCT_STREET" Type="char" MaxLength="60" />
+          <Property Name="ACCT_BRGY" Type="char" MaxLength="40" />
+          <Property Name="ACCT_MUN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_PROV" Type="char" MaxLength="40" />
+          <Property Name="ACCT_ZIP" Type="char" MaxLength="10" />
+          <Property Name="BILL_NO" Type="char" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="char" MaxLength="10" />
+          <Property Name="FEES_AMT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.EPS_BILLING_HIST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EPS_BILLING_HIST">
+          <Property Name="ARN" Type="char" MaxLength="20" />
+          <Property Name="ACCT_CODE" Type="char" MaxLength="10" />
+          <Property Name="MRS_ACCT_CODE" Type="char" MaxLength="10" />
+          <Property Name="ACCT_LN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_FN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_MI" Type="char" MaxLength="1" />
+          <Property Name="ACCT_HOUSE_NO" Type="char" MaxLength="10" />
+          <Property Name="ACCT_STREET" Type="char" MaxLength="60" />
+          <Property Name="ACCT_BRGY" Type="char" MaxLength="40" />
+          <Property Name="ACCT_MUN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_PROV" Type="char" MaxLength="40" />
+          <Property Name="ACCT_ZIP" Type="char" MaxLength="10" />
+          <Property Name="BILL_NO" Type="char" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="char" MaxLength="10" />
+          <Property Name="FEES_AMT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.EXCESS_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EXCESS_TBL">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="EXCESS_OF" Type="float" Precision="126" Scale="0" />
+          <Property Name="EXCESS_PER" Type="float" Precision="126" Scale="0" />
+          <Property Name="ADDITIONAL" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.EXCESS_TBL_X' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EXCESS_TBL_X">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="EXCESS_OF" Type="float" Precision="126" Scale="0" />
+          <Property Name="EXCESS_PER" Type="float" Precision="126" Scale="0" />
+          <Property Name="ADDITIONAL" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.FEES_CODE_SERIAL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="FEES_CODE_SERIAL">
+          <Property Name="FEES_CODE" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.FEES_MEANS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="FEES_MEANS">
+          <Property Name="CODE_FLD" Type="varchar2" MaxLength="2" />
+          <Property Name="DESC_FLD" Type="varchar2" MaxLength="40" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ARCS02101.FORM_TBL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FORM_TBL">
+          <Key>
+            <PropertyRef Name="FORM_FLD" />
+          </Key>
+          <Property Name="FORM_FLD" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="FORM_DESC" Type="varchar2" MaxLength="40" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.GENCODE_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="GENCODE_TBL">
+          <Property Name="GEN_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="GEN_DESC" Type="varchar2" MaxLength="100" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.GROUP_ACCOUNT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="GROUP_ACCOUNT">
+          <Property Name="GROUP_NAME" Type="varchar2" MaxLength="50" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.INT_TABLE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="INT_TABLE">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="INT_RATE" Type="float" Precision="126" Scale="0" />
+          <Property Name="SURCH_RATE" Type="float" Precision="126" Scale="0" />
+          <Property Name="DUE_PERIOD" Type="varchar2" MaxLength="10" />
+          <Property Name="INT_TERM" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.MAJOR_FEES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MAJOR_FEES">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="140" />
+          <Property Name="FEES_TYPE" Type="varchar2" MaxLength="100" />
+          <Property Name="RECORD_KEEP" Type="varchar2" MaxLength="2" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="GEN_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.MAJOR_FEES_X' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MAJOR_FEES_X">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="140" />
+          <Property Name="FEES_TYPE" Type="varchar2" MaxLength="100" />
+          <Property Name="RECORD_KEEP" Type="varchar2" MaxLength="2" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="GEN_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.MARRIAGE_INFO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MARRIAGE_INFO">
+          <Property Name="APP_NAME" Type="varchar2" MaxLength="100" />
+          <Property Name="APP_ADD" Type="varchar2" MaxLength="200" />
+          <Property Name="APP_AGE_YR" Type="number" Precision="38" Scale="0" />
+          <Property Name="APP_AGE_MOS" Type="number" Precision="38" Scale="0" />
+          <Property Name="SPS_NAME" Type="varchar2" MaxLength="100" />
+          <Property Name="SPS_ADD" Type="varchar2" MaxLength="200" />
+          <Property Name="SPS_AGE_YR" Type="number" Precision="38" Scale="0" />
+          <Property Name="SPS_AGE_MOS" Type="number" Precision="38" Scale="0" />
+          <Property Name="FORMS" Type="varchar2" MaxLength="200" />
+          <Property Name="REG_NO" Type="varchar2" MaxLength="50" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.MARRIAGE_INFO_TMP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MARRIAGE_INFO_TMP">
+          <Property Name="APP_NAME" Type="varchar2" MaxLength="100" />
+          <Property Name="APP_ADD" Type="varchar2" MaxLength="200" />
+          <Property Name="APP_AGE_YR" Type="number" Precision="38" Scale="0" />
+          <Property Name="APP_AGE_MOS" Type="number" Precision="38" Scale="0" />
+          <Property Name="SPS_NAME" Type="varchar2" MaxLength="100" />
+          <Property Name="SPS_ADD" Type="varchar2" MaxLength="200" />
+          <Property Name="SPS_AGE_YR" Type="number" Precision="38" Scale="0" />
+          <Property Name="SPS_AGE_MOS" Type="number" Precision="38" Scale="0" />
+          <Property Name="FORMS" Type="varchar2" MaxLength="200" />
+          <Property Name="REG_NO" Type="varchar2" MaxLength="50" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.MEMO_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MEMO_TBL">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="MEMO_FLD" Type="varchar2" MaxLength="200" />
+          <Property Name="OVERWRITE" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.MULTI_CHECK_HIST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MULTI_CHECK_HIST">
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="CHK_DATE" Type="date" />
+          <Property Name="CHK_TYPE" Type="varchar2" MaxLength="2" />
+          <Property Name="CHK_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="BANK_CODE" Type="varchar2" MaxLength="15" />
+          <Property Name="DATETIME_FLD" Type="date" />
+          <Property Name="TELLER" Type="varchar2" MaxLength="15" />
+          <Property Name="USED_SW" Type="varchar2" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.MULTI_CHECK_PAY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MULTI_CHECK_PAY">
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="CHK_DATE" Type="date" />
+          <Property Name="CHK_TYPE" Type="varchar2" MaxLength="2" />
+          <Property Name="CHK_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="BANK_CODE" Type="varchar2" MaxLength="15" />
+          <Property Name="DATETIME_FLD" Type="date" />
+          <Property Name="TELLER" Type="varchar2" MaxLength="15" />
+          <Property Name="USED_SW" Type="varchar2" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.NGAS_ACCT_CODES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="NGAS_ACCT_CODES">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="NGAS_CODE" Type="varchar2" MaxLength="30" />
+          <Property Name="GEN_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.OR_ASSIGNED' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OR_ASSIGNED">
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="FROM_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TO_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="DATE_ASSIGNED" Type="date" />
+          <Property Name="ASSIGNED_BY" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_CODE" Type="varchar2" MaxLength="3" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.OR_ASSIGNED_HIST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OR_ASSIGNED_HIST">
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="FROM_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TO_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="DATE_ASSIGNED" Type="date" />
+          <Property Name="ASSIGNED_BY" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_CODE" Type="varchar2" MaxLength="3" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.OR_CURRENT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OR_CURRENT">
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="FROM_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TO_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="CUR_OR_NO" Type="number" Precision="10" Scale="0" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="OR_CODE" Type="varchar2" MaxLength="3" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.OR_RETURNED' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OR_RETURNED">
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="FROM_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TO_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="TRN_DATE" Type="date" />
+          <Property Name="RETURNED_BY" Type="varchar2" MaxLength="20" />
+          <Property Name="DEC_SERIES" Type="varchar2" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.OR_USED' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OR_USED">
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TELLER" Type="varchar2" MaxLength="20" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="TRN_DATE" Type="date" />
+          <Property Name="OR_NO_VAL" Type="number" Precision="10" Scale="0" />
+          <Property Name="OR_CODE" Type="varchar2" MaxLength="3" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.OTHER_OR_USED' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OTHER_OR_USED">
+          <Property Name="FORM_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TELLER" Type="varchar2" MaxLength="20" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="TRN_DATE" Type="date" />
+          <Property Name="PAYMENT_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="CATTLE_GENDER" Type="varchar2" MaxLength="20" />
+          <Property Name="CATTLE_KIND" Type="varchar2" MaxLength="20" />
+          <Property Name="CATTLE_AGE" Type="number" Precision="38" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ARCS02101.PARTIAL_REMIT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PARTIAL_REMIT">
+          <Key>
+            <PropertyRef Name="TELLER_CODE" />
+          </Key>
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="RCD_SERIES" Type="varchar2" MaxLength="20" />
+          <Property Name="P1000" Type="number" Precision="38" Scale="0" />
+          <Property Name="P500" Type="number" Precision="38" Scale="0" />
+          <Property Name="P200" Type="number" Precision="38" Scale="0" />
+          <Property Name="P100" Type="number" Precision="38" Scale="0" />
+          <Property Name="P50" Type="number" Precision="38" Scale="0" />
+          <Property Name="P20" Type="number" Precision="38" Scale="0" />
+          <Property Name="P10" Type="number" Precision="38" Scale="0" />
+          <Property Name="C10" Type="number" Precision="38" Scale="0" />
+          <Property Name="C5" Type="number" Precision="38" Scale="0" />
+          <Property Name="C1" Type="number" Precision="38" Scale="0" />
+          <Property Name="C005" Type="number" Precision="38" Scale="0" />
+          <Property Name="C0025" Type="number" Precision="38" Scale="0" />
+          <Property Name="C001" Type="number" Precision="38" Scale="0" />
+          <Property Name="C0005" Type="number" Precision="38" Scale="0" />
+          <Property Name="C0001" Type="number" Precision="38" Scale="0" />
+          <Property Name="TOTAL_CASH" Type="float" Precision="126" Scale="0" />
+          <Property Name="TOTAL_CHECK" Type="float" Precision="126" Scale="0" />
+          <Property Name="TOTAL_COLLECTION" Type="float" Precision="126" Scale="0" />
+          <Property Name="OR_FROM" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_TO" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="DT_SAVE" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.PAYER_ADDL_INFO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PAYER_ADDL_INFO">
+          <Property Name="PAYER_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="CITIZENSHIP" Type="varchar2" MaxLength="20" />
+          <Property Name="ICR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="BDATE" Type="date" />
+          <Property Name="BIRTHPLACE" Type="varchar2" MaxLength="20" />
+          <Property Name="CIVIL_STATUS" Type="varchar2" MaxLength="10" />
+          <Property Name="PROF_OCC_BUSS" Type="varchar2" MaxLength="50" />
+          <Property Name="GENDER" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.PAYER_ADDL_INFO_CORP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PAYER_ADDL_INFO_CORP">
+          <Property Name="PAYER_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="KIND_OF_ORG" Type="varchar2" MaxLength="20" />
+          <Property Name="PLACE_OF_INC" Type="varchar2" MaxLength="50" />
+          <Property Name="DATE_OF_REG" Type="date" />
+          <Property Name="NATURE_OF_BUSS" Type="varchar2" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.PAYER_SERIAL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PAYER_SERIAL">
+          <Property Name="PAYER_SERIAL" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.PAYER_SERIAL_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PAYER_SERIAL_TBL">
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="NUM_CODE" Type="number" Precision="10" Scale="0" />
+          <Property Name="PAYER_SERIAL" Type="number" Precision="10" Scale="0" />
+          <Property Name="TEMP_SERIAL" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.PAYERS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PAYERS">
+          <Property Name="PAYER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="PAYER_LN" Type="varchar2" MaxLength="900" />
+          <Property Name="PAYER_FN" Type="varchar2" MaxLength="40" />
+          <Property Name="PAYER_MI" Type="varchar2" MaxLength="1" />
+          <Property Name="PAYER_HOUSE_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="PAYER_STREET" Type="varchar2" MaxLength="60" />
+          <Property Name="PAYER_BRGY" Type="varchar2" MaxLength="40" />
+          <Property Name="PAYER_MUN" Type="varchar2" MaxLength="40" />
+          <Property Name="PAYER_PROV" Type="varchar2" MaxLength="40" />
+          <Property Name="PAYER_ZIP" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.PAYMENTS_INFO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PAYMENTS_INFO">
+          <Property Name="PAYER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="BILLED_SYSTEM" Type="varchar2" MaxLength="15" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_INT" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_SURCH" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_AMT_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="PAYMENT_TYPE" Type="varchar2" MaxLength="3" />
+          <Property Name="DATA_MODE" Type="varchar2" MaxLength="3" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="PAYMENT_TERM" Type="varchar2" MaxLength="1" />
+          <Property Name="QTR_PAID" Type="varchar2" MaxLength="1" />
+          <Property Name="DATE_POSTED" Type="date" />
+          <Property Name="TIME_POSTED" Type="varchar2" MaxLength="11" />
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="500" />
+          <Property Name="REFNO" Type="varchar2" MaxLength="25" />
+          <Property Name="TAXABLE_AMOUNT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.PAYMENTS_TENDERED' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PAYMENTS_TENDERED">
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="FORM_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="PAYMENT_TYPE" Type="varchar2" MaxLength="3" />
+          <Property Name="ORIG_AMT_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="CASH_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="CHECK_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="TAX_CREDIT_USED" Type="float" Precision="126" Scale="0" />
+          <Property Name="TOTAL_AMT_TENDERED" Type="float" Precision="126" Scale="0" />
+          <Property Name="CREDIT_SAVED" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.POSTING_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="POSTING_TBL">
+          <Property Name="REF_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="REFERENCE" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="PERIOD_COVERED" Type="date" />
+          <Property Name="AMOUNT_PAID" Type="float" Precision="126" Scale="0" />
+          <Property Name="DATA_MODE" Type="varchar2" MaxLength="3" />
+          <Property Name="POSTED_BY" Type="varchar2" MaxLength="20" />
+          <Property Name="POSTED_DT" Type="date" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.QRY_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="QRY_TBL">
+          <Property Name="QRY_STATEMENT" Type="varchar2" MaxLength="4000" />
+          <Property Name="REP_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_GEN" Type="date" />
+        </EntityType>-->
+        <EntityType Name="QUARTERLYFEE_TBL">
+          <Key>
+            <PropertyRef Name="FEES_CODE" />
+          </Key>
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.RCD_REMIT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="RCD_REMIT">
+          <Property Name="RCD_SERIES" Type="varchar2" MaxLength="20" />
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.RCD_SERIES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="RCD_SERIES">
+          <Property Name="YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="RCD_SERIES" Type="varchar2" MaxLength="9" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.REAL_PROPERTY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="REAL_PROPERTY">
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="PIN" Type="varchar2" MaxLength="34" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="PAY_TYPE" Type="varchar2" MaxLength="1" />
+          <Property Name="START_QTR" Type="varchar2" MaxLength="1" />
+          <Property Name="END_QTR" Type="varchar2" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.REAL_PROPERTY_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="REAL_PROPERTY_TBL">
+          <Property Name="PIN" Type="varchar2" MaxLength="40" />
+          <Property Name="ARPN" Type="varchar2" MaxLength="20" />
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="LOT_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="BLK_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="LOC_STREET" Type="varchar2" MaxLength="60" />
+          <Property Name="LOC_BRGY" Type="varchar2" MaxLength="40" />
+          <Property Name="KIND" Type="varchar2" MaxLength="20" />
+          <Property Name="PREV_ARPN" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.REAL_PROPERTY_TMP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="REAL_PROPERTY_TMP">
+          <Property Name="PIN" Type="varchar2" MaxLength="40" />
+          <Property Name="ARPN" Type="varchar2" MaxLength="20" />
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="LOT_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="BLK_NO" Type="varchar2" MaxLength="40" />
+          <Property Name="LOC_STREET" Type="varchar2" MaxLength="60" />
+          <Property Name="LOC_BRGY" Type="varchar2" MaxLength="40" />
+          <Property Name="KIND" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="PREV_ARPN" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <EntityType Name="RECEIPTS_PAYMENT">
+          <Key>
+            <PropertyRef Name="OR_NO" />
+          </Key>
+          <Property Name="OR_NO" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="QTR_PAID" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" Nullable="false" />
+          <Property Name="FEES_AMOUNT" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RECEIPTS_TBL">
+          <Key>
+            <PropertyRef Name="OR_NO" />
+          </Key>
+          <Property Name="OR_NO" Type="varchar2" MaxLength="4000" Nullable="false" />
+          <Property Name="OR_DATE" Type="date" Nullable="false" />
+          <Property Name="TAX_YEAR" Type="varchar2" MaxLength="4000" />
+          <Property Name="REF_NO" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="TAXPAYER_NM" Type="varchar2" MaxLength="50" />
+          <Property Name="MEMO_TAG" Type="varchar2" MaxLength="500" />
+          <Property Name="ENCODEDBY" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="DATE_ENCODED" Type="date" Nullable="false" />
+          <Property Name="MODIFIEDBY" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="DATE_MODIFIED" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.REPORT_ABS_FEES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="REPORT_ABS_FEES">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="120" />
+          <Property Name="FEES_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="REPORT_NO" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.REPORT_ABS_OR' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="REPORT_ABS_OR">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="PAYER" Type="varchar2" MaxLength="120" />
+          <Property Name="FEES_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="SURCHARGE" Type="float" Precision="126" Scale="0" />
+          <Property Name="INTEREST" Type="float" Precision="126" Scale="0" />
+          <Property Name="TOTAL_AMT_TENDERED" Type="float" Precision="126" Scale="0" />
+          <Property Name="CREDIT_USED" Type="float" Precision="126" Scale="0" />
+          <Property Name="REPORT_NO" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.RIGHTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="RIGHTS">
+          <Property Name="RIGHT_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="RIGHT_DESC" Type="varchar2" MaxLength="100" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.SCHEDULES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SCHEDULES">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="QTY1" Type="float" Precision="126" Scale="0" />
+          <Property Name="QTY2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT1" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE_DESC" Type="varchar2" MaxLength="40" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.SCHEDULES_BAK' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SCHEDULES_BAK">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="QTY1" Type="number" Precision="10" Scale="0" />
+          <Property Name="QTY2" Type="number" Precision="10" Scale="0" />
+          <Property Name="RANGE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT1" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE_DESC" Type="varchar2" MaxLength="40" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.SCHEDULES_X' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SCHEDULES_X">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="QTY1" Type="float" Precision="126" Scale="0" />
+          <Property Name="QTY2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT1" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE_DESC" Type="varchar2" MaxLength="40" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.SETUP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SETUP">
+          <Property Name="LGU_TYPE" Type="char" MaxLength="100" />
+          <Property Name="LGU_NAME" Type="char" MaxLength="100" />
+          <Property Name="PROV_NAME" Type="char" MaxLength="100" />
+          <Property Name="TREASURER" Type="char" MaxLength="100" />
+          <Property Name="ASST_TREASURER" Type="char" MaxLength="100" />
+          <Property Name="REPORT_HEADER" Type="char" MaxLength="100" />
+          <Property Name="ORD_REV_YEAR" Type="char" MaxLength="100" />
+          <Property Name="PAYER_SERIAL" Type="char" MaxLength="100" />
+          <Property Name="CRS_LINK" Type="char" MaxLength="1" />
+          <Property Name="TRS_LINK" Type="char" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.SPECIAL_FEES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SPECIAL_FEES">
+          <Property Name="SYSTEM_NM" Type="char" MaxLength="3" />
+          <Property Name="FEES_CODE" Type="char" MaxLength="8" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.SUBCATEGORIES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SUBCATEGORIES">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="200" />
+          <Property Name="FEES_TERM" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_MEANS" Type="varchar2" MaxLength="2" />
+          <Property Name="FEES_UNIT" Type="varchar2" MaxLength="100" />
+          <Property Name="CUMULATIVE" Type="varchar2" MaxLength="2" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.SUBCATEGORIES_TMP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SUBCATEGORIES_TMP">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="200" />
+          <Property Name="FEES_TERM" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_MEANS" Type="varchar2" MaxLength="2" />
+          <Property Name="FEES_UNIT" Type="varchar2" MaxLength="100" />
+          <Property Name="CUMULATIVE" Type="varchar2" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.SUBCATEGORIES_X' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SUBCATEGORIES_X">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="200" />
+          <Property Name="FEES_TERM" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_MEANS" Type="varchar2" MaxLength="2" />
+          <Property Name="FEES_UNIT" Type="varchar2" MaxLength="100" />
+          <Property Name="CUMULATIVE" Type="varchar2" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ARCS02101.SYSLINK_DIC_TBL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SYSLINK_DIC_TBL">
+          <Key>
+            <PropertyRef Name="SYSNAME" />
+            <PropertyRef Name="GEN_CODE" />
+            <PropertyRef Name="FEES_CODE" />
+            <PropertyRef Name="NGAS_ACCT_CODE" />
+          </Key>
+          <Property Name="SYSNAME" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="GEN_CODE" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" Nullable="false" />
+          <Property Name="NGAS_ACCT_CODE" Type="varchar2" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.TELLER_TRANSACTION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TELLER_TRANSACTION">
+          <Property Name="TELLER" Type="varchar2" MaxLength="15" />
+          <Property Name="TRANSACTION_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="TOTAL_AMOUNT" Type="float" Precision="126" Scale="0" />
+          <Property Name="TAX_CREDIT" Type="float" Precision="126" Scale="0" />
+          <Property Name="CHECK_AMOUNT" Type="float" Precision="126" Scale="0" />
+          <Property Name="CASH_TENDER" Type="float" Precision="126" Scale="0" />
+          <Property Name="EXCESS" Type="float" Precision="126" Scale="0" />
+          <Property Name="PAYMENT_TYPE" Type="varchar2" MaxLength="4" />
+          <Property Name="DT_SAVE" Type="date" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.TELLERS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TELLERS">
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="TELLER_LN" Type="varchar2" MaxLength="40" />
+          <Property Name="TELLER_FN" Type="varchar2" MaxLength="40" />
+          <Property Name="TELLER_MI" Type="varchar2" MaxLength="1" />
+          <Property Name="TELLER_POS" Type="varchar2" MaxLength="40" />
+          <Property Name="TELLER_PWD" Type="varchar2" MaxLength="20" />
+          <Property Name="TELLER_MEMO" Type="varchar2" MaxLength="60" />
+          <Property Name="FORM_FLD" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_CODE" Type="varchar2" MaxLength="3" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.TELLERS_GEN' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TELLERS_GEN">
+          <Property Name="TELLER_CODE" Type="char" MaxLength="20" />
+          <Property Name="GEN_CODE" Type="char" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.TELLERS_REV_ACCT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TELLERS_REV_ACCT">
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="GEN_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.TRS_ACCOUNTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TRS_ACCOUNTS">
+          <Property Name="TRS_ACCT_CODE" Type="char" MaxLength="10" />
+          <Property Name="MRS_ACCT_CODE" Type="char" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.TRS_BILLING' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TRS_BILLING">
+          <Property Name="TRN" Type="char" MaxLength="20" />
+          <Property Name="ACCT_CODE" Type="char" MaxLength="10" />
+          <Property Name="MRS_ACCT_CODE" Type="char" MaxLength="10" />
+          <Property Name="ACCT_LN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_FN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_MI" Type="char" MaxLength="1" />
+          <Property Name="ACCT_HOUSE_NO" Type="char" MaxLength="10" />
+          <Property Name="ACCT_STREET" Type="char" MaxLength="60" />
+          <Property Name="ACCT_BRGY" Type="char" MaxLength="40" />
+          <Property Name="ACCT_MUN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_PROV" Type="char" MaxLength="40" />
+          <Property Name="ACCT_ZIP" Type="char" MaxLength="10" />
+          <Property Name="BILL_NO" Type="char" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="char" MaxLength="10" />
+          <Property Name="FEES_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="APPLICATION" Type="char" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.TRS_BILLING_HIST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TRS_BILLING_HIST">
+          <Property Name="TRN" Type="char" MaxLength="20" />
+          <Property Name="ACCT_CODE" Type="char" MaxLength="10" />
+          <Property Name="MRS_ACCT_CODE" Type="char" MaxLength="10" />
+          <Property Name="ACCT_LN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_FN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_MI" Type="char" MaxLength="1" />
+          <Property Name="ACCT_HOUSE_NO" Type="char" MaxLength="10" />
+          <Property Name="ACCT_STREET" Type="char" MaxLength="60" />
+          <Property Name="ACCT_BRGY" Type="char" MaxLength="40" />
+          <Property Name="ACCT_MUN" Type="char" MaxLength="40" />
+          <Property Name="ACCT_PROV" Type="char" MaxLength="40" />
+          <Property Name="ACCT_ZIP" Type="char" MaxLength="10" />
+          <Property Name="BILL_NO" Type="char" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="char" MaxLength="10" />
+          <Property Name="FEES_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="APPLICATION" Type="char" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.TRS_PAY_TEMP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TRS_PAY_TEMP">
+          <Property Name="TRN" Type="char" MaxLength="15" />
+          <Property Name="ACCOUNT_NO" Type="char" MaxLength="20" />
+          <Property Name="TAX_YEAR" Type="char" MaxLength="4" />
+          <Property Name="FEES_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="PENALTY" Type="float" Precision="126" Scale="0" />
+          <Property Name="TOTAL" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.TRS_TABLE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TRS_TABLE">
+          <Property Name="ACCOUNT_NO" Type="char" MaxLength="10" />
+          <Property Name="PAYER_CODE" Type="char" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.USER_LEVEL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="USER_LEVEL">
+          <Property Name="USER_LEVEL" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.USER_LEVEL_RIGHTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="USER_LEVEL_RIGHTS">
+          <Property Name="USER_LEVEL" Type="varchar2" MaxLength="20" />
+          <Property Name="MODULE_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.USERS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="USERS">
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="USER_LN" Type="varchar2" MaxLength="40" />
+          <Property Name="USER_FN" Type="varchar2" MaxLength="40" />
+          <Property Name="USER_MI" Type="varchar2" MaxLength="1" />
+          <Property Name="USER_POS" Type="varchar2" MaxLength="40" />
+          <Property Name="USER_LEVEL" Type="varchar2" MaxLength="20" />
+          <Property Name="USER_PWD" Type="varchar2" MaxLength="20" />
+          <Property Name="USER_MEMO" Type="varchar2" MaxLength="120" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ARCS02101.USERS_RIGHTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="USERS_RIGHTS">
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="RIGHT_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="BUSINESS_CONFIG" EntityType="Self.BUSINESS_CONFIG" Schema="ARCS02101" store:Type="Tables" />
+          <EntitySet Name="QUARTERLYFEE_TBL" EntityType="Self.QUARTERLYFEE_TBL" Schema="ARCS02101" store:Type="Tables" />
+          <EntitySet Name="RECEIPTS_PAYMENT" EntityType="Self.RECEIPTS_PAYMENT" Schema="ARCS02101" store:Type="Tables" />
+          <EntitySet Name="RECEIPTS_TBL" EntityType="Self.RECEIPTS_TBL" Schema="ARCS02101" store:Type="Tables" />
+          <EntitySet Name="DEATH_INFO" EntityType="Self.DEATH_INFO" store:Type="Tables" store:Schema="ARCS02101">
+            <DefiningQuery>SELECT 
+"DEATH_INFO"."OR_NO" AS "OR_NO", 
+"DEATH_INFO"."D_NAME" AS "D_NAME", 
+"DEATH_INFO"."D_NATIONALITY" AS "D_NATIONALITY", 
+"DEATH_INFO"."AGE" AS "AGE", 
+"DEATH_INFO"."SEX" AS "SEX", 
+"DEATH_INFO"."CEMETERY" AS "CEMETERY", 
+"DEATH_INFO"."DISINTERMENT" AS "DISINTERMENT", 
+"DEATH_INFO"."INFECTIOUS" AS "INFECTIOUS", 
+"DEATH_INFO"."EMBALMED" AS "EMBALMED", 
+"DEATH_INFO"."DISPOSITION" AS "DISPOSITION", 
+"DEATH_INFO"."TELLER_CODE" AS "TELLER_CODE", 
+"DEATH_INFO"."DEATH_DATE" AS "DEATH_DATE"
+FROM "ARCS02101"."DEATH_INFO" "DEATH_INFO"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DEATH_INFO_TMP" EntityType="Self.DEATH_INFO_TMP" store:Type="Tables" store:Schema="ARCS02101">
+            <DefiningQuery>SELECT 
+"DEATH_INFO_TMP"."OR_NO" AS "OR_NO", 
+"DEATH_INFO_TMP"."D_NAME" AS "D_NAME", 
+"DEATH_INFO_TMP"."D_NATIONALITY" AS "D_NATIONALITY", 
+"DEATH_INFO_TMP"."AGE" AS "AGE", 
+"DEATH_INFO_TMP"."SEX" AS "SEX", 
+"DEATH_INFO_TMP"."CEMETERY" AS "CEMETERY", 
+"DEATH_INFO_TMP"."DISINTERMENT" AS "DISINTERMENT", 
+"DEATH_INFO_TMP"."INFECTIOUS" AS "INFECTIOUS", 
+"DEATH_INFO_TMP"."EMBALMED" AS "EMBALMED", 
+"DEATH_INFO_TMP"."DISPOSITION" AS "DISPOSITION", 
+"DEATH_INFO_TMP"."TELLER_CODE" AS "TELLER_CODE", 
+"DEATH_INFO_TMP"."DEATH_DATE" AS "DEATH_DATE"
+FROM "ARCS02101"."DEATH_INFO_TMP" "DEATH_INFO_TMP"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DEBIT_CREDIT" EntityType="Self.DEBIT_CREDIT" store:Type="Tables" store:Schema="ARCS02101">
+            <DefiningQuery>SELECT 
+"DEBIT_CREDIT"."PAYER_CODE" AS "PAYER_CODE", 
+"DEBIT_CREDIT"."OR_NO" AS "OR_NO", 
+"DEBIT_CREDIT"."OR_DATE" AS "OR_DATE", 
+"DEBIT_CREDIT"."FORM_TYPE" AS "FORM_TYPE", 
+"DEBIT_CREDIT"."DEBIT" AS "DEBIT", 
+"DEBIT_CREDIT"."CREDIT" AS "CREDIT", 
+"DEBIT_CREDIT"."BALANCE" AS "BALANCE", 
+"DEBIT_CREDIT"."MEMO" AS "MEMO", 
+"DEBIT_CREDIT"."CHK_NO" AS "CHK_NO", 
+"DEBIT_CREDIT"."DATE_POSTED" AS "DATE_POSTED", 
+"DEBIT_CREDIT"."TIME_POSTED" AS "TIME_POSTED", 
+"DEBIT_CREDIT"."USER_CODE" AS "USER_CODE"
+FROM "ARCS02101"."DEBIT_CREDIT" "DEBIT_CREDIT"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DEBIT_CREDIT_X" EntityType="Self.DEBIT_CREDIT_X" store:Type="Tables" store:Schema="ARCS02101">
+            <DefiningQuery>SELECT 
+"DEBIT_CREDIT_X"."PAYER_CODE" AS "PAYER_CODE", 
+"DEBIT_CREDIT_X"."OR_NO" AS "OR_NO", 
+"DEBIT_CREDIT_X"."OR_DATE" AS "OR_DATE", 
+"DEBIT_CREDIT_X"."FORM_TYPE" AS "FORM_TYPE", 
+"DEBIT_CREDIT_X"."DEBIT" AS "DEBIT", 
+"DEBIT_CREDIT_X"."CREDIT" AS "CREDIT", 
+"DEBIT_CREDIT_X"."BALANCE" AS "BALANCE", 
+"DEBIT_CREDIT_X"."MEMO" AS "MEMO", 
+"DEBIT_CREDIT_X"."CHK_NO" AS "CHK_NO", 
+"DEBIT_CREDIT_X"."DATE_POSTED" AS "DATE_POSTED", 
+"DEBIT_CREDIT_X"."TIME_POSTED" AS "TIME_POSTED", 
+"DEBIT_CREDIT_X"."USER_CODE" AS "USER_CODE"
+FROM "ARCS02101"."DEBIT_CREDIT_X" "DEBIT_CREDIT_X"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DISTRICTS" EntityType="Self.DISTRICTS" store:Type="Tables" store:Schema="ARCS02101">
+            <DefiningQuery>SELECT 
+"DISTRICTS"."DIST_CODE" AS "DIST_CODE", 
+"DISTRICTS"."DIST_NM" AS "DIST_NM"
+FROM "ARCS02101"."DISTRICTS" "DISTRICTS"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FORM_TBL" EntityType="Self.FORM_TBL" store:Type="Tables" store:Schema="ARCS02101">
+            <DefiningQuery>SELECT 
+"FORM_TBL"."FORM_FLD" AS "FORM_FLD", 
+"FORM_TBL"."FORM_DESC" AS "FORM_DESC"
+FROM "ARCS02101"."FORM_TBL" "FORM_TBL"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PARTIAL_REMIT" EntityType="Self.PARTIAL_REMIT" store:Type="Tables" store:Schema="ARCS02101">
+            <DefiningQuery>SELECT 
+"PARTIAL_REMIT"."TELLER_CODE" AS "TELLER_CODE", 
+"PARTIAL_REMIT"."RCD_SERIES" AS "RCD_SERIES", 
+"PARTIAL_REMIT"."P1000" AS "P1000", 
+"PARTIAL_REMIT"."P500" AS "P500", 
+"PARTIAL_REMIT"."P200" AS "P200", 
+"PARTIAL_REMIT"."P100" AS "P100", 
+"PARTIAL_REMIT"."P50" AS "P50", 
+"PARTIAL_REMIT"."P20" AS "P20", 
+"PARTIAL_REMIT"."P10" AS "P10", 
+"PARTIAL_REMIT"."C10" AS "C10", 
+"PARTIAL_REMIT"."C5" AS "C5", 
+"PARTIAL_REMIT"."C1" AS "C1", 
+"PARTIAL_REMIT"."C005" AS "C005", 
+"PARTIAL_REMIT"."C0025" AS "C0025", 
+"PARTIAL_REMIT"."C001" AS "C001", 
+"PARTIAL_REMIT"."C0005" AS "C0005", 
+"PARTIAL_REMIT"."C0001" AS "C0001", 
+"PARTIAL_REMIT"."TOTAL_CASH" AS "TOTAL_CASH", 
+"PARTIAL_REMIT"."TOTAL_CHECK" AS "TOTAL_CHECK", 
+"PARTIAL_REMIT"."TOTAL_COLLECTION" AS "TOTAL_COLLECTION", 
+"PARTIAL_REMIT"."OR_FROM" AS "OR_FROM", 
+"PARTIAL_REMIT"."OR_TO" AS "OR_TO", 
+"PARTIAL_REMIT"."OR_DATE" AS "OR_DATE", 
+"PARTIAL_REMIT"."DT_SAVE" AS "DT_SAVE"
+FROM "ARCS02101"."PARTIAL_REMIT" "PARTIAL_REMIT"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SYSLINK_DIC_TBL" EntityType="Self.SYSLINK_DIC_TBL" store:Type="Tables" store:Schema="ARCS02101">
+            <DefiningQuery>SELECT 
+"SYSLINK_DIC_TBL"."SYSNAME" AS "SYSNAME", 
+"SYSLINK_DIC_TBL"."GEN_CODE" AS "GEN_CODE", 
+"SYSLINK_DIC_TBL"."FEES_CODE" AS "FEES_CODE", 
+"SYSLINK_DIC_TBL"."NGAS_ACCT_CODE" AS "NGAS_ACCT_CODE"
+FROM "ARCS02101"."SYSLINK_DIC_TBL" "SYSLINK_DIC_TBL"</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BUSINESS_CONFIG">
+          <Key>
+            <PropertyRef Name="BUSS_CONFIGNO" />
+          </Key>
+          <Property Name="BUSS_CONFIGNO" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONFIG_DESC" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONFIG_VALUE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QUARTERLYFEE_TBL">
+          <Key>
+            <PropertyRef Name="FEES_CODE" />
+          </Key>
+          <Property Name="FEES_CODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RECEIPTS_PAYMENT">
+          <Key>
+            <PropertyRef Name="OR_NO" />
+          </Key>
+          <Property Name="OR_NO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QTR_PAID" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FEES_CODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FEES_AMOUNT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RECEIPTS_TBL">
+          <Key>
+            <PropertyRef Name="OR_NO" />
+          </Key>
+          <Property Name="OR_NO" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OR_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="TAX_YEAR" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="REF_NO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TAXPAYER_NM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MEMO_TAG" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ENCODEDBY" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATE_ENCODED" Type="DateTime" Nullable="false" />
+          <Property Name="MODIFIEDBY" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATE_MODIFIED" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DEATH_INFO">
+          <Key>
+            <PropertyRef Name="OR_NO" />
+            <PropertyRef Name="D_NAME" />
+          </Key>
+          <Property Name="OR_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="D_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="D_NATIONALITY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AGE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="SEX" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CEMETERY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DISINTERMENT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="INFECTIOUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="EMBALMED" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DISPOSITION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TELLER_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DEATH_DATE" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="DEATH_INFO_TMP">
+          <Key>
+            <PropertyRef Name="OR_NO" />
+            <PropertyRef Name="D_NAME" />
+          </Key>
+          <Property Name="OR_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="D_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="D_NATIONALITY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AGE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="SEX" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CEMETERY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DISINTERMENT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="INFECTIOUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="EMBALMED" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DISPOSITION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TELLER_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DEATH_DATE" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="DEBIT_CREDIT">
+          <Key>
+            <PropertyRef Name="PAYER_CODE" />
+            <PropertyRef Name="OR_NO" />
+            <PropertyRef Name="DATE_POSTED" />
+            <PropertyRef Name="TIME_POSTED" />
+            <PropertyRef Name="USER_CODE" />
+          </Key>
+          <Property Name="PAYER_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OR_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OR_DATE" Type="DateTime" />
+          <Property Name="FORM_TYPE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DEBIT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CREDIT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="BALANCE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="MEMO" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="CHK_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_POSTED" Type="DateTime" Nullable="false" />
+          <Property Name="TIME_POSTED" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DEBIT_CREDIT_X">
+          <Key>
+            <PropertyRef Name="PAYER_CODE" />
+            <PropertyRef Name="OR_NO" />
+            <PropertyRef Name="DATE_POSTED" />
+            <PropertyRef Name="TIME_POSTED" />
+            <PropertyRef Name="USER_CODE" />
+          </Key>
+          <Property Name="PAYER_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OR_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OR_DATE" Type="DateTime" />
+          <Property Name="FORM_TYPE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DEBIT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CREDIT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="BALANCE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="MEMO" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="CHK_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_POSTED" Type="DateTime" Nullable="false" />
+          <Property Name="TIME_POSTED" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DISTRICT">
+          <Key>
+            <PropertyRef Name="DIST_CODE" />
+            <PropertyRef Name="DIST_NM" />
+          </Key>
+          <Property Name="DIST_CODE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIST_NM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FORM_TBL">
+          <Key>
+            <PropertyRef Name="FORM_FLD" />
+          </Key>
+          <Property Name="FORM_FLD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FORM_DESC" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PARTIAL_REMIT">
+          <Key>
+            <PropertyRef Name="TELLER_CODE" />
+          </Key>
+          <Property Name="TELLER_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RCD_SERIES" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="P1000" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="P500" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="P200" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="P100" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="P50" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="P20" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="P10" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="C10" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="C5" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="C1" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="C005" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="C0025" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="C001" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="C0005" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="C0001" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TOTAL_CASH" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TOTAL_CHECK" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TOTAL_COLLECTION" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="OR_FROM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OR_TO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OR_DATE" Type="DateTime" />
+          <Property Name="DT_SAVE" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="SYSLINK_DIC_TBL">
+          <Key>
+            <PropertyRef Name="SYSNAME" />
+            <PropertyRef Name="GEN_CODE" />
+            <PropertyRef Name="FEES_CODE" />
+            <PropertyRef Name="NGAS_ACCT_CODE" />
+          </Key>
+          <Property Name="SYSNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GEN_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FEES_CODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NGAS_ACCT_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ARCSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BUSINESS_CONFIG" EntityType="Self.BUSINESS_CONFIG" />
+          <EntitySet Name="QUARTERLYFEE_TBL" EntityType="Self.QUARTERLYFEE_TBL" />
+          <EntitySet Name="RECEIPTS_PAYMENT" EntityType="Self.RECEIPTS_PAYMENT" />
+          <EntitySet Name="RECEIPTS_TBL" EntityType="Self.RECEIPTS_TBL" />
+          <EntitySet Name="DEATH_INFO" EntityType="Self.DEATH_INFO" />
+          <EntitySet Name="DEATH_INFO_TMP" EntityType="Self.DEATH_INFO_TMP" />
+          <EntitySet Name="DEBIT_CREDIT" EntityType="Self.DEBIT_CREDIT" />
+          <EntitySet Name="DEBIT_CREDIT_X" EntityType="Self.DEBIT_CREDIT_X" />
+          <EntitySet Name="DISTRICTS" EntityType="Self.DISTRICT" />
+          <EntitySet Name="FORM_TBL" EntityType="Self.FORM_TBL" />
+          <EntitySet Name="PARTIAL_REMIT" EntityType="Self.PARTIAL_REMIT" />
+          <EntitySet Name="SYSLINK_DIC_TBL" EntityType="Self.SYSLINK_DIC_TBL" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ARCSEntities">
+          <EntitySetMapping Name="BUSINESS_CONFIG">
+            <EntityTypeMapping TypeName="Model.BUSINESS_CONFIG">
+              <MappingFragment StoreEntitySet="BUSINESS_CONFIG">
+                <ScalarProperty Name="BUSS_CONFIGNO" ColumnName="BUSS_CONFIGNO" />
+                <ScalarProperty Name="CONFIG_DESC" ColumnName="CONFIG_DESC" />
+                <ScalarProperty Name="CONFIG_VALUE" ColumnName="CONFIG_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUARTERLYFEE_TBL">
+            <EntityTypeMapping TypeName="Model.QUARTERLYFEE_TBL">
+              <MappingFragment StoreEntitySet="QUARTERLYFEE_TBL">
+                <ScalarProperty Name="FEES_CODE" ColumnName="FEES_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECEIPTS_PAYMENT">
+            <EntityTypeMapping TypeName="Model.RECEIPTS_PAYMENT">
+              <MappingFragment StoreEntitySet="RECEIPTS_PAYMENT">
+                <ScalarProperty Name="OR_NO" ColumnName="OR_NO" />
+                <ScalarProperty Name="QTR_PAID" ColumnName="QTR_PAID" />
+                <ScalarProperty Name="FEES_CODE" ColumnName="FEES_CODE" />
+                <ScalarProperty Name="FEES_AMOUNT" ColumnName="FEES_AMOUNT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECEIPTS_TBL">
+            <EntityTypeMapping TypeName="Model.RECEIPTS_TBL">
+              <MappingFragment StoreEntitySet="RECEIPTS_TBL">
+                <ScalarProperty Name="OR_NO" ColumnName="OR_NO" />
+                <ScalarProperty Name="OR_DATE" ColumnName="OR_DATE" />
+                <ScalarProperty Name="TAX_YEAR" ColumnName="TAX_YEAR" />
+                <ScalarProperty Name="REF_NO" ColumnName="REF_NO" />
+                <ScalarProperty Name="TAXPAYER_NM" ColumnName="TAXPAYER_NM" />
+                <ScalarProperty Name="MEMO_TAG" ColumnName="MEMO_TAG" />
+                <ScalarProperty Name="ENCODEDBY" ColumnName="ENCODEDBY" />
+                <ScalarProperty Name="DATE_ENCODED" ColumnName="DATE_ENCODED" />
+                <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+                <ScalarProperty Name="DATE_MODIFIED" ColumnName="DATE_MODIFIED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEATH_INFO">
+            <EntityTypeMapping TypeName="Model.DEATH_INFO">
+              <MappingFragment StoreEntitySet="DEATH_INFO">
+                <ScalarProperty Name="OR_NO" ColumnName="OR_NO" />
+                <ScalarProperty Name="D_NAME" ColumnName="D_NAME" />
+                <ScalarProperty Name="D_NATIONALITY" ColumnName="D_NATIONALITY" />
+                <ScalarProperty Name="AGE" ColumnName="AGE" />
+                <ScalarProperty Name="SEX" ColumnName="SEX" />
+                <ScalarProperty Name="CEMETERY" ColumnName="CEMETERY" />
+                <ScalarProperty Name="DISINTERMENT" ColumnName="DISINTERMENT" />
+                <ScalarProperty Name="INFECTIOUS" ColumnName="INFECTIOUS" />
+                <ScalarProperty Name="EMBALMED" ColumnName="EMBALMED" />
+                <ScalarProperty Name="DISPOSITION" ColumnName="DISPOSITION" />
+                <ScalarProperty Name="TELLER_CODE" ColumnName="TELLER_CODE" />
+                <ScalarProperty Name="DEATH_DATE" ColumnName="DEATH_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEATH_INFO_TMP">
+            <EntityTypeMapping TypeName="Model.DEATH_INFO_TMP">
+              <MappingFragment StoreEntitySet="DEATH_INFO_TMP">
+                <ScalarProperty Name="OR_NO" ColumnName="OR_NO" />
+                <ScalarProperty Name="D_NAME" ColumnName="D_NAME" />
+                <ScalarProperty Name="D_NATIONALITY" ColumnName="D_NATIONALITY" />
+                <ScalarProperty Name="AGE" ColumnName="AGE" />
+                <ScalarProperty Name="SEX" ColumnName="SEX" />
+                <ScalarProperty Name="CEMETERY" ColumnName="CEMETERY" />
+                <ScalarProperty Name="DISINTERMENT" ColumnName="DISINTERMENT" />
+                <ScalarProperty Name="INFECTIOUS" ColumnName="INFECTIOUS" />
+                <ScalarProperty Name="EMBALMED" ColumnName="EMBALMED" />
+                <ScalarProperty Name="DISPOSITION" ColumnName="DISPOSITION" />
+                <ScalarProperty Name="TELLER_CODE" ColumnName="TELLER_CODE" />
+                <ScalarProperty Name="DEATH_DATE" ColumnName="DEATH_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEBIT_CREDIT">
+            <EntityTypeMapping TypeName="Model.DEBIT_CREDIT">
+              <MappingFragment StoreEntitySet="DEBIT_CREDIT">
+                <ScalarProperty Name="PAYER_CODE" ColumnName="PAYER_CODE" />
+                <ScalarProperty Name="OR_NO" ColumnName="OR_NO" />
+                <ScalarProperty Name="OR_DATE" ColumnName="OR_DATE" />
+                <ScalarProperty Name="FORM_TYPE" ColumnName="FORM_TYPE" />
+                <ScalarProperty Name="DEBIT" ColumnName="DEBIT" />
+                <ScalarProperty Name="CREDIT" ColumnName="CREDIT" />
+                <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+                <ScalarProperty Name="MEMO" ColumnName="MEMO" />
+                <ScalarProperty Name="CHK_NO" ColumnName="CHK_NO" />
+                <ScalarProperty Name="DATE_POSTED" ColumnName="DATE_POSTED" />
+                <ScalarProperty Name="TIME_POSTED" ColumnName="TIME_POSTED" />
+                <ScalarProperty Name="USER_CODE" ColumnName="USER_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEBIT_CREDIT_X">
+            <EntityTypeMapping TypeName="Model.DEBIT_CREDIT_X">
+              <MappingFragment StoreEntitySet="DEBIT_CREDIT_X">
+                <ScalarProperty Name="PAYER_CODE" ColumnName="PAYER_CODE" />
+                <ScalarProperty Name="OR_NO" ColumnName="OR_NO" />
+                <ScalarProperty Name="OR_DATE" ColumnName="OR_DATE" />
+                <ScalarProperty Name="FORM_TYPE" ColumnName="FORM_TYPE" />
+                <ScalarProperty Name="DEBIT" ColumnName="DEBIT" />
+                <ScalarProperty Name="CREDIT" ColumnName="CREDIT" />
+                <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+                <ScalarProperty Name="MEMO" ColumnName="MEMO" />
+                <ScalarProperty Name="CHK_NO" ColumnName="CHK_NO" />
+                <ScalarProperty Name="DATE_POSTED" ColumnName="DATE_POSTED" />
+                <ScalarProperty Name="TIME_POSTED" ColumnName="TIME_POSTED" />
+                <ScalarProperty Name="USER_CODE" ColumnName="USER_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DISTRICTS">
+            <EntityTypeMapping TypeName="Model.DISTRICT">
+              <MappingFragment StoreEntitySet="DISTRICTS">
+                <ScalarProperty Name="DIST_CODE" ColumnName="DIST_CODE" />
+                <ScalarProperty Name="DIST_NM" ColumnName="DIST_NM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FORM_TBL">
+            <EntityTypeMapping TypeName="Model.FORM_TBL">
+              <MappingFragment StoreEntitySet="FORM_TBL">
+                <ScalarProperty Name="FORM_FLD" ColumnName="FORM_FLD" />
+                <ScalarProperty Name="FORM_DESC" ColumnName="FORM_DESC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARTIAL_REMIT">
+            <EntityTypeMapping TypeName="Model.PARTIAL_REMIT">
+              <MappingFragment StoreEntitySet="PARTIAL_REMIT">
+                <ScalarProperty Name="TELLER_CODE" ColumnName="TELLER_CODE" />
+                <ScalarProperty Name="RCD_SERIES" ColumnName="RCD_SERIES" />
+                <ScalarProperty Name="P1000" ColumnName="P1000" />
+                <ScalarProperty Name="P500" ColumnName="P500" />
+                <ScalarProperty Name="P200" ColumnName="P200" />
+                <ScalarProperty Name="P100" ColumnName="P100" />
+                <ScalarProperty Name="P50" ColumnName="P50" />
+                <ScalarProperty Name="P20" ColumnName="P20" />
+                <ScalarProperty Name="P10" ColumnName="P10" />
+                <ScalarProperty Name="C10" ColumnName="C10" />
+                <ScalarProperty Name="C5" ColumnName="C5" />
+                <ScalarProperty Name="C1" ColumnName="C1" />
+                <ScalarProperty Name="C005" ColumnName="C005" />
+                <ScalarProperty Name="C0025" ColumnName="C0025" />
+                <ScalarProperty Name="C001" ColumnName="C001" />
+                <ScalarProperty Name="C0005" ColumnName="C0005" />
+                <ScalarProperty Name="C0001" ColumnName="C0001" />
+                <ScalarProperty Name="TOTAL_CASH" ColumnName="TOTAL_CASH" />
+                <ScalarProperty Name="TOTAL_CHECK" ColumnName="TOTAL_CHECK" />
+                <ScalarProperty Name="TOTAL_COLLECTION" ColumnName="TOTAL_COLLECTION" />
+                <ScalarProperty Name="OR_FROM" ColumnName="OR_FROM" />
+                <ScalarProperty Name="OR_TO" ColumnName="OR_TO" />
+                <ScalarProperty Name="OR_DATE" ColumnName="OR_DATE" />
+                <ScalarProperty Name="DT_SAVE" ColumnName="DT_SAVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYSLINK_DIC_TBL">
+            <EntityTypeMapping TypeName="Model.SYSLINK_DIC_TBL">
+              <MappingFragment StoreEntitySet="SYSLINK_DIC_TBL">
+                <ScalarProperty Name="SYSNAME" ColumnName="SYSNAME" />
+                <ScalarProperty Name="GEN_CODE" ColumnName="GEN_CODE" />
+                <ScalarProperty Name="FEES_CODE" ColumnName="FEES_CODE" />
+                <ScalarProperty Name="NGAS_ACCT_CODE" ColumnName="NGAS_ACCT_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

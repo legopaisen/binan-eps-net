@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RPT02303.FAAS_LAND' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FAAS_LAND">
+          <Key>
+            <PropertyRef Name="LAND_PIN" />
+            <PropertyRef Name="ARP_LAND" />
+          </Key>
+          <Property Name="LAND_PIN" Type="varchar2" MaxLength="23" Nullable="false" />
+          <Property Name="ARP_LAND" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="OCT_NO" Type="varchar2" MaxLength="200" />
+          <Property Name="LOT_NO" Type="varchar2" MaxLength="200" />
+          <Property Name="BLK_NO" Type="varchar2" MaxLength="200" />
+          <Property Name="SURVEY_NO" Type="varchar2" MaxLength="200" />
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="UPDATE_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="ZONE_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="LOCN_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="PB_N" Type="varchar2" MaxLength="150" />
+          <Property Name="PB_E" Type="varchar2" MaxLength="150" />
+          <Property Name="PB_S" Type="varchar2" MaxLength="150" />
+          <Property Name="PB_W" Type="varchar2" MaxLength="150" />
+          <Property Name="LAND_FMT" Type="varchar2" MaxLength="1" />
+          <Property Name="LAND_AREA" Type="float" Precision="126" Scale="0" />
+          <Property Name="MARKET_VALUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="ADJUSTED_MV" Type="float" Precision="126" Scale="0" />
+          <Property Name="ACT_USE" Type="varchar2" MaxLength="12" />
+          <Property Name="ASS_LEV" Type="float" Precision="126" Scale="0" />
+          <Property Name="ASS_VAL" Type="float" Precision="126" Scale="0" />
+          <Property Name="TAXABILITY" Type="varchar2" MaxLength="1" />
+          <Property Name="PREV_OWN_NM" Type="varchar2" MaxLength="300" />
+          <Property Name="PREV_ASS_VAL" Type="float" Precision="126" Scale="0" />
+          <Property Name="EFF_DATE" Type="date" />
+          <Property Name="APP_BY_NM" Type="varchar2" MaxLength="40" />
+          <Property Name="APP_BY_DT" Type="date" />
+          <Property Name="ASS_BY_NM" Type="varchar2" MaxLength="40" />
+          <Property Name="ASS_BY_DT" Type="date" />
+          <Property Name="REC_APP_NM" Type="varchar2" MaxLength="40" />
+          <Property Name="REC_APP_DT" Type="date" />
+          <Property Name="APPROVED_BY" Type="varchar2" MaxLength="40" />
+          <Property Name="APPROVED_DT" Type="date" />
+          <Property Name="MEMORANDA" Type="varchar2" MaxLength="1000" />
+          <Property Name="MEMO2" Type="varchar2" MaxLength="500" />
+          <Property Name="PREV_PIN" Type="varchar2" MaxLength="50" />
+          <Property Name="PREV_ARP" Type="varchar2" MaxLength="50" />
+          <Property Name="UPDATED_BY" Type="varchar2" MaxLength="20" />
+          <Property Name="ENCODE_DT" Type="date" />
+          <Property Name="UPDATED_DT" Type="date" />
+          <Property Name="ENCODE_TM" Type="varchar2" MaxLength="8" />
+          <Property Name="TD_NUM" Type="varchar2" MaxLength="30" />
+          <Property Name="PREV_TD" Type="varchar2" MaxLength="30" />
+          <Property Name="BT_DATE" Type="date" />
+          <Property Name="EXEMPT_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="CAD_NO" Type="varchar2" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RPT02303.OWN_NAMES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OWN_NAMES">
+          <Key>
+            <PropertyRef Name="OWN_CODE" />
+            <PropertyRef Name="OWN_LN" />
+            <PropertyRef Name="OWN_ADDR" />
+          </Key>
+          <Property Name="OWN_CODE" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="OWN_LN" Type="varchar2" MaxLength="120" Nullable="false" />
+          <Property Name="OWN_FN" Type="varchar2" MaxLength="150" />
+          <Property Name="OWN_MI" Type="varchar2" MaxLength="1" />
+          <Property Name="OWN_ADDR" Type="varchar2" MaxLength="150" Nullable="false" />
+          <Property Name="OWN_BRGY" Type="varchar2" MaxLength="30" />
+          <Property Name="OWN_MUN" Type="varchar2" MaxLength="30" />
+          <Property Name="OWN_PROV" Type="varchar2" MaxLength="30" />
+          <Property Name="OWN_TELNO" Type="varchar2" MaxLength="20" />
+          <Property Name="OWN_ZIP" Type="varchar2" MaxLength="10" />
+          <Property Name="OWN_EMAIL" Type="varchar2" MaxLength="30" />
+          <Property Name="UPDATE_DATE" Type="date" />
+          <Property Name="UPDATE_TIME" Type="varchar2" MaxLength="8" />
+          <Property Name="OWN_DIST" Type="varchar2" MaxLength="30" />
+          <Property Name="TYPE_FLD" Type="varchar2" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="FAAS_LAND" EntityType="Self.FAAS_LAND" store:Type="Tables" store:Schema="RPT02303">
+            <DefiningQuery>SELECT 
+"FAAS_LAND"."LAND_PIN" AS "LAND_PIN", 
+"FAAS_LAND"."ARP_LAND" AS "ARP_LAND", 
+"FAAS_LAND"."OCT_NO" AS "OCT_NO", 
+"FAAS_LAND"."LOT_NO" AS "LOT_NO", 
+"FAAS_LAND"."BLK_NO" AS "BLK_NO", 
+"FAAS_LAND"."SURVEY_NO" AS "SURVEY_NO", 
+"FAAS_LAND"."OWN_CODE" AS "OWN_CODE", 
+"FAAS_LAND"."UPDATE_CODE" AS "UPDATE_CODE", 
+"FAAS_LAND"."ZONE_CODE" AS "ZONE_CODE", 
+"FAAS_LAND"."LOCN_CODE" AS "LOCN_CODE", 
+"FAAS_LAND"."PB_N" AS "PB_N", 
+"FAAS_LAND"."PB_E" AS "PB_E", 
+"FAAS_LAND"."PB_S" AS "PB_S", 
+"FAAS_LAND"."PB_W" AS "PB_W", 
+"FAAS_LAND"."LAND_FMT" AS "LAND_FMT", 
+"FAAS_LAND"."LAND_AREA" AS "LAND_AREA", 
+"FAAS_LAND"."MARKET_VALUE" AS "MARKET_VALUE", 
+"FAAS_LAND"."ADJUSTED_MV" AS "ADJUSTED_MV", 
+"FAAS_LAND"."ACT_USE" AS "ACT_USE", 
+"FAAS_LAND"."ASS_LEV" AS "ASS_LEV", 
+"FAAS_LAND"."ASS_VAL" AS "ASS_VAL", 
+"FAAS_LAND"."TAXABILITY" AS "TAXABILITY", 
+"FAAS_LAND"."PREV_OWN_NM" AS "PREV_OWN_NM", 
+"FAAS_LAND"."PREV_ASS_VAL" AS "PREV_ASS_VAL", 
+"FAAS_LAND"."EFF_DATE" AS "EFF_DATE", 
+"FAAS_LAND"."APP_BY_NM" AS "APP_BY_NM", 
+"FAAS_LAND"."APP_BY_DT" AS "APP_BY_DT", 
+"FAAS_LAND"."ASS_BY_NM" AS "ASS_BY_NM", 
+"FAAS_LAND"."ASS_BY_DT" AS "ASS_BY_DT", 
+"FAAS_LAND"."REC_APP_NM" AS "REC_APP_NM", 
+"FAAS_LAND"."REC_APP_DT" AS "REC_APP_DT", 
+"FAAS_LAND"."APPROVED_BY" AS "APPROVED_BY", 
+"FAAS_LAND"."APPROVED_DT" AS "APPROVED_DT", 
+"FAAS_LAND"."MEMORANDA" AS "MEMORANDA", 
+"FAAS_LAND"."MEMO2" AS "MEMO2", 
+"FAAS_LAND"."PREV_PIN" AS "PREV_PIN", 
+"FAAS_LAND"."PREV_ARP" AS "PREV_ARP", 
+"FAAS_LAND"."UPDATED_BY" AS "UPDATED_BY", 
+"FAAS_LAND"."ENCODE_DT" AS "ENCODE_DT", 
+"FAAS_LAND"."UPDATED_DT" AS "UPDATED_DT", 
+"FAAS_LAND"."ENCODE_TM" AS "ENCODE_TM", 
+"FAAS_LAND"."TD_NUM" AS "TD_NUM", 
+"FAAS_LAND"."PREV_TD" AS "PREV_TD", 
+"FAAS_LAND"."BT_DATE" AS "BT_DATE", 
+"FAAS_LAND"."EXEMPT_CODE" AS "EXEMPT_CODE", 
+"FAAS_LAND"."CAD_NO" AS "CAD_NO"
+FROM "RPT02303"."FAAS_LAND" "FAAS_LAND"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OWN_NAMES" EntityType="Self.OWN_NAMES" store:Type="Tables" store:Schema="RPT02303">
+            <DefiningQuery>SELECT 
+"OWN_NAMES"."OWN_CODE" AS "OWN_CODE", 
+"OWN_NAMES"."OWN_LN" AS "OWN_LN", 
+"OWN_NAMES"."OWN_FN" AS "OWN_FN", 
+"OWN_NAMES"."OWN_MI" AS "OWN_MI", 
+"OWN_NAMES"."OWN_ADDR" AS "OWN_ADDR", 
+"OWN_NAMES"."OWN_BRGY" AS "OWN_BRGY", 
+"OWN_NAMES"."OWN_MUN" AS "OWN_MUN", 
+"OWN_NAMES"."OWN_PROV" AS "OWN_PROV", 
+"OWN_NAMES"."OWN_TELNO" AS "OWN_TELNO", 
+"OWN_NAMES"."OWN_ZIP" AS "OWN_ZIP", 
+"OWN_NAMES"."OWN_EMAIL" AS "OWN_EMAIL", 
+"OWN_NAMES"."UPDATE_DATE" AS "UPDATE_DATE", 
+"OWN_NAMES"."UPDATE_TIME" AS "UPDATE_TIME", 
+"OWN_NAMES"."OWN_DIST" AS "OWN_DIST", 
+"OWN_NAMES"."TYPE_FLD" AS "TYPE_FLD"
+FROM "RPT02303"."OWN_NAMES" "OWN_NAMES"</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FAAS_LAND">
+          <Key>
+            <PropertyRef Name="LAND_PIN" />
+            <PropertyRef Name="ARP_LAND" />
+          </Key>
+          <Property Name="LAND_PIN" Type="String" MaxLength="23" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ARP_LAND" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OCT_NO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LOT_NO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BLK_NO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SURVEY_NO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OWN_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATE_CODE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ZONE_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="LOCN_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="PB_N" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PB_E" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PB_S" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PB_W" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="LAND_FMT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="LAND_AREA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="MARKET_VALUE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ADJUSTED_MV" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ACT_USE" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ASS_LEV" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ASS_VAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TAXABILITY" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="PREV_OWN_NM" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PREV_ASS_VAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="EFF_DATE" Type="DateTime" />
+          <Property Name="APP_BY_NM" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="APP_BY_DT" Type="DateTime" />
+          <Property Name="ASS_BY_NM" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ASS_BY_DT" Type="DateTime" />
+          <Property Name="REC_APP_NM" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="REC_APP_DT" Type="DateTime" />
+          <Property Name="APPROVED_BY" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="APPROVED_DT" Type="DateTime" />
+          <Property Name="MEMORANDA" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="MEMO2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PREV_PIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PREV_ARP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ENCODE_DT" Type="DateTime" />
+          <Property Name="UPDATED_DT" Type="DateTime" />
+          <Property Name="ENCODE_TM" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="TD_NUM" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PREV_TD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="BT_DATE" Type="DateTime" />
+          <Property Name="EXEMPT_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="CAD_NO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OWN_NAMES">
+          <Key>
+            <PropertyRef Name="OWN_CODE" />
+            <PropertyRef Name="OWN_LN" />
+            <PropertyRef Name="OWN_ADDR" />
+          </Key>
+          <Property Name="OWN_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OWN_LN" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OWN_FN" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="OWN_MI" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="OWN_ADDR" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OWN_BRGY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="OWN_MUN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="OWN_PROV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="OWN_TELNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OWN_ZIP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="OWN_EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATE_DATE" Type="DateTime" />
+          <Property Name="UPDATE_TIME" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="OWN_DIST" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TYPE_FLD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FAAS_LAND" EntityType="Self.FAAS_LAND" />
+          <EntitySet Name="OWN_NAMES" EntityType="Self.OWN_NAMES" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="FAAS_LAND">
+            <EntityTypeMapping TypeName="Model.FAAS_LAND">
+              <MappingFragment StoreEntitySet="FAAS_LAND">
+                <ScalarProperty Name="LAND_PIN" ColumnName="LAND_PIN" />
+                <ScalarProperty Name="ARP_LAND" ColumnName="ARP_LAND" />
+                <ScalarProperty Name="OCT_NO" ColumnName="OCT_NO" />
+                <ScalarProperty Name="LOT_NO" ColumnName="LOT_NO" />
+                <ScalarProperty Name="BLK_NO" ColumnName="BLK_NO" />
+                <ScalarProperty Name="SURVEY_NO" ColumnName="SURVEY_NO" />
+                <ScalarProperty Name="OWN_CODE" ColumnName="OWN_CODE" />
+                <ScalarProperty Name="UPDATE_CODE" ColumnName="UPDATE_CODE" />
+                <ScalarProperty Name="ZONE_CODE" ColumnName="ZONE_CODE" />
+                <ScalarProperty Name="LOCN_CODE" ColumnName="LOCN_CODE" />
+                <ScalarProperty Name="PB_N" ColumnName="PB_N" />
+                <ScalarProperty Name="PB_E" ColumnName="PB_E" />
+                <ScalarProperty Name="PB_S" ColumnName="PB_S" />
+                <ScalarProperty Name="PB_W" ColumnName="PB_W" />
+                <ScalarProperty Name="LAND_FMT" ColumnName="LAND_FMT" />
+                <ScalarProperty Name="LAND_AREA" ColumnName="LAND_AREA" />
+                <ScalarProperty Name="MARKET_VALUE" ColumnName="MARKET_VALUE" />
+                <ScalarProperty Name="ADJUSTED_MV" ColumnName="ADJUSTED_MV" />
+                <ScalarProperty Name="ACT_USE" ColumnName="ACT_USE" />
+                <ScalarProperty Name="ASS_LEV" ColumnName="ASS_LEV" />
+                <ScalarProperty Name="ASS_VAL" ColumnName="ASS_VAL" />
+                <ScalarProperty Name="TAXABILITY" ColumnName="TAXABILITY" />
+                <ScalarProperty Name="PREV_OWN_NM" ColumnName="PREV_OWN_NM" />
+                <ScalarProperty Name="PREV_ASS_VAL" ColumnName="PREV_ASS_VAL" />
+                <ScalarProperty Name="EFF_DATE" ColumnName="EFF_DATE" />
+                <ScalarProperty Name="APP_BY_NM" ColumnName="APP_BY_NM" />
+                <ScalarProperty Name="APP_BY_DT" ColumnName="APP_BY_DT" />
+                <ScalarProperty Name="ASS_BY_NM" ColumnName="ASS_BY_NM" />
+                <ScalarProperty Name="ASS_BY_DT" ColumnName="ASS_BY_DT" />
+                <ScalarProperty Name="REC_APP_NM" ColumnName="REC_APP_NM" />
+                <ScalarProperty Name="REC_APP_DT" ColumnName="REC_APP_DT" />
+                <ScalarProperty Name="APPROVED_BY" ColumnName="APPROVED_BY" />
+                <ScalarProperty Name="APPROVED_DT" ColumnName="APPROVED_DT" />
+                <ScalarProperty Name="MEMORANDA" ColumnName="MEMORANDA" />
+                <ScalarProperty Name="MEMO2" ColumnName="MEMO2" />
+                <ScalarProperty Name="PREV_PIN" ColumnName="PREV_PIN" />
+                <ScalarProperty Name="PREV_ARP" ColumnName="PREV_ARP" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="ENCODE_DT" ColumnName="ENCODE_DT" />
+                <ScalarProperty Name="UPDATED_DT" ColumnName="UPDATED_DT" />
+                <ScalarProperty Name="ENCODE_TM" ColumnName="ENCODE_TM" />
+                <ScalarProperty Name="TD_NUM" ColumnName="TD_NUM" />
+                <ScalarProperty Name="PREV_TD" ColumnName="PREV_TD" />
+                <ScalarProperty Name="BT_DATE" ColumnName="BT_DATE" />
+                <ScalarProperty Name="EXEMPT_CODE" ColumnName="EXEMPT_CODE" />
+                <ScalarProperty Name="CAD_NO" ColumnName="CAD_NO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OWN_NAMES">
+            <EntityTypeMapping TypeName="Model.OWN_NAMES">
+              <MappingFragment StoreEntitySet="OWN_NAMES">
+                <ScalarProperty Name="OWN_CODE" ColumnName="OWN_CODE" />
+                <ScalarProperty Name="OWN_LN" ColumnName="OWN_LN" />
+                <ScalarProperty Name="OWN_FN" ColumnName="OWN_FN" />
+                <ScalarProperty Name="OWN_MI" ColumnName="OWN_MI" />
+                <ScalarProperty Name="OWN_ADDR" ColumnName="OWN_ADDR" />
+                <ScalarProperty Name="OWN_BRGY" ColumnName="OWN_BRGY" />
+                <ScalarProperty Name="OWN_MUN" ColumnName="OWN_MUN" />
+                <ScalarProperty Name="OWN_PROV" ColumnName="OWN_PROV" />
+                <ScalarProperty Name="OWN_TELNO" ColumnName="OWN_TELNO" />
+                <ScalarProperty Name="OWN_ZIP" ColumnName="OWN_ZIP" />
+                <ScalarProperty Name="OWN_EMAIL" ColumnName="OWN_EMAIL" />
+                <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+                <ScalarProperty Name="UPDATE_TIME" ColumnName="UPDATE_TIME" />
+                <ScalarProperty Name="OWN_DIST" ColumnName="OWN_DIST" />
+                <ScalarProperty Name="TYPE_FLD" ColumnName="TYPE_FLD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

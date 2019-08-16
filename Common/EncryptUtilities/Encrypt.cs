@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Amellar.Common.EncryptUtilities
+namespace Common.EncryptUtilities
 {
     /// <summary>
     /// This encryption is used to avoid conflict in RPTA C++ encryption

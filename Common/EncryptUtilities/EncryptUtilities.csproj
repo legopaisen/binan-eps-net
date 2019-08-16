@@ -8,7 +8,7 @@
     <ProjectGuid>{EB833D79-9D87-48EC-B396-79AACE685253}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Amellar.Common.EncryptUtilities</RootNamespace>
+    <RootNamespace>Common.EncryptUtilities</RootNamespace>
     <AssemblyName>EncryptUtilities</AssemblyName>
     <SccProjectName>
     </SccProjectName>
@@ -31,7 +31,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>

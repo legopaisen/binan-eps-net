@@ -1,0 +1,1109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.ACCOUNT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ACCOUNT">
+          <Property Name="ACCT_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="ACCT_LN" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_FN" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_MI" Type="varchar2" MaxLength="2" />
+          <Property Name="ACCT_HSE_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="ACCT_LOT_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="ACCT_BLK_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="ACCT_ADDR" Type="varchar2" MaxLength="60" />
+          <Property Name="ACCT_BRGY" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_CITY" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_PROV" Type="varchar2" MaxLength="40" />
+          <Property Name="ACCT_ZIP" Type="varchar2" MaxLength="20" />
+          <Property Name="ACCT_TCT" Type="varchar2" MaxLength="20" />
+          <Property Name="ACCT_TIN" Type="varchar2" MaxLength="20" />
+          <Property Name="ACCT_CTC" Type="varchar2" MaxLength="20" />
+          <Property Name="ACCT_TELNO" Type="varchar2" MaxLength="12" />
+          <Property Name="ACCT_TCT_LOT" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.ACTIVE_MODULES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ACTIVE_MODULES">
+          <Property Name="MODULE_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="TIME_IN" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.APPLICATION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="APPLICATION">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_DESC" Type="varchar2" MaxLength="40" />
+          <Property Name="PERMIT_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="PERMIT_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="STRUC_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="BLDG_NO" Type="number" Precision="10" Scale="0" />
+          <Property Name="STATUS_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="SCOPE_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="CATEGORY_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="OCCUPANCY_CODE" Type="varchar2" MaxLength="4" />
+          <Property Name="BNS_CODE" Type="varchar2" MaxLength="18" />
+          <Property Name="PROJ_HSE_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_LOT_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_BLK_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_ADDR" Type="varchar2" MaxLength="60" />
+          <Property Name="PROJ_BRGY" Type="varchar2" MaxLength="30" />
+          <Property Name="PROJ_CITY" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_PROV" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_ZIP" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_OWNER" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_LOT_OWNER" Type="varchar2" MaxLength="10" />
+          <Property Name="OWN_TYPE" Type="varchar2" MaxLength="30" />
+          <Property Name="ENGR_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="ARCHITECT" Type="varchar2" MaxLength="10" />
+          <Property Name="PROP_START" Type="date" />
+          <Property Name="PROP_COMPLETE" Type="date" />
+          <Property Name="DATE_APPLIED" Type="date" />
+          <Property Name="DATE_ISSUED" Type="date" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="120" />
+          <Property Name="MAIN_APPLICATION" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.APPLICATION_QUE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="APPLICATION_QUE">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_DESC" Type="varchar2" MaxLength="40" />
+          <Property Name="PERMIT_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="PERMIT_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="STRUC_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="BLDG_NO" Type="number" Precision="10" Scale="0" />
+          <Property Name="STATUS_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="SCOPE_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="CATEGORY_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="OCCUPANCY_CODE" Type="varchar2" MaxLength="4" />
+          <Property Name="BNS_CODE" Type="varchar2" MaxLength="18" />
+          <Property Name="PROJ_HSE_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_LOT_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_BLK_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_ADDR" Type="varchar2" MaxLength="60" />
+          <Property Name="PROJ_BRGY" Type="varchar2" MaxLength="30" />
+          <Property Name="PROJ_CITY" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_PROV" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_ZIP" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_OWNER" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_LOT_OWNER" Type="varchar2" MaxLength="10" />
+          <Property Name="OWN_TYPE" Type="varchar2" MaxLength="30" />
+          <Property Name="ENGR_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="ARCHITECT" Type="varchar2" MaxLength="10" />
+          <Property Name="PROP_START" Type="date" />
+          <Property Name="PROP_COMPLETE" Type="date" />
+          <Property Name="DATE_APPLIED" Type="date" />
+          <Property Name="DATE_ISSUED" Type="date" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="120" />
+          <Property Name="MAIN_APPLICATION" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.BANK_TABLE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BANK_TABLE">
+          <Property Name="BANK_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="BANK_NM" Type="varchar2" MaxLength="60" />
+          <Property Name="BANK_BRANCH" Type="varchar2" MaxLength="40" />
+          <Property Name="BANK_ADD" Type="varchar2" MaxLength="60" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.BILL_TMP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILL_TMP">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_UNIT" Type="varchar2" MaxLength="100" />
+          <Property Name="FEES_UNIT_VALUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="PERMIT_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.BILLING' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILLING">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="BILL_DATE" Type="date" />
+          <Property Name="BILL_BY" Type="varchar2" MaxLength="10" />
+          <Property Name="RECEIVED_DATE" Type="date" />
+          <Property Name="RECEIVED_BY" Type="varchar2" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.BILLING_HIST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILLING_HIST">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="BILL_DATE" Type="date" />
+          <Property Name="BILL_BY" Type="varchar2" MaxLength="10" />
+          <Property Name="RECEIVED_DATE" Type="date" />
+          <Property Name="RECEIVED_BY" Type="varchar2" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.BILLING_PAID' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BILLING_PAID">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="BILL_DATE" Type="date" />
+          <Property Name="BILL_BY" Type="varchar2" MaxLength="10" />
+          <Property Name="RECEIVED_DATE" Type="date" />
+          <Property Name="RECEIVED_BY" Type="varchar2" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EPS02101.BLDG_PERMIT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BLDG_PERMIT">
+          <Key>
+            <PropertyRef Name="PERMIT_CODE" />
+          </Key>
+          <Property Name="PERMIT_CODE" Type="varchar2" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.BLDG_UNITS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BLDG_UNITS">
+          <Property Name="BLDG_NO" Type="number" Precision="10" Scale="0" />
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="UNIT_NO" Type="number" Precision="10" Scale="0" />
+          <Property Name="HOUSE_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="LOT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="BLK_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="STREET_ADDR" Type="varchar2" MaxLength="20" />
+          <Property Name="BRGY" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EPS02101.BNS_TABLE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BNS_TABLE">
+          <Key>
+            <PropertyRef Name="FEES_CODE" />
+            <PropertyRef Name="BNS_CODE" />
+            <PropertyRef Name="BNS_DESC" />
+          </Key>
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="2" Nullable="false" />
+          <Property Name="BNS_CODE" Type="varchar2" MaxLength="8" Nullable="false" />
+          <Property Name="BNS_DESC" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="MEANS" Type="varchar2" MaxLength="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.BRGY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BRGY">
+          <Property Name="BRGY_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="BRGY_NM" Type="varchar2" MaxLength="40" />
+          <Property Name="DIST_CODE" Type="varchar2" MaxLength="3" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.BUILDING' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BUILDING">
+          <Property Name="BLDG_NO" Type="number" Precision="10" Scale="0" />
+          <Property Name="BLDG_NM" Type="varchar2" MaxLength="60" />
+          <Property Name="LAND_PIN" Type="varchar2" MaxLength="20" />
+          <Property Name="BLDG_HEIGHT" Type="float" Precision="126" Scale="0" />
+          <Property Name="TOTAL_FLR_AREA" Type="float" Precision="126" Scale="0" />
+          <Property Name="ANCILLARY_AREA" Type="float" Precision="126" Scale="0" />
+          <Property Name="NO_UNITS" Type="number" Precision="10" Scale="0" />
+          <Property Name="NO_STOREYS" Type="number" Precision="10" Scale="0" />
+          <Property Name="MATERIAL_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="EST_COST" Type="float" Precision="126" Scale="0" />
+          <Property Name="ACTUAL_COST" Type="float" Precision="126" Scale="0" />
+          <Property Name="DATE_COMPLETED" Type="date" />
+          <Property Name="ASS_VAL" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.CANCEL_APPLICATION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CANCEL_APPLICATION">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_DESC" Type="varchar2" MaxLength="40" />
+          <Property Name="PERMIT_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="PERMIT_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="STRUC_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="BLDG_NO" Type="number" Precision="10" Scale="0" />
+          <Property Name="STATUS_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="SCOPE_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="CATEGORY_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="OCCUPANCY_CODE" Type="varchar2" MaxLength="4" />
+          <Property Name="BNS_CODE" Type="varchar2" MaxLength="4" />
+          <Property Name="PROJ_HSE_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_LOT_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_BLK_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_ADDR" Type="varchar2" MaxLength="60" />
+          <Property Name="PROJ_BRGY" Type="varchar2" MaxLength="30" />
+          <Property Name="PROJ_CITY" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_PROV" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_ZIP" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_OWNER" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_LOT_OWNER" Type="varchar2" MaxLength="10" />
+          <Property Name="OWN_TYPE" Type="varchar2" MaxLength="30" />
+          <Property Name="ENGR_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="ARCHITECT" Type="varchar2" MaxLength="10" />
+          <Property Name="PROP_START" Type="date" />
+          <Property Name="PROP_COMPLETE" Type="date" />
+          <Property Name="DATE_APPLIED" Type="date" />
+          <Property Name="DATE_ISSUED" Type="date" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="120" />
+          <Property Name="MAIN_APPLICATION" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.CANCELLED_PAYMENTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CANCELLED_PAYMENTS">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="8" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="4" />
+          <Property Name="FEES_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="PAYMENT_TYPE" Type="varchar2" MaxLength="2" />
+          <Property Name="MODE_FLD" Type="varchar2" MaxLength="3" />
+          <Property Name="TIME_POSTED" Type="varchar2" MaxLength="5" />
+          <Property Name="DATE_POSTED" Type="date" />
+          <Property Name="TIME_CANCELLED" Type="varchar2" MaxLength="5" />
+          <Property Name="DATE_CANCELLED" Type="date" />
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="CANCELLED_BY" Type="varchar2" MaxLength="10" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="100" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.CATEGORY_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CATEGORY_TBL">
+          <Property Name="CATEGORY_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="CATEGORY_DESC" Type="varchar2" MaxLength="60" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.CERT_INSPECTION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CERT_INSPECTION">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="CERT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_ISSUED" Type="date" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.CERT_OCCUPANCY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CERT_OCCUPANCY">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="CERT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_ISSUED" Type="date" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.CHECK_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CHECK_TBL">
+          <Property Name="CHK_REF" Type="varchar2" MaxLength="20" />
+          <Property Name="CHK_DATE" Type="date" />
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="ACCT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="ACCT_LN" Type="varchar2" MaxLength="20" />
+          <Property Name="ACCT_FN" Type="varchar2" MaxLength="20" />
+          <Property Name="ACCT_MI" Type="varchar2" MaxLength="2" />
+          <Property Name="CHK_AMT" Type="float" Precision="126" Scale="0" />
+          <Property Name="DT_CREATE" Type="date" />
+          <Property Name="BANK_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="DEBIT_CREDIT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.CONFIG' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CONFIG">
+          <Property Name="SUBJ_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="SUBJ_DESC" Type="varchar2" MaxLength="50" />
+          <Property Name="VALUE_FLD" Type="varchar2" MaxLength="255" />
+          <Property Name="SECURITY_FLD" Type="varchar2" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.CONNECTIVITY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CONNECTIVITY">
+          <Property Name="CONNECTIVITY" Type="varchar2" MaxLength="1" />
+          <Property Name="BILLING" Type="varchar2" MaxLength="1" />
+          <Property Name="SYSTEM_NM" Type="varchar2" MaxLength="4" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.CURR_CERT_NO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CURR_CERT_NO">
+          <Property Name="CERT_NO" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.CURRENT_ARN' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CURRENT_ARN">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.CURRENT_BILL_NO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CURRENT_BILL_NO">
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.DATE_SETTING' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DATE_SETTING">
+          <Property Name="CUR_DATE" Type="date" />
+          <Property Name="CUR_TIME" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.DEBIT_CREDIT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DEBIT_CREDIT">
+          <Property Name="PAYER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="SEQID" Type="number" Precision="10" Scale="0" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="DEBIT" Type="float" Precision="126" Scale="0" />
+          <Property Name="CREDIT" Type="float" Precision="126" Scale="0" />
+          <Property Name="BALANCE" Type="float" Precision="126" Scale="0" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="100" />
+          <Property Name="CHK_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_POSTED" Type="date" />
+          <Property Name="TIME_POSTED" Type="varchar2" MaxLength="20" />
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="SERVED" Type="varchar2" MaxLength="1" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.DENOM_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DENOM_TBL">
+          <Property Name="BILL_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="BILL_DESC" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.DENOMINATION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DENOMINATION">
+          <Property Name="CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="TRAN_DATE" Type="date" />
+          <Property Name="BILL_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="DENOMINATION" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.ELECT_SVC_TYPE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ELECT_SVC_TYPE">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="VOLTAGE" Type="varchar2" MaxLength="20" />
+          <Property Name="WIRE" Type="varchar2" MaxLength="20" />
+          <Property Name="GROUND_WIRE" Type="varchar2" MaxLength="20" />
+          <Property Name="PHASE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.ELECT_WIRING_TYPE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ELECT_WIRING_TYPE">
+          <Property Name="TYPEWIRING_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="TYPEWIRING_DESC" Type="varchar2" MaxLength="100" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.ENGINEER_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ENGINEER_TBL">
+          <Property Name="ENGR_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="ENGR_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="ENGR_LN" Type="varchar2" MaxLength="40" />
+          <Property Name="ENGR_FN" Type="varchar2" MaxLength="40" />
+          <Property Name="ENGR_MI" Type="varchar2" MaxLength="2" />
+          <Property Name="ENGR_HSE_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="ENGR_LOT_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="ENGR_BLK_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="ENGR_ADDR" Type="varchar2" MaxLength="40" />
+          <Property Name="ENGR_BRGY" Type="varchar2" MaxLength="40" />
+          <Property Name="ENGR_CITY" Type="varchar2" MaxLength="40" />
+          <Property Name="ENGR_PROV" Type="varchar2" MaxLength="40" />
+          <Property Name="ENGR_ZIP" Type="varchar2" MaxLength="20" />
+          <Property Name="ENGR_TIN" Type="varchar2" MaxLength="20" />
+          <Property Name="ENGR_PRC" Type="varchar2" MaxLength="20" />
+          <Property Name="ENGR_PTR" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.EXCAVATION_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EXCAVATION_TBL">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_DESC" Type="varchar2" MaxLength="250" />
+          <Property Name="ACCT_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="CATEGORY_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="HSE_NO" Type="varchar2" MaxLength="255" />
+          <Property Name="LOT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="BLK_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="ADDRESS" Type="varchar2" MaxLength="100" />
+          <Property Name="BRGY" Type="varchar2" MaxLength="20" />
+          <Property Name="CITY" Type="varchar2" MaxLength="20" />
+          <Property Name="PROVINCE" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_APPLIED" Type="date" />
+          <Property Name="EXCAVATION_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_ISSUED" Type="date" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.LOT_OWNERS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LOT_OWNERS">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="ACCT_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.MAJOR_FEES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MAJOR_FEES">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="140" />
+          <Property Name="FEES_TYPE" Type="varchar2" MaxLength="100" />
+          <Property Name="RECORD_KEEP" Type="varchar2" MaxLength="2" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.MAJOR_FEES_X' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MAJOR_FEES_X">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="140" />
+          <Property Name="FEES_TYPE" Type="varchar2" MaxLength="100" />
+          <Property Name="RECORD_KEEP" Type="varchar2" MaxLength="2" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.MATERIAL_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MATERIAL_TBL">
+          <Property Name="MATERIAL_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="MATERIAL_DESC" Type="varchar2" MaxLength="30" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.MODULES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MODULES">
+          <Property Name="MODULE_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="MODULE_DESC" Type="varchar2" MaxLength="40" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.MRS_ACCOUNTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MRS_ACCOUNTS">
+          <Property Name="EPS_ACCT_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="MRS_ACCT_CODE" Type="varchar2" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.MRS_PAYMENTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MRS_PAYMENTS">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="ACCT_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="MRS_ACCT_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="DATE_POSTED" Type="date" />
+          <Property Name="TIME_POSTED" Type="varchar2" MaxLength="8" />
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="POSTED_BY" Type="varchar2" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.OCCUPANCY_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OCCUPANCY_TBL">
+          <Property Name="OCC_CODE" Type="varchar2" MaxLength="4" />
+          <Property Name="OCC_DESC" Type="varchar2" MaxLength="60" />
+          <Property Name="CATEGORY_CODE" Type="varchar2" MaxLength="2" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.OR_ASSIGNED' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OR_ASSIGNED">
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="FROM_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TO_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_ASSIGNED" Type="date" />
+          <Property Name="ASSIGNED_BY" Type="varchar2" MaxLength="10" />
+          <Property Name="DEC_SERIES" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.OR_ASSIGNED_HIST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OR_ASSIGNED_HIST">
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="FROM_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TO_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_ASSIGNED" Type="date" />
+          <Property Name="ASSIGNED_BY" Type="varchar2" MaxLength="10" />
+          <Property Name="DEC_SERIES" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.OR_CURRENT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OR_CURRENT">
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="FROM_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TO_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="CUR_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="DEC_SERIES" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.OR_RETURNED' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OR_RETURNED">
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="FROM_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TO_OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TRN_DATE" Type="date" />
+          <Property Name="RETURNED_BY" Type="varchar2" MaxLength="10" />
+          <Property Name="DEC_SERIES" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.OR_USED' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OR_USED">
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TELLER" Type="varchar2" MaxLength="10" />
+          <Property Name="TRN_DATE" Type="date" />
+          <Property Name="OR_NO_VAL" Type="number" Precision="10" Scale="0" />
+          <Property Name="DEC_SERIES" Type="number" Precision="10" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EPS02101.OTHER_CERT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OTHER_CERT">
+          <Key>
+            <PropertyRef Name="TSWITCH" />
+          </Key>
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="ACCT_CODE" Type="varchar2" MaxLength="6" />
+          <Property Name="LOCATION" Type="varchar2" MaxLength="255" />
+          <Property Name="ASSIGNED_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="WIRING_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_DESC" Type="varchar2" MaxLength="20" />
+          <Property Name="TYPE_FLD" Type="varchar2" MaxLength="60" />
+          <Property Name="DATE_ASSIGNED" Type="date" />
+          <Property Name="TYPE_SERVICE" Type="varchar2" MaxLength="30" />
+          <Property Name="METHOD_WIRING" Type="varchar2" MaxLength="30" />
+          <Property Name="NATURE_WORK" Type="varchar2" MaxLength="50" />
+          <Property Name="OCCUPANCY" Type="varchar2" MaxLength="5" />
+          <Property Name="REMARK" Type="varchar2" MaxLength="255" />
+          <Property Name="SWITCHBOARD" Type="varchar2" MaxLength="5" />
+          <Property Name="METERS" Type="varchar2" MaxLength="10" />
+          <Property Name="LIGHT_OUTLET" Type="varchar2" MaxLength="5" />
+          <Property Name="ELECT_RANGE" Type="varchar2" MaxLength="5" />
+          <Property Name="ACU_UP" Type="varchar2" MaxLength="5" />
+          <Property Name="TSWITCH" Type="varchar2" MaxLength="5" Nullable="false" />
+          <Property Name="TEL" Type="varchar2" MaxLength="5" />
+          <Property Name="W_PUMP" Type="varchar2" MaxLength="5" />
+          <Property Name="MISC" Type="varchar2" MaxLength="5" />
+          <Property Name="CONV_OUTLET" Type="varchar2" MaxLength="5" />
+          <Property Name="BELL" Type="varchar2" MaxLength="5" />
+          <Property Name="OTHERS_FLD" Type="varchar2" MaxLength="5" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.OTHER_PERMIT_ASS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="OTHER_PERMIT_ASS">
+          <Property Name="PERMIT_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="FR_PERMIT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="CU_PERMIT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="ASSIGNED_DATE" Type="date" />
+          <Property Name="ASSIGNED_BY" Type="varchar2" MaxLength="60" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.PAYMENT_DENOM' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PAYMENT_DENOM">
+          <Property Name="OR_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="AMT_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="CASH_PAY" Type="float" Precision="126" Scale="0" />
+          <Property Name="CHECK_PAY" Type="float" Precision="126" Scale="0" />
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.PAYMENTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PAYMENTS">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="OR_NO" Type="varchar2" MaxLength="8" />
+          <Property Name="OR_DATE" Type="date" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="4" />
+          <Property Name="FEES_DUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="PAYMENT_TYPE" Type="varchar2" MaxLength="2" />
+          <Property Name="MODE_FLD" Type="varchar2" MaxLength="3" />
+          <Property Name="TIME_POSTED" Type="varchar2" MaxLength="5" />
+          <Property Name="DATE_POSTED" Type="date" />
+          <Property Name="POSTED_BY" Type="varchar2" MaxLength="60" />
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="60" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="100" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.PERMIT_ASSIGNED' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PERMIT_ASSIGNED">
+          <Property Name="PERMIT_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="FR_PERMIT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="CU_PERMIT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="ASSIGNED_DATE" Type="date" />
+          <Property Name="ASSIGNED_BY" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.PERMIT_FEES_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PERMIT_FEES_TBL">
+          <Property Name="PERMIT_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.PERMIT_FEES_TBL_TMP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PERMIT_FEES_TBL_TMP">
+          <Property Name="PERMIT_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.PERMIT_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PERMIT_TBL">
+          <Property Name="PERMIT_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="PERMIT_DESC" Type="varchar2" MaxLength="60" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="OTHER_TYPE" Type="varchar2" MaxLength="60" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.RIGHTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="RIGHTS">
+          <Property Name="RIGHT_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="RIGHT_DESC" Type="varchar2" MaxLength="100" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.RPT_BUILDING' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="RPT_BUILDING">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_DESC" Type="varchar2" MaxLength="100" />
+          <Property Name="PERMIT_DESC" Type="varchar2" MaxLength="100" />
+          <Property Name="PERMIT_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="PERMIT_DATE_ISSUED" Type="varchar2" MaxLength="10" />
+          <Property Name="BLDG_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="BLDG_NM" Type="varchar2" MaxLength="100" />
+          <Property Name="BLDG_HEIGHT" Type="varchar2" MaxLength="50" />
+          <Property Name="TOTAL_FLR_AREA" Type="varchar2" MaxLength="50" />
+          <Property Name="NO_UNITS" Type="varchar2" MaxLength="50" />
+          <Property Name="NO_STOREYS" Type="varchar2" MaxLength="50" />
+          <Property Name="MATERIAL_DESC" Type="varchar2" MaxLength="100" />
+          <Property Name="EST_COST" Type="varchar2" MaxLength="50" />
+          <Property Name="ACTUAL_COST" Type="varchar2" MaxLength="50" />
+          <Property Name="DATE_COMPLETED" Type="varchar2" MaxLength="10" />
+          <Property Name="CATEGORY_DESC" Type="varchar2" MaxLength="100" />
+          <Property Name="OCCUPANCY_DESC" Type="varchar2" MaxLength="100" />
+          <Property Name="PROJ_HSE_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_LOT_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_BLK_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_ADDR" Type="varchar2" MaxLength="100" />
+          <Property Name="PROJ_BRGY" Type="varchar2" MaxLength="30" />
+          <Property Name="PROJ_CITY" Type="varchar2" MaxLength="30" />
+          <Property Name="PROJ_PROV" Type="varchar2" MaxLength="30" />
+          <Property Name="PROJ_ZIP" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_OWNER" Type="varchar2" MaxLength="100" />
+          <Property Name="CERT_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="CERT_DATE_ISSUED" Type="varchar2" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.RPT_INFO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="RPT_INFO">
+          <Property Name="REPORT_CD" Type="varchar2" MaxLength="5" />
+          <Property Name="REPORT_DESC" Type="varchar2" MaxLength="100" />
+          <Property Name="GEN_DATE" Type="varchar2" MaxLength="10" />
+          <Property Name="GEN_TIME" Type="varchar2" MaxLength="10" />
+          <Property Name="USER_NAME" Type="varchar2" MaxLength="100" />
+          <Property Name="MEMO" Type="varchar2" MaxLength="255" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.RPT_ISSUED_PERMITS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="RPT_ISSUED_PERMITS">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_DESC" Type="varchar2" MaxLength="100" />
+          <Property Name="PERMIT_DESC" Type="varchar2" MaxLength="100" />
+          <Property Name="PERMIT_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="STRUC_DESC" Type="varchar2" MaxLength="40" />
+          <Property Name="STATUS_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="SCOPE_DESC" Type="varchar2" MaxLength="40" />
+          <Property Name="CATEGORY_DESC" Type="varchar2" MaxLength="40" />
+          <Property Name="OCCUPANCY_DESC" Type="varchar2" MaxLength="40" />
+          <Property Name="PROJ_HSE_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_LOT_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_BLK_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_ADDR" Type="varchar2" MaxLength="100" />
+          <Property Name="PROJ_BRGY" Type="varchar2" MaxLength="30" />
+          <Property Name="PROJ_CITY" Type="varchar2" MaxLength="30" />
+          <Property Name="PROJ_PROV" Type="varchar2" MaxLength="30" />
+          <Property Name="PROJ_ZIP" Type="varchar2" MaxLength="10" />
+          <Property Name="PROJ_OWNER" Type="varchar2" MaxLength="100" />
+          <Property Name="OWN_TYPE" Type="varchar2" MaxLength="40" />
+          <Property Name="DATE_APPLIED" Type="varchar2" MaxLength="10" />
+          <Property Name="DATE_ISSUED" Type="varchar2" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.RPT_SUMMARY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="RPT_SUMMARY">
+          <Property Name="CATEGORY_DESC" Type="varchar2" MaxLength="50" />
+          <Property Name="PERMIT_DESC" Type="varchar2" MaxLength="50" />
+          <Property Name="TOTAL_ARN" Type="varchar2" MaxLength="50" />
+          <Property Name="PERMIT_VALUE" Type="varchar2" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.SCHEDULES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SCHEDULES">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="QTY1" Type="float" Precision="126" Scale="0" />
+          <Property Name="QTY2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT1" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE_DESC" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.SCHEDULES_X' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SCHEDULES_X">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="QTY1" Type="float" Precision="126" Scale="0" />
+          <Property Name="QTY2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE1" Type="float" Precision="126" Scale="0" />
+          <Property Name="RATE2" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT1" Type="float" Precision="126" Scale="0" />
+          <Property Name="AMOUNT2" Type="float" Precision="126" Scale="0" />
+          <Property Name="RANGE_DESC" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.SCOPE_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SCOPE_TBL">
+          <Property Name="SCOPE_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="SCOPE_DESC" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.STRUC_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="STRUC_TBL">
+          <Property Name="STRUC_CODE" Type="varchar2" MaxLength="2" />
+          <Property Name="STRUC_DESC" Type="varchar2" MaxLength="30" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.SUBCATEGORIES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SUBCATEGORIES">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="500" />
+          <Property Name="FEES_TERM" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_MEANS" Type="varchar2" MaxLength="4" />
+          <Property Name="FEES_UNIT" Type="varchar2" MaxLength="100" />
+          <Property Name="CATEGORY_CODE" Type="varchar2" MaxLength="5" />
+          <Property Name="AREA_NEEDED" Type="varchar2" MaxLength="1" />
+          <Property Name="CUMULATIVE" Type="varchar2" MaxLength="1" />
+          <Property Name="SCOPE_CODE" Type="varchar2" MaxLength="40" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.SUBCATEGORIES_X' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SUBCATEGORIES_X">
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="8" />
+          <Property Name="FEES_DESC" Type="varchar2" MaxLength="500" />
+          <Property Name="FEES_TERM" Type="varchar2" MaxLength="20" />
+          <Property Name="FEES_MEANS" Type="varchar2" MaxLength="4" />
+          <Property Name="FEES_UNIT" Type="varchar2" MaxLength="100" />
+          <Property Name="CATEGORY_CODE" Type="varchar2" MaxLength="5" />
+          <Property Name="AREA_NEEDED" Type="varchar2" MaxLength="1" />
+          <Property Name="CUMULATIVE" Type="varchar2" MaxLength="1" />
+          <Property Name="SCOPE_CODE" Type="varchar2" MaxLength="40" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.TAX_DETAILS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TAX_DETAILS">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="6" />
+          <Property Name="FEES_UNIT" Type="varchar2" MaxLength="100" />
+          <Property Name="FEES_UNIT_VALUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_AMT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.TAX_DETAILS_HIST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TAX_DETAILS_HIST">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="6" />
+          <Property Name="FEES_UNIT" Type="varchar2" MaxLength="100" />
+          <Property Name="FEES_UNIT_VALUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_AMT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.TAX_DETAILS_PAID' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TAX_DETAILS_PAID">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="6" />
+          <Property Name="FEES_UNIT" Type="varchar2" MaxLength="100" />
+          <Property Name="FEES_UNIT_VALUE" Type="float" Precision="126" Scale="0" />
+          <Property Name="FEES_AMT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.TAXDUES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TAXDUES">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="6" />
+          <Property Name="FEES_AMT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.TAXDUES_HIST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TAXDUES_HIST">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="6" />
+          <Property Name="FEES_AMT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.TAXDUES_PAID' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TAXDUES_PAID">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="BILL_NO" Type="varchar2" MaxLength="10" />
+          <Property Name="FEES_CODE" Type="varchar2" MaxLength="6" />
+          <Property Name="FEES_AMT" Type="float" Precision="126" Scale="0" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.TELLERS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TELLERS">
+          <Property Name="TELLER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="TELLER_LN" Type="varchar2" MaxLength="40" />
+          <Property Name="TELLER_FN" Type="varchar2" MaxLength="40" />
+          <Property Name="TELLER_MI" Type="varchar2" MaxLength="2" />
+          <Property Name="TELLER_POS" Type="varchar2" MaxLength="40" />
+          <Property Name="TELLER_PWD" Type="varchar2" MaxLength="20" />
+          <Property Name="TELLER_MEMO" Type="varchar2" MaxLength="40" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.TRAIL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TRAIL">
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="MODULE_CODE" Type="varchar2" MaxLength="30" />
+          <Property Name="TRANS_DATE" Type="date" />
+          <Property Name="TRANS_TIME" Type="varchar2" MaxLength="15" />
+          <Property Name="TABLE_FLD" Type="varchar2" MaxLength="30" />
+          <Property Name="OBJECT_FLD" Type="varchar2" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.TRAIL_TABLE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TRAIL_TABLE">
+          <Property Name="MODULE_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="MODULE_DESC" Type="varchar2" MaxLength="100" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.TYPEWIRING_REC' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TYPEWIRING_REC">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="TYPEWIRING_CODE" Type="varchar2" MaxLength="2" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.USER_LEVEL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="USER_LEVEL">
+          <Property Name="USER_LEVEL" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.USER_LEVEL_RIGHTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="USER_LEVEL_RIGHTS">
+          <Property Name="USER_LEVEL" Type="varchar2" MaxLength="20" />
+          <Property Name="MODULE_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.USERS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="USERS">
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="10" />
+          <Property Name="USER_LN" Type="varchar2" MaxLength="40" />
+          <Property Name="USER_FN" Type="varchar2" MaxLength="40" />
+          <Property Name="USER_MI" Type="varchar2" MaxLength="1" />
+          <Property Name="USER_POS" Type="varchar2" MaxLength="40" />
+          <Property Name="USER_LEVEL" Type="varchar2" MaxLength="20" />
+          <Property Name="USER_PWD" Type="varchar2" MaxLength="40" />
+          <Property Name="USER_MEMO" Type="varchar2" MaxLength="120" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.USERS_RIGHTS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="USERS_RIGHTS">
+          <Property Name="USER_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="RIGHT_CODE" Type="varchar2" MaxLength="6" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'EPS02101.WIRING_TBL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="WIRING_TBL">
+          <Property Name="ARN" Type="varchar2" MaxLength="20" />
+          <Property Name="PROJ_DESC" Type="varchar2" MaxLength="20" />
+          <Property Name="ACCT_CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="ASSIGNED_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TYPE_FLD" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_ASSIGNED" Type="date" />
+          <Property Name="OCCUPANCY" Type="varchar2" MaxLength="4" />
+          <Property Name="HSE_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="LOT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="BLK_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="ADDRESS" Type="varchar2" MaxLength="20" />
+          <Property Name="BRGY" Type="varchar2" MaxLength="20" />
+          <Property Name="CITY" Type="varchar2" MaxLength="20" />
+          <Property Name="PROVINCE" Type="varchar2" MaxLength="20" />
+          <Property Name="CTC_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="CTC_AT" Type="varchar2" MaxLength="40" />
+          <Property Name="CTC_ON" Type="date" />
+          <Property Name="LOAD1" Type="varchar2" MaxLength="20" />
+          <Property Name="LOAD2" Type="varchar2" MaxLength="20" />
+          <Property Name="LOAD3" Type="varchar2" MaxLength="20" />
+          <Property Name="LOAD4" Type="varchar2" MaxLength="20" />
+          <Property Name="LOAD5" Type="varchar2" MaxLength="20" />
+          <Property Name="MOTOR1" Type="varchar2" MaxLength="20" />
+          <Property Name="MOTOR2" Type="varchar2" MaxLength="20" />
+          <Property Name="MOTOR3" Type="varchar2" MaxLength="20" />
+          <Property Name="MOTOR4" Type="varchar2" MaxLength="20" />
+          <Property Name="MOTOR5" Type="varchar2" MaxLength="20" />
+          <Property Name="APP1" Type="varchar2" MaxLength="20" />
+          <Property Name="APP2" Type="varchar2" MaxLength="20" />
+          <Property Name="APP3" Type="varchar2" MaxLength="20" />
+          <Property Name="APP4" Type="varchar2" MaxLength="20" />
+          <Property Name="APP5" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="20" />
+        </EntityType>-->
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="BLDG_PERMIT" EntityType="Self.BLDG_PERMIT" store:Type="Tables" store:Schema="EPS02101">
+            <DefiningQuery>SELECT 
+"BLDG_PERMIT"."PERMIT_CODE" AS "PERMIT_CODE"
+FROM "EPS02101"."BLDG_PERMIT" "BLDG_PERMIT"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BNS_TABLE" EntityType="Self.BNS_TABLE" store:Type="Tables" store:Schema="EPS02101">
+            <DefiningQuery>SELECT 
+"BNS_TABLE"."FEES_CODE" AS "FEES_CODE", 
+"BNS_TABLE"."BNS_CODE" AS "BNS_CODE", 
+"BNS_TABLE"."BNS_DESC" AS "BNS_DESC", 
+"BNS_TABLE"."MEANS" AS "MEANS"
+FROM "EPS02101"."BNS_TABLE" "BNS_TABLE"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OTHER_CERT" EntityType="Self.OTHER_CERT" store:Type="Tables" store:Schema="EPS02101">
+            <DefiningQuery>SELECT 
+"OTHER_CERT"."ARN" AS "ARN", 
+"OTHER_CERT"."ACCT_CODE" AS "ACCT_CODE", 
+"OTHER_CERT"."LOCATION" AS "LOCATION", 
+"OTHER_CERT"."ASSIGNED_NO" AS "ASSIGNED_NO", 
+"OTHER_CERT"."WIRING_NO" AS "WIRING_NO", 
+"OTHER_CERT"."PROJ_DESC" AS "PROJ_DESC", 
+"OTHER_CERT"."TYPE_FLD" AS "TYPE_FLD", 
+"OTHER_CERT"."DATE_ASSIGNED" AS "DATE_ASSIGNED", 
+"OTHER_CERT"."TYPE_SERVICE" AS "TYPE_SERVICE", 
+"OTHER_CERT"."METHOD_WIRING" AS "METHOD_WIRING", 
+"OTHER_CERT"."NATURE_WORK" AS "NATURE_WORK", 
+"OTHER_CERT"."OCCUPANCY" AS "OCCUPANCY", 
+"OTHER_CERT"."REMARK" AS "REMARK", 
+"OTHER_CERT"."SWITCHBOARD" AS "SWITCHBOARD", 
+"OTHER_CERT"."METERS" AS "METERS", 
+"OTHER_CERT"."LIGHT_OUTLET" AS "LIGHT_OUTLET", 
+"OTHER_CERT"."ELECT_RANGE" AS "ELECT_RANGE", 
+"OTHER_CERT"."ACU_UP" AS "ACU_UP", 
+"OTHER_CERT"."TSWITCH" AS "TSWITCH", 
+"OTHER_CERT"."TEL" AS "TEL", 
+"OTHER_CERT"."W_PUMP" AS "W_PUMP", 
+"OTHER_CERT"."MISC" AS "MISC", 
+"OTHER_CERT"."CONV_OUTLET" AS "CONV_OUTLET", 
+"OTHER_CERT"."BELL" AS "BELL", 
+"OTHER_CERT"."OTHERS_FLD" AS "OTHERS_FLD"
+FROM "EPS02101"."OTHER_CERT" "OTHER_CERT"</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="BLDG_PERMIT">
+          <Key>
+            <PropertyRef Name="PERMIT_CODE" />
+          </Key>
+          <Property Name="PERMIT_CODE" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BNS_TABLE">
+          <Key>
+            <PropertyRef Name="FEES_CODE" />
+            <PropertyRef Name="BNS_CODE" />
+            <PropertyRef Name="BNS_DESC" />
+          </Key>
+          <Property Name="FEES_CODE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BNS_CODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BNS_DESC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MEANS" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OTHER_CERT">
+          <Key>
+            <PropertyRef Name="TSWITCH" />
+          </Key>
+          <Property Name="ARN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ACCT_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="LOCATION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ASSIGNED_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="WIRING_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PROJ_DESC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TYPE_FLD" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_ASSIGNED" Type="DateTime" />
+          <Property Name="TYPE_SERVICE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="METHOD_WIRING" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NATURE_WORK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OCCUPANCY" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="REMARK" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SWITCHBOARD" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="METERS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LIGHT_OUTLET" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ELECT_RANGE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ACU_UP" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TSWITCH" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TEL" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="W_PUMP" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="MISC" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CONV_OUTLET" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="BELL" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="OTHERS_FLD" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="EPSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BLDG_PERMIT" EntityType="Self.BLDG_PERMIT" />
+          <EntitySet Name="BNS_TABLE" EntityType="Self.BNS_TABLE" />
+          <EntitySet Name="OTHER_CERT" EntityType="Self.OTHER_CERT" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="EPSEntities">
+          <EntitySetMapping Name="BLDG_PERMIT">
+            <EntityTypeMapping TypeName="Model.BLDG_PERMIT">
+              <MappingFragment StoreEntitySet="BLDG_PERMIT">
+                <ScalarProperty Name="PERMIT_CODE" ColumnName="PERMIT_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BNS_TABLE">
+            <EntityTypeMapping TypeName="Model.BNS_TABLE">
+              <MappingFragment StoreEntitySet="BNS_TABLE">
+                <ScalarProperty Name="FEES_CODE" ColumnName="FEES_CODE" />
+                <ScalarProperty Name="BNS_CODE" ColumnName="BNS_CODE" />
+                <ScalarProperty Name="BNS_DESC" ColumnName="BNS_DESC" />
+                <ScalarProperty Name="MEANS" ColumnName="MEANS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OTHER_CERT">
+            <EntityTypeMapping TypeName="Model.OTHER_CERT">
+              <MappingFragment StoreEntitySet="OTHER_CERT">
+                <ScalarProperty Name="ARN" ColumnName="ARN" />
+                <ScalarProperty Name="ACCT_CODE" ColumnName="ACCT_CODE" />
+                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+                <ScalarProperty Name="ASSIGNED_NO" ColumnName="ASSIGNED_NO" />
+                <ScalarProperty Name="WIRING_NO" ColumnName="WIRING_NO" />
+                <ScalarProperty Name="PROJ_DESC" ColumnName="PROJ_DESC" />
+                <ScalarProperty Name="TYPE_FLD" ColumnName="TYPE_FLD" />
+                <ScalarProperty Name="DATE_ASSIGNED" ColumnName="DATE_ASSIGNED" />
+                <ScalarProperty Name="TYPE_SERVICE" ColumnName="TYPE_SERVICE" />
+                <ScalarProperty Name="METHOD_WIRING" ColumnName="METHOD_WIRING" />
+                <ScalarProperty Name="NATURE_WORK" ColumnName="NATURE_WORK" />
+                <ScalarProperty Name="OCCUPANCY" ColumnName="OCCUPANCY" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="SWITCHBOARD" ColumnName="SWITCHBOARD" />
+                <ScalarProperty Name="METERS" ColumnName="METERS" />
+                <ScalarProperty Name="LIGHT_OUTLET" ColumnName="LIGHT_OUTLET" />
+                <ScalarProperty Name="ELECT_RANGE" ColumnName="ELECT_RANGE" />
+                <ScalarProperty Name="ACU_UP" ColumnName="ACU_UP" />
+                <ScalarProperty Name="TSWITCH" ColumnName="TSWITCH" />
+                <ScalarProperty Name="TEL" ColumnName="TEL" />
+                <ScalarProperty Name="W_PUMP" ColumnName="W_PUMP" />
+                <ScalarProperty Name="MISC" ColumnName="MISC" />
+                <ScalarProperty Name="CONV_OUTLET" ColumnName="CONV_OUTLET" />
+                <ScalarProperty Name="BELL" ColumnName="BELL" />
+                <ScalarProperty Name="OTHERS_FLD" ColumnName="OTHERS_FLD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

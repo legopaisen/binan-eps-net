@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EPS</RootNamespace>
     <AssemblyName>EPS</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>aEPs.ico</ApplicationIcon>
@@ -44,6 +46,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -53,9 +56,35 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AppSettings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\AppSettings\bin\Debug\AppSettings.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPSEntities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EPSEntities\bin\Debug\EPSEntities.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.2400\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.1.2400\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -84,6 +113,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -100,7 +130,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="aEPs.ico" />
@@ -109,7 +141,7 @@
     <None Include="Resources\2012_aeps.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\DataConnector\DataConnector\DataConnector.csproj">
+    <ProjectReference Include="..\..\Common\DataConnector\DataConnector.csproj">
       <Project>{7c12da36-676a-49b3-b59d-c07c96539620}</Project>
       <Name>DataConnector</Name>
     </ProjectReference>
@@ -121,9 +153,29 @@
       <Project>{f7cab867-edef-4e74-91bf-6c5385dcf513}</Project>
       <Name>StringUtilities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tables\Tables.csproj">
+    <ProjectReference Include="..\..\Common\User\User.csproj">
+      <Project>{f289f40d-39bb-4bbd-bf6e-25e2e73fb786}</Project>
+      <Name>User</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\ARN\ARN.csproj">
+      <Project>{25fd3db7-ac87-4989-8f78-bd361427490a}</Project>
+      <Name>ARN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Billing\Billing.csproj">
+      <Project>{bcfd28a2-0b61-4d7c-aadb-57b9acc5877d}</Project>
+      <Name>Billing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Tables\Tables.csproj">
       <Project>{e3052cdd-4fbb-44ca-9674-580cc45be0a7}</Project>
       <Name>Tables</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Transactions\Transactions.csproj">
+      <Project>{f34e5205-51e9-4d82-bf7a-bceb77139dc2}</Project>
+      <Name>Transactions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Utilities\Utilities.csproj">
+      <Project>{da501b98-0ae7-440f-bec3-b82eb7b5669d}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace Amellar.Common.EncryptUtilities
+namespace Common.EncryptUtilities
 {
     /// <summary>
     /// Copied from eleksyon

@@ -800,14 +800,21 @@ namespace Common.StringUtilities
 
         public static string PutComma(string sValue)
         {
+            if (string.IsNullOrEmpty(sValue))
+                sValue = "0";
             sValue = Convert.ToDouble(sValue).ToString("#,##0.00");
             return sValue;
         }
 
         public static string RemoveComma(string sValue)
         {
-            sValue = Convert.ToDouble(sValue).ToString();
-            return sValue;
+            if (string.IsNullOrEmpty(sValue))
+                sValue = "0";
+            //sValue = Convert.ToDouble(sValue).ToString();
+            double dValue = 0;
+            double.TryParse(sValue, out dValue);
+            //return sValue;
+            return dValue.ToString();
         }
 
         public static int GetNextLineCount(string sStringValue, int iIntCut)

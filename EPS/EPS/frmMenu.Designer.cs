@@ -36,9 +36,18 @@
             this.cancelPostedPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renewalApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.assessmentOfFeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.permitBillingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mechanicalPermitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.electricalPermitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoningPermitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buildingPermitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reassessmentOfPermitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.certificationBillingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,6 +92,9 @@
             this.btnAOF = new System.Windows.Forms.Button();
             this.btnER = new System.Windows.Forms.Button();
             this.btnNewApp = new System.Windows.Forms.Button();
+            this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MS.SuspendLayout();
             this.pnlButton.SuspendLayout();
             this.SuspendLayout();
@@ -90,6 +102,7 @@
             // MS
             // 
             this.MS.BackColor = System.Drawing.Color.Aqua;
+            this.MS.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.MS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.recordsToolStripMenuItem,
             this.applicationsToolStripMenuItem,
@@ -118,6 +131,7 @@
             this.engineeringRecordsToolStripMenuItem.Name = "engineeringRecordsToolStripMenuItem";
             this.engineeringRecordsToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.engineeringRecordsToolStripMenuItem.Text = "Engineering Records ";
+            this.engineeringRecordsToolStripMenuItem.Click += new System.EventHandler(this.engineeringRecordsToolStripMenuItem_Click);
             // 
             // postingToolStripMenuItem
             // 
@@ -143,15 +157,60 @@
             // 
             // newApplicationToolStripMenuItem
             // 
+            this.newApplicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.viewToolStripMenuItem,
+            this.cancelToolStripMenuItem});
             this.newApplicationToolStripMenuItem.Name = "newApplicationToolStripMenuItem";
             this.newApplicationToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.newApplicationToolStripMenuItem.Text = "New Application";
             // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addToolStripMenuItem.Text = "Add";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewToolStripMenuItem.Text = "View";
+            this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
+            // 
+            // cancelToolStripMenuItem
+            // 
+            this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
+            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cancelToolStripMenuItem.Text = "Cancel";
+            this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
+            // 
             // renewalApplicationToolStripMenuItem
             // 
+            this.renewalApplicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem1,
+            this.editToolStripMenuItem1,
+            this.viewToolStripMenuItem1,
+            this.cancelToolStripMenuItem1});
             this.renewalApplicationToolStripMenuItem.Name = "renewalApplicationToolStripMenuItem";
             this.renewalApplicationToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.renewalApplicationToolStripMenuItem.Text = "Renewal Application";
+            // 
+            // addToolStripMenuItem1
+            // 
+            this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.addToolStripMenuItem1.Text = "Add";
+            this.addToolStripMenuItem1.Click += new System.EventHandler(this.addToolStripMenuItem1_Click);
             // 
             // assessmentOfFeesToolStripMenuItem
             // 
@@ -167,15 +226,49 @@
             // 
             // permitBillingToolStripMenuItem
             // 
+            this.permitBillingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mechanicalPermitToolStripMenuItem,
+            this.electricalPermitToolStripMenuItem,
+            this.zoningPermitToolStripMenuItem,
+            this.buildingPermitToolStripMenuItem});
             this.permitBillingToolStripMenuItem.Name = "permitBillingToolStripMenuItem";
             this.permitBillingToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.permitBillingToolStripMenuItem.Text = "Permit billing";
+            // 
+            // mechanicalPermitToolStripMenuItem
+            // 
+            this.mechanicalPermitToolStripMenuItem.Name = "mechanicalPermitToolStripMenuItem";
+            this.mechanicalPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.mechanicalPermitToolStripMenuItem.Text = "Mechanical Permit";
+            this.mechanicalPermitToolStripMenuItem.Click += new System.EventHandler(this.mechanicalPermitToolStripMenuItem_Click);
+            // 
+            // electricalPermitToolStripMenuItem
+            // 
+            this.electricalPermitToolStripMenuItem.Name = "electricalPermitToolStripMenuItem";
+            this.electricalPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.electricalPermitToolStripMenuItem.Text = "Electrical Permit";
+            this.electricalPermitToolStripMenuItem.Click += new System.EventHandler(this.electricalPermitToolStripMenuItem_Click);
+            // 
+            // zoningPermitToolStripMenuItem
+            // 
+            this.zoningPermitToolStripMenuItem.Name = "zoningPermitToolStripMenuItem";
+            this.zoningPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.zoningPermitToolStripMenuItem.Text = "Zoning Permit";
+            this.zoningPermitToolStripMenuItem.Visible = false;
+            // 
+            // buildingPermitToolStripMenuItem
+            // 
+            this.buildingPermitToolStripMenuItem.Name = "buildingPermitToolStripMenuItem";
+            this.buildingPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.buildingPermitToolStripMenuItem.Text = "Building Permit";
+            this.buildingPermitToolStripMenuItem.Click += new System.EventHandler(this.buildingPermitToolStripMenuItem_Click);
             // 
             // reassessmentOfPermitToolStripMenuItem
             // 
             this.reassessmentOfPermitToolStripMenuItem.Name = "reassessmentOfPermitToolStripMenuItem";
             this.reassessmentOfPermitToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.reassessmentOfPermitToolStripMenuItem.Text = "Reassessment of Permit";
+            this.reassessmentOfPermitToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator2
             // 
@@ -532,6 +625,28 @@
             this.btnNewApp.Text = "New Application";
             this.btnNewApp.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnNewApp.UseVisualStyleBackColor = true;
+            this.btnNewApp.Click += new System.EventHandler(this.btnNewApp_Click);
+            // 
+            // editToolStripMenuItem1
+            // 
+            this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
+            this.editToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem1.Text = "Edit";
+            this.editToolStripMenuItem1.Click += new System.EventHandler(this.editToolStripMenuItem1_Click);
+            // 
+            // viewToolStripMenuItem1
+            // 
+            this.viewToolStripMenuItem1.Name = "viewToolStripMenuItem1";
+            this.viewToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.viewToolStripMenuItem1.Text = "View";
+            this.viewToolStripMenuItem1.Click += new System.EventHandler(this.viewToolStripMenuItem1_Click);
+            // 
+            // cancelToolStripMenuItem1
+            // 
+            this.cancelToolStripMenuItem1.Name = "cancelToolStripMenuItem1";
+            this.cancelToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.cancelToolStripMenuItem1.Text = "Cancel";
+            this.cancelToolStripMenuItem1.Click += new System.EventHandler(this.cancelToolStripMenuItem1_Click);
             // 
             // frmMenu
             // 
@@ -616,6 +731,18 @@
         private System.Windows.Forms.Button btnAOF;
         private System.Windows.Forms.Button btnER;
         private System.Windows.Forms.Button btnNewApp;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem buildingPermitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mechanicalPermitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem electricalPermitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoningPermitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem1;
     }
 }
 
