@@ -23,6 +23,7 @@ namespace Modules.Transactions
         public static ConnectionString dbConn = new ConnectionString();
         public static ARCSConnectionString dbConnArcs = new ARCSConnectionString();
         public static RPTConnectionString dbRPTConn = new RPTConnectionString();
+        TaskManager taskman = new TaskManager();
 
         public Application(frmRecords Form) : base(Form)
         { }
@@ -185,7 +186,7 @@ namespace Modules.Transactions
                 RecordFrm.ButtonDelete.Text = "Cancel App";
             }
 
-            TaskManager.RemTask(RecordFrm.ARN);
+            taskman.RemTask(RecordFrm.ARN);
             RecordFrm.arn1.Clear();
         }
 
@@ -434,7 +435,7 @@ namespace Modules.Transactions
                 RecordFrm.arn1.SetAn(form.sArn);
             }
 
-            if (!TaskManager.AddTask(RecordFrm.SourceClass, RecordFrm.ARN))
+            if (!taskman.AddTask(RecordFrm.SourceClass, RecordFrm.ARN))
                 return;
 
             DisplayData();
@@ -728,7 +729,7 @@ namespace Modules.Transactions
                 return;
             }
 
-            TaskManager.RemTask(RecordFrm.ARN);
+            taskman.RemTask(RecordFrm.ARN);
             RecordFrm.Close();
         }
 

@@ -16,6 +16,8 @@ namespace Modules.Transactions
 {
     public class EngrRecords : RecordForm
     {
+        TaskManager taskman = new TaskManager();
+
         public static ConnectionString dbConn = new ConnectionString();
         public EngrRecords(frmRecords Form) : base(Form)
         { }
@@ -291,7 +293,7 @@ namespace Modules.Transactions
                 RecordFrm.arn1.SetAn(form.sArn);
             }
 
-            if (!TaskManager.AddTask(RecordFrm.SourceClass, RecordFrm.ARN))
+            if (!taskman.AddTask(RecordFrm.SourceClass, RecordFrm.ARN))
                 return;
 
             DisplayData();
@@ -548,7 +550,7 @@ namespace Modules.Transactions
                 return;
             }
 
-            TaskManager.RemTask(RecordFrm.ARN);
+            taskman.RemTask(RecordFrm.ARN);
             RecordFrm.Close();
         }
     }

@@ -16,11 +16,11 @@ using EPSEntities.Connection;
 
 namespace Modules.Utilities
 {
-    public static class TaskManager
+    public class TaskManager
     {
         public static ConnectionString dbConn = new ConnectionString();
 
-        public static bool IsObjectLock(string strModuleCode, string strMode, string strObject)
+        public bool IsObjectLock(string strModuleCode, string strMode, string strObject)
         {
             string strQuery = string.Empty;
             int intCnt = 0;
@@ -75,7 +75,7 @@ namespace Modules.Utilities
             return true;
         }
 
-        public static bool AddTask(string strModuleCode, string strObject)
+        public bool AddTask(string strModuleCode, string strObject)
         {
             string strQuery = string.Empty;
             string strUserCode = string.Empty;
@@ -123,7 +123,7 @@ namespace Modules.Utilities
             return true;
         }
 
-        public static void RemTask(string strObject)
+        public void RemTask(string strObject)
         {
             string strQuery = string.Empty;
             string strUserCode = string.Empty;
@@ -142,6 +142,49 @@ namespace Modules.Utilities
                 MessageBox.Show("Unable to save to the database", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+        }
+
+        public void RemTask(string strObject, string strModule, string strUserCode)
+        {
+            string strQuery = string.Empty;
+
+            var db = new EPSConnection(dbConn);
+
+            try
+            {
+                strQuery = $"delete from active_modules where user_code = '{strUserCode}' and module_code = '{strModule}'";
+                if (!string.IsNullOrEmpty(strObject))
+                    strQuery += $" and object = '{strObject}' ";
+                db.Database.ExecuteSqlCommand(strQuery);
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                MessageBox.Show("Unable to save to the database", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+        }
+
+        public DataTable GetRecords()
+        {
+            var db = new EPSConnection(dbConn);
+            DataTable dataTable = new DataTable();
+            string sQuery = string.Empty;
+                
+            dataTable.Columns.Add("ModCode", typeof(String));
+            dataTable.Columns.Add("Object", typeof(String));
+            dataTable.Columns.Add("UserCode", typeof(String));
+            dataTable.Columns.Add("TimeIn", typeof(String));
+            //module_code, user_code, time_in
+
+            sQuery = "select module_code, object, user_code, time_in from active_modules order by time_in";
+            var epsrec = db.Database.SqlQuery<ACTIVE_MODULES>(sQuery);
+
+            foreach (var items in epsrec)
+            {
+                dataTable.Rows.Add(items.MODULE_CODE,items.USER_CODE,items.TIME_IN);
+            }
+            return dataTable;
         }
     }
 }

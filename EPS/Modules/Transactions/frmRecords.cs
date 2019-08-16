@@ -230,7 +230,8 @@ namespace Modules.Transactions
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            TaskManager.RemTask(ARN);
+            TaskManager taskman = new TaskManager();
+            taskman.RemTask(ARN);
 
             if (btnExit.Text == "Cancel")
             {

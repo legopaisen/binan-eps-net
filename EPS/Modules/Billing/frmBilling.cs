@@ -14,6 +14,7 @@ namespace Modules.Billing
 {
     public partial class frmBilling : Form
     {
+        TaskManager taskman = new TaskManager();
         public string Source { get; set; }
         private FormClass RecordClass = null;
         public string m_sModule = string.Empty;
@@ -48,6 +49,7 @@ namespace Modules.Billing
         private void btnSearch_Click(object sender, EventArgs e)
         {
             m_sAN = an1.GetAn();
+            TaskManager taskman = new TaskManager();
 
             if (string.IsNullOrEmpty(m_sAN))
             {
@@ -66,12 +68,12 @@ namespace Modules.Billing
             if (string.IsNullOrEmpty(m_sAN))
                 return;
 
-            if (!TaskManager.AddTask(m_sModule, m_sAN))
+            if (!taskman.AddTask(m_sModule, m_sAN))
                 return;
 
             if (!RecordClass.DisplayData())
             {
-                TaskManager.RemTask(m_sAN);
+                taskman.RemTask(m_sAN);
                 RecordClass.ClearControls();
                 return;
             }
@@ -120,7 +122,7 @@ namespace Modules.Billing
         {
             if (MessageBox.Show("Are you sure you want to exit?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                TaskManager.RemTask(m_sAN);
+                taskman.RemTask(m_sAN);
 
             }
             else
@@ -145,7 +147,7 @@ namespace Modules.Billing
             {
                 if (MessageBox.Show("Are you sure you want to cancel transaction?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    TaskManager.RemTask(m_sAN);
+                    taskman.RemTask(m_sAN);
                     RecordClass.ClearControls();
                     this.Close();
                 }

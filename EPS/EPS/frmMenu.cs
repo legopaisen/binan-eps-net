@@ -90,7 +90,8 @@ namespace EPS
 
         private void engineeringRecordsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(!Modules.Utilities.TaskManager.IsObjectLock("ENG_REC","",""))
+            TaskManager taskman = new TaskManager();
+            if (!taskman.IsObjectLock("ENG_REC","",""))
             {
                 frmRecords form = new frmRecords();
                 form.SourceClass = "ENG_REC";
@@ -215,6 +216,14 @@ namespace EPS
                 frmRecords form = new frmRecords();
                 form.SourceClass = "REN_CANCEL";
                 form.ShowDialog();
+            }
+        }
+
+        private void taskManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("SUM"))
+            {
+                
             }
         }
     }
