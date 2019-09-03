@@ -35,10 +35,10 @@ namespace Modules.Utilities.Forms
 
         private void frmScheduleFees_Load(object sender, EventArgs e)
         {
+            PopulateType();
             PopulateRevenueAccount();
             PopulateStructure();
             PopulateScope();
-            PopulateType();
             PopulateCategory();
             EnableControls(false);
             InitializeControls();
