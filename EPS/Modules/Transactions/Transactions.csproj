@@ -36,21 +36,25 @@
     <Reference Include="DataConnector">
       <HintPath>..\..\Common\DataConnector\bin\Debug\DataConnector.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Oracle.ManagedDataAccess.12.1.2400\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Oracle.ManagedDataAccess.EntityFramework.12.1.2400\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -70,11 +74,35 @@
     <Compile Include="frmBuildingUnits.Designer.cs">
       <DependentUpon>frmBuildingUnits.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCancelPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCancelPayment.Designer.cs">
+      <DependentUpon>frmCancelPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCheck.Designer.cs">
+      <DependentUpon>frmCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEngineer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmEngineer.Designer.cs">
       <DependentUpon>frmEngineer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOtherCert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOtherCert.Designer.cs">
+      <DependentUpon>frmOtherCert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPosting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPosting.Designer.cs">
+      <DependentUpon>frmPosting.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSearchLot.cs">
       <SubType>Form</SubType>
@@ -124,8 +152,20 @@
     <EmbeddedResource Include="frmBuildingUnits.resx">
       <DependentUpon>frmBuildingUnits.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCancelPayment.resx">
+      <DependentUpon>frmCancelPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCheck.resx">
+      <DependentUpon>frmCheck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEngineer.resx">
       <DependentUpon>frmEngineer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOtherCert.resx">
+      <DependentUpon>frmOtherCert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPosting.resx">
+      <DependentUpon>frmPosting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSearchLot.resx">
       <DependentUpon>frmSearchLot.cs</DependentUpon>
@@ -195,6 +235,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

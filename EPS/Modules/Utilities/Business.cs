@@ -13,6 +13,7 @@ using Common.AppSettings;
 using System.Windows.Forms;
 using Common.StringUtilities;
 using EPSEntities.Connection;
+using EPSEntities.Entity;
 
 namespace Modules.Utilities
 {

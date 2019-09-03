@@ -41,7 +41,7 @@ namespace Modules.Utilities
                 }
                 else
                 {
-                    strQuery = $"select count(*) from active_modules where module_code = '{strMode}' and user_code = '{strUserCode}'";
+                    strQuery = $"select count(*) from active_modules where module_code = '{strModuleCode}' and user_code = '{strUserCode}'";
                     intCnt = db.Database.SqlQuery<Int32>(strQuery).SingleOrDefault();
 
                     if (intCnt > 0)
@@ -171,18 +171,18 @@ namespace Modules.Utilities
             DataTable dataTable = new DataTable();
             string sQuery = string.Empty;
                 
-            dataTable.Columns.Add("ModCode", typeof(String));
+            dataTable.Columns.Add("Module", typeof(String));
             dataTable.Columns.Add("Object", typeof(String));
-            dataTable.Columns.Add("UserCode", typeof(String));
-            dataTable.Columns.Add("TimeIn", typeof(String));
+            dataTable.Columns.Add("User Code", typeof(String));
+            dataTable.Columns.Add("Time In", typeof(String));
             //module_code, user_code, time_in
 
-            sQuery = "select module_code, object, user_code, time_in from active_modules order by time_in";
+            sQuery = $"select * from active_modules order by time_in";
             var epsrec = db.Database.SqlQuery<ACTIVE_MODULES>(sQuery);
 
             foreach (var items in epsrec)
             {
-                dataTable.Rows.Add(items.MODULE_CODE,items.USER_CODE,items.TIME_IN);
+                dataTable.Rows.Add(items.MODULE_CODE,items.OBJECT, items.USER_CODE,items.TIME_IN);
             }
             return dataTable;
         }

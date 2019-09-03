@@ -18,7 +18,7 @@ namespace Modules.Billing
     {
         public static ConnectionString dbConn = new ConnectionString();
         public static ARCSConnectionString dbConnArcs = new ARCSConnectionString();
-
+        TaskManager taskman = new TaskManager();
         protected frmBilling RecordFrm = null;
         private double m_dArea = 0;
         private int m_iAssessmentRow = 0;
@@ -65,6 +65,7 @@ namespace Modules.Billing
 
             m_sProjOwner = string.Empty;
             RecordFrm.btnCancel.Text = "Exit";
+            
         }
         
         public bool DisplayData()
@@ -77,11 +78,23 @@ namespace Modules.Billing
             int iBldgNo = 0;
             DateTime dtApplied;
             m_iMainApplication = 0;
+            var result = (dynamic)null;
 
-            strWhereCond = $" where arn = '{RecordFrm.m_sAN}' and permit_code = '{RecordFrm.PermitCode}'";
+            if (RecordFrm.Source == "CERTIFICATE OF ANNUAL INSPECTION" ||
+                RecordFrm.Source == "CERTIFICATE OF OCCUPANCY")
+            {
+                strWhereCond = $" where arn = '{RecordFrm.m_sAN}' and permit_code = '{RecordFrm.PermitCode}'";
 
-            var result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
+                result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
                          select a;
+            }
+            else
+            {
+                strWhereCond = $" where arn = '{RecordFrm.m_sAN}' and permit_code = '{RecordFrm.PermitCode}'";
+
+                result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
+                         select a;
+            }
 
             foreach (var item in result)
             {
@@ -186,7 +199,10 @@ namespace Modules.Billing
 
             RecordFrm.dgvAssessment.Columns.Clear();
             RecordFrm.dgvAssessment.DataSource = null;
-            RecordFrm.dgvAssessment.DataSource = subcat.GetSubcategory(sPermitCode, RecordFrm.m_sAN);
+            if (RecordFrm.Source == "CERTIFICATE OF OCCUPANCY" || RecordFrm.Source == "CERTIFICATE OF ANNUAL INSPECTION")
+                RecordFrm.dgvAssessment.DataSource = subcat.GetSubcategory(sPermitCode, RecordFrm.m_sAN, "application");
+            else
+                RecordFrm.dgvAssessment.DataSource = subcat.GetSubcategory(sPermitCode, RecordFrm.m_sAN,"application_que");
             RecordFrm.dgvAssessment.Columns[0].Width = 30;
             RecordFrm.dgvAssessment.Columns[1].Width = 250;
             RecordFrm.dgvAssessment.Columns[2].Visible = false;
@@ -195,11 +211,23 @@ namespace Modules.Billing
             RecordFrm.dgvAssessment.Columns[6].Visible = false;
             RecordFrm.dgvAssessment.Columns[9].Visible = false;
             RecordFrm.dgvAssessment.Columns[10].Visible = false;
+            RecordFrm.dgvAssessment.Columns[11].Visible = false;
 
             var db = new EPSConnection(dbConn);
 
             string sQuery = string.Empty;
             string sFeesCode = string.Empty;
+            int iBillTmp = 0;
+
+            sQuery = $"select count(*) from bill_tmp where arn = '{RecordFrm.m_sAN}'";
+            iBillTmp = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+            if(iBillTmp == 0)
+            {
+                sQuery = "insert into bill_tmp ";
+                sQuery += $"select ARN, FEES_CODE, FEES_UNIT, FEES_UNIT_VALUE, FEES_AMT, PERMIT_CODE,'{AppSettingsManager.SystemUser.UserCode}',ORIG_AMT ";
+                sQuery += $" from tax_details where arn = '{RecordFrm.m_sAN}' and bill_no = '{RecordFrm.txtBillNo.Text.ToString()}'";
+                db.Database.ExecuteSqlCommand(sQuery);
+            }
 
             for (int i = 0; i <= RecordFrm.dgvAssessment.Rows.Count; i++)
             {
@@ -216,6 +244,7 @@ namespace Modules.Billing
                         RecordFrm.dgvAssessment[0, i].Value = true;
                         RecordFrm.dgvAssessment[7, i].Value = items.FEES_UNIT_VALUE.ToString();
                         RecordFrm.dgvAssessment[8, i].Value = string.Format("{0:#,###.00}", items.FEES_AMT);
+                        RecordFrm.dgvAssessment[11, i].Value = string.Format("{0:#,###.00}", items.ORIG_AMT);
                     }
                 }
                 catch { }
@@ -236,7 +265,11 @@ namespace Modules.Billing
             {
                 m_iAssessmentRow = e.RowIndex;
                 m_sFeesCode = RecordFrm.dgvAssessment[2, m_iAssessmentRow].Value.ToString();
+                m_sFeesMeans = RecordFrm.dgvAssessment[3, m_iAssessmentRow].Value.ToString();
+                m_sCumulative = RecordFrm.dgvAssessment[6, m_iAssessmentRow].Value.ToString();
 
+                DisplayParameters(m_iAssessmentRow);
+                
                 if (e.ColumnIndex == 0)
                 {
                     RecordFrm.dgvAssessment.ReadOnly = false;
@@ -245,16 +278,11 @@ namespace Modules.Billing
                     if (!bSelect)
                     {
                         RecordFrm.dgvAssessment[0, m_iAssessmentRow].Value = true;
-                        
-                        m_sFeesMeans = RecordFrm.dgvAssessment[3, m_iAssessmentRow].Value.ToString();
-                        m_sCumulative = RecordFrm.dgvAssessment[6, m_iAssessmentRow].Value.ToString();
-
-                        DisplayParameters(m_iAssessmentRow);
-                        
                     }
                     else
                     {
                         RecordFrm.dgvAssessment[0, m_iAssessmentRow].Value = false;
+                        RecordFrm.dgvAssessment[7, m_iAssessmentRow].Value = "0";
                         RecordFrm.dgvAssessment[8, m_iAssessmentRow].Value = "0";
 
                         SaveBillTmp(m_sFeesCode, 0);
@@ -367,7 +395,7 @@ namespace Modules.Billing
 
                 foreach (var items in epsrec)
                 {
-                    dRate = items.RATE1;
+                    double.TryParse(items.RATE1.ToString(), out dRate);
                 }
                 dAmountDue = dRate * m_dArea;
 
@@ -383,8 +411,8 @@ namespace Modules.Billing
 
                 foreach (var items in epsrec)
                 {
-                    dAmt1 = items.AMOUNT1;
-                    dAmt2 = items.AMOUNT2;
+                    double.TryParse(items.AMOUNT1.ToString(), out dAmt1);
+                    double.TryParse(items.AMOUNT2.ToString(), out dAmt2);
                 }
                 dAmountDue = dAmt1 * m_dArea;
                 if (dAmountDue < dAmt2)
@@ -406,10 +434,9 @@ namespace Modules.Billing
                 {
                     if (m_sCumulative == "N")
                     {
-
-                        dAmt1 = items.AMOUNT1;
-                        dRate2 = items.RATE2;
-                        dQty1 = items.QTY1;
+                        double.TryParse(items.AMOUNT1.ToString(), out dAmt1);
+                        double.TryParse(items.RATE2.ToString(), out dRate2);
+                        double.TryParse(items.QTY1.ToString(), out dQty1);
 
                         if (dRate2 > 0)
                         {
@@ -438,14 +465,16 @@ namespace Modules.Billing
                     {
                         double dRate = 0;
                         double dTemp = 0;
-                        dRate = items.RATE1;
+                        double.TryParse(items.RATE1.ToString(), out dRate);
+                        double.TryParse(items.AMOUNT1.ToString(), out dTemp);
+
                         if (dRate != 0)
                         {
-                            dAmountDue = items.AMOUNT1 * m_dArea * dRate;
+                            dAmountDue = dTemp * m_dArea * dRate;
                         }
                         else
                         {
-                            dAmountDue = items.AMOUNT1 * m_dArea;
+                            dAmountDue = dTemp * m_dArea;
                         }
                         
                     }
@@ -466,10 +495,9 @@ namespace Modules.Billing
                         double dAmt1 = 0;
                         double dRate2 = 0;
                         double dRange1 = 0;
-                        dAmt1 = items.AMOUNT1;
-                        dRate2 = items.RATE2;
-                        dRange1 = items.RANGE1;
-
+                        double.TryParse(items.AMOUNT1.ToString(), out dAmt1);
+                        double.TryParse(items.RATE2.ToString(), out dRate2);
+                        double.TryParse(items.RANGE1.ToString(), out dRange1);
                         
                         if (dRate2 > 0)
                         {
@@ -506,6 +534,7 @@ namespace Modules.Billing
             {
                 RecordFrm.dgvAssessment[7, m_iAssessmentRow].Value = m_dArea;
                 RecordFrm.dgvAssessment[8, m_iAssessmentRow].Value = RecordFrm.txtAmount.Text;
+                RecordFrm.dgvAssessment[11, m_iAssessmentRow].Value = RecordFrm.txtAmount.Text;
 
                 double dAmountDue = 0;
 
@@ -531,17 +560,19 @@ namespace Modules.Billing
             var db = new EPSConnection(dbConn);
             string sQuery = string.Empty;
             double dRowVal = 0;
-
-            sQuery = "delete from bill_tmp where ";
-            sQuery += $"arn = '{RecordFrm.m_sAN}' and ";
-            sQuery += $"fees_code = '{sFeesCode}'";
-            db.Database.ExecuteSqlCommand(sQuery);
+            double dOrigVal = 0;
 
             if(dAmountDue > 0)
             {
-                double.TryParse(RecordFrm.dgvAssessment[8, m_iAssessmentRow].Value.ToString(), out dRowVal);
+                sQuery = "delete from bill_tmp where ";
+                sQuery += $"arn = '{RecordFrm.m_sAN}' and ";
+                sQuery += $"fees_code = '{sFeesCode}'";
+                db.Database.ExecuteSqlCommand(sQuery);
 
-                sQuery = "insert into bill_tmp values (:1,:2,:3,:4,:5,:6,:7)";
+                double.TryParse(RecordFrm.dgvAssessment[8, m_iAssessmentRow].Value.ToString(), out dRowVal);
+                double.TryParse(RecordFrm.dgvAssessment[11, m_iAssessmentRow].Value.ToString(), out dOrigVal);
+
+                sQuery = "insert into bill_tmp values (:1,:2,:3,:4,:5,:6,:7,:8)";
                 db.Database.ExecuteSqlCommand(sQuery,
                         new OracleParameter(":1", RecordFrm.m_sAN),
                         new OracleParameter(":2", sFeesCode),
@@ -549,9 +580,19 @@ namespace Modules.Billing
                         new OracleParameter(":4", RecordFrm.dgvAssessment[7, m_iAssessmentRow].Value),
                         new OracleParameter(":5", dRowVal),
                         new OracleParameter(":6", RecordFrm.PermitCode),
-                        new OracleParameter(":7", AppSettingsManager.SystemUser.UserCode));
+                        new OracleParameter(":7", AppSettingsManager.SystemUser.UserCode),
+                        new OracleParameter(":8", dOrigVal));
 
                 ComputeTotal();
+            }
+            else if(dAmountDue == 0)
+            {
+                sQuery = "delete from bill_tmp where ";
+                sQuery += $"arn = '{RecordFrm.m_sAN}' and ";
+                sQuery += $"fees_code = '{sFeesCode}'";
+                db.Database.ExecuteSqlCommand(sQuery);
+
+                RecordFrm.dgvAssessment[0, m_iAssessmentRow].Value = false;
             }
         }
 
@@ -646,10 +687,10 @@ namespace Modules.Billing
 
             foreach (var items in epsrec)
             {
-                dRange1 = items.RANGE1;
-                dRange2 = items.RANGE2;
-                dAmount1 = items.AMOUNT1;
-
+                double.TryParse(items.RANGE1.ToString(), out dRange1);
+                double.TryParse(items.RANGE2.ToString(), out dRange2);
+                double.TryParse(items.AMOUNT1.ToString(), out dAmount1);
+              
                 iCtr++;
 
                 if (dAmount <= dRange2)
@@ -878,13 +919,74 @@ namespace Modules.Billing
                     double.TryParse(RecordFrm.txtAddlAmt.Text.ToString(), out dAddlAmt);
 
                     RecordFrm.dgvAssessment[8, m_iAssessmentRow].Value = (dAmount + dAddlAmt).ToString("#,###.00");
-                    RecordFrm.dgvAssessment[0, m_iAssessmentRow].Value = true;
 
+                    SaveBillTmp(m_sAddlFeeCode, (dAmount + dAddlAmt));
+                    RecordFrm.dgvAssessment[0, m_iAssessmentRow].Value = true;
                     MessageBox.Show("Amount for " + RecordFrm.dgvAssessment[1, m_iAssessmentRow].Value + " updated.","Billing",MessageBoxButtons.OK,MessageBoxIcon.Information);
                         
                 }
                 catch { }
             }
+        }
+
+        public bool ValidatePermitNo()
+        {
+            var db = new EPSConnection(dbConn);
+            string sQuery = string.Empty;
+            string sYear1 = AppSettingsManager.GetCurrentDate().Year.ToString();
+            string strWhereCond = string.Empty;
+            string sPermitCode = string.Empty;
+            string sPermitName = string.Empty;
+            var result = (dynamic)null;
+
+            strWhereCond = $" where arn = '{RecordFrm.m_sAN}'";
+
+            if (RecordFrm.Source == "CERTIFICATE OF ANNUAL INSPECTION" ||
+                RecordFrm.Source == "CERTIFICATE OF OCCUPANCY")
+            {
+                result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
+                         select a;
+            }
+            else
+            {
+                result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
+                         select a;
+            }
+            foreach (var item in result)
+            {
+                sPermitCode = item.PERMIT_CODE;
+                string sWhereClause = " where permit_code = '";
+                sWhereClause += sPermitCode;
+                sWhereClause += "'";
+                PermitList permitlist = new PermitList(sWhereClause);
+                sPermitName = permitlist.PermitLst[0].PermitDesc;
+
+                DateTime dtDate;
+                string sYear = string.Empty;
+                int iCnt = 0;
+                try
+                {
+                    sQuery = $"select count(*) from permit_assigned where permit_code = '{sPermitCode}'";
+                    iCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+                }
+                catch { }
+
+                if (iCnt == 0)
+                    sYear = "";
+                else
+                {
+                    sQuery = $"select assigned_date from permit_assigned where permit_code = '{sPermitCode}'";
+                    dtDate = db.Database.SqlQuery<DateTime>(sQuery).SingleOrDefault();
+                    sYear = dtDate.Year.ToString();
+                }
+
+                if (sYear != sYear1 && !string.IsNullOrEmpty(sYear))
+                {
+                    MessageBox.Show("The Permit No assigned to " + sPermitName + " already expired. \n Please update permit nos. before payments.", "POSTING", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

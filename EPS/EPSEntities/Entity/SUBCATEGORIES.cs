@@ -17,5 +17,6 @@ namespace EPSEntities.Entity
         public string AREA_NEEDED { get; set; }
         public string CUMULATIVE { get; set; }
         public string SCOPE_CODE { get; set; }
+        public string STRUC_CODE { get; set; }
     }
 }

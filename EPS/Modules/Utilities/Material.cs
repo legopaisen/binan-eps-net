@@ -90,16 +90,17 @@ namespace Modules.Utilities
         {
             var db = new EPSConnection(dbConn);
             string strQuery = string.Empty;
-            
+            string sCode = string.Empty;
+
             strQuery = $"select * from material_tbl where material_desc = '{sDesc}' ";
             var epsrec = db.Database.SqlQuery<MATERIAL_TBL>(strQuery);
 
             foreach (var items in epsrec)
             {
-                sDesc = items.MATERIAL_CODE;
+                sCode = items.MATERIAL_CODE;
             }
 
-            return sDesc;
+            return sCode;
         }
     }
 }

@@ -94,7 +94,6 @@ namespace Modules.Billing
                         RecordFrm.txtBillNo.Text = GenerateBillNo();
                     }
 
-
                     sQuery = "insert into billing values (:1,:2,:3,:4,:5,:6,:7)";
                     db.Database.ExecuteSqlCommand(sQuery,
                             new OracleParameter(":1", RecordFrm.m_sAN),
@@ -110,10 +109,9 @@ namespace Modules.Billing
                     if (RecordFrm.PermitCode == m_lstPermit.GetPermitCode("EXCAVATION"))
                         OnSaveIntoExcavation();
 
-
                     sQuery = "insert into tax_details ";
                     sQuery += $"select arn,'{RecordFrm.txtBillNo.Text.ToString()}',fees_code,fees_unit,";
-                    sQuery += "fees_unit_value,fees_amt from bill_tmp ";
+                    sQuery += "fees_unit_value,fees_amt, orig_amt, permit_code from bill_tmp ";
                     sQuery += $"where arn = '{RecordFrm.m_sAN}'";
                     db.Database.ExecuteSqlCommand(sQuery);
 
@@ -197,7 +195,7 @@ namespace Modules.Billing
                         MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-
+                    RecordFrm.grpAddFees.Enabled = true;
                     RecordFrm.btnSave.Enabled = false;
                     RecordFrm.btnPrint.Enabled = true;
                     RecordFrm.btnCancel.Text = "Exit";

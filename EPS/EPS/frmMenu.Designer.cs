@@ -87,6 +87,8 @@
             this.permitNoadjustmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.auditTrailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectivityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.taskManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlButton = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnLO = new System.Windows.Forms.Button();
@@ -95,8 +97,6 @@
             this.btnAOF = new System.Windows.Forms.Button();
             this.btnER = new System.Windows.Forms.Button();
             this.btnNewApp = new System.Windows.Forms.Button();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.taskManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MS.SuspendLayout();
             this.pnlButton.SuspendLayout();
             this.SuspendLayout();
@@ -140,12 +140,14 @@
             this.postingToolStripMenuItem.Name = "postingToolStripMenuItem";
             this.postingToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.postingToolStripMenuItem.Text = "Posting";
+            this.postingToolStripMenuItem.Click += new System.EventHandler(this.postingToolStripMenuItem_Click);
             // 
             // cancelPostedPaymentToolStripMenuItem
             // 
             this.cancelPostedPaymentToolStripMenuItem.Name = "cancelPostedPaymentToolStripMenuItem";
             this.cancelPostedPaymentToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
-            this.cancelPostedPaymentToolStripMenuItem.Text = "Cancel posted payment";
+            this.cancelPostedPaymentToolStripMenuItem.Text = "Cancel Posted Payment";
+            this.cancelPostedPaymentToolStripMenuItem.Click += new System.EventHandler(this.cancelPostedPaymentToolStripMenuItem_Click);
             // 
             // applicationsToolStripMenuItem
             // 
@@ -278,6 +280,7 @@
             this.zoningPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.zoningPermitToolStripMenuItem.Text = "Zoning Permit";
             this.zoningPermitToolStripMenuItem.Visible = false;
+            this.zoningPermitToolStripMenuItem.Click += new System.EventHandler(this.zoningPermitToolStripMenuItem_Click);
             // 
             // buildingPermitToolStripMenuItem
             // 
@@ -312,12 +315,14 @@
             this.occupancyToolStripMenuItem.Name = "occupancyToolStripMenuItem";
             this.occupancyToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.occupancyToolStripMenuItem.Text = "Occupancy";
+            this.occupancyToolStripMenuItem.Click += new System.EventHandler(this.occupancyToolStripMenuItem_Click);
             // 
             // annualInspectionToolStripMenuItem
             // 
             this.annualInspectionToolStripMenuItem.Name = "annualInspectionToolStripMenuItem";
             this.annualInspectionToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.annualInspectionToolStripMenuItem.Text = "Annual Inspection";
+            this.annualInspectionToolStripMenuItem.Click += new System.EventHandler(this.annualInspectionToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -436,24 +441,28 @@
             this.categoryToolStripMenuItem.Name = "categoryToolStripMenuItem";
             this.categoryToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.categoryToolStripMenuItem.Text = "Category";
+            this.categoryToolStripMenuItem.Click += new System.EventHandler(this.categoryToolStripMenuItem_Click);
             // 
             // occupancyToolStripMenuItem1
             // 
             this.occupancyToolStripMenuItem1.Name = "occupancyToolStripMenuItem1";
             this.occupancyToolStripMenuItem1.Size = new System.Drawing.Size(204, 22);
             this.occupancyToolStripMenuItem1.Text = "Occupancy";
+            this.occupancyToolStripMenuItem1.Click += new System.EventHandler(this.occupancyToolStripMenuItem1_Click);
             // 
             // scopeOfWorkToolStripMenuItem
             // 
             this.scopeOfWorkToolStripMenuItem.Name = "scopeOfWorkToolStripMenuItem";
             this.scopeOfWorkToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.scopeOfWorkToolStripMenuItem.Text = "Scope of Work";
+            this.scopeOfWorkToolStripMenuItem.Click += new System.EventHandler(this.scopeOfWorkToolStripMenuItem_Click);
             // 
             // typesOfMaterialsToolStripMenuItem
             // 
             this.typesOfMaterialsToolStripMenuItem.Name = "typesOfMaterialsToolStripMenuItem";
             this.typesOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.typesOfMaterialsToolStripMenuItem.Text = "Types of Materials";
+            this.typesOfMaterialsToolStripMenuItem.Click += new System.EventHandler(this.typesOfMaterialsToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
@@ -493,6 +502,7 @@
             this.scheduleOfFeesToolStripMenuItem.Name = "scheduleOfFeesToolStripMenuItem";
             this.scheduleOfFeesToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.scheduleOfFeesToolStripMenuItem.Text = "Schedule of Fees";
+            this.scheduleOfFeesToolStripMenuItem.Click += new System.EventHandler(this.scheduleOfFeesToolStripMenuItem_Click);
             // 
             // permitTypeToolStripMenuItem
             // 
@@ -527,18 +537,33 @@
             this.permitNoadjustmentToolStripMenuItem.Name = "permitNoadjustmentToolStripMenuItem";
             this.permitNoadjustmentToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.permitNoadjustmentToolStripMenuItem.Text = "Permit no.adjustment";
+            this.permitNoadjustmentToolStripMenuItem.Click += new System.EventHandler(this.permitNoadjustmentToolStripMenuItem_Click);
             // 
             // auditTrailToolStripMenuItem
             // 
             this.auditTrailToolStripMenuItem.Name = "auditTrailToolStripMenuItem";
             this.auditTrailToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.auditTrailToolStripMenuItem.Text = "Audit Trail";
+            this.auditTrailToolStripMenuItem.Click += new System.EventHandler(this.auditTrailToolStripMenuItem_Click);
             // 
             // connectivityToolStripMenuItem
             // 
             this.connectivityToolStripMenuItem.Name = "connectivityToolStripMenuItem";
             this.connectivityToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.connectivityToolStripMenuItem.Text = "Connectivity";
+            this.connectivityToolStripMenuItem.Click += new System.EventHandler(this.connectivityToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(209, 6);
+            // 
+            // taskManagerToolStripMenuItem
+            // 
+            this.taskManagerToolStripMenuItem.Name = "taskManagerToolStripMenuItem";
+            this.taskManagerToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.taskManagerToolStripMenuItem.Text = "Task Manager";
+            this.taskManagerToolStripMenuItem.Click += new System.EventHandler(this.taskManagerToolStripMenuItem_Click);
             // 
             // pnlButton
             // 
@@ -651,18 +676,6 @@
             this.btnNewApp.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnNewApp.UseVisualStyleBackColor = true;
             this.btnNewApp.Click += new System.EventHandler(this.btnNewApp_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(209, 6);
-            // 
-            // taskManagerToolStripMenuItem
-            // 
-            this.taskManagerToolStripMenuItem.Name = "taskManagerToolStripMenuItem";
-            this.taskManagerToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.taskManagerToolStripMenuItem.Text = "Task Manager";
-            this.taskManagerToolStripMenuItem.Click += new System.EventHandler(this.taskManagerToolStripMenuItem_Click);
             // 
             // frmMenu
             // 

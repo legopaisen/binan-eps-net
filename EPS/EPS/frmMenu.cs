@@ -16,6 +16,8 @@ using Modules.Utilities;
 using Modules.Transactions;
 using Common.AppSettings;
 using Modules.Billing;
+using Modules.Utilities.Forms;
+
 
 namespace EPS
 {
@@ -60,32 +62,47 @@ namespace EPS
 
         private void systemConfigToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmConfig frmconfig = new frmConfig();
-            frmconfig.ShowDialog();
+            if (AppSettingsManager.Granted("SS"))
+            {
+                frmConfig frmconfig = new frmConfig();
+                frmconfig.ShowDialog();
+            }
         }
 
         private void userLevelTableToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmUserlvltbl frmuserlvltbl = new frmUserlvltbl();
-            frmuserlvltbl.ShowDialog();
+            if (AppSettingsManager.Granted("SC"))
+            {
+                frmUserlvltbl frmuserlvltbl = new frmUserlvltbl();
+                frmuserlvltbl.ShowDialog();
+            }
         }
 
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmBarangay frmbarangay = new frmBarangay();
-            frmbarangay.ShowDialog();
+            if (AppSettingsManager.Granted("STB"))
+            {
+                frmBarangay frmbarangay = new frmBarangay();
+                frmbarangay.ShowDialog();
+            }
         }
 
         private void structureTpeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmStructureType frmstructuretype = new frmStructureType();
-            frmstructuretype.ShowDialog();
+            if (AppSettingsManager.Granted("SST"))
+            {
+                frmStructureType frmstructuretype = new frmStructureType();
+                frmstructuretype.ShowDialog();
+            }
         }
 
         private void userLevelAccessToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmUserlvlAccess frmuserlvlaccess = new frmUserlvlAccess();
-            frmuserlvlaccess.ShowDialog();
+            if (AppSettingsManager.Granted("SSS"))
+            {
+                frmUserlvlAccess frmuserlvlaccess = new frmUserlvlAccess();
+                frmuserlvlaccess.ShowDialog();
+            }
         }
 
         private void engineeringRecordsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -97,6 +114,7 @@ namespace EPS
                 form.SourceClass = "ENG_REC";
                 form.ShowDialog();
             }
+            taskman.IsObjectLock("ENG_REC", "DELETE", "");
         }
 
         private void btnNewApp_Click(object sender, EventArgs e)
@@ -159,10 +177,16 @@ namespace EPS
         {
             if(AppSettingsManager.Granted("TB-B"))
             {
-                frmBilling form = new frmBilling();
-                form.Source = "BUILDING PERMIT";
-                form.ModuleCode = "TB-UBB";
-                form.ShowDialog();
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("BILLING", "", ""))
+                {
+                    frmBilling form = new frmBilling();
+                    form.Source = "BUILDING PERMIT";
+                    form.ModuleCode = "TB-UBB";
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("BILLING", "DELETE", "");
+                }
             }
         }
 
@@ -170,10 +194,16 @@ namespace EPS
         {
             if (AppSettingsManager.Granted("TB-M"))
             {
-                frmBilling form = new frmBilling();
-                form.Source = "MECHANICAL PERMIT";
-                form.ModuleCode = "TB-UBM";
-                form.ShowDialog();
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("BILLING", "", ""))
+                {
+                    frmBilling form = new frmBilling();
+                    form.Source = "MECHANICAL PERMIT";
+                    form.ModuleCode = "TB-UBM";
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("BILLING", "DELETE", "");
+                }
             }
         }
 
@@ -181,10 +211,16 @@ namespace EPS
         {
             if (AppSettingsManager.Granted("TB-E"))
             {
-                frmBilling form = new frmBilling();
-                form.Source = "ELECTRICAL PERMIT";
-                form.ModuleCode = "TB-UBE";
-                form.ShowDialog();
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("BILLING", "", ""))
+                {
+                    frmBilling form = new frmBilling();
+                    form.Source = "ELECTRICAL PERMIT";
+                    form.ModuleCode = "TB-UBE";
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("BILLING", "DELETE", "");
+                }
             }
 
         }
@@ -223,7 +259,154 @@ namespace EPS
         {
             if (AppSettingsManager.Granted("SUM"))
             {
+                frmTaskManager form = new frmTaskManager();
+                form.ShowDialog();   
+            }
+        }
+
+        private void postingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("P"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("POSTING", "", ""))
+                {
+                    frmPosting form = new frmPosting();
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("POSTING", "DELETE", "");
+                }
                 
+            }
+        }
+
+        private void cancelPostedPaymentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(AppSettingsManager.Granted("PCP"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("CANCEL PAYMENT", "", ""))
+                {
+                    frmCancelPayment form = new frmCancelPayment();
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("CANCEL PAYMENT", "DELETE", "");
+                }
+            }   
+        }
+
+        private void occupancyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TB-O"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("BILLING", "", ""))
+                {
+                    frmBilling form = new frmBilling();
+                    form.Source = "CERTIFICATE OF OCCUPANCY";
+                    form.ModuleCode = "TB-UBO";
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("BILLING", "DELETE", "");
+                }
+            }
+        }
+
+        private void zoningPermitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void annualInspectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TB-AI"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("BILLING", "", ""))
+                {
+                    frmBilling form = new frmBilling();
+                    form.Source = "CERTIFICATE OF ANNUAL INSPECTION";
+                    form.ModuleCode = "TB-UBAI";
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("BILLING", "DELETE", "");
+                }
+            }
+        }
+
+        private void permitNoadjustmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void auditTrailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void connectivityToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void categoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void occupancyToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if(AppSettingsManager.Granted("SOC"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("OCCUPANCY", "", ""))
+                {
+                    frmOccupancy form = new frmOccupancy();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("OCCUPANCY", "DELETE", "");
+                }
+            }
+        }
+
+        private void scheduleOfFeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("STS"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("FEES", "", ""))
+                {
+                    frmScheduleFees form = new frmScheduleFees();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("FEES", "DELETE", "");
+                }
+            }
+        }
+
+        private void scopeOfWorkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(AppSettingsManager.Granted("SSC"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("SCOPE", "", ""))
+                {
+                    frmScope form = new frmScope();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("SCOPE", "DELETE", "");
+                }
+            }
+        }
+
+        private void typesOfMaterialsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("SMT"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("MATERIAL", "", ""))
+                {
+                    frmMaterial form = new frmMaterial();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("MATERIAL", "DELETE", "");
+                }
             }
         }
     }
