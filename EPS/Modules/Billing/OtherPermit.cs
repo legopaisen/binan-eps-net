@@ -106,7 +106,7 @@ namespace Modules.Billing
 
                 sQuery = "insert into tax_details ";
                 sQuery += $"select arn,'{RecordFrm.txtBillNo.Text.ToString()}',fees_code,fees_unit,";
-                sQuery += "fees_unit_value,fees_amt from bill_tmp ";
+                sQuery += "fees_unit_value,fees_amt,orig_amt,permit_code from bill_tmp ";
                 sQuery += $"where arn = '{RecordFrm.m_sAN}' and permit_code like '{RecordFrm.PermitCode}%'";
                 db.Database.ExecuteSqlCommand(sQuery);
 

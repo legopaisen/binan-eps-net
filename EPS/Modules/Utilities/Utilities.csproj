@@ -60,9 +60,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Banks.cs" />
     <Compile Include="Engineers.cs" />
     <Compile Include="Accounts.cs" />
     <Compile Include="Business.cs" />
+    <Compile Include="Forms\frmBank.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBank.Designer.cs">
+      <DependentUpon>frmBank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmOccupancy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmOccupancy.Designer.cs">
+      <DependentUpon>frmOccupancy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmScheduleDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmScheduleDelete.Designer.cs">
+      <DependentUpon>frmScheduleDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmScheduleFees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmScheduleFees.Designer.cs">
+      <DependentUpon>frmScheduleFees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMaterial.Designer.cs">
+      <DependentUpon>frmMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmScope.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmScope.Designer.cs">
+      <DependentUpon>frmScope.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmTaskManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +107,7 @@
       <DependentUpon>frmTaskManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Material.cs" />
+    <Compile Include="MajorFees.cs" />
     <Compile Include="Structure.cs" />
     <Compile Include="Occupancy.cs" />
     <Compile Include="Category.cs" />
@@ -85,6 +123,10 @@
       <Project>{889d88f6-1668-418f-969a-6466670138b6}</Project>
       <Name>AppSettings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\MultiColumnComboBox\MultiColumnComboBox.csproj">
+      <Project>{4DD47A19-1A17-4C59-94BA-575E0C2ECC17}</Project>
+      <Name>MultiColumnComboBox</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Common\StringUtilities\StringUtilities.csproj">
       <Project>{f7cab867-edef-4e74-91bf-6c5385dcf513}</Project>
       <Name>StringUtilities</Name>
@@ -98,6 +140,24 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\frmBank.resx">
+      <DependentUpon>frmBank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmOccupancy.resx">
+      <DependentUpon>frmOccupancy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmScheduleDelete.resx">
+      <DependentUpon>frmScheduleDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmScheduleFees.resx">
+      <DependentUpon>frmScheduleFees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMaterial.resx">
+      <DependentUpon>frmMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmScope.resx">
+      <DependentUpon>frmScope.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTaskManager.resx">
       <DependentUpon>frmTaskManager.cs</DependentUpon>
     </EmbeddedResource>

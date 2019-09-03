@@ -70,11 +70,35 @@
     <Compile Include="frmBuildingUnits.Designer.cs">
       <DependentUpon>frmBuildingUnits.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCancelPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCancelPayment.Designer.cs">
+      <DependentUpon>frmCancelPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCheck.Designer.cs">
+      <DependentUpon>frmCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEngineer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmEngineer.Designer.cs">
       <DependentUpon>frmEngineer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOtherCert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOtherCert.Designer.cs">
+      <DependentUpon>frmOtherCert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPosting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPosting.Designer.cs">
+      <DependentUpon>frmPosting.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSearchLot.cs">
       <SubType>Form</SubType>
@@ -124,8 +148,20 @@
     <EmbeddedResource Include="frmBuildingUnits.resx">
       <DependentUpon>frmBuildingUnits.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCancelPayment.resx">
+      <DependentUpon>frmCancelPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCheck.resx">
+      <DependentUpon>frmCheck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEngineer.resx">
       <DependentUpon>frmEngineer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOtherCert.resx">
+      <DependentUpon>frmOtherCert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPosting.resx">
+      <DependentUpon>frmPosting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSearchLot.resx">
       <DependentUpon>frmSearchLot.cs</DependentUpon>

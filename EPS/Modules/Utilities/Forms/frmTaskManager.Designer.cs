@@ -62,6 +62,7 @@
             this.Info});
             this.dgvList.Location = new System.Drawing.Point(8, 15);
             this.dgvList.Name = "dgvList";
+            this.dgvList.ReadOnly = true;
             this.dgvList.RowHeadersVisible = false;
             this.dgvList.Size = new System.Drawing.Size(558, 227);
             this.dgvList.TabIndex = 1;
@@ -97,6 +98,7 @@
             this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnDelete
             // 

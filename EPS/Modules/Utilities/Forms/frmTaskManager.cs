@@ -79,6 +79,7 @@ namespace Modules.Utilities.Forms
                 {
                     TaskManager taskman = new TaskManager();
                     taskman.RemTask(m_sObject, m_sModCode, m_sUser);
+                    UpdateList();
                 }
             }
             else
@@ -86,6 +87,11 @@ namespace Modules.Utilities.Forms
                 MessageBox.Show("Select task to remove first","Task Manager",MessageBoxButtons.OK,MessageBoxIcon.Stop);
                 return;
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

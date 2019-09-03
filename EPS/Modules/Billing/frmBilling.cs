@@ -38,6 +38,10 @@ namespace Modules.Billing
             {
                 RecordClass = new Building(this);
             }
+            else if (Source == "CERTIFICATE OF OCCUPANCY" || Source == "CERTIFICATE OF ANNUAL INSPECTION")
+            {
+                RecordClass = new BillCertificate(this);
+            }
             else
             {
                 RecordClass = new OtherPermit(this);
@@ -54,7 +58,10 @@ namespace Modules.Billing
             if (string.IsNullOrEmpty(m_sAN))
             {
                 SearchAccount.frmSearchARN form = new SearchAccount.frmSearchARN();
-                form.SearchCriteria = "QUE";
+                if (Source == "CERTIFICATE OF OCCUPANCY" || Source == "CERTIFICATE OF ANNUAL INSPECTION")
+                    form.SearchCriteria = "APP";
+                else
+                    form.SearchCriteria = "QUE";
 
                 form.ShowDialog();
 
@@ -68,12 +75,14 @@ namespace Modules.Billing
             if (string.IsNullOrEmpty(m_sAN))
                 return;
 
+            if (!RecordClass.ValidatePermitNo())
+                return;
+
             if (!taskman.AddTask(m_sModule, m_sAN))
                 return;
 
             if (!RecordClass.DisplayData())
-            {
-                taskman.RemTask(m_sAN);
+            {    
                 RecordClass.ClearControls();
                 return;
             }
@@ -87,6 +96,12 @@ namespace Modules.Billing
         private void btnClear_Click(object sender, EventArgs e)
         {
             RecordClass.ClearControls();
+            taskman.RemTask(m_sAN);
+            an1.GetCode = "";
+            an1.GetTaxYear = "";
+            an1.GetMonth = "";
+            an1.GetSeries = "";
+            m_sAN = "";
         }
 
         private void dgvAssessment_CellLeave(object sender, DataGridViewCellEventArgs e)
@@ -123,6 +138,11 @@ namespace Modules.Billing
             if (MessageBox.Show("Are you sure you want to exit?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 taskman.RemTask(m_sAN);
+                an1.GetCode = "";
+                an1.GetTaxYear = "";
+                an1.GetMonth = "";
+                an1.GetSeries = "";
+                m_sAN = "";
 
             }
             else
@@ -147,8 +167,13 @@ namespace Modules.Billing
             {
                 if (MessageBox.Show("Are you sure you want to cancel transaction?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    taskman.RemTask(m_sAN);
                     RecordClass.ClearControls();
+                    taskman.RemTask(m_sAN);
+                    an1.GetCode = "";
+                    an1.GetTaxYear = "";
+                    an1.GetMonth = "";
+                    an1.GetSeries = "";
+                    m_sAN = "";
                     this.Close();
                 }
                 else
@@ -167,6 +192,14 @@ namespace Modules.Billing
         private void btnAddlAdd_Click(object sender, EventArgs e)
         {
             RecordClass.AdditionalFeesAdd(sender, e);
+        }
+
+        private void txtAddlAmt_Leave(object sender, EventArgs e)
+        {
+            double dAmt = 0;
+            double.TryParse(txtAddlAmt.Text.ToString(), out dAmt);
+
+            txtAddlAmt.Text = string.Format("{0:#,###.00}", dAmt);
         }
     }
 }

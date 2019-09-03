@@ -54,6 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationQue.cs" />
+    <Compile Include="OtherCert.cs" />
+    <Compile Include="WiringTbl.cs" />
+    <Compile Include="ExcavationTbl.cs" />
     <Compile Include="ApplicationTbl.cs" />
     <Compile Include="Building.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

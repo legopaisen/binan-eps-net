@@ -140,10 +140,10 @@ namespace Modules.Reports
             string sPres = string.Empty;
             string sNoMember = string.Empty;
 
-            sQuery = "select taxdues.fees_code as fees_code,major_fees.fees_desc as fees_desc,";
-            sQuery += "taxdues.fees_amt as fees_amt from taxdues,major_fees ";
+            sQuery = "select major_fees.fees_desc as fees_desc,";
+            sQuery += "sum(taxdues.fees_amt) as fees_amt from taxdues,major_fees ";
             sQuery += "where substr(taxdues.fees_code,1,2) = major_fees.fees_code and ";   
-            sQuery += $"taxdues.arn = '{ReportForm.Arn}'";
+            sQuery += $"taxdues.arn = '{ReportForm.Arn}' group by major_fees.fees_desc";
             var record = db.Database.SqlQuery<SOA_TBL>(sQuery);
             string sOwnCode = string.Empty;
 

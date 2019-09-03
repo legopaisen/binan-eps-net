@@ -34,7 +34,7 @@
       <HintPath>..\..\..\Common\AppSettings\bin\Debug\AppSettings.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
-      <HintPath>..\ARN\bin\Debug\EntityFramework.dll</HintPath>
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EPSEntities">
       <HintPath>..\..\EPSEntities\bin\Debug\EPSEntities.dll</HintPath>
@@ -53,11 +53,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Utilities">
-      <HintPath>..\Utilities\bin\Debug\Utilities.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillCertificate.cs" />
     <Compile Include="OtherPermit.cs" />
     <Compile Include="Building.cs" />
     <Compile Include="Class1.cs" />
@@ -99,6 +97,10 @@
     <ProjectReference Include="..\SearchAccount\SearchAccount.csproj">
       <Project>{dfc64719-406d-427c-9835-47c69ea2cfe8}</Project>
       <Name>SearchAccount</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{da501b98-0ae7-440f-bec3-b82eb7b5669d}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

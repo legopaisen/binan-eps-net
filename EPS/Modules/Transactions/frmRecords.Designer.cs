@@ -108,9 +108,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(18, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 18);
+            this.label1.Size = new System.Drawing.Size(31, 18);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Application No.";
+            this.label1.Text = "AN:";
             // 
             // label2
             // 
@@ -236,7 +236,7 @@
             // 
             this.btnSearch.ForeColor = System.Drawing.Color.Aqua;
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.Location = new System.Drawing.Point(351, 16);
+            this.btnSearch.Location = new System.Drawing.Point(275, 16);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(30, 26);
             this.btnSearch.TabIndex = 7;
@@ -247,7 +247,7 @@
             // 
             this.btnClear.ForeColor = System.Drawing.Color.Aqua;
             this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
-            this.btnClear.Location = new System.Drawing.Point(387, 16);
+            this.btnClear.Location = new System.Drawing.Point(311, 16);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(30, 26);
             this.btnClear.TabIndex = 8;
@@ -282,7 +282,7 @@
             this.arn1.GetMonth = "";
             this.arn1.GetSeries = "";
             this.arn1.GetTaxYear = "";
-            this.arn1.Location = new System.Drawing.Point(128, 12);
+            this.arn1.Location = new System.Drawing.Point(52, 12);
             this.arn1.Margin = new System.Windows.Forms.Padding(4);
             this.arn1.Name = "arn1";
             this.arn1.Size = new System.Drawing.Size(216, 39);
