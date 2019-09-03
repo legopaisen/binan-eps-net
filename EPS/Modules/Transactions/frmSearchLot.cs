@@ -44,7 +44,7 @@ namespace Modules.Transactions
             }
             string strQuery = string.Empty;
 
-            using (RPTEntities.Entities db = new RPTEntities.Entities())
+            /*using (RPTEntities.Entities db = new RPTEntities.Entities())
             {
                 strQuery = $"select faas_land.land_pin as PIN, own_names.own_code as OWN_CODE, own_names.own_ln as OWN_LN, ";
                 strQuery += $"own_names.own_fn as OWN_FN, own_names.own_mi as OWN_MI,";
@@ -83,7 +83,7 @@ namespace Modules.Transactions
                         dgvList.Rows.Add(LotPIN, items.OWN_CODE, items.OWN_LN, items.OWN_FN, items.OWN_MI, items.OWN_ADDR,LotNo,BlkNo,BrgyName, City);
                     }
                 }
-            }
+            }*/
         }
 
         private void frmSearchLot_Load(object sender, EventArgs e)
