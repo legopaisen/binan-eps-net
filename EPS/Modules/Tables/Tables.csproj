@@ -149,6 +149,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\AppSettings\AppSettings.csproj">
+      <Project>{889d88f6-1668-418f-969a-6466670138b6}</Project>
+      <Name>AppSettings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Common\DataConnector\DataConnector.csproj">
       <Project>{7c12da36-676a-49b3-b59d-c07c96539620}</Project>
       <Name>DataConnector</Name>

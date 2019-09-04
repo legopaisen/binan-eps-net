@@ -86,6 +86,9 @@ namespace Modules.ARN
 
             txtCode.Text = permit.GetPermitAppCode(sApplication);
 
+            if (string.IsNullOrEmpty(txtCode.Text.ToString()))
+                txtCode.Text = "BP";    // default
+
             string sYear = string.Format("{0:yyyy}", AppSettingsManager.GetCurrentDate());
 
             strQuery = $"select arn from current_arn where arn like '{txtCode.Text}-{sYear}-%'";

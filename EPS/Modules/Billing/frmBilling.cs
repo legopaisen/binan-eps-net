@@ -41,13 +41,13 @@ namespace Modules.Billing
             else if (Source == "CERTIFICATE OF OCCUPANCY" || Source == "CERTIFICATE OF ANNUAL INSPECTION")
             {
                 RecordClass = new BillCertificate(this);
-                this.Text = Source;
             }
             else
             {
                 RecordClass = new OtherPermit(this);
             }
 
+            this.Text = "Billing - " + Source;
             RecordClass.FormLoad();
         }
 

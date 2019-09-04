@@ -121,7 +121,23 @@ namespace Modules.Billing
 
 
                 //VALIDATE FIRST IF ALL PERMIT WAS BILLED
-                try
+                int iPermitCnt = 0;
+                int iPermitBilled = 0;
+
+                sQuery = $"select count(*) from application_que where arn = '{RecordFrm.m_sAN}'";
+                iPermitCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+
+                sQuery = $"select count(distinct substr(fees_code,0,2)) from taxdues where arn = '{RecordFrm.m_sAN}'";
+                iPermitBilled = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+
+                if (iPermitCnt != iPermitBilled)
+                {
+                    MessageBox.Show("Other permits not yet billed, record is not yet ready for payment", "Billing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    RecordFrm.btnPrint.Enabled = false;
+                }
+                else
+                {
+                    try
                     {
                         var dbarcs = new ARCSConnection(dbConnArcs);
 
@@ -165,8 +181,9 @@ namespace Modules.Billing
                         }
                     }
                     catch { }
-                
 
+                    RecordFrm.btnPrint.Enabled = true;
+                }
                 
 
                 if (Utilities.AuditTrail.InsertTrail(RecordFrm.ModuleCode, RecordFrm.m_sModule, "ARN: " + RecordFrm.m_sAN) == 0)
@@ -176,7 +193,7 @@ namespace Modules.Billing
                 }
 
                 RecordFrm.btnSave.Enabled = false;
-                RecordFrm.btnPrint.Enabled = true;
+                
                 RecordFrm.btnCancel.Text = "Exit";
 
             }

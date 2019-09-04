@@ -111,14 +111,17 @@ namespace Modules.Transactions
             {
                 this.Status = "NEW";
                 RecordClass = new Application(this);
+                this.Text = "Application - New";
             }
             else if (this.SourceClass == "REN_ADD" || this.SourceClass == "REN_EDIT"
                 || this.SourceClass == "REN_VIEW" || this.SourceClass == "REN_CANCEL")
             {
                 this.Status = "REN";
                 RecordClass = new Application(this);
+                this.Text = "Application - Renewal";
             }
 
+            DialogText = this.Text;
             RecordClass.FormLoad();
 
             formProject.SourceClass = m_sSource;

@@ -25,10 +25,6 @@ namespace RPTEntities
             throw new UnintentionalCodeFirstException();
         }
     
-<<<<<<< HEAD
-        
-=======
-       
->>>>>>> f9162d866801ac86191e605f540b7a860dcbbce2
+
     }
 }

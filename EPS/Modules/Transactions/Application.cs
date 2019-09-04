@@ -226,6 +226,12 @@ namespace Modules.Transactions
             if(RecordFrm.SourceClass == "NEW_ADD" || RecordFrm.SourceClass == "REN_ADD")
                 RecordFrm.arn1.CreateAN(RecordFrm.cmbPermit.Text.ToString());
 
+            if(string.IsNullOrEmpty(RecordFrm.ARN))
+            {
+                MessageBox.Show("Error generating application no.\nPlease check permit table",RecordFrm.DialogText,MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                return;
+            }
+
             if (AppSettingsManager.GetConfigValue("25") == "Y" || AppSettingsManager.GetConfigValue("25") == "1")
             {
                 if (ValidateLotDelinquency())

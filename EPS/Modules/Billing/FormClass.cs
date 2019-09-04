@@ -543,7 +543,7 @@ namespace Modules.Billing
             }
 
             RecordFrm.txtAmount.Text = string.Format("{0:#,###.00}", dAmountDue);
-
+            RecordFrm.txtAmount.TextAlign = HorizontalAlignment.Right;
             return true;
         }
 
@@ -563,6 +563,7 @@ namespace Modules.Billing
                 {
                     RecordFrm.dgvAssessment[0, m_iAssessmentRow].Value = true;
                     SaveBillTmp(RecordFrm.dgvAssessment[2, m_iAssessmentRow].Value.ToString(), dAmountDue);
+                    RecordFrm.txtAmount.Text = "";  // initialize
                 }
             }
             catch { }
@@ -648,6 +649,7 @@ namespace Modules.Billing
             }
             catch { }
             RecordFrm.txtAmtDue.Text = string.Format("{0:#,###.##}", dTotalAmt);
+            RecordFrm.txtAmtDue.TextAlign = HorizontalAlignment.Right;
         }
 
         protected string GenerateBillNo()

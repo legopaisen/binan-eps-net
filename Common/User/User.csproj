@@ -83,7 +83,7 @@
       <Name>AppSettings</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataConnector\DataConnector.csproj">
-      <Project>{7C12DA36-676A-49B3-B59D-C07C96539620}</Project>
+      <Project>{7c12da36-676a-49b3-b59d-c07c96539620}</Project>
       <Name>DataConnector</Name>
     </ProjectReference>
   </ItemGroup>

@@ -139,6 +139,7 @@ namespace Modules.Billing
                     if (iPermitCnt != iPermitBilled)
                     {
                         MessageBox.Show("Other permits not yet billed, record is not yet ready for payment", "Billing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        RecordFrm.btnPrint.Enabled = false;
                     }
                     else
                     {
@@ -187,6 +188,8 @@ namespace Modules.Billing
                             }
                         }
                         catch { }
+
+                        RecordFrm.btnPrint.Enabled = true;
                     }
 
 
@@ -197,7 +200,6 @@ namespace Modules.Billing
                     }
                     RecordFrm.grpAddFees.Enabled = true;
                     RecordFrm.btnSave.Enabled = false;
-                    RecordFrm.btnPrint.Enabled = true;
                     RecordFrm.btnCancel.Text = "Exit";
 
                 }
