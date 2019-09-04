@@ -68,7 +68,7 @@ namespace Modules.Transactions
                     LotPIN = items.PIN;
                     
                     strQuery = $"select * from faas_land where land_pin = '{LotPIN}'";
-                    var faasrec = db.Database.SqlQuery<RPTEntities.FAAS_LAND>(strQuery);
+                    var faasrec = db.Database.SqlQuery<FAAS_LAND>(strQuery);
 
                     foreach (var faasitems in faasrec)
                     {

@@ -138,7 +138,7 @@ namespace Modules.Records
         string sOCCUPANCY_CODE,string sBNS_CODE,string sPROJ_HSE_NO,string sPROJ_LOT_NO,
         string sPROJ_BLK_NO,string sPROJ_ADDR, string sPROJ_BRGY,string sPROJ_CITY,string sPROJ_PROV,
         string sPROJ_ZIP,string sPROJ_OWNER,string sPROJ_LOT_OWNER,string sOWN_TYPE,string sENGR_CODE,
-        string sARCHITECT, DateTime dPROP_START,DateTime dPROP_COMPLETE, DateTime dDATE_APPLIED,
+        string sARCHITECT, Nullable<DateTime> dPROP_START, Nullable<DateTime> dPROP_COMPLETE, Nullable<DateTime> dDATE_APPLIED,
         Nullable<DateTime> dDATE_ISSUED,string sMEMO,int iMAIN_APPLICATION )
         {
             ARN = sARN;

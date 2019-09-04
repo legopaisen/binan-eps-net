@@ -83,7 +83,7 @@ namespace Modules.Billing
             if (RecordFrm.Source == "CERTIFICATE OF ANNUAL INSPECTION" ||
                 RecordFrm.Source == "CERTIFICATE OF OCCUPANCY")
             {
-                strWhereCond = $" where arn = '{RecordFrm.m_sAN}' and permit_code = '{RecordFrm.PermitCode}'";
+                strWhereCond = $" where arn = '{RecordFrm.m_sAN}' and main_application = 1";
 
                 result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
                          select a;
@@ -304,6 +304,7 @@ namespace Modules.Billing
 
         private void DisplayParameters(int iRow)
         {
+            
             try
             {
                 string sFeesMeans = string.Empty;
@@ -320,11 +321,27 @@ namespace Modules.Billing
                 catch { }
 
                 RecordFrm.dgvParameter.Rows.Clear();
-                RecordFrm.dgvParameter.Rows.Add("Enter " + sUnit,m_dArea);// default value is the total bldg flr area
 
-                if (sFeesMeans == "AR")
+                if (sFeesMeans == "FA")
                 {
-                    RecordFrm.dgvParameter.Rows.Add("No. of Month ", "");
+                    string sQuery = string.Empty;
+                    string sFeesCode = string.Empty;
+
+                    try { sFeesCode = RecordFrm.dgvAssessment[2, iRow].Value.ToString(); }
+                    catch { }
+                    var db = new EPSConnection(dbConn);
+                    sQuery = $"select amount1 from schedules where fees_code = '{sFeesCode}'";
+                    m_dArea = db.Database.SqlQuery<double>(sQuery).SingleOrDefault();
+                    RecordFrm.dgvParameter.Rows.Add("Fixed Amount ", m_dArea);
+                }
+                else
+                {
+                    RecordFrm.dgvParameter.Rows.Add("Enter " + sUnit, m_dArea);// default value is the total bldg flr area
+
+                    if (sFeesMeans == "AR")
+                    {
+                        RecordFrm.dgvParameter.Rows.Add("No. of Month ", "");
+                    }
                 }
             }
             catch (Exception ex)
@@ -389,7 +406,7 @@ namespace Modules.Billing
             if (m_sFeesMeans == "FR")
             {
                 double dRate = 0;
-                
+
                 sQuery = $"select coalesce(rate1,0) as rate1 from schedules where fees_code = '{m_sFeesCode}'";
                 var epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
 
@@ -399,7 +416,7 @@ namespace Modules.Billing
                 }
                 dAmountDue = dRate * m_dArea;
 
-                
+
             }
             else if (m_sFeesMeans == "QN")
             {
@@ -426,7 +443,7 @@ namespace Modules.Billing
                 double dQty1 = 0;
                 double dQty = 0;
 
-                sQuery = $"select coalesce(amount1,0) as amount1, coalesce(rate2,0) as rate2, coalesce(qty1,0) as qty1 from schedules where  "; 
+                sQuery = $"select coalesce(amount1,0) as amount1, coalesce(rate2,0) as rate2, coalesce(qty1,0) as qty1 from schedules where  ";
                 sQuery += $"qty1 <= {m_dArea} and qty2 >= {m_dArea} and fees_code = '{m_sFeesCode}'";
                 var epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
 
@@ -476,7 +493,7 @@ namespace Modules.Billing
                         {
                             dAmountDue = dTemp * m_dArea;
                         }
-                        
+
                     }
                     else
                         dAmountDue = ComputeCumulative(m_sFeesCode, m_dArea);
@@ -498,7 +515,7 @@ namespace Modules.Billing
                         double.TryParse(items.AMOUNT1.ToString(), out dAmt1);
                         double.TryParse(items.RATE2.ToString(), out dRate2);
                         double.TryParse(items.RANGE1.ToString(), out dRange1);
-                        
+
                         if (dRate2 > 0)
                         {
                             dRange1 = m_dArea - (dRange1 - .01);
@@ -516,6 +533,8 @@ namespace Modules.Billing
             {
                 dAmountDue = m_dArea;
             }
+            else
+                dAmountDue = m_dArea;
 
             if (dAmountDue <= 0)
             {

@@ -32,10 +32,11 @@ namespace Modules.Reports
             string sArea = string.Empty;
             string sConsCost = string.Empty;
             int iBldgNo = 0;
+            var result = (dynamic)null;
 
             strWhereCond = $" where arn = '{ReportForm.Arn}'";
 
-            var result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
+            result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
                          select a;
 
             foreach (var item in result)
@@ -49,6 +50,25 @@ namespace Modules.Reports
                 Category category = new Category();
                 sCategory = category.GetCategoryDesc(item.CATEGORY_CODE);
                 iBldgNo = item.BLDG_NO;
+            }
+
+            if(string.IsNullOrEmpty(sProjDesc))
+            {
+                result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
+                             select a;
+
+                foreach (var item in result)
+                {
+                    sProjDesc = item.PROJ_DESC;
+                    sProjLoc = string.Format("{0} {1} {2} {3} {4} {5} {6} ", item.PROJ_HSE_NO, item.PROJ_LOT_NO, item.PROJ_BLK_NO, item.PROJ_ADDR, item.PROJ_BRGY, item.PROJ_CITY, item.PROJ_PROV);
+
+                    Accounts account = new Accounts();
+                    account.GetOwner(item.PROJ_OWNER);
+                    sOwnName = account.OwnerName;
+                    Category category = new Category();
+                    sCategory = category.GetCategoryDesc(item.CATEGORY_CODE);
+                    iBldgNo = item.BLDG_NO;
+                }
             }
 
             var result2 = from a in Records.Building.GetBuildingRecord(iBldgNo)

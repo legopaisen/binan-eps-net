@@ -25,17 +25,6 @@ namespace ARCSEntities
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<BUSINESS_CONFIG> BUSINESS_CONFIG { get; set; }
-        public DbSet<QUARTERLYFEE_TBL> QUARTERLYFEE_TBL { get; set; }
-        public DbSet<RECEIPTS_PAYMENT> RECEIPTS_PAYMENT { get; set; }
-        public DbSet<RECEIPTS_TBL> RECEIPTS_TBL { get; set; }
-        public DbSet<DEATH_INFO> DEATH_INFO { get; set; }
-        public DbSet<DEATH_INFO_TMP> DEATH_INFO_TMP { get; set; }
-        public DbSet<DEBIT_CREDIT> DEBIT_CREDIT { get; set; }
-        public DbSet<DEBIT_CREDIT_X> DEBIT_CREDIT_X { get; set; }
-        public DbSet<DISTRICT> DISTRICTS { get; set; }
-        public DbSet<FORM_TBL> FORM_TBL { get; set; }
-        public DbSet<PARTIAL_REMIT> PARTIAL_REMIT { get; set; }
-        public DbSet<SYSLINK_DIC_TBL> SYSLINK_DIC_TBL { get; set; }
+        
     }
 }

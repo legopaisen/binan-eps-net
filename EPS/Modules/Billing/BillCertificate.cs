@@ -34,7 +34,7 @@ namespace Modules.Billing
             string sPermit = string.Empty;
             string strWhereCond = string.Empty;
 
-            strWhereCond = $" where arn = '{RecordFrm.m_sAN}' and permit_code = '{RecordFrm.PermitCode}'";
+            strWhereCond = $" where arn = '{RecordFrm.m_sAN}' and main_application = 1";
 
             var result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
                          select a;

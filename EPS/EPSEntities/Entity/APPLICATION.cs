@@ -32,9 +32,9 @@ namespace EPSEntities.Entity
         public string OWN_TYPE { get; set; }
         public string ENGR_CODE { get; set; }
         public string ARCHITECT { get; set; }
-        public DateTime PROP_START { get; set; }
-        public DateTime PROP_COMPLETE { get; set; }
-        public DateTime DATE_APPLIED { get; set; }
+        public Nullable<DateTime> PROP_START { get; set; }
+        public Nullable<DateTime> PROP_COMPLETE { get; set; }
+        public Nullable<DateTime> DATE_APPLIED { get; set; }
         public Nullable<DateTime> DATE_ISSUED { get; set; }
         public string MEMO { get; set; }
         public int MAIN_APPLICATION { get; set; }

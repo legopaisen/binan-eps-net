@@ -25,7 +25,6 @@ namespace RPTEntities
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<FAAS_LAND> FAAS_LAND { get; set; }
-        public DbSet<OWN_NAMES> OWN_NAMES { get; set; }
+        
     }
 }
