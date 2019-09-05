@@ -65,12 +65,13 @@ namespace Common.StringUtilities
             strDictionaryValues[8] = strFirstName;
             strDictionaryValues[9] = strFirstName;
 
-            strDictionaryValues[10] = strMI.ToUpper();
-            strDictionaryValues[11] = strMI.ToLower();
+            strDictionaryValues[10] = strMI?.ToUpper(); //AFM 20190905 accepts null
+            strDictionaryValues[11] = strMI?.ToLower();
             strDictionaryValues[12] = string.Empty;
-            if (strMI.Length != 0)
+            //if (strMI.Length != 0)
+            if (strMI == null) //AFM 20190905
             {
-                strDictionaryValues[12] = strMI.Substring(0, 1);
+                strDictionaryValues[12] = strMI?.Substring(0, 1);
             }
             strDictionaryValues[13] = strMI;
             strDictionaryValues[14] = strMI;

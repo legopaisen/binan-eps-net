@@ -255,11 +255,11 @@ namespace Modules.Transactions
         {
             var db = new EPSConnection(dbConn);
 
-            if (string.IsNullOrEmpty(RecordFrm.ARN))
-            {
-                MessageBox.Show("Incomplete ARN", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
-            }
+            //if (string.IsNullOrEmpty(RecordFrm.ARN))
+            //{
+            //    MessageBox.Show("Incomplete ARN", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    return false;
+            //}
 
             // add validation of duplicate arn
             string strQuery = string.Empty;
