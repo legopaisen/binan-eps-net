@@ -170,12 +170,12 @@ namespace Modules.Transactions
             tabControl1.TabPages[4].Controls.Add(formEngr);
             tabControl1.TabPages[4].Text = "Architect & Engineers";
 
-            
+
             RecordClass.PopulatePermit();
             PopulateScope();
         }
 
-        
+
 
         private void PopulateScope()
         {
@@ -219,7 +219,7 @@ namespace Modules.Transactions
             //btnClear.Enabled = blnEnable;
         }
 
-        
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -259,7 +259,7 @@ namespace Modules.Transactions
         private void ClearControls()
         {
             RecordClass.ClearControl();
-            
+
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -274,7 +274,7 @@ namespace Modules.Transactions
                 MessageBox.Show("Permit Type is required", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return false;
             }
-            if(string.IsNullOrEmpty(cmbScope.Text.ToString()))
+            if (string.IsNullOrEmpty(cmbScope.Text.ToString()))
             {
                 MessageBox.Show("Scope of Work is required", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return false;
@@ -316,7 +316,7 @@ namespace Modules.Transactions
 
         private void cmbPermit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(cmbPermit.Text.ToString()) &&
+            if (!string.IsNullOrEmpty(cmbPermit.Text.ToString()) &&
                 !string.IsNullOrEmpty(cmbScope.Text.ToString()))
             {
                 RecordClass.EnableRecordEntry();
@@ -328,7 +328,7 @@ namespace Modules.Transactions
                 {
                     formBldgDate.LoadGrid();
                     formBldgDate.dgvList.Rows.Add(((DataRowView)cmbPermit.SelectedItem)["PermitCode"].ToString(), ((DataRowView)cmbPermit.SelectedItem)["PermitDesc"].ToString(), null, null, null);
-                    
+
                 }
                 else
                 {
@@ -356,7 +356,7 @@ namespace Modules.Transactions
                 PermitList permit = new PermitList(null);
                 if (string.IsNullOrEmpty(permit.GetPermitCode(cmbPermit.Text.ToString())))
                 {
-                    MessageBox.Show("Permit not found in list",DialogText,MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                    MessageBox.Show("Permit not found in list", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     cmbPermit.Text = "";
                     cmbPermit.Focus();
                     return;
@@ -366,7 +366,7 @@ namespace Modules.Transactions
 
         private void cmbScope_Leave(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(cmbScope.Text.ToString()))
+            if (!string.IsNullOrEmpty(cmbScope.Text.ToString()))
             {
                 ScopeList permit = new ScopeList();
                 if (string.IsNullOrEmpty(permit.GetScopeCode(cmbScope.Text.ToString())))
@@ -381,9 +381,9 @@ namespace Modules.Transactions
 
         public void CopyLotStrucOwner(string sSwitch)
         {
-            if(sSwitch == "CopyLot")
+            if (sSwitch == "CopyLot")
             {
-                if(!string.IsNullOrEmpty(formLotOwn.LotAcctNo))
+                if (!string.IsNullOrEmpty(formLotOwn.LotAcctNo))
                 {
                     formStrucOwn.StrucAcctNo = formLotOwn.LotAcctNo;
                     formStrucOwn.txtLastName.Text = formLotOwn.txtLastName.Text;
@@ -434,10 +434,13 @@ namespace Modules.Transactions
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            /*frmReport form = new frmReport();
-            form.ReportName = "APPLICATION";
+            frmReport form = new frmReport();
+            if (this.Text.Contains("New Application") || this.Text.Contains("Renewal Application"))
+                form.ReportName = "Application";
+            else
+                form.ReportName = "Records";
             form.Arn = ARN;
-            form.ShowDialog();*/
+            form.ShowDialog();
         }
     }
 }

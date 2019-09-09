@@ -98,7 +98,7 @@ namespace Modules.Utilities
             
         }
 
-        public void GetOwner(string sLastName, string sFirstName)
+        public void GetOwner(string sLastName, string sFirstName, string sMI)
         {
             this.Clear();
             string sQuery = string.Empty;
@@ -107,6 +107,8 @@ namespace Modules.Utilities
 
             sQuery = $"SELECT * FROM account WHERE acct_ln = '{sLastName}'";
             sQuery += $" and acct_fn = '{sFirstName}'";
+            if(!string.IsNullOrEmpty(sMI))
+                sQuery += $" and acct_mi = '{sMI}'";
             var epsrec = db.Database.SqlQuery<ACCOUNT>(sQuery);
 
             foreach (var items in epsrec)
@@ -288,7 +290,7 @@ namespace Modules.Utilities
             var db = new EPSConnection(dbConn);
             string strQuery = string.Empty;
 
-            GetOwner(sLastName, sFirstName);
+            GetOwner(sLastName, sFirstName, sMI);
 
             if (string.IsNullOrEmpty(m_sOwnerCode))
             {
@@ -422,20 +424,29 @@ namespace Modules.Utilities
 
             using (var db = new EPSConnection(dbConn))
             {
-                if (string.IsNullOrEmpty(sAcctNo))
+                /*if (string.IsNullOrEmpty(sAcctNo))
                     sAcctNo = "%";
                 if (string.IsNullOrEmpty(sLastName))
                     sLastName = "%";
                 if (string.IsNullOrEmpty(sFirstName))
                     sFirstName = "%";
                 if (string.IsNullOrEmpty(sMI))
-                    sMI = "%";
+                    sMI = "%";*/
+                sAcctNo = sAcctNo.Trim();
+                sLastName = sLastName.Trim();
+                sFirstName = sFirstName.Trim();
+                sMI = sMI.Trim();
 
-                sQuery = $"select * from account where ";
-                sQuery += $" acct_code like '{sAcctNo}%'";
-                sQuery += $" and acct_ln like '{sLastName}%'";
-                sQuery += $" and acct_fn like '{sFirstName}%'";
-                sQuery += $" and acct_mi like '{sMI}%' order by acct_ln";
+                sQuery = $"select * from account where 1=1 ";
+                if(!string.IsNullOrEmpty(sAcctNo))
+                    sQuery += $" acct_code like '{sAcctNo}%'";
+                if(!string.IsNullOrEmpty(sLastName))
+                    sQuery += $" and acct_ln like '{sLastName}%'";
+                if(!string.IsNullOrEmpty(sFirstName))
+                    sQuery += $" and acct_fn like '{sFirstName}%'";
+                if (!string.IsNullOrEmpty(sMI))
+                    sQuery += $" and acct_mi like '{sMI}%' ";
+                sQuery += " order by acct_ln";
                 var epsrec = db.Database.SqlQuery<ACCOUNT>(sQuery);
 
                 foreach (var items in epsrec)

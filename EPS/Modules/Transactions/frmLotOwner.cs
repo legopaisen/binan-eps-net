@@ -137,7 +137,7 @@ namespace Modules.Transactions
             string sAcctNo = string.Empty;
 
             Utilities.Accounts acct = new Utilities.Accounts();
-            acct.GetOwner(txtLastName.Text.Trim(), txtFirstName.Text.Trim());
+            acct.GetOwner(txtLastName.Text.Trim(), txtFirstName.Text.Trim(),txtMI.Text.Trim());
             sAcctNo = acct.OwnerCode;
 
             if (!string.IsNullOrEmpty(sAcctNo))

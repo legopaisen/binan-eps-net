@@ -409,5 +409,35 @@ namespace EPS
                 }
             }
         }
+
+        private void lotOwnerApplicantToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("SLS"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("LOT OWNER", "", ""))
+                {
+                    frmOwner form = new frmOwner();
+                    form.SourceClass = "OWNER";
+                    form.ShowDialog();
+                    taskman.IsObjectLock("LOT OWNER", "DELETE", "");
+                }
+            }
+        }
+
+        private void engineersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("SE"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("ENGINEER", "", ""))
+                {
+                    frmOwner form = new frmOwner();
+                    form.SourceClass = "ENGR";
+                    form.ShowDialog();
+                    taskman.IsObjectLock("ENGINEER", "DELETE", "");
+                }
+            }
+        }
     }
 }

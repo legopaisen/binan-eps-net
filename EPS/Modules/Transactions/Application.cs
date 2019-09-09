@@ -60,6 +60,21 @@ namespace Modules.Transactions
                 RecordFrm.arn1.Enabled = false;
                 RecordFrm.Text = "Renewal Application";
             }
+            else if (RecordFrm.SourceClass == "REN_EDIT")
+            {
+                RecordFrm.arn1.Enabled = false;
+                RecordFrm.Text = "Renewal Application - Edit";
+            }
+            else if (RecordFrm.SourceClass == "REN_VIEW")
+            {
+                RecordFrm.arn1.Enabled = false;
+                RecordFrm.Text = "Renewal Application - View";
+            }
+            else if (RecordFrm.SourceClass == "REN_CANCEL")
+            {
+                RecordFrm.arn1.Enabled = false;
+                RecordFrm.Text = "Renewal Application - Cancel";
+            }
 
             ClearControl();
         }

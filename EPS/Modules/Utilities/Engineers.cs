@@ -103,8 +103,14 @@ namespace Modules.Utilities
 
             var db = new EPSConnection(dbConn);
 
-            sQuery = $"SELECT * FROM engineer_tbl WHERE engr_ln = '{sLastName}'";
-            sQuery += $" and engr_fn = '{sFirstName}'";
+            if (string.IsNullOrEmpty(sLastName) && string.IsNullOrEmpty(sFirstName) && string.IsNullOrEmpty(sEngrType))
+                return;
+
+            sQuery = $"SELECT * FROM engineer_tbl WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(sLastName))
+                sQuery += $"and engr_ln = '{sLastName}'";
+            if(!string.IsNullOrEmpty(sFirstName))
+                sQuery += $" and engr_fn = '{sFirstName}'";
             if (!string.IsNullOrEmpty(sEngrType))
                 sQuery += $" and engr_type = '{sEngrType}'";
             var epsrec = db.Database.SqlQuery<ENGINEER_TBL>(sQuery);
@@ -282,6 +288,97 @@ namespace Modules.Utilities
             m_sPRC = sPRC;
             m_sPTR = sPTR;
         }
+
+        public void CreateAccount(string sLastName, string sFirstName, string sMI,
+            string sAddress, string sHouseNo, string sLotNo, string sBlkNo, string sBrgy,
+            string sCity, string sProv, string sZip, string sEngrType, string sTIN,
+            string sPRC, string sPTR)
+        {
+            var db = new EPSConnection(dbConn);
+            string strQuery = string.Empty;
+
+            GetOwner(sLastName, sFirstName, sEngrType);
+
+            if (string.IsNullOrEmpty(m_sOwnerCode))
+            {
+                CreateAccountCode();
+
+                if (!string.IsNullOrEmpty(m_sOwnerCode))
+                {
+                    strQuery = $"insert into engineer_tbl values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15,:16)";
+                    db.Database.ExecuteSqlCommand(strQuery,
+                        new OracleParameter(":1", m_sOwnerCode),
+                        new OracleParameter(":2", StringUtilities.HandleApostrophe(sEngrType)),
+                        new OracleParameter(":3", StringUtilities.HandleApostrophe(sLastName)),
+                        new OracleParameter(":4", StringUtilities.HandleApostrophe(sFirstName)),
+                        new OracleParameter(":5", StringUtilities.HandleApostrophe(sMI)),
+                        new OracleParameter(":6", StringUtilities.HandleApostrophe(sHouseNo)),
+                        new OracleParameter(":7", StringUtilities.HandleApostrophe(sLotNo)),
+                        new OracleParameter(":8", StringUtilities.HandleApostrophe(sBlkNo)),
+                        new OracleParameter(":9", StringUtilities.HandleApostrophe(sAddress)),
+                        new OracleParameter(":10", StringUtilities.HandleApostrophe(sBrgy)),
+                        new OracleParameter(":11", StringUtilities.HandleApostrophe(sCity)),
+                        new OracleParameter(":12", StringUtilities.HandleApostrophe(sProv)),
+                        new OracleParameter(":13", StringUtilities.HandleApostrophe(sZip)),
+                        new OracleParameter(":14", StringUtilities.HandleApostrophe(sTIN)),
+                        new OracleParameter(":15", StringUtilities.HandleApostrophe(sPRC)),
+                        new OracleParameter(":16", StringUtilities.HandleApostrophe(sPTR)));
+                }
+            }
+        }
+
+        private void CreateAccountCode()
+        {
+            m_sOwnerCode = string.Empty;
+            string strQuery = string.Empty;
+            string strAcctCode = string.Empty;
+            int iCode = 0;
+
+            var db = new EPSConnection(dbConn);
+
+            strQuery = "select max(engr_code) from engineer_tbl";
+            strAcctCode = db.Database.SqlQuery<string>(strQuery).SingleOrDefault();
+
+            int.TryParse(strAcctCode, out iCode);
+            iCode++;
+
+            switch ((iCode).ToString().Length)
+            {
+                case 1:
+                    {
+                        strAcctCode = "00000" + (iCode).ToString();
+                        break;
+                    }
+                case 2:
+                    {
+                        strAcctCode = "0000" + (iCode).ToString();
+                        break;
+                    }
+                case 3:
+                    {
+                        strAcctCode = "000" + (iCode).ToString();
+                        break;
+                    }
+                case 4:
+                    {
+                        strAcctCode = "00" + (iCode).ToString();
+                        break;
+                    }
+                case 5:
+                    {
+                        strAcctCode = "0" + (iCode).ToString();
+                        break;
+                    }
+                case 6:
+                    {
+                        strAcctCode = (iCode).ToString();
+                        break;
+                    }
+
+            }
+
+            m_sOwnerCode = strAcctCode;
+        }
     }
 
     public class EngineersList
@@ -336,7 +433,7 @@ namespace Modules.Utilities
 
             using (var db = new EPSConnection(dbConn))
             {
-                if (string.IsNullOrEmpty(sAcctNo))
+                /*if (string.IsNullOrEmpty(sAcctNo))
                     sAcctNo = "%";
                 if (string.IsNullOrEmpty(sLastName))
                     sLastName = "%";
@@ -345,14 +442,25 @@ namespace Modules.Utilities
                 if (string.IsNullOrEmpty(sMI))
                     sMI = "%";
                 if (string.IsNullOrEmpty(sEngrType))
-                    sEngrType = "%";
+                    sEngrType = "%";*/
+                sAcctNo = sAcctNo.Trim();
+                sLastName = sLastName.Trim();
+                sFirstName = sFirstName.Trim();
+                sMI = sMI.Trim();
+                sEngrType = sEngrType.Trim();
 
-                sQuery = $"select * from engineer_tbl where ";
-                sQuery += $" engr_code like '{sAcctNo}%'";
-                sQuery += $" and engr_ln like '{sLastName}%'";
-                sQuery += $" and engr_fn like '{sFirstName}%'";
-                sQuery += $" and engr_mi like '{sMI}%' ";
-                sQuery += $" and engr_type like '{sEngrType}%' order by engr_ln";
+                sQuery = $"select * from engineer_tbl where 1=1 ";
+                if(!string.IsNullOrEmpty(sAcctNo))
+                    sQuery += $" engr_code like '{sAcctNo}%'";
+                if(!string.IsNullOrEmpty(sLastName))
+                    sQuery += $" and engr_ln like '{sLastName}%'";
+                if(!string.IsNullOrEmpty(sFirstName))
+                    sQuery += $" and engr_fn like '{sFirstName}%'";
+                if(!string.IsNullOrEmpty(sMI))
+                    sQuery += $" and engr_mi like '{sMI}%' ";
+                if (!string.IsNullOrEmpty(sEngrType))
+                    sQuery += $" and engr_type like '{sEngrType}%'";
+                sQuery += " order by engr_ln";
                 var epsrec = db.Database.SqlQuery<ENGINEER_TBL>(sQuery);
 
                 foreach (var items in epsrec)

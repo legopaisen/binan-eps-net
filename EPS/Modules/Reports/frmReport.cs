@@ -51,6 +51,14 @@ namespace Modules.Reports
                 ReportClass = new SOA(this);
                 ReportClass.BillNo = sBillNo;
             }
+            else if(ReportName == "Records" || ReportName == "Application")
+            {
+                this.reportViewer1.LocalReport.ReportEmbeddedResource = "Modules.Reports.Report.Application.rdlc";
+                this.Text = ReportName;
+
+                ReportClass = new Application(this);
+                ReportClass.ARN = Arn;
+            }
 
             ReportClass.LoadForm();
 

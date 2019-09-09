@@ -68,6 +68,9 @@
     <Compile Include="Engineers.cs" />
     <Compile Include="Accounts.cs" />
     <Compile Include="Business.cs" />
+    <Compile Include="FormEngr.cs" />
+    <Compile Include="FormOwner.cs" />
+    <Compile Include="FormOwnerClass.cs" />
     <Compile Include="Forms\frmBank.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +107,12 @@
     <Compile Include="Forms\frmScope.Designer.cs">
       <DependentUpon>frmScope.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmOwner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmOwner.Designer.cs">
+      <DependentUpon>frmOwner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmTaskManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +148,10 @@
       <Project>{64f894bd-df57-4d82-8c15-4bea4081b870}</Project>
       <Name>EPSEntities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Records\Records.csproj">
+      <Project>{06b2ec66-db06-4a88-98db-922969d57da8}</Project>
+      <Name>Records</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -162,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmScope.resx">
       <DependentUpon>frmScope.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmOwner.resx">
+      <DependentUpon>frmOwner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTaskManager.resx">
       <DependentUpon>frmTaskManager.cs</DependentUpon>
