@@ -313,6 +313,7 @@
             this.txtMun.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMun.Location = new System.Drawing.Point(371, 51);
             this.txtMun.Name = "txtMun";
+            this.txtMun.ReadOnly = true;
             this.txtMun.Size = new System.Drawing.Size(167, 23);
             this.txtMun.TabIndex = 12;
             this.txtMun.TextChanged += new System.EventHandler(this.txtMun_TextChanged);
@@ -323,6 +324,7 @@
             this.txtProv.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProv.Location = new System.Drawing.Point(371, 80);
             this.txtProv.Name = "txtProv";
+            this.txtProv.ReadOnly = true;
             this.txtProv.Size = new System.Drawing.Size(167, 23);
             this.txtProv.TabIndex = 14;
             // 
@@ -332,6 +334,7 @@
             this.txtZIP.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtZIP.Location = new System.Drawing.Point(371, 109);
             this.txtZIP.Name = "txtZIP";
+            this.txtZIP.ReadOnly = true;
             this.txtZIP.Size = new System.Drawing.Size(167, 23);
             this.txtZIP.TabIndex = 16;
             // 

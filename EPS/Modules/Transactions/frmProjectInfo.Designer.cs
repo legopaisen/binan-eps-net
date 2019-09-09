@@ -39,7 +39,6 @@
             this.txtProv = new System.Windows.Forms.TextBox();
             this.txtZIP = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmbBrgy = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -56,11 +55,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtProjDesc = new System.Windows.Forms.TextBox();
+            this.cmbOwnership = new System.Windows.Forms.ComboBox();
             this.cmbStrucType = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbBussKind = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbOccupancy = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbCategory = new MultiColumnComboBoxDemo.MultiColumnComboBox();
-            this.cmbOwnership = new System.Windows.Forms.ComboBox();
+            this.cmbBrgy = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,6 +136,7 @@
             this.txtMun.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMun.Location = new System.Drawing.Point(383, 83);
             this.txtMun.Name = "txtMun";
+            this.txtMun.ReadOnly = true;
             this.txtMun.Size = new System.Drawing.Size(167, 23);
             this.txtMun.TabIndex = 13;
             // 
@@ -145,6 +146,7 @@
             this.txtProv.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProv.Location = new System.Drawing.Point(383, 112);
             this.txtProv.Name = "txtProv";
+            this.txtProv.ReadOnly = true;
             this.txtProv.Size = new System.Drawing.Size(167, 23);
             this.txtProv.TabIndex = 15;
             // 
@@ -154,6 +156,7 @@
             this.txtZIP.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtZIP.Location = new System.Drawing.Point(383, 141);
             this.txtZIP.Name = "txtZIP";
+            this.txtZIP.ReadOnly = true;
             this.txtZIP.Size = new System.Drawing.Size(167, 23);
             this.txtZIP.TabIndex = 17;
             // 
@@ -184,15 +187,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project Location";
-            // 
-            // cmbBrgy
-            // 
-            this.cmbBrgy.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbBrgy.FormattingEnabled = true;
-            this.cmbBrgy.Location = new System.Drawing.Point(383, 54);
-            this.cmbBrgy.Name = "cmbBrgy";
-            this.cmbBrgy.Size = new System.Drawing.Size(167, 24);
-            this.cmbBrgy.TabIndex = 11;
             // 
             // label15
             // 
@@ -362,6 +356,19 @@
             this.txtProjDesc.Size = new System.Drawing.Size(447, 23);
             this.txtProjDesc.TabIndex = 1;
             // 
+            // cmbOwnership
+            // 
+            this.cmbOwnership.FormattingEnabled = true;
+            this.cmbOwnership.Items.AddRange(new object[] {
+            "SINGLE PROPRIETORSHIP",
+            "PARTNERSHIP",
+            "CORPORATION"});
+            this.cmbOwnership.Location = new System.Drawing.Point(135, 129);
+            this.cmbOwnership.Name = "cmbOwnership";
+            this.cmbOwnership.Size = new System.Drawing.Size(204, 23);
+            this.cmbOwnership.TabIndex = 5;
+            this.cmbOwnership.Leave += new System.EventHandler(this.cmbOwnership_Leave);
+            // 
             // cmbStrucType
             // 
             this.cmbStrucType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
@@ -403,18 +410,14 @@
             this.cmbCategory.SelectedValueChanged += new System.EventHandler(this.cmbCategory_SelectedValueChanged);
             this.cmbCategory.Leave += new System.EventHandler(this.cmbCategory_Leave);
             // 
-            // cmbOwnership
+            // cmbBrgy
             // 
-            this.cmbOwnership.FormattingEnabled = true;
-            this.cmbOwnership.Items.AddRange(new object[] {
-            "SINGLE PROPRIETORSHIP",
-            "PARTNERSHIP",
-            "CORPORATION"});
-            this.cmbOwnership.Location = new System.Drawing.Point(135, 129);
-            this.cmbOwnership.Name = "cmbOwnership";
-            this.cmbOwnership.Size = new System.Drawing.Size(204, 23);
-            this.cmbOwnership.TabIndex = 5;
-            this.cmbOwnership.Leave += new System.EventHandler(this.cmbOwnership_Leave);
+            this.cmbBrgy.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbBrgy.FormattingEnabled = true;
+            this.cmbBrgy.Location = new System.Drawing.Point(383, 54);
+            this.cmbBrgy.Name = "cmbBrgy";
+            this.cmbBrgy.Size = new System.Drawing.Size(167, 24);
+            this.cmbBrgy.TabIndex = 11;
             // 
             // frmProjectInfo
             // 
