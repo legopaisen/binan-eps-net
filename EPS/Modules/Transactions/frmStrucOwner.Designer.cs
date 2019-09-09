@@ -269,6 +269,7 @@
             this.cmbBrgy.Name = "cmbBrgy";
             this.cmbBrgy.Size = new System.Drawing.Size(167, 23);
             this.cmbBrgy.TabIndex = 10;
+            this.cmbBrgy.SelectedIndexChanged += new System.EventHandler(this.cmbBrgy_SelectedIndexChanged);
             // 
             // txtHseNo
             // 
@@ -314,6 +315,7 @@
             this.txtMun.Name = "txtMun";
             this.txtMun.Size = new System.Drawing.Size(167, 23);
             this.txtMun.TabIndex = 12;
+            this.txtMun.TextChanged += new System.EventHandler(this.txtMun_TextChanged);
             // 
             // txtProv
             // 

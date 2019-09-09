@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Common.AppSettings;
 using Modules.Utilities;
 using Modules.SearchAccount;
+using Common.DataConnector;
 
 namespace Modules.Transactions
 {
@@ -35,10 +36,17 @@ namespace Modules.Transactions
         {
             toolTip1.SetToolTip(btnCopy, "Use Lot Owner");
 
+
             ClearControls();
 
             PopulateBrgy();
+
+            txtMun.Text = AppSettingsManager.GetConfigValue("02");
+            txtProv.Text = AppSettingsManager.GetConfigValue("03");
+            txtZIP.Text = AppSettingsManager.GetConfigValue("26");
         }
+
+       
 
         public void ClearControls()
         {
@@ -229,6 +237,21 @@ namespace Modules.Transactions
         public void EnableFormControls(bool blnEnable)
         {
             EnableControls(blnEnable);
+        }
+
+        private void cmbBrgy_Leave(object sender, EventArgs e)
+        {
+    
+        }
+
+        private void cmbBrgy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMun_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
