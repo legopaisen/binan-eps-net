@@ -119,6 +119,7 @@ namespace Modules.Transactions
             dgvList.Rows.Clear();
             dgvList.Columns.Clear();
 
+
             dgvList.Columns.Add("PermitCode", "");
 
             dgvList.Columns.Insert(1, comboPermit);
@@ -192,6 +193,10 @@ namespace Modules.Transactions
             {
                 dgvList[2, e.RowIndex].Value = null;
             }
+            else
+            {
+                dgvList[2, e.RowIndex].Value = dgvList[2, e.RowIndex].Value?.ToString().ToUpper();
+            }
             try
             {
                 if (e.ColumnIndex == 1)
@@ -224,18 +229,6 @@ namespace Modules.Transactions
                     }
                 }
 
-                //if (e.ColumnIndex == 2) //AFM 20190906 permit no. format validation
-                //{
-                //    if (Convert.ToString(dgvList[2, e.RowIndex]).Length != 11 || Convert.ToString(dgvList[e.ColumnIndex, e.RowIndex]).Length != 12)
-                //    {
-                //        MessageBox.Show("Invalid Permit Format (e.g. BP-19-00001)");
-                //        dgvList[2, e.RowIndex].Value = null;
-                //        return;
-                //    }
-                //}
-
-
-
                 if (e.ColumnIndex == 3)
                 {
                     string sStart = string.Empty;
@@ -264,20 +257,23 @@ namespace Modules.Transactions
             catch { }
         }
 
-        private void dgvList_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void dgvList_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) //AFM 20190906
         {
             permitIsNull = false;
             if (e.ColumnIndex == 2) //AFM 20190906 permit no. format validation
             {
                 if (dgvList[2, e.RowIndex].EditedFormattedValue != null)
                 {
-                    dgvList[2, e.RowIndex].Value = dgvList[2, e.RowIndex].EditedFormattedValue;
-                    if (Convert.ToString(dgvList[2, e.RowIndex].Value).Length != 11 && Convert.ToString(dgvList[2, e.RowIndex].Value).Length != 12 || !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("BP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("FP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("EP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("DP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("SP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("ECP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("AP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("OP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("WP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("MP"))
+                    dgvList[2, e.RowIndex].Value = dgvList[2, e.RowIndex].EditedFormattedValue.ToString().ToUpper();
+                    if (dgvList[2, e.RowIndex].Value.ToString() != "")
                     {
-                        MessageBox.Show("Invalid Permit Format (e.g. BP-19-00001)");
-                        dgvList[2, e.RowIndex].Value = null;
-                        permitIsNull = true;
-                        return;
+                        if (Convert.ToString(dgvList[2, e.RowIndex].Value).Length != 11 && Convert.ToString(dgvList[2, e.RowIndex].Value).Length != 12 || !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("BP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("FP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("EP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("DP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("SP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("ECP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("AP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("OP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("WP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("MP"))
+                        {
+                            MessageBox.Show("Invalid Permit Format (e.g. BP-19-00001)");
+                            dgvList[2, e.RowIndex].Value = null;
+                            permitIsNull = true;
+                            return;
+                        }
                     }
                 }
             }
@@ -294,7 +290,14 @@ namespace Modules.Transactions
             catch { }
         }
 
-
+        private void dgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value != null)
+            {
+                e.Value = e.Value.ToString().ToUpper();
+                e.FormattingApplied = true;
+            }
+        }
 
 
 

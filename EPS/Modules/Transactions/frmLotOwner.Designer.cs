@@ -262,6 +262,7 @@
             // 
             // cmbBrgy
             // 
+            this.cmbBrgy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBrgy.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBrgy.FormattingEnabled = true;
             this.cmbBrgy.Location = new System.Drawing.Point(371, 22);
