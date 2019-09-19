@@ -53,7 +53,6 @@ namespace Modules.Transactions
 
             txtMun.Text = AppSettingsManager.GetConfigValue("02");
             txtProv.Text = AppSettingsManager.GetConfigValue("03");
-            txtZIP.Text = AppSettingsManager.GetConfigValue("26");
         }
 
         public void ClearControls()
@@ -239,7 +238,7 @@ namespace Modules.Transactions
             cmbBrgy.Text = string.Empty;
             //txtMun.Text = string.Empty;
             //txtProv.Text= string.Empty;
-            //txtZIP.Text = string.Empty;
+            txtZIP.Text = string.Empty;
         }
 
         private void EnableLocationControls(bool blnEnable)
@@ -250,9 +249,9 @@ namespace Modules.Transactions
             txtStreet.ReadOnly = !blnEnable;
             cmbBrgy.Enabled = blnEnable;
             txtMemo.ReadOnly = !blnEnable;
-            //txtMun.ReadOnly = !blnEnable;
-            //txtProv.ReadOnly = !blnEnable;
-            //txtZIP.ReadOnly = !blnEnable;
+            txtMun.ReadOnly = !blnEnable;
+            txtProv.ReadOnly = !blnEnable;
+            txtZIP.ReadOnly = !blnEnable;
         }
 
         private void EnableOtherControls(bool blnEnable)

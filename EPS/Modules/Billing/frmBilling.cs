@@ -22,8 +22,6 @@ namespace Modules.Billing
         public string PermitCode { get; set; }
         public string ModuleCode { get; set; }
 
-        public List<DataGridViewRow> listofrows;
-
         public frmBilling()
         {
             InitializeComponent();
@@ -154,56 +152,13 @@ namespace Modules.Billing
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //AFM 20190911 checked permit validation (s)
-            bool isChecked = false;
-            foreach (DataGridViewRow row in dgvPermit.Rows)
-            {
-                string strVal = row.Cells[0].Value.ToString();
-                bool blnVal = Convert.ToBoolean(strVal);
-                if (blnVal == true)
-                {
-                    isChecked = true;
-                }
-            }
-            if (isChecked == false)
-            {
-                MessageBox.Show("No Permit selected!");
-                return;
-            }
-            //AFM 20190911 checked permit validation (e)
-
             RecordClass.Save();
         }
 
         private void dgvPermit_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            RecordClass.PermitList = new List<string>();
-            if (RecordClass.PermitList != null)
-            {
-                RecordClass.PermitList.Clear();
-            }
-            try
-            {
-                RecordClass.PermitCellClick(sender, e);
-                //AFM 20190911 permit checkbox (s)
-                if (dgvPermit.CurrentCell == null) return;
-                if ((bool)dgvPermit.CurrentCell.Value == true)
-                    dgvPermit.CurrentCell.Value = false;
-                else if ((bool)dgvPermit.CurrentCell.Value == false)
-                    dgvPermit.CurrentCell.Value = true;
-                //AFM 20190911 permit checkbox (e)
-            }
-            catch { }
-            for (int cnt = 0; cnt < dgvPermit.Rows.Count; cnt++) //AFM 20190913
-            {
-                if ((bool)dgvPermit[0,cnt].Value == true)
-                {
-                    RecordClass.PermitList.Add(dgvPermit[2, e.RowIndex].Value.ToString());
-                }
-            }
+            RecordClass.PermitCellClick(sender, e);
         }
-
-
 
         private void btnCancel_Click(object sender, EventArgs e)
         {

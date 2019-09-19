@@ -23,8 +23,6 @@ namespace Modules.Transactions
         public string DistCode { get; set; }
         public string BldgNo { get; set; }
         DataGridViewComboBoxColumn comboBrgy = new DataGridViewComboBoxColumn();
-        private TextBox tmptxtBox;
-        private bool isPressed = false;
 
         public frmBuildingUnits()
         {
@@ -78,29 +76,6 @@ namespace Modules.Transactions
 
             BldgNo = string.Format("{0:####}",intBldgNo);
         }
-
-        //AFM 20190912 accepts numbers only in unit col.(s)
-        private void dgvList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            isPressed = false;
-            TextBox tb = (dgvList.EditingControl as TextBox);
-            if (dgvList.CurrentCell.ColumnIndex != dgvList.Columns["Unit"].Index)
-            {
-                isPressed = true;
-                return;
-            }
-            tb.KeyPress += new KeyPressEventHandler(tb_KeyPress);
-        }
-
-        void tb_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (isPressed == false)
-            {
-                if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)
-                    e.Handled = true;
-            }
-        }
-        //AFM 20190912 accepts numbers only in unit col.(e)
 
         private void UpdateDataControls()
         {
