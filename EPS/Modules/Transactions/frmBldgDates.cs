@@ -28,6 +28,8 @@ namespace Modules.Transactions
         public double ActualCost { get; set; }
         public string PermitAppl { get; set; }
 
+        public bool permitIsNull = false;
+
         public frmBldgDates()
         {
             InitializeComponent();
@@ -117,6 +119,7 @@ namespace Modules.Transactions
             dgvList.Rows.Clear();
             dgvList.Columns.Clear();
 
+
             dgvList.Columns.Add("PermitCode", "");
 
             dgvList.Columns.Insert(1, comboPermit);
@@ -150,6 +153,7 @@ namespace Modules.Transactions
             dgvList.Columns[2].Width = 130;
             dgvList.Columns[3].Width = 140;
             dgvList.Columns[4].Width = 140;
+
             //dgvList.Columns[2].DefaultCellStyle.Format = "MM/dd/yyyy";
             // dgvList.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
 
@@ -182,8 +186,17 @@ namespace Modules.Transactions
 
         }
 
-        private void dgvList_CellLeave(object sender, DataGridViewCellEventArgs e)
+        //dgvList_CellLeave
+        private void dgvList_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (permitIsNull != false)
+            {
+                dgvList[2, e.RowIndex].Value = null;
+            }
+            else
+            {
+                dgvList[2, e.RowIndex].Value = dgvList[2, e.RowIndex].Value?.ToString().ToUpper();
+            }
             try
             {
                 if (e.ColumnIndex == 1)
@@ -215,7 +228,8 @@ namespace Modules.Transactions
                         dgvList.Rows.Add("");
                     }
                 }
-                if(e.ColumnIndex== 3)
+
+                if (e.ColumnIndex == 3)
                 {
                     string sStart = string.Empty;
                     try
@@ -243,18 +257,74 @@ namespace Modules.Transactions
             catch { }
         }
 
-        private void dgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvList_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) //AFM 20190906
         {
+            permitIsNull = false;
+            if (e.ColumnIndex == 2) //AFM 20190906 permit no. format validation
+            {
+                if (dgvList[2, e.RowIndex].EditedFormattedValue != null)
+                {
+                    dgvList[2, e.RowIndex].Value = dgvList[2, e.RowIndex].EditedFormattedValue.ToString().ToUpper();
+                    if (dgvList[2, e.RowIndex].Value.ToString() != "")
+                    {
+                        if (Convert.ToString(dgvList[2, e.RowIndex].Value).Length != 11 && Convert.ToString(dgvList[2, e.RowIndex].Value).Length != 12 || !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("BP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("FP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("EP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("DP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("SP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("ECP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("AP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("OP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("WP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("MP"))
+                        {
+                            MessageBox.Show("Invalid Permit Format (e.g. BP-19-00001)");
+                            dgvList[2, e.RowIndex].Value = null;
+                            permitIsNull = true;
+                            return;
+                        }
+                    }
+                }
+            }
+
             try
             {
                 if (e.ColumnIndex == 2)
                 {
-                    int iCnt = dgvList[2, e.RowIndex].ToString().Length;
+                    int iCnt = dgvList[2, e.RowIndex].Value.ToString().Length;
+                    //for (iCnt = 0; );
                     //format data entry yyyy-mm-series 2003-06-000001
                 }
             }
             catch { }
         }
+
+        private void dgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value != null)
+            {
+                e.Value = e.Value.ToString().ToUpper();
+                e.FormattingApplied = true;
+            }
+        }
+
+
+
+        //private void dgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        //{
+        //    if (e.ColumnIndex == 2) //AFM 20190906 permit no. format validation
+        //    {
+        //        if (Convert.ToString(dgvList[2, e.RowIndex]).Length != 11 || Convert.ToString(dgvList[e.ColumnIndex, e.RowIndex]).Length != 12)
+        //        {
+        //            MessageBox.Show("Invalid Permit Format (e.g. BP-19-00001)");
+        //            dgvList[2, e.RowIndex].Value = null;
+        //            return;
+        //        }
+        //    }
+
+            //    try
+            //        {
+            //        if (e.ColumnIndex == 2)
+            //        {
+            //            int iCnt = dgvList[2, e.RowIndex].Value.ToString().Length; //AFM 20190909 get value
+            //            //for (iCnt = 0; );
+            //            //format data entry yyyy-mm-series 2003-06-000001
+            //        }
+            //    }
+            //    catch { }
+            //}
+
 
         private void dgvList_KeyDown(object sender, KeyEventArgs e)
         {

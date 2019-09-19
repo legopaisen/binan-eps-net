@@ -817,6 +817,15 @@ namespace Common.StringUtilities
             return dValue.ToString();
         }
 
+        public static string CaseIgnoreNull(string sValue) //afm test
+        {
+            if(string.IsNullOrEmpty(sValue))
+            {
+                sValue = "";
+            }
+            return sValue;
+        }
+
         public static int GetNextLineCount(string sStringValue, int iIntCut)
         {
             int iCount = 0;
