@@ -32,6 +32,24 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -76,6 +94,18 @@
     </Compile>
     <Compile Include="Forms\frmBank.Designer.cs">
       <DependentUpon>frmBank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPermitType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPermitType.Designer.cs">
+      <DependentUpon>frmPermitType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmFeeSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmFeeSearch.Designer.cs">
+      <DependentUpon>frmFeeSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmOccupancy.cs">
       <SubType>Form</SubType>
@@ -160,6 +190,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Forms\frmBank.resx">
       <DependentUpon>frmBank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPermitType.resx">
+      <DependentUpon>frmPermitType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmFeeSearch.resx">
+      <DependentUpon>frmFeeSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOccupancy.resx">
       <DependentUpon>frmOccupancy.cs</DependentUpon>

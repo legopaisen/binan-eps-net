@@ -439,5 +439,19 @@ namespace EPS
                 }
             }
         }
+
+        private void permitTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("SPT"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("PERMIT TYPE", "", ""))
+                {
+                    frmPermitType form = new frmPermitType();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("PERMIT TYPE", "DELETE", "");
+                }
+            }
+        }
     }
 }
