@@ -114,11 +114,6 @@ namespace Modules.Billing
                         RecordFrm.txtBillNo.Text = GenerateBillNo();
                     }
 
-                    else
-                    {
-                        RecordFrm.txtBillNo.Text = GenerateBillNo();
-                    }
-
                     sQuery = "insert into billing values (:1,:2,:3,:4,:5,:6,:7)";
                     db.Database.ExecuteSqlCommand(sQuery,
                             new OracleParameter(":1", RecordFrm.m_sAN),

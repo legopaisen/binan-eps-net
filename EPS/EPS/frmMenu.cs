@@ -439,11 +439,7 @@ namespace EPS
                 }
             }
         }
-<<<<<<< .mine
 
-=======
-
->>>>>>> .theirs
         private void permitTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (AppSettingsManager.Granted("SPT"))
