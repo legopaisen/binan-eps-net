@@ -63,14 +63,16 @@ namespace Modules.Transactions
                     form.SearchCriteria = "QUE";
                 form.ShowDialog();
 
-                arn1.SetAn(form.sArn);
+                arn1.SetArn(form.sArn);
             }
 
-            if (!taskman.AddTask("POSTING", arn1.GetAn()))
+            if (!taskman.AddTask("POSTING", arn1.GetArn()))
             {
-                arn1.GetCode = "";
+                //arn1.GetCode = "";
+                arn1.GetLGUCode = "";
                 arn1.GetTaxYear = "";
-                arn1.GetMonth = "";
+                //arn1.GetMonth = "";
+                arn1.GetDistCode = "";
                 arn1.GetSeries = "";
 
                 return;
@@ -122,7 +124,7 @@ namespace Modules.Transactions
 
             if (m_sCertType.Contains("EXCAVATION PERMIT"))
             {
-                strWhereCond = $" where arn = '{arn1.GetAn()}'";
+                strWhereCond = $" where arn = '{arn1.GetArn()}'";
                 result = from a in Records.ExcavationTblList.GetRecord(strWhereCond)
                          select a;
             }
@@ -130,32 +132,32 @@ namespace Modules.Transactions
             {
                 if (string.IsNullOrEmpty(m_sWiringNo))
                 {
-                    strWhereCond = $" where arn = '{arn1.GetAn()}' and assigned_no = ''";
+                    strWhereCond = $" where arn = '{arn1.GetArn()}' and assigned_no = ''";
                     result = from a in Records.OtherCertList.GetRecord(strWhereCond)
                              select a;
                 }
                 else
                 {
-                    strWhereCond = $" where arn = '{arn1.GetAn()}' and wiring_no = '{m_sWiringNo}'";
+                    strWhereCond = $" where arn = '{arn1.GetArn()}' and wiring_no = '{m_sWiringNo}'";
                     result = from a in Records.OtherCertList.GetRecord(strWhereCond)
                              select a;
                 }
             }
             else if (m_sCertType.Contains("WIRING PERMIT"))
             {
-                strWhereCond = $" where arn = '{arn1.GetAn()}'";
+                strWhereCond = $" where arn = '{arn1.GetArn()}'";
                 result = from a in Records.WiringTblList.GetRecord(strWhereCond)
                          select a;
             }
             else if (m_sCertType.Contains("OCCUPANCY"))
             {
-                strWhereCond = $" where arn = '{arn1.GetAn()}'";
+                strWhereCond = $" where arn = '{arn1.GetArn()}'";
                 result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
                              select a;
             }
             else
             {
-                strWhereCond = $" where arn = '{arn1.GetAn()}'";
+                strWhereCond = $" where arn = '{arn1.GetArn()}'";
                 result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
                              select a;
             }
@@ -215,7 +217,7 @@ namespace Modules.Transactions
         {
             ClearControls();
             
-            taskman.RemTask(arn1.GetAn());
+            taskman.RemTask(arn1.GetArn());
         }
 
         private void LoadGrid()
@@ -227,7 +229,7 @@ namespace Modules.Transactions
 
             string sQuery = string.Empty;
 
-            sQuery = $"select * from billing where arn = '{arn1.GetAn()}' ";
+            sQuery = $"select * from billing where arn = '{arn1.GetArn()}' ";
             result = db.Database.SqlQuery<BILLING>(sQuery).ToList();
 
             foreach (var item in result)
@@ -244,7 +246,7 @@ namespace Modules.Transactions
             string sFeesCode = string.Empty;
             string sFeesAmt = string.Empty;
 
-            sQuery = $"select * from tax_details where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}' order by fees_code";
+            sQuery = $"select * from tax_details where arn = '{arn1.GetArn()}' and bill_no = '{txtBillNo.Text.ToString()}' order by fees_code";
             result = db.Database.SqlQuery<TAX_DETAILS>(sQuery).ToList();
             foreach (var item in result)
             {
@@ -476,7 +478,7 @@ namespace Modules.Transactions
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            taskman.RemTask(arn1.GetAn());
+            taskman.RemTask(arn1.GetArn());
             this.Close();
         }
 
@@ -490,7 +492,7 @@ namespace Modules.Transactions
             if (MessageBox.Show("Save Payment?", "POSTING", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 SavePosting();
-                taskman.RemTask(arn1.GetAn());
+                taskman.RemTask(arn1.GetArn());
             }
         }
 
@@ -528,7 +530,7 @@ namespace Modules.Transactions
             string sPermitName = string.Empty;
             var result = (dynamic)null;
 
-            strWhereCond = $" where arn = '{arn1.GetAn()}'";
+            strWhereCond = $" where arn = '{arn1.GetArn()}'";
             result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
                      select a;
 
@@ -603,7 +605,7 @@ namespace Modules.Transactions
 
                         sQuery = $"insert into mrs_payments values (:1,:2,:3,:4,:5,to_date(:6,'MM/dd/yyyy'),:7,:8,to_date(:9,'MM/dd/yyyy'),:10,:11,:12)";
                         db.Database.ExecuteSqlCommand(sQuery,
-                                    new OracleParameter(":1", arn1.GetAn()),
+                                    new OracleParameter(":1", arn1.GetArn()),
                                     new OracleParameter(":2", txtBillNo.Text.ToString()),
                                     new OracleParameter(":3", m_sProjOwner),
                                     new OracleParameter(":4", ""),
@@ -627,30 +629,30 @@ namespace Modules.Transactions
 
             try
             {
-                sQuery = $"insert into application select * from application_que where arn = '{arn1.GetAn()}'";
+                sQuery = $"insert into application select * from application_que where arn = '{arn1.GetArn()}'";
                 db.Database.ExecuteSqlCommand(sQuery);
 
                 AssignPermitNo();
 
-                sQuery = $"delete from application_que where arn = '{arn1.GetAn()}'";
+                sQuery = $"delete from application_que where arn = '{arn1.GetArn()}'";
                 db.Database.ExecuteSqlCommand(sQuery);
 
-                sQuery = $"insert into billing_paid select * from billing where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                sQuery = $"insert into billing_paid select * from billing where arn = '{arn1.GetArn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
                 db.Database.ExecuteSqlCommand(sQuery);
 
-                sQuery = $"delete from billing where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                sQuery = $"delete from billing where arn = '{arn1.GetArn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
                 db.Database.ExecuteSqlCommand(sQuery);
 
-                sQuery = $"insert into taxdues_paid select * from taxdues where arn = '{arn1.GetAn()}'  and bill_no  = '{txtBillNo.Text.ToString()}'";
+                sQuery = $"insert into taxdues_paid select * from taxdues where arn = '{arn1.GetArn()}'  and bill_no  = '{txtBillNo.Text.ToString()}'";
                 db.Database.ExecuteSqlCommand(sQuery);
 
-                sQuery = $"delete from taxdues where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                sQuery = $"delete from taxdues where arn = '{arn1.GetArn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
                 db.Database.ExecuteSqlCommand(sQuery);
 
-                sQuery = $"insert into tax_details_paid select * from tax_details where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                sQuery = $"insert into tax_details_paid select * from tax_details where arn = '{arn1.GetArn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
                 db.Database.ExecuteSqlCommand(sQuery);
 
-                sQuery = $"delete from tax_details where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                sQuery = $"delete from tax_details where arn = '{arn1.GetArn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
                 db.Database.ExecuteSqlCommand(sQuery);
 
                 double dCash = 0;
@@ -662,7 +664,7 @@ namespace Modules.Transactions
                 db.Database.ExecuteSqlCommand(sQuery,
                             new OracleParameter(":1", txtOrNo.Text.ToString().Trim()),
                             new OracleParameter(":2", string.Format("{0:MM/dd/yyyy}", dtpDate.Text)),
-                            new OracleParameter(":3", arn1.GetAn()),
+                            new OracleParameter(":3", arn1.GetArn()),
                             new OracleParameter(":4", dTotalFeesDue),
                             new OracleParameter(":5", dCash),
                             new OracleParameter(":6", dCheck),
@@ -703,7 +705,7 @@ namespace Modules.Transactions
             {
                 var dbarcs = new ARCSConnection(dbConnArcs);
 
-                sQuery = $"delete from eps_billing where arn = '{arn1.GetAn()}'";
+                sQuery = $"delete from eps_billing where arn = '{arn1.GetArn()}'";
                 dbarcs.Database.ExecuteSqlCommand(sQuery);
 
             }
@@ -711,7 +713,7 @@ namespace Modules.Transactions
 
             MessageBox.Show("Payment Successfully Posted.", "POSTING", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            if (Utilities.AuditTrail.InsertTrail("P-PP", "PAYMENTS", "ARN: " + arn1.GetAn()) == 0)
+            if (Utilities.AuditTrail.InsertTrail("P-PP", "PAYMENTS", "ARN: " + arn1.GetArn()) == 0)
             {
                 MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -822,7 +824,7 @@ namespace Modules.Transactions
                 AssignCertofOccupancyNo();
             else
             {
-                strWhereCond = $" where arn = '{arn1.GetAn()}'";
+                strWhereCond = $" where arn = '{arn1.GetArn()}'";
                 var result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
                              select a;
 
@@ -834,7 +836,7 @@ namespace Modules.Transactions
                     sPermitCode = item.PERMIT_CODE;
                     sPermitNo = GetCurrentPermitNo(sPermitCode);
 
-                    sQuery = $"update application set permit_no = '{sPermitNo}', date_issued = to_date('{AppSettingsManager.GetCurrentDate().ToShortDateString()}','MM/dd/yyyy') where arn = '{arn1.GetAn()}' and permit_code = '{sPermitCode}'";
+                    sQuery = $"update application set permit_no = '{sPermitNo}', date_issued = to_date('{AppSettingsManager.GetCurrentDate().ToShortDateString()}','MM/dd/yyyy') where arn = '{arn1.GetArn()}' and permit_code = '{sPermitCode}'";
                     db.Database.ExecuteSqlCommand(sQuery);
                 }
             }
@@ -883,7 +885,7 @@ namespace Modules.Transactions
 
             sQuery = $"insert into cert_occupancy values (:1,:2,to_date(:3,'MM/dd/yyyy'))";
             db.Database.ExecuteSqlCommand(sQuery,
-                        new OracleParameter(":1", arn1.GetAn()),
+                        new OracleParameter(":1", arn1.GetArn()),
                         new OracleParameter(":2", sCertNo),
                         new OracleParameter(":3", string.Format("{0:MM/dd/yyyy}",AppSettingsManager.GetCurrentDate())));
 
@@ -1020,7 +1022,7 @@ namespace Modules.Transactions
 
                 OnCertTypeSelect();
 
-                if (!string.IsNullOrEmpty(arn1.GetAn()))
+                if (!string.IsNullOrEmpty(arn1.GetArn()))
                     DisplayData();
             }
             else

@@ -51,7 +51,7 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.cmbScope = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbPermit = new MultiColumnComboBoxDemo.MultiColumnComboBox();
-            this.arn1 = new Modules.ARN.AN();
+            this.arn1 = new Modules.ARN.ARN();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -239,7 +239,7 @@
             this.btnSearch.Location = new System.Drawing.Point(275, 16);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(30, 26);
-            this.btnSearch.TabIndex = 7;
+            this.btnSearch.TabIndex = 2;
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
@@ -257,6 +257,7 @@
             // cmbScope
             // 
             this.cmbScope.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbScope.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbScope.FormattingEnabled = true;
             this.cmbScope.Location = new System.Drawing.Point(619, 45);
             this.cmbScope.Name = "cmbScope";
@@ -268,6 +269,7 @@
             // cmbPermit
             // 
             this.cmbPermit.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbPermit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPermit.FormattingEnabled = true;
             this.cmbPermit.Location = new System.Drawing.Point(619, 12);
             this.cmbPermit.Name = "cmbPermit";
@@ -278,15 +280,15 @@
             // 
             // arn1
             // 
-            this.arn1.GetCode = "";
-            this.arn1.GetMonth = "";
+            this.arn1.GetDistCode = "";
+            this.arn1.GetLGUCode = "";
             this.arn1.GetSeries = "";
             this.arn1.GetTaxYear = "";
             this.arn1.Location = new System.Drawing.Point(52, 12);
             this.arn1.Margin = new System.Windows.Forms.Padding(4);
             this.arn1.Name = "arn1";
             this.arn1.Size = new System.Drawing.Size(216, 39);
-            this.arn1.TabIndex = 13;
+            this.arn1.TabIndex = 1;
             // 
             // frmRecords
             // 
@@ -351,6 +353,6 @@
         public System.Windows.Forms.Button btnClear;
         public MultiColumnComboBoxDemo.MultiColumnComboBox cmbPermit;
         public MultiColumnComboBoxDemo.MultiColumnComboBox cmbScope;
-        public ARN.AN arn1;
+        public ARN.ARN arn1;
     }
 }

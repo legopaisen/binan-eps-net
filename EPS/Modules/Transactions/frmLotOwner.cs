@@ -41,7 +41,7 @@ namespace Modules.Transactions
 
             txtMun.Text = AppSettingsManager.GetConfigValue("02");
             txtProv.Text = AppSettingsManager.GetConfigValue("03");
-            txtZIP.Text = AppSettingsManager.GetConfigValue("26");
+            txtZIP.Text = AppSettingsManager.GetConfigValue("28");
         }
         public void ClearControls()
         {

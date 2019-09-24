@@ -52,7 +52,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.an1 = new Modules.ARN.AN();
+            this.an1 = new Modules.ARN.ARN();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvPermit = new System.Windows.Forms.DataGridView();
             this.Select = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -71,14 +71,11 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCompute = new System.Windows.Forms.Button();
             this.dgvParameter = new System.Windows.Forms.DataGridView();
+            this.Para = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtAmtDue = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dgvAssessment = new System.Windows.Forms.DataGridView();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.Para = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Fees = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FeesCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,6 +88,9 @@
             this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Scope = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrigAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPermit)).BeginInit();
@@ -325,8 +325,8 @@
             // 
             // an1
             // 
-            this.an1.GetCode = "";
-            this.an1.GetMonth = "";
+            this.an1.GetDistCode = "";
+            this.an1.GetLGUCode = "";
             this.an1.GetSeries = "";
             this.an1.GetTaxYear = "";
             this.an1.Location = new System.Drawing.Point(106, 17);
@@ -410,6 +410,7 @@
             this.grpAddFees.TabIndex = 119;
             this.grpAddFees.TabStop = false;
             this.grpAddFees.Text = "Additional Fees";
+            this.grpAddFees.Visible = false;
             // 
             // txtAddlAmt
             // 
@@ -535,6 +536,19 @@
             this.dgvParameter.TabIndex = 3;
             this.dgvParameter.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvParameter_CellClick);
             // 
+            // Para
+            // 
+            this.Para.HeaderText = "Parameter";
+            this.Para.Name = "Para";
+            this.Para.ReadOnly = true;
+            // 
+            // Value
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.Value.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Value.HeaderText = "Value";
+            this.Value.Name = "Value";
+            // 
             // txtAmtDue
             // 
             this.txtAmtDue.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -585,50 +599,6 @@
             this.dgvAssessment.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssessment_CellContentClick);
             this.dgvAssessment.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssessment_CellLeave);
             // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(578, 490);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 27);
-            this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "Save Billing";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Enabled = false;
-            this.btnPrint.Location = new System.Drawing.Point(684, 490);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(100, 27);
-            this.btnPrint.TabIndex = 3;
-            this.btnPrint.Text = "Print OP";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(790, 490);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 27);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // Para
-            // 
-            this.Para.HeaderText = "Parameter";
-            this.Para.Name = "Para";
-            this.Para.ReadOnly = true;
-            // 
-            // Value
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.Value.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Value.HeaderText = "Value";
-            this.Value.Name = "Value";
-            // 
             // dataGridViewCheckBoxColumn1
             // 
             this.dataGridViewCheckBoxColumn1.HeaderText = " ";
@@ -645,7 +615,6 @@
             // 
             this.FeesCode.HeaderText = "Code";
             this.FeesCode.Name = "FeesCode";
-            this.FeesCode.Visible = false;
             this.FeesCode.Width = 70;
             // 
             // Means
@@ -703,6 +672,37 @@
             this.OrigAmt.Name = "OrigAmt";
             this.OrigAmt.Visible = false;
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(578, 490);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(100, 27);
+            this.btnSave.TabIndex = 3;
+            this.btnSave.Text = "Save Billing";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Enabled = false;
+            this.btnPrint.Location = new System.Drawing.Point(684, 490);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(100, 27);
+            this.btnPrint.TabIndex = 3;
+            this.btnPrint.Text = "Print OP";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(790, 490);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(100, 27);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // frmBilling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -758,7 +758,7 @@
         public System.Windows.Forms.TextBox txtOccupancy;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
-        public ARN.AN an1;
+        public ARN.ARN an1;
         public System.Windows.Forms.DataGridView dgvPermit;
         public System.Windows.Forms.DataGridView dgvAssessment;
         public System.Windows.Forms.TextBox txtAmtDue;

@@ -24,7 +24,7 @@ namespace Modules.ARN
         public ARN()
         {
             InitializeComponent();
-            txtLGUCode.Enabled = false;
+            txtLGUCode.Enabled = true;
         }
 
         public string GetLGUCode
@@ -141,6 +141,18 @@ namespace Modules.ARN
             set { txtSeries.Text = value; }
         }
 
+        private void txtDistCode_TextChanged(object sender, EventArgs e)
+        {
+            if (txtDistCode.Text.Trim().Length == 2)
+                txtTaxYear.Focus();
+        }
+
+        private void txtLGUCode_TextChanged(object sender, EventArgs e)
+        {
+            if (txtLGUCode.Text.Trim().Length == 3)
+                txtDistCode.Focus();
+        }
+
         public string GetArn()
         {
             m_sARN = txtLGUCode.Text + "-" + txtDistCode.Text + "-" + txtTaxYear.Text + "-" + txtSeries.Text;
@@ -158,9 +170,12 @@ namespace Modules.ARN
             var db = new EPSConnection(dbConn);
             string strQuery = string.Empty;
             string sTmpArn = string.Empty;
-                
-            strQuery = $"select distinct (dist_code) from brgy where brgy_code = '{sBrgyCode}'";
-            txtDistCode.Text = db.Database.SqlQuery<string>(strQuery).SingleOrDefault();
+            string sLguCodeConfig = "04";
+
+            //strQuery = $"select distinct (dist_code) from brgy where brgy_code = '{sBrgyCode}'";
+            //txtDistCode.Text = db.Database.SqlQuery<string>(strQuery).SingleOrDefault();
+            txtDistCode.Text = sBrgyCode;
+            txtLGUCode.Text = AppSettingsManager.GetConfigValue(sLguCodeConfig); //get lgucode
 
             strQuery = $"select arn from current_arn where arn like '%-{sYear}-%'";
             sTmpArn = db.Database.SqlQuery<string>(strQuery).SingleOrDefault();
@@ -195,6 +210,14 @@ namespace Modules.ARN
                 txtSeries.Text = sArn.Substring(12, 4);
             }
             catch { }
+        }
+
+        public void Clear()
+        {
+            txtLGUCode.Text = "";
+            txtTaxYear.Text = "";
+            txtDistCode.Text = "";
+            txtSeries.Text = "";
         }
 
     }

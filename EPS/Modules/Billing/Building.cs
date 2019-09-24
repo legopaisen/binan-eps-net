@@ -22,9 +22,9 @@ namespace Modules.Billing
         public Building(frmBilling Form) : base(Form)
         { }
 
-        private List<string> sPermitListSave;
+        private static List<string> sPermitListSave;
 
-        public List<string> PermitListSave
+        public static List<string> PermitListSave
         {
             get { return sPermitListSave; }
             set { sPermitListSave = value; }
@@ -33,7 +33,7 @@ namespace Modules.Billing
 
         public override void FormLoad()
         {
-            RecordFrm.grpAddFees.Visible = true;
+            //RecordFrm.grpAddFees.Visible = true; --binan version
         }
 
 
@@ -59,9 +59,14 @@ namespace Modules.Billing
                 bool bAssessed = false;
 
                 if (RecordFrm.PermitCode == item.PERMIT_CODE.Substring(0, 2))
-                    bAssessed = true;
+                {
+                    //bAssessed = true;
+                }
+
                 else
-                    bAssessed = ValidatePermitAssessed(item.PERMIT_CODE.Substring(0, 2));
+                {
+                    //bAssessed = ValidatePermitAssessed(item.PERMIT_CODE.Substring(0, 2));
+                }
                 RecordFrm.dgvPermit.Rows.Add(bAssessed, sPermit, item.PERMIT_CODE);
             }
 
@@ -79,35 +84,31 @@ namespace Modules.Billing
             {
                 if (MessageBox.Show("Save Billing?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    //if (!string.IsNullOrEmpty(RecordFrm.txtBillNo.Text.ToString()))
-                    //{
+                    if (!string.IsNullOrEmpty(RecordFrm.txtBillNo.Text.ToString()))
+                    {
+                        sQuery = $"insert into billing_hist select * from billing where arn = '{RecordFrm.m_sAN}'";
+                        db.Database.ExecuteSqlCommand(sQuery);
 
-                    //    //for (int row = 0; row < RcrdClass.PermitList.Count; row++)
-                    //    //{
+                        sQuery = $"delete from billing where arn = '{RecordFrm.m_sAN}'";
+                        db.Database.ExecuteSqlCommand(sQuery);
 
-                    //    //}
-                    sQuery = $"insert into billing_hist select * from billing where arn = '{RecordFrm.m_sAN}'";
-                    db.Database.ExecuteSqlCommand(sQuery);
+                        sQuery = $"insert into taxdues_hist select * from taxdues where arn = '{RecordFrm.m_sAN}'";
+                        db.Database.ExecuteSqlCommand(sQuery);
 
-                    sQuery = $"delete from billing where arn = '{RecordFrm.m_sAN}'";
-                    db.Database.ExecuteSqlCommand(sQuery);
+                        sQuery = $"delete from taxdues where arn = '{RecordFrm.m_sAN}'";
+                        db.Database.ExecuteSqlCommand(sQuery);
 
-                    sQuery = $"insert into taxdues_hist select * from taxdues where arn = '{RecordFrm.m_sAN}'";
-                    db.Database.ExecuteSqlCommand(sQuery);
+                        sQuery = $"insert into tax_details_hist select * from tax_details where arn = '{RecordFrm.m_sAN}'";
+                        db.Database.ExecuteSqlCommand(sQuery);
 
-                    sQuery = $"delete from taxdues where arn = '{RecordFrm.m_sAN}'";
-                    db.Database.ExecuteSqlCommand(sQuery);
+                        sQuery = $"delete from tax_details where arn = '{RecordFrm.m_sAN}'";
+                        db.Database.ExecuteSqlCommand(sQuery);
+                    }
 
-                    sQuery = $"insert into tax_details_hist select * from tax_details where arn = '{RecordFrm.m_sAN}'";
-                    db.Database.ExecuteSqlCommand(sQuery);
-
-                    sQuery = $"delete from tax_details where arn = '{RecordFrm.m_sAN}'";
-                    db.Database.ExecuteSqlCommand(sQuery);
-                }
-                else
-                {
-                    RecordFrm.txtBillNo.Text = GenerateBillNo();
-                }
+                    else
+                    {
+                        RecordFrm.txtBillNo.Text = GenerateBillNo();
+                    }
 
                     sQuery = "insert into billing values (:1,:2,:3,:4,:5,:6,:7)";
                     db.Database.ExecuteSqlCommand(sQuery,
@@ -217,7 +218,7 @@ namespace Modules.Billing
                     RecordFrm.btnSave.Enabled = false;
                     RecordFrm.btnCancel.Text = "Exit";
 
-                
+                }
             }
             catch (Exception ex)
             {

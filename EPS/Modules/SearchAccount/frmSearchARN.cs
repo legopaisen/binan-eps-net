@@ -63,7 +63,7 @@ namespace Modules.SearchAccount
                 sQuery += "from excavation_tbl,billing,account account2 where ";
                 sQuery += "excavation_tbl.arn = billing.arn and ";
                 sQuery += "excavation_tbl.acct_code = account2.acct_code and ";
-                sQuery += $"excavation_tbl.arn like '{arn1.GetAn()}%' ";
+                sQuery += $"excavation_tbl.arn like '{arn1.GetArn()}%' ";
                 sQuery += $" and excavation_tbl.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 sQuery += $" and excavation_tbl.brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
                 sQuery += $" and billing.bill_no like '{StringUtilities.HandleApostrophe(txtLotLastName.Text.ToString())}%' ";
@@ -84,7 +84,7 @@ namespace Modules.SearchAccount
                 sQuery += "from excavation_tbl,account account2 where ";
                 sQuery += "excavation_tbl.excavation_no is not null and ";
                 sQuery += "excavation_tbl.acct_code = account2.acct_code and ";
-                sQuery += $"excavation_tbl.arn like '{arn1.GetAn()}%' ";
+                sQuery += $"excavation_tbl.arn like '{arn1.GetArn()}%' ";
                 sQuery += $" and excavation_tbl.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 sQuery += $" and excavation_tbl.brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
                 sQuery += $" and excavation_tbl.excavation_no like '{StringUtilities.HandleApostrophe(txtLotLastName.Text.ToString())}%' ";
@@ -104,7 +104,7 @@ namespace Modules.SearchAccount
                 sQuery += "wiring_tbl.assigned_no is not null and ";
                 sQuery += "wiring_tbl.acct_code = account2.acct_code and ";
                 sQuery += "wiring_tbl.occupancy = category_tbl.category_code and ";
-                sQuery += $"wiring_tbl.arn like '{arn1.GetAn()}%' ";
+                sQuery += $"wiring_tbl.arn like '{arn1.GetArn()}%' ";
                 sQuery += $" and wiring_tbl.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 sQuery += $" and wiring_tbl.brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
 
@@ -125,7 +125,7 @@ namespace Modules.SearchAccount
                 sQuery += "from other_cert,account account2 where ";
                 sQuery += "other_cert.assigned_no is not null and ";
                 sQuery += "other_cert.acct_code = account2.acct_code and ";
-                sQuery += $"other_cert.arn like '{arn1.GetAn()}%' ";
+                sQuery += $"other_cert.arn like '{arn1.GetArn()}%' ";
                 sQuery += $" and other_cert.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 sQuery += $" and other_cert.brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
                 sQuery += $" and other_cert.assigned_no like '{StringUtilities.HandleApostrophe(txtLotLastName.Text.ToString())}%' ";
@@ -146,7 +146,7 @@ namespace Modules.SearchAccount
                 sQuery += "wiring_tbl.assigned_no is not null and ";
                 sQuery += "wiring_tbl.acct_code = account2.acct_code and ";
                 sQuery += "wiring_tbl.occupancy = category_tbl.category_code and ";
-                sQuery += $"wiring_tbl.arn like '{arn1.GetAn()}%' ";
+                sQuery += $"wiring_tbl.arn like '{arn1.GetArn()}%' ";
                 sQuery += $" and wiring_tbl.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 sQuery += $" and wiring_tbl.brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
 
@@ -169,7 +169,7 @@ namespace Modules.SearchAccount
                 sQuery += "wiring_tbl.assigned_no is null and ";
                 sQuery += "wiring_tbl.acct_code = account2.acct_code and ";
                 sQuery += "wiring_tbl.occupancy = category_tbl.category_code and ";
-                sQuery += $"wiring_tbl.arn like '{arn1.GetAn()}%' ";
+                sQuery += $"wiring_tbl.arn like '{arn1.GetArn()}%' ";
                 sQuery += $" and wiring_tbl.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 sQuery += $" and wiring_tbl.brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
 
@@ -198,7 +198,7 @@ namespace Modules.SearchAccount
                 sQuery += "left join account account1 on account1.acct_code= application_que.proj_lot_owner ";
                 sQuery += "where application_que.main_application = 1 and ";
                 sQuery += $"application_que.status_code like '{StatusCode}%' and ";
-                sQuery += $"application_que.arn like '{arn1.GetAn()}%' ";
+                sQuery += $"application_que.arn like '{arn1.GetArn()}%' ";
                 sQuery += $" and application_que.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 if (!string.IsNullOrEmpty(cmbBrgy.Text.ToString()))
                     sQuery += $" and application_que.proj_brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
@@ -224,7 +224,7 @@ namespace Modules.SearchAccount
                 sQuery += "application.proj_owner = account2.acct_code and ";
                 sQuery += "application.proj_lot_owner = account1.acct_code and ";
                 sQuery += "application.main_application = 1 and ";
-                sQuery += $"application.arn like '{arn1.GetAn()}%' ";
+                sQuery += $"application.arn like '{arn1.GetArn()}%' ";
                 sQuery += $" and application.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 sQuery += $" and application.brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
                 sQuery += $" and account1.acct_ln like '{StringUtilities.HandleApostrophe(txtLotLastName.Text.ToString())}%' ";
@@ -252,7 +252,7 @@ namespace Modules.SearchAccount
                 sQuery += "application.proj_owner = account2.acct_code and ";
                 sQuery += "application.proj_lot_owner = account1.acct_code and ";
                 sQuery += "application.main_application = 1 and ";
-                sQuery += $"application.arn like '{arn1.GetAn()}%' ";
+                sQuery += $"application.arn like '{arn1.GetArn()}%' ";
                 sQuery += $" and application.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 sQuery += $" and application.brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
                 sQuery += $" and account1.acct_ln like '{StringUtilities.HandleApostrophe(txtLotLastName.Text.ToString())}%' ";
@@ -277,7 +277,7 @@ namespace Modules.SearchAccount
                 sQuery += "application.proj_owner = account2.acct_code and ";
                 sQuery += "application.proj_lot_owner = account1.acct_code and ";
                 sQuery += "application.main_application = 1 and ";
-                sQuery += $"application.arn like '{arn1.GetAn()}%' ";
+                sQuery += $"application.arn like '{arn1.GetArn()}%' ";
                 sQuery += $" and application.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 sQuery += $" and application.brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
                 sQuery += $" and account1.acct_ln like '{StringUtilities.HandleApostrophe(txtLotLastName.Text.ToString())}%' ";
@@ -595,7 +595,7 @@ namespace Modules.SearchAccount
             try
             {
                 sArn = dgvList[0, e.RowIndex].Value.ToString();
-                arn1.SetAn(sArn);
+                arn1.SetArn(sArn);
             }
             catch
             { }
@@ -656,7 +656,7 @@ namespace Modules.SearchAccount
                 strWhereCond = $" where application_que.main_application = 1 and ";
                 if(SearchCriteria != "QUE")
                     strWhereCond += $"application_que.status_code = '{StatusCode}' and ";
-                strWhereCond += $"application_que.arn like '{arn1.GetAn()}%' ";
+                strWhereCond += $"application_que.arn like '{arn1.GetArn()}%' ";
                 strWhereCond += $" and application_que.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 if (!string.IsNullOrEmpty(cmbBrgy.Text.ToString()))
                     strWhereCond += $" and application_que.proj_brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
@@ -702,7 +702,7 @@ namespace Modules.SearchAccount
             else if(SearchCriteria == "APP")
             {
                 strWhereCond = $" where application.main_application = 1 and ";
-                strWhereCond += $"application.arn like '{arn1.GetAn()}%' ";
+                strWhereCond += $"application.arn like '{arn1.GetArn()}%' ";
                 strWhereCond += $" and application.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 if (!string.IsNullOrEmpty(cmbBrgy.Text.ToString()))
                     strWhereCond += $" and application.proj_brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";

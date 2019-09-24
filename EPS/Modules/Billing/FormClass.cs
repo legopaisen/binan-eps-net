@@ -16,11 +16,12 @@ namespace Modules.Billing
 {
     public class FormClass
     {
+
         public static ConnectionString dbConn = new ConnectionString();
         public static ARCSConnectionString dbConnArcs = new ARCSConnectionString();
         TaskManager taskman = new TaskManager();
         protected frmBilling RecordFrm = null;
-        protected Building BuildingClass = null;
+        //private Building BuildingClass = null;
         private double m_dArea = 0;
         private int m_iAssessmentRow = 0;
         private string m_sFeesCode = string.Empty;
@@ -40,6 +41,7 @@ namespace Modules.Billing
             set { sPermitList = value; }
         }
 
+        
 
         public FormClass(frmBilling Form)
         {
@@ -100,7 +102,7 @@ namespace Modules.Billing
             }
             else
             {
-                strWhereCond = $" where arn = '{RecordFrm.m_sAN}' and permit_code = '{RecordFrm.PermitCode}'";
+                strWhereCond = $" where arn = '{RecordFrm.m_sAN}'"; // and permit_code = '{RecordFrm.PermitCode}'"; <- binan version 
 
                 result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
                          select a;
@@ -365,27 +367,32 @@ namespace Modules.Billing
         public void CellLeave(object sender, DataGridViewCellEventArgs e)
         {
             double dAmount = 0;
-            bool isGood = false;
-           
+            //Building.PermitListSave = new List<string>();
             try  
             {
                 double.TryParse(RecordFrm.dgvAssessment[8, e.RowIndex].Value.ToString(), out dAmount);
-                if (sPermitList != null)
-                {
-                    isGood = true;
-                }
             }
             catch { }
 
             if(dAmount == 0)
-            {
+                {
                 RecordFrm.dgvAssessment[0, e.RowIndex].Value = false;
                 SaveBillTmp(m_sFeesCode, 0);
             }
-            //for (int listCnt = 0; listCnt < sPermitList.Count; listCnt++)
+
+            //SaveBillTmp(m_sFeesCode, dAmount);
+            //try
             //{
-            //    BuildingClass.PermitListSave.Add(sPermitList.);
+            //    foreach (var value in sPermitList)
+            //    {
+            //        if (value != null)
+            //        {
+            //            Building.PermitListSave = PermitList.ToList();
+            //            return;
+            //        }
+            //    }
             //}
+            //catch { }
         }
 
         public bool Compute()
@@ -630,7 +637,7 @@ namespace Modules.Billing
                 sQuery = "delete from bill_tmp where ";
                 sQuery += $"arn = '{RecordFrm.m_sAN}' and ";
                 sQuery += $"fees_code = '{sFeesCode}'";
-                db.Database.ExecuteSqlCommand(sQuery);
+                db.Database.ExecuteSqlCommand(sQuery); 
 
                 RecordFrm.dgvAssessment[0, m_iAssessmentRow].Value = false;
             }

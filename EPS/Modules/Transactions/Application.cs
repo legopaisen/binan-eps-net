@@ -223,10 +223,14 @@ namespace Modules.Transactions
             db.Database.ExecuteSqlCommand(strQuery);
 
             //if (string.IsNullOrEmpty(RecordFrm.ARN))
-            if(RecordFrm.SourceClass == "NEW_ADD" || RecordFrm.SourceClass == "REN_ADD")
-                RecordFrm.arn1.CreateAN(RecordFrm.cmbPermit.Text.ToString());
 
-            if(string.IsNullOrEmpty(RecordFrm.ARN))
+            if(RecordFrm.SourceClass == "NEW_ADD")
+                RecordFrm.arn1.CreateARN(DateTime.Now.Year.ToString(), frmProjectInfo.BrgyCode); //RecordFrm.cmbPermit.Text.ToString()
+
+            if (RecordFrm.SourceClass == "REN_ADD")
+                RecordFrm.arn1.CreateARN(RecordFrm.arn1.GetTaxYear, frmProjectInfo.BrgyCode); //RecordFrm.cmbPermit.Text.ToString()
+
+            if (string.IsNullOrEmpty(RecordFrm.ARN))
             {
                 MessageBox.Show("Error generating application no.\nPlease check permit table",RecordFrm.DialogText,MessageBoxButtons.OK,MessageBoxIcon.Stop);
                 return;
@@ -438,7 +442,7 @@ namespace Modules.Transactions
                     form.SearchCriteria = "APP";
                 form.ShowDialog();
 
-                RecordFrm.arn1.SetAn(form.sArn);
+                RecordFrm.arn1.SetArn(form.sArn);
             }
 
             if (!taskman.AddTask(RecordFrm.SourceClass, RecordFrm.ARN))
@@ -540,7 +544,7 @@ namespace Modules.Transactions
                 RecordFrm.formProject.cmbOwnership.Text = item.OWN_TYPE;
                 DateTime.TryParse(item.PROP_START.ToString(), out dtTmp);
                 sDateStart = dtTmp.ToShortDateString();
-                DateTime.TryParse(item.PROP_COMPLETE.ToString(), out dtTmp);
+                DateTime.TryParse(item.PROP_COMPLETE?.ToString(), out dtTmp);
                 sDateComp = dtTmp.ToShortDateString();
 
                 RecordFrm.formProject.txtMemo.Text = item.MEMO;
@@ -573,7 +577,8 @@ namespace Modules.Transactions
                 RecordFrm.cmbPermit.Enabled = true;
 
                 RecordFrm.arn1.GetTaxYear = "";
-                RecordFrm.arn1.GetMonth = "";
+                //RecordFrm.arn1.GetMonth = "";
+                RecordFrm.arn1.GetDistCode = "";
                 RecordFrm.arn1.GetSeries = "";
             }
             if(RecordFrm.SourceClass == "REN_EDIT")

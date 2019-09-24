@@ -409,5 +409,42 @@ namespace EPS
                 }
             }
         }
+
+        private void btnLO_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void permitBillingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TB-B"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("BILLING", "", ""))
+                {
+                    frmBilling form = new frmBilling();
+                    form.Source = "BUILDING PERMIT";
+                    form.ModuleCode = "TB-UBB";
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("BILLING", "DELETE", "");
+                }
+            }
+        }
+
+        private void assessmentOfFeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void reassessmentOfPermitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

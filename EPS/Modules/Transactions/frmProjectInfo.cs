@@ -20,6 +20,20 @@ namespace Modules.Transactions
         public string SourceClass { get; set; }
         public string DialogText { get; set; }
 
+        //ComboBox cmbBrgyCode = new ComboBox();
+        //public MultiColumnComboBoxDemo.MultiColumnComboBox cmbBrgyCode;
+        public ComboBox cmbBrgyCode = new ComboBox();
+
+
+        private static string sBrgyCode;
+
+        public static string BrgyCode
+        {
+            get { return sBrgyCode; }
+            set { sBrgyCode = value; }
+        }
+
+
         public string DistCode
         {
             get { return m_sDistCode; }
@@ -53,7 +67,7 @@ namespace Modules.Transactions
 
             txtMun.Text = AppSettingsManager.GetConfigValue("02");
             txtProv.Text = AppSettingsManager.GetConfigValue("03");
-            txtZIP.Text = AppSettingsManager.GetConfigValue("26");
+            txtZIP.Text = AppSettingsManager.GetConfigValue("28");
         }
 
         public void ClearControls()
@@ -76,24 +90,31 @@ namespace Modules.Transactions
         private void PopulateBrgy()
         {
             cmbBrgy.Items.Clear();
+            cmbBrgyCode = new MultiColumnComboBoxDemo.MultiColumnComboBox();
 
             DataTable dataTable = new DataTable("Barangay");
             dataTable.Columns.Clear();
             dataTable.Columns.Add("Code", typeof(String));
             dataTable.Columns.Add("Desc", typeof(String));
+            dataTable.Columns.Add("Dist", typeof(String));
 
             BarangayList lstBrgy = new BarangayList();
             lstBrgy.GetBarangayList(m_sDistCode, true);
             int intCount = lstBrgy.BarangayNames.Count;
             for (int i = 0; i < intCount; i++)
             {
-                dataTable.Rows.Add(new String[] { lstBrgy.BarangayCodes[i], lstBrgy.BarangayNames[i] });
+                dataTable.Rows.Add(new String[] { lstBrgy.BarangayCodes[i], lstBrgy.BarangayNames[i], lstBrgy.DistrictCodes[i], });
             }
+
+            //cmbBrgyCode.DataSource = dataTable;
+            //cmbBrgyCode.DisplayMember = "Dist";
+            //cmbBrgyCode.ValueMember = "Dist";
 
             cmbBrgy.DataSource = dataTable;
             cmbBrgy.DisplayMember = "Desc";
-            cmbBrgy.ValueMember = "Desc";
+            cmbBrgy.ValueMember = "Dist"; //get district code
             cmbBrgy.SelectedIndex = 0;
+
         }
 
         private void PopulateCategory()
@@ -120,6 +141,7 @@ namespace Modules.Transactions
             cmbCategory.DisplayMember = "Desc";
             cmbCategory.ValueMember = "Desc";
             cmbCategory.SelectedIndex = 0;
+
         }
 
         private void PopulateOccupancy(string sCategory)
@@ -372,6 +394,12 @@ namespace Modules.Transactions
         {
             EnableLocationControls(blnEnable);
             EnableOtherControls(blnEnable);
+        }
+
+        private void cmbBrgy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //cmbBrgyCode.Text = this.cmbBrgy.GetItemText(this.cmbBrgy.SelectedItem);
+            sBrgyCode = cmbBrgy.SelectedValue.ToString();
         }
     }
 }

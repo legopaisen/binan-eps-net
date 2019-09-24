@@ -197,6 +197,7 @@
             this.cmbBrgy.Name = "cmbBrgy";
             this.cmbBrgy.Size = new System.Drawing.Size(167, 24);
             this.cmbBrgy.TabIndex = 11;
+            this.cmbBrgy.SelectedIndexChanged += new System.EventHandler(this.cmbBrgy_SelectedIndexChanged);
             // 
             // label15
             // 

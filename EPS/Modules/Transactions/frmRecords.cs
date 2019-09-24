@@ -86,7 +86,7 @@ namespace Modules.Transactions
 
         public string ARN
         {
-            get { return this.arn1.GetAn(); }
+            get { return this.arn1.GetArn(); }
         }
 
 

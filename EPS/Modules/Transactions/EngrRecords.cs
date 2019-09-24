@@ -72,9 +72,11 @@ namespace Modules.Transactions
                     RecordFrm.ButtonSearch.Enabled = false;
                     RecordFrm.arn1.Enabled = true;
                     RecordFrm.EnableControl(true);
-                    RecordFrm.arn1.GetCode = "";
+                    //RecordFrm.arn1.GetCode = "";
+                    RecordFrm.arn1.GetLGUCode = "";
                     RecordFrm.arn1.GetTaxYear = "";
-                    RecordFrm.arn1.GetMonth = "";
+                    //RecordFrm.arn1.GetMonth = "";
+                    RecordFrm.arn1.GetDistCode = "";
                     RecordFrm.arn1.GetSeries = "";
                 }
                 else
@@ -103,12 +105,16 @@ namespace Modules.Transactions
         {
             var db = new EPSConnection(dbConn);
             string strQuery = string.Empty;
+            string sYear = AppSettingsManager.GetCurrentDate().Year.ToString();
+            string sBrgyCode = frmProjectInfo.BrgyCode;
 
-            /*if (string.IsNullOrEmpty(RecordFrm.ARN))
-                RecordFrm.arn1.CreateAN(RecordFrm.cmbPermit.Text.ToString());*/
+            if (string.IsNullOrEmpty(RecordFrm.ARN))
+                RecordFrm.arn1.CreateARN(sYear, sBrgyCode);
 
             strQuery = $"delete from application where arn = '{RecordFrm.ARN}'";
             db.Database.ExecuteSqlCommand(strQuery);
+
+            
 
             for (int i = 0; i < RecordFrm.formBldgDate.dgvList.Rows.Count; i++)
             {
@@ -118,7 +124,10 @@ namespace Modules.Transactions
                 string sStart = string.Empty;
                 string sCompleted = string.Empty;
 
+
+
                 m_lstPermit = new PermitList(null);
+
 
                 try { sPermitCode = RecordFrm.formBldgDate.dgvList[0, i].Value.ToString(); }
                 catch { }
@@ -240,9 +249,11 @@ namespace Modules.Transactions
 
             RecordFrm.EnableControl(false);
             RecordFrm.arn1.Enabled = true;
-            RecordFrm.arn1.GetCode = "";
+            //RecordFrm.arn1.GetCode = "";
+            RecordFrm.arn1.GetLGUCode = "";
             RecordFrm.arn1.GetTaxYear = "";
-            RecordFrm.arn1.GetMonth = ""; 
+            //RecordFrm.arn1.GetMonth = ""; 
+            RecordFrm.arn1.GetDistCode = "";
             RecordFrm.arn1.GetSeries = "";
             RecordFrm.formProject.ClearControls();
             RecordFrm.formBldgDate.ClearControls();
@@ -290,7 +301,7 @@ namespace Modules.Transactions
                 form.SearchCriteria = "APP";
                 form.ShowDialog();
 
-                RecordFrm.arn1.SetAn(form.sArn);
+                RecordFrm.arn1.SetArn(form.sArn);
             }
 
             if (!taskman.AddTask(RecordFrm.SourceClass, RecordFrm.ARN))

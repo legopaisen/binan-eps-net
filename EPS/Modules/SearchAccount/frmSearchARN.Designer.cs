@@ -52,7 +52,7 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.bntList = new System.Windows.Forms.Button();
             this.cmbBrgy = new MultiColumnComboBoxDemo.MultiColumnComboBox();
-            this.arn1 = new Modules.ARN.AN();
+            this.arn1 = new Modules.ARN.ARN();
             this.grpBox1.SuspendLayout();
             this.grpBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
@@ -307,8 +307,10 @@
             // 
             // arn1
             // 
-            this.arn1.GetCode = "";
-            this.arn1.GetMonth = "";
+            //this.arn1.GetCode = "";
+            this.arn1.GetLGUCode = "";
+            //this.arn1.GetMonth = "";
+            this.arn1.GetDistCode = "";
             this.arn1.GetSeries = "";
             this.arn1.GetTaxYear = "";
             this.arn1.Location = new System.Drawing.Point(103, 12);
@@ -376,6 +378,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button bntList;
-        private ARN.AN arn1;
+        private ARN.ARN arn1;
     }
 }

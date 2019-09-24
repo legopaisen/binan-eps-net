@@ -41,6 +41,7 @@
             this.txtLGUCode.Name = "txtLGUCode";
             this.txtLGUCode.Size = new System.Drawing.Size(35, 20);
             this.txtLGUCode.TabIndex = 0;
+            this.txtLGUCode.TextChanged += new System.EventHandler(this.txtLGUCode_TextChanged);
             // 
             // txtDistCode
             // 
@@ -49,6 +50,7 @@
             this.txtDistCode.Name = "txtDistCode";
             this.txtDistCode.Size = new System.Drawing.Size(22, 20);
             this.txtDistCode.TabIndex = 1;
+            this.txtDistCode.TextChanged += new System.EventHandler(this.txtDistCode_TextChanged);
             this.txtDistCode.Leave += new System.EventHandler(this.txtDistCode_Leave);
             // 
             // txtTaxYear

@@ -107,7 +107,7 @@ namespace Modules.Transactions
         }
 
         public void LoadGrid()
-        {
+         {
             comboPermit.HeaderCell.Value = "Permit";
             dtDateStart = new DateTimePicker();
             dtDateStart.Format = DateTimePickerFormat.Short;
@@ -575,6 +575,11 @@ namespace Modules.Transactions
 
             double.TryParse(txtAssVal.Text.ToString(), out dValue);
             txtAssVal.Text = string.Format("{0:#,###.00}", dValue);
+        }
+
+        private void dgvList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
