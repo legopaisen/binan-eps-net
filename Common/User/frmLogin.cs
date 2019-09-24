@@ -153,10 +153,5 @@ namespace Common.User
             m_blnIsFormDragged = true;
             m_pntClicked = new Point(e.X, e.Y);
         }
-
-        private void frmLogin_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

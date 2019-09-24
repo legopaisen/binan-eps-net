@@ -55,6 +55,40 @@ namespace Modules.Utilities
 
             return Desc;
         }
+
+        public void CreateCategoryCode()
+        {
+            Code = string.Empty;
+            string strQuery = string.Empty;
+            string strCode = string.Empty;
+            int iCode = 0;
+
+            var db = new EPSConnection(dbConn);
+
+            strQuery = "select max(category_code) from category_tbl";
+            strCode = db.Database.SqlQuery<string>(strQuery).SingleOrDefault();
+
+            int.TryParse(strCode, out iCode);
+            iCode++;
+
+            switch ((iCode).ToString().Length)
+            {
+                case 1:
+                    {
+                        strCode = "0" + (iCode).ToString();
+                        break;
+                    }
+                case 2:
+                    {
+                        strCode = (iCode).ToString();
+                        break;
+                    }
+
+
+            }
+
+            Code = strCode;
+        }
     }
 
     public class CategoryList

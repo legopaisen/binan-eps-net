@@ -373,7 +373,7 @@ namespace Modules.Billing
             catch { }
 
             if(dAmount == 0)
-                {
+            {
                 RecordFrm.dgvAssessment[0, e.RowIndex].Value = false;
                 SaveBillTmp(m_sFeesCode, 0);
             }

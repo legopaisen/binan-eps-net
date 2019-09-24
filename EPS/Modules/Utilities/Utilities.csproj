@@ -95,6 +95,12 @@
     <Compile Include="Forms\frmBank.Designer.cs">
       <DependentUpon>frmBank.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCategory.Designer.cs">
+      <DependentUpon>frmCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmPermitType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +155,12 @@
     <Compile Include="Forms\frmTaskManager.Designer.cs">
       <DependentUpon>frmTaskManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmUsers.Designer.cs">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Material.cs" />
     <Compile Include="MajorFees.cs" />
     <Compile Include="Structure.cs" />
@@ -165,6 +177,10 @@
     <ProjectReference Include="..\..\..\Common\AppSettings\AppSettings.csproj">
       <Project>{889d88f6-1668-418f-969a-6466670138b6}</Project>
       <Name>AppSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\EncryptUtilities\EncryptUtilities.csproj">
+      <Project>{eb833d79-9d87-48ec-b396-79aace685253}</Project>
+      <Name>EncryptUtilities</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Common\MultiColumnComboBox\MultiColumnComboBox.csproj">
       <Project>{4DD47A19-1A17-4C59-94BA-575E0C2ECC17}</Project>
@@ -190,6 +206,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Forms\frmBank.resx">
       <DependentUpon>frmBank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCategory.resx">
+      <DependentUpon>frmCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPermitType.resx">
       <DependentUpon>frmPermitType.cs</DependentUpon>
@@ -217,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTaskManager.resx">
       <DependentUpon>frmTaskManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmUsers.resx">
+      <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

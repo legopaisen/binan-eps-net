@@ -18,6 +18,7 @@ namespace Modules.Utilities.Forms
     {
         private static ConnectionString dbConn = new ConnectionString();
         public string m_sPermitCode = string.Empty;
+        public bool m_bUpdate = false;
 
         public frmFeeSearch()
         {
@@ -128,7 +129,7 @@ namespace Modules.Utilities.Forms
                     sQuery = $"delete from permit_fees_tbl_tmp where permit_code = '{m_sPermitCode}' and fees_code = '{sFeesCode}'";
                     db.Database.ExecuteSqlCommand(sQuery);
 
-                    sQuery = $"insert into permit_tbl values (:1,:2)";
+                    sQuery = $"insert into permit_fees_tbl_tmp values (:1,:2)";
                     db.Database.ExecuteSqlCommand(sQuery,
                         new OracleParameter(":1", m_sPermitCode),
                         new OracleParameter(":2", sFeesCode));
@@ -141,34 +142,72 @@ namespace Modules.Utilities.Forms
 
         private void dgvList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            
+            
+        }
+
+        private void SaveSelected(string sFeesCode, bool bSave)
+        {
             var db = new EPSConnection(dbConn);
             string sQuery = string.Empty;
-            string sFeesCode = string.Empty;
 
-            for (int iRow = 0; iRow < dgvList.Rows.Count; iRow++)
+            if (bSave)
             {
-                sFeesCode = dgvList[2, iRow].Value.ToString();
+                int iCnt = 0;
 
-                if ((bool)dgvList[0,iRow].Value)
+                sQuery = $"select count(*) from permit_fees_tbl_tmp where fees_code = '{sFeesCode}'";
+                iCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+
+                if (iCnt == 0)
                 {
-                    int iCnt = 0;
-
-                    sQuery = $"select count(*) from permit_fees_tbl_tmp where fees_code = '{sFeesCode}'";
-                    iCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
-
-                    if(iCnt == 0)
-                    {
-                        sQuery = $"insert into permit_tbl values (:1,:2)";
-                        db.Database.ExecuteSqlCommand(sQuery,
-                            new OracleParameter(":1", m_sPermitCode),
-                            new OracleParameter(":2", sFeesCode));
-                    }
+                    sQuery = $"insert into permit_fees_tbl_tmp values (:1,:2)";
+                    db.Database.ExecuteSqlCommand(sQuery,
+                        new OracleParameter(":1", m_sPermitCode),
+                        new OracleParameter(":2", sFeesCode));
                 }
-                else
-                {
-                    sQuery = $"delete from permit_fees_tbl_tmp where permit_code = '{m_sPermitCode}' and fees_code = '{sFeesCode}'";
-                    db.Database.ExecuteSqlCommand(sQuery);
-                }
+            }
+            else
+            {
+                sQuery = $"delete from permit_fees_tbl_tmp where permit_code = '{m_sPermitCode}' and fees_code = '{sFeesCode}'";
+                db.Database.ExecuteSqlCommand(sQuery);
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            var db = new EPSConnection(dbConn);
+            string sQuery = string.Empty;
+
+            if (MessageBox.Show("Are you sure you want to cancel selected fees?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                m_bUpdate = false;
+
+                sQuery = $"delete from permit_fees_tbl_tmp where permit_code = '{m_sPermitCode}'";
+                db.Database.ExecuteSqlCommand(sQuery);
+
+                this.Close();
+            }
+            else
+                return;
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            m_bUpdate = true;
+            this.Close();
+        }
+
+        private void dgvList_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            string sFeesCode = string.Empty;
+            bool bSelected = false;
+
+            if (e.ColumnIndex == 0)
+            {
+                sFeesCode = dgvList[2, e.RowIndex].Value.ToString();
+                bSelected = (bool)dgvList[0, e.RowIndex].Value;
+
+                SaveSelected(sFeesCode, bSelected);
             }
         }
     }

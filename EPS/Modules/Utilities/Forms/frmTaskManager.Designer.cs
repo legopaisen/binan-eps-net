@@ -72,22 +72,26 @@
             // 
             this.Code.HeaderText = "Module Code";
             this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
             // 
             // Object
             // 
             this.Object.HeaderText = "Object";
             this.Object.Name = "Object";
+            this.Object.ReadOnly = true;
             // 
             // User
             // 
             this.User.HeaderText = "User Name";
             this.User.Name = "User";
+            this.User.ReadOnly = true;
             this.User.Width = 150;
             // 
             // Info
             // 
             this.Info.HeaderText = "Login Information";
             this.Info.Name = "Info";
+            this.Info.ReadOnly = true;
             this.Info.Width = 200;
             // 
             // btnExit

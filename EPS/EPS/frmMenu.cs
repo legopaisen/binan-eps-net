@@ -351,7 +351,16 @@ namespace EPS
 
         private void categoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (AppSettingsManager.Granted("SC"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("CATEGORY", "", ""))
+                {
+                    frmCategory form = new frmCategory();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("CATEGORY", "DELETE", "");
+                }
+            }
         }
 
         private void occupancyToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -450,6 +459,21 @@ namespace EPS
                     frmPermitType form = new frmPermitType();
                     form.ShowDialog();
                     taskman.IsObjectLock("PERMIT TYPE", "DELETE", "");
+                }
+            }
+        }
+
+        private void usersToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            
+            if (AppSettingsManager.Granted("SUA"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("USERS", "", ""))
+                {
+                    frmUsers form = new frmUsers();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("USERS", "DELETE", "");
                 }
             }
         }

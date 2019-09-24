@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbRevenueAcct = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.Select = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCheck = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
+            this.cmbRevenueAcct = new MultiColumnComboBoxDemo.MultiColumnComboBox();
+            this.Select = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
@@ -51,17 +51,6 @@
             this.label1.Size = new System.Drawing.Size(120, 18);
             this.label1.TabIndex = 3;
             this.label1.Text = "Revenue Account:";
-            // 
-            // cmbRevenueAcct
-            // 
-            this.cmbRevenueAcct.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbRevenueAcct.FormattingEnabled = true;
-            this.cmbRevenueAcct.Location = new System.Drawing.Point(132, 27);
-            this.cmbRevenueAcct.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbRevenueAcct.Name = "cmbRevenueAcct";
-            this.cmbRevenueAcct.Size = new System.Drawing.Size(255, 27);
-            this.cmbRevenueAcct.TabIndex = 1;
-            this.cmbRevenueAcct.SelectedValueChanged += new System.EventHandler(this.cmbRevenueAcct_SelectedValueChanged);
             // 
             // groupBox1
             // 
@@ -91,35 +80,11 @@
             this.dgvList.Location = new System.Drawing.Point(8, 78);
             this.dgvList.Margin = new System.Windows.Forms.Padding(4);
             this.dgvList.Name = "dgvList";
-            this.dgvList.ReadOnly = true;
             this.dgvList.RowHeadersVisible = false;
             this.dgvList.Size = new System.Drawing.Size(379, 191);
             this.dgvList.TabIndex = 2;
             this.dgvList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellContentClick);
-            // 
-            // Select
-            // 
-            this.Select.HeaderText = " ";
-            this.Select.Name = "Select";
-            this.Select.ReadOnly = true;
-            this.Select.Width = 30;
-            // 
-            // Desc
-            // 
-            this.Desc.HeaderText = "Fees Description";
-            this.Desc.Name = "Desc";
-            this.Desc.ReadOnly = true;
-            this.Desc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Desc.Width = 250;
-            // 
-            // Code
-            // 
-            this.Code.HeaderText = "Code";
-            this.Code.Name = "Code";
-            this.Code.ReadOnly = true;
-            this.Code.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellEndEdit);
             // 
             // btnCheck
             // 
@@ -139,8 +104,9 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(78, 33);
             this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Exit";
+            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOk
             // 
@@ -151,6 +117,41 @@
             this.btnOk.TabIndex = 4;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // cmbRevenueAcct
+            // 
+            this.cmbRevenueAcct.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbRevenueAcct.FormattingEnabled = true;
+            this.cmbRevenueAcct.Location = new System.Drawing.Point(132, 27);
+            this.cmbRevenueAcct.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbRevenueAcct.Name = "cmbRevenueAcct";
+            this.cmbRevenueAcct.Size = new System.Drawing.Size(255, 27);
+            this.cmbRevenueAcct.TabIndex = 1;
+            this.cmbRevenueAcct.SelectedValueChanged += new System.EventHandler(this.cmbRevenueAcct_SelectedValueChanged);
+            // 
+            // Select
+            // 
+            this.Select.HeaderText = " ";
+            this.Select.Name = "Select";
+            this.Select.Width = 30;
+            // 
+            // Desc
+            // 
+            this.Desc.HeaderText = "Fees Description";
+            this.Desc.Name = "Desc";
+            this.Desc.ReadOnly = true;
+            this.Desc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Desc.Width = 250;
+            // 
+            // Code
+            // 
+            this.Code.HeaderText = "Code";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            this.Code.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // frmFeeSearch
             // 
@@ -182,11 +183,11 @@
         private MultiColumnComboBoxDemo.MultiColumnComboBox cmbRevenueAcct;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvList;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Select;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Desc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Select;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Desc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
     }
 }

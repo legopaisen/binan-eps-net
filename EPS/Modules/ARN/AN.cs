@@ -29,12 +29,6 @@ namespace Modules.ARN
             txtSeries.Text = "";
         }
 
-        //public string GetBrgyCode
-        //{
-        //    get { return; }
-        //    set { }
-        //}
-
         public string GetCode
         {
             get { return txtCode.Text; }
