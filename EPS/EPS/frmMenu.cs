@@ -465,7 +465,6 @@ namespace EPS
 
         private void usersToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            
             if (AppSettingsManager.Granted("SUA"))
             {
                 TaskManager taskman = new TaskManager();

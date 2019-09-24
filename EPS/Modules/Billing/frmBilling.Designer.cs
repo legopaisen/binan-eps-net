@@ -71,7 +71,6 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCompute = new System.Windows.Forms.Button();
             this.dgvParameter = new System.Windows.Forms.DataGridView();
-            this.Para = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtAmtDue = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -80,7 +79,6 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.Para = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Fees = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FeesCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -598,7 +596,7 @@
             this.dgvAssessment.RowHeadersVisible = false;
             this.dgvAssessment.Size = new System.Drawing.Size(586, 259);
             this.dgvAssessment.TabIndex = 4;
-            this.dgvAssessment.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssessment_CellContentClick);
+            this.dgvAssessment.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssessment_CellClick);
             this.dgvAssessment.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssessment_CellLeave);
             // 
             // btnSave
@@ -631,12 +629,6 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // Para
-            // 
-            this.Para.HeaderText = "Parameter";
-            this.Para.Name = "Para";
-            this.Para.ReadOnly = true;
             // 
             // Value
             // 

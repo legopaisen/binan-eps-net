@@ -86,8 +86,8 @@
     <Compile Include="Connection\EPSConnection.cs" />
     <Compile Include="Connection\IConnectionString.cs" />
     <Compile Include="Entity\BNS_TABLE.cs" />
-    <Compile Include="Entity\RIGHTS.cs" />
     <Compile Include="Entity\BRGY.cs" />
+    <Compile Include="Entity\RIGHTS.cs" />
     <Compile Include="Entity\MAJOR_FEES.cs" />
     <Compile Include="Entity\PERMIT_FEES_TBL_TMP.cs" />
     <Compile Include="Entity\SCHEDULES_X.cs" />
@@ -122,7 +122,6 @@
     <Compile Include="Entity\PERMIT_TBL.cs" />
     <Compile Include="Entity\ACTIVE_MODULES.cs" />
     <Compile Include="Entity\USERS.cs" />
-    <Compile Include="Entity\BRGY.cs" />
     <Compile Include="Entity\TRAIL.cs" />
     <Compile Include="EPSEntities.cs" />
     <Compile Include="Model1.Context.cs">

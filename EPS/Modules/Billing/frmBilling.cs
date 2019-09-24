@@ -91,10 +91,6 @@ namespace Modules.Billing
             }
         }
 
-        private void dgvAssessment_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            RecordClass.CellClick(sender, e);
-        }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -133,7 +129,7 @@ namespace Modules.Billing
             RecordClass.ButtonOk();
         }
 
-        private void dgvAssessment_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvAssessment_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //bool entry = false;
             //for (int row = 0; row<dgvPermit.Rows.Count; row++)

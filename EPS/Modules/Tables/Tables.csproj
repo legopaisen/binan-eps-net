@@ -102,12 +102,6 @@
     <Compile Include="frmUserlvltbl.Designer.cs">
       <DependentUpon>frmUserlvltbl.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmUsers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmUsers.Designer.cs">
-      <DependentUpon>frmUsers.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmBarangay.resx">
       <DependentUpon>frmBarangay.cs</DependentUpon>
@@ -123,9 +117,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmUserlvltbl.resx">
       <DependentUpon>frmUserlvltbl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmUsers.resx">
-      <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
