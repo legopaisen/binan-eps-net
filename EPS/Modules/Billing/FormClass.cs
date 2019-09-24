@@ -21,7 +21,6 @@ namespace Modules.Billing
         public static ARCSConnectionString dbConnArcs = new ARCSConnectionString();
         TaskManager taskman = new TaskManager();
         protected frmBilling RecordFrm = null;
-        //private Building BuildingClass = null;
         private double m_dArea = 0;
         private int m_iAssessmentRow = 0;
         private string m_sFeesCode = string.Empty;
@@ -367,8 +366,7 @@ namespace Modules.Billing
         public void CellLeave(object sender, DataGridViewCellEventArgs e)
         {
             double dAmount = 0;
-            //Building.PermitListSave = new List<string>();
-            try  
+            try
             {
                 double.TryParse(RecordFrm.dgvAssessment[8, e.RowIndex].Value.ToString(), out dAmount);
             }
@@ -379,19 +377,6 @@ namespace Modules.Billing
                 RecordFrm.dgvAssessment[0, e.RowIndex].Value = false;
                 SaveBillTmp(m_sFeesCode, 0);
             }
-
-            //SaveBillTmp(m_sFeesCode, dAmount);
-            //try
-            //{
-            //    foreach (var value in sPermitList)
-            //    {
-            //        if (value != null)
-            //        {
-            //            Building.PermitListSave = PermitList.ToList();
-            //            return;
-            //        }
-            //    }
-            //}
             //catch { }
         }
 

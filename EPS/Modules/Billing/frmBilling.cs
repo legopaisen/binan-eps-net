@@ -24,8 +24,6 @@ namespace Modules.Billing
         public string PermitCode { get; set; }
         public string ModuleCode { get; set; }
 
-        public List<DataGridViewRow> listofrows;
-
         public frmBilling()
         {
             InitializeComponent();
@@ -169,24 +167,6 @@ namespace Modules.Billing
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //AFM 20190911 checked permit validation (s)
-            bool isChecked = false;
-            foreach (DataGridViewRow row in dgvPermit.Rows)
-            {
-                string strVal = row.Cells[0].Value.ToString();
-                bool blnVal = Convert.ToBoolean(strVal);
-                if (blnVal == true)
-                {
-                    isChecked = true;
-                }
-            }
-            if (isChecked == false)
-            {
-                MessageBox.Show("No Permit selected!");
-                return;
-            }
-            //AFM 20190911 checked permit validation (e)
-
             RecordClass.Save();
         }
 

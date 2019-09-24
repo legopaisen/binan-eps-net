@@ -493,12 +493,14 @@
             this.lotOwnerApplicantToolStripMenuItem.Name = "lotOwnerApplicantToolStripMenuItem";
             this.lotOwnerApplicantToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.lotOwnerApplicantToolStripMenuItem.Text = "Lot Owner/Applicant";
+            this.lotOwnerApplicantToolStripMenuItem.Click += new System.EventHandler(this.lotOwnerApplicantToolStripMenuItem_Click);
             // 
             // engineersToolStripMenuItem
             // 
             this.engineersToolStripMenuItem.Name = "engineersToolStripMenuItem";
             this.engineersToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.engineersToolStripMenuItem.Text = "Engineers";
+            this.engineersToolStripMenuItem.Click += new System.EventHandler(this.engineersToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
@@ -517,6 +519,7 @@
             this.permitTypeToolStripMenuItem.Name = "permitTypeToolStripMenuItem";
             this.permitTypeToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.permitTypeToolStripMenuItem.Text = "Permit Type";
+            this.permitTypeToolStripMenuItem.Click += new System.EventHandler(this.permitTypeToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 

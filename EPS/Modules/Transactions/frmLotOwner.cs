@@ -58,9 +58,9 @@ namespace Modules.Transactions
             this.txtLotNo.Text = string.Empty;
             this.txtBlkNo.Text = string.Empty;
             this.txtStreet.Text = string.Empty;
-            //this.txtMun.Text = string.Empty;
-            //this.txtProv.Text = string.Empty;
-            //this.txtZIP.Text = string.Empty;
+            this.txtMun.Text = string.Empty;
+            this.txtProv.Text = string.Empty;
+            this.txtZIP.Text = string.Empty;
         }
 
         private void EnableControls(bool blnEnable)
@@ -77,9 +77,9 @@ namespace Modules.Transactions
             this.txtLotNo.ReadOnly = !blnEnable;
             this.txtBlkNo.ReadOnly = !blnEnable;
             this.txtStreet.ReadOnly = !blnEnable;
-            //this.txtMun.ReadOnly = !blnEnable;
-            //this.txtProv.ReadOnly = !blnEnable;
-            //this.txtZIP.ReadOnly = !blnEnable;
+            this.txtMun.ReadOnly = !blnEnable;
+            this.txtProv.ReadOnly = !blnEnable;
+            this.txtZIP.ReadOnly = !blnEnable;
             this.btnSearch.Enabled = blnEnable;
             this.btnClear.Enabled = blnEnable;
         }
@@ -141,7 +141,7 @@ namespace Modules.Transactions
             string sAcctNo = string.Empty;
 
             Utilities.Accounts acct = new Utilities.Accounts();
-            acct.GetOwner(txtLastName.Text.Trim(), txtFirstName.Text.Trim());
+            acct.GetOwner(txtLastName.Text.Trim(), txtFirstName.Text.Trim(),txtMI.Text.Trim());
             sAcctNo = acct.OwnerCode;
 
             if (!string.IsNullOrEmpty(sAcctNo))

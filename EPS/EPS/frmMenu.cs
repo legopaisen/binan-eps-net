@@ -410,7 +410,54 @@ namespace EPS
             }
         }
 
-        private void btnLO_Click(object sender, EventArgs e)
+        private void lotOwnerApplicantToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("SLS"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("LOT OWNER", "", ""))
+                {
+                    frmOwner form = new frmOwner();
+                    form.SourceClass = "OWNER";
+                    form.ShowDialog();
+                    taskman.IsObjectLock("LOT OWNER", "DELETE", "");
+                }
+            }
+        }
+
+        private void engineersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("SE"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("ENGINEER", "", ""))
+                {
+                    frmOwner form = new frmOwner();
+                    form.SourceClass = "ENGR";
+                    form.ShowDialog();
+                    taskman.IsObjectLock("ENGINEER", "DELETE", "");
+                }
+            }
+        }
+<<<<<<< .mine
+
+=======
+
+>>>>>>> .theirs
+        private void permitTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("SPT"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("PERMIT TYPE", "", ""))
+                {
+                    frmPermitType form = new frmPermitType();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("PERMIT TYPE", "DELETE", "");
+                }
+            }
+        }
+		private void btnLO_Click(object sender, EventArgs e)
         {
 
         }
@@ -420,7 +467,7 @@ namespace EPS
             
         }
 
-        private void permitBillingToolStripMenuItem_Click(object sender, EventArgs e)
+		private void permitBillingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (AppSettingsManager.Granted("TB-B"))
             {
@@ -436,8 +483,8 @@ namespace EPS
                 }
             }
         }
-
-        private void assessmentOfFeesToolStripMenuItem_Click(object sender, EventArgs e)
+		
+		private void assessmentOfFeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
@@ -446,5 +493,6 @@ namespace EPS
         {
 
         }
+
     }
 }

@@ -18,9 +18,12 @@ namespace Modules.Utilities
 {
     public class Permit
     {
+        public static ConnectionString dbConn = new ConnectionString();
         public string PermitCode { get; set; }
         public string PermitDesc { get; set; }
         public string PermitAppCode { get; set; }
+        public string PermitFeesCode { get; set; }
+        public string PermitOtherType { get; set; }
 
         public Permit()
         {
@@ -32,13 +35,51 @@ namespace Modules.Utilities
             PermitCode = string.Empty;
             PermitDesc = string.Empty;
             PermitAppCode = string.Empty;
+            PermitFeesCode = string.Empty;
+            PermitOtherType = string.Empty;
         }
 
-        public Permit(string sCode, string sDesc)
+        public Permit(string sCode, string sDesc, string sFeesCode, string sAppCode, string sOtherType)
         {
             PermitCode = sCode;
             PermitDesc = sDesc;
-            
+            PermitFeesCode = sFeesCode;
+            PermitAppCode = sAppCode;
+            PermitOtherType = sOtherType;
+        }
+
+        public void CreatePermitCode()
+        {
+            PermitCode = string.Empty;
+            string strQuery = string.Empty;
+            string strCode = string.Empty;
+            int iCode = 0;
+
+            var db = new EPSConnection(dbConn);
+
+            strQuery = "select max(permit_code) from permit_tbl";
+            strCode = db.Database.SqlQuery<string>(strQuery).SingleOrDefault();
+
+            int.TryParse(strCode, out iCode);
+            iCode++;
+
+            switch ((iCode).ToString().Length)
+            {
+                case 1:
+                    {
+                        strCode = "0" + (iCode).ToString();
+                        break;
+                    }
+                case 2:
+                    {
+                        strCode = (iCode).ToString();
+                        break;
+                    }
+                
+
+            }
+
+            PermitCode = strCode;
         }
     }
 
@@ -69,7 +110,7 @@ namespace Modules.Utilities
 
                 foreach (var items in epsrec)
                 {
-                    m_List.Add(new Permit(items.PERMIT_CODE, items.PERMIT_DESC ));
+                    m_List.Add(new Permit(items.PERMIT_CODE, items.PERMIT_DESC, items.FEES_CODE, items.APP_CODE,items.OTHER_TYPE ));
                 }
             }
         }
@@ -129,6 +170,25 @@ namespace Modules.Utilities
             }
 
             return sPermitDesc;
+        }
+
+        public string GetFeesCode(string sPermit)
+        {
+            string sCode = string.Empty;
+            string strQuery = string.Empty;
+
+            using (var db = new EPSConnection(dbConn))
+            {
+                strQuery = $"select * from permit_tbl where fees_code  = '{sPermit}'";
+                var epsrec = db.Database.SqlQuery<PERMIT_TBL>(strQuery);
+
+                foreach (var items in epsrec)
+                {
+                    sCode = items.PERMIT_CODE;
+                }
+            }
+
+            return sCode;
         }
     }
 }

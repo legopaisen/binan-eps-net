@@ -18,10 +18,15 @@ namespace Modules.Billing
     public class Building : FormClass
     {
         
-
         public Building(frmBilling Form) : base(Form)
         { }
 
+        //private List<string> sPermitListSave;
+        //public List<string> PermitListSave
+        //{
+            //get { return sPermitListSave; }
+            //set { sPermitListSave = value; }
+        //}
         private static List<string> sPermitListSave;
 
         public static List<string> PermitListSave
@@ -36,6 +41,7 @@ namespace Modules.Billing
             //RecordFrm.grpAddFees.Visible = true; --binan version
         }
 
+       
 
         public override void DisplayAssessmentData()
         {
@@ -79,7 +85,6 @@ namespace Modules.Billing
             string sQuery = string.Empty;
             var db = new EPSConnection(dbConn);
 
-
             try
             {
                 if (MessageBox.Show("Save Billing?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -103,6 +108,10 @@ namespace Modules.Billing
 
                         sQuery = $"delete from tax_details where arn = '{RecordFrm.m_sAN}'";
                         db.Database.ExecuteSqlCommand(sQuery);
+                    }
+                    else
+                    {
+                        RecordFrm.txtBillNo.Text = GenerateBillNo();
                     }
 
                     else

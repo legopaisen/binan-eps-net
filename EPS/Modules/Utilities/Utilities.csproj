@@ -33,12 +33,22 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -76,11 +86,26 @@
     <Compile Include="Engineers.cs" />
     <Compile Include="Accounts.cs" />
     <Compile Include="Business.cs" />
+    <Compile Include="FormEngr.cs" />
+    <Compile Include="FormOwner.cs" />
+    <Compile Include="FormOwnerClass.cs" />
     <Compile Include="Forms\frmBank.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmBank.Designer.cs">
       <DependentUpon>frmBank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPermitType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPermitType.Designer.cs">
+      <DependentUpon>frmPermitType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmFeeSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmFeeSearch.Designer.cs">
+      <DependentUpon>frmFeeSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmOccupancy.cs">
       <SubType>Form</SubType>
@@ -111,6 +136,12 @@
     </Compile>
     <Compile Include="Forms\frmScope.Designer.cs">
       <DependentUpon>frmScope.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmOwner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmOwner.Designer.cs">
+      <DependentUpon>frmOwner.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmTaskManager.cs">
       <SubType>Form</SubType>
@@ -147,6 +178,10 @@
       <Project>{64f894bd-df57-4d82-8c15-4bea4081b870}</Project>
       <Name>EPSEntities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Records\Records.csproj">
+      <Project>{06b2ec66-db06-4a88-98db-922969d57da8}</Project>
+      <Name>Records</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -155,6 +190,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Forms\frmBank.resx">
       <DependentUpon>frmBank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPermitType.resx">
+      <DependentUpon>frmPermitType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmFeeSearch.resx">
+      <DependentUpon>frmFeeSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOccupancy.resx">
       <DependentUpon>frmOccupancy.cs</DependentUpon>
@@ -170,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmScope.resx">
       <DependentUpon>frmScope.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmOwner.resx">
+      <DependentUpon>frmOwner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTaskManager.resx">
       <DependentUpon>frmTaskManager.cs</DependentUpon>

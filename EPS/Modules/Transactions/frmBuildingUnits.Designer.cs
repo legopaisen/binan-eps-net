@@ -41,8 +41,6 @@
             this.dgvList.Name = "dgvList";
             this.dgvList.Size = new System.Drawing.Size(510, 209);
             this.dgvList.TabIndex = 0;
-            //this.dgvList.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(dgvList_CellValidating);
-            this.dgvList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(dgvList_EditingControlShowing);
             // 
             // btnOk
             // 

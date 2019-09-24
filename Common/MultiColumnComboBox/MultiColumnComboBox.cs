@@ -162,32 +162,28 @@ namespace MultiColumnComboBoxDemo
                     {
                         for (int colIndex = 0; colIndex < columnNames.Length; colIndex++)
                         {
-                            try
+                            string item = Convert.ToString(FilterItemOnProperty(Items[e.Index], columnNames[colIndex]));
+
+                            boundsRect.X = lastRight;
+                            boundsRect.Width = (int)columnWidths[colIndex] + columnPadding;
+                            lastRight = boundsRect.Right;
+
+                            if (colIndex == valueMemberColumnIndex)
                             {
-                                string item = Convert.ToString(FilterItemOnProperty(Items[e.Index], columnNames[colIndex]));
-
-                                boundsRect.X = lastRight;
-                                boundsRect.Width = (int)columnWidths[colIndex] + columnPadding;
-                                lastRight = boundsRect.Right;
-
-                                if (colIndex == valueMemberColumnIndex)
+                                using (Font boldFont = new Font(Font, FontStyle.Bold))
                                 {
-                                    using (Font boldFont = new Font(Font, FontStyle.Bold))
-                                    {
-                                        e.Graphics.DrawString(item, boldFont, brush, boundsRect);
-                                    }
-                                }
-                                else
-                                {
-                                    e.Graphics.DrawString(item, Font, brush, boundsRect);
-                                }
-
-                                if (colIndex < columnNames.Length - 1)
-                                {
-                                    e.Graphics.DrawLine(linePen, boundsRect.Right, boundsRect.Top, boundsRect.Right, boundsRect.Bottom);
+                                    e.Graphics.DrawString(item, boldFont, brush, boundsRect);
                                 }
                             }
-                            catch { }
+                            else
+                            {
+                                e.Graphics.DrawString(item, Font, brush, boundsRect);
+                            }
+
+                            if (colIndex < columnNames.Length - 1)
+                            {
+                                e.Graphics.DrawLine(linePen, boundsRect.Right, boundsRect.Top, boundsRect.Right, boundsRect.Bottom);
+                            }
                         }
                     }
                 }
