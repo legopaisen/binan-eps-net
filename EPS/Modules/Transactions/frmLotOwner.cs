@@ -215,5 +215,10 @@ namespace Modules.Transactions
         {
             EnableControls(blnEnable);
         }
+
+        private void cmbBrgy_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

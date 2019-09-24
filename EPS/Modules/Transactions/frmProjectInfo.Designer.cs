@@ -136,6 +136,7 @@
             this.txtMun.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMun.Location = new System.Drawing.Point(383, 83);
             this.txtMun.Name = "txtMun";
+            this.txtMun.ReadOnly = true;
             this.txtMun.Size = new System.Drawing.Size(167, 23);
             this.txtMun.TabIndex = 13;
             // 
@@ -145,6 +146,7 @@
             this.txtProv.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProv.Location = new System.Drawing.Point(383, 112);
             this.txtProv.Name = "txtProv";
+            this.txtProv.ReadOnly = true;
             this.txtProv.Size = new System.Drawing.Size(167, 23);
             this.txtProv.TabIndex = 15;
             // 
@@ -154,6 +156,7 @@
             this.txtZIP.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtZIP.Location = new System.Drawing.Point(383, 141);
             this.txtZIP.Name = "txtZIP";
+            this.txtZIP.ReadOnly = true;
             this.txtZIP.Size = new System.Drawing.Size(167, 23);
             this.txtZIP.TabIndex = 17;
             // 
@@ -194,6 +197,7 @@
             this.cmbBrgy.Size = new System.Drawing.Size(167, 24);
             this.cmbBrgy.TabIndex = 11;
             this.cmbBrgy.SelectedIndexChanged += new System.EventHandler(this.cmbBrgy_SelectedIndexChanged);
+            this.cmbBrgy.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbBrgy_KeyPress);
             // 
             // label15
             // 

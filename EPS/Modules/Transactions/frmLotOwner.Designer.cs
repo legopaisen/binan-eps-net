@@ -268,6 +268,7 @@
             this.cmbBrgy.Name = "cmbBrgy";
             this.cmbBrgy.Size = new System.Drawing.Size(167, 23);
             this.cmbBrgy.TabIndex = 10;
+            this.cmbBrgy.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbBrgy_KeyPress);
             // 
             // txtHseNo
             // 

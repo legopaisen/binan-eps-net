@@ -114,7 +114,7 @@ namespace Modules.Transactions
             cmbBrgy.DataSource = dataTable;
             cmbBrgy.DisplayMember = "Desc";
             cmbBrgy.ValueMember = "Dist"; //get district code
-            cmbBrgy.SelectedIndex = 0;
+            cmbBrgy.SelectedIndex = -1;
 
         }
 
@@ -273,9 +273,9 @@ namespace Modules.Transactions
             txtStreet.ReadOnly = !blnEnable;
             cmbBrgy.Enabled = blnEnable;
             txtMemo.ReadOnly = !blnEnable;
-            txtMun.ReadOnly = !blnEnable;
-            txtProv.ReadOnly = !blnEnable;
-            txtZIP.ReadOnly = !blnEnable;
+            //txtMun.ReadOnly = !blnEnable;
+            //txtProv.ReadOnly = !blnEnable;
+            //txtZIP.ReadOnly = !blnEnable;
         }
 
         private void EnableOtherControls(bool blnEnable)
@@ -397,10 +397,15 @@ namespace Modules.Transactions
             EnableOtherControls(blnEnable);
         }
 
+        private void cmbBrgy_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
         private void cmbBrgy_SelectedIndexChanged(object sender, EventArgs e)
         {
             //cmbBrgyCode.Text = this.cmbBrgy.GetItemText(this.cmbBrgy.SelectedItem);
-            sBrgyCode = cmbBrgy.SelectedValue.ToString();
+            sBrgyCode = cmbBrgy.SelectedValue?.ToString();
         }
     }
 }
