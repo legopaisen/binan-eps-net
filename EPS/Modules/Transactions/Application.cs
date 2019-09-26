@@ -344,9 +344,9 @@ namespace Modules.Transactions
                             new OracleParameter(":22", RecordFrm.formProject.cmbOwnership.Text.ToString()),
                             new OracleParameter(":23", m_sEngr),
                             new OracleParameter(":24", m_sArch),
-                            new OracleParameter(":25", string.Format("{0:MM/dd/yyyy}", sStart)),
-                            new OracleParameter(":26", string.Format("{0:MM/dd/yyyy}", sCompleted)),
-                            new OracleParameter(":27", string.Format("{0:MM/dd/yyyy}", RecordFrm.dtDateApplied.Value.ToShortDateString())),
+                            new OracleParameter(":25", sStart),//string.Format("{0:MM/dd/yyyy}", sStart)),
+                            new OracleParameter(":26", sCompleted),//string.Format("{0:MM/dd/yyyy}", sCompleted)),
+                            new OracleParameter(":27", RecordFrm.dtDateApplied.Value.ToShortDateString()),//string.Format("{0:MM/dd/yyyy}", RecordFrm.dtDateApplied.Value.ToShortDateString())),
                             new OracleParameter(":28", null),
                             new OracleParameter(":29", RecordFrm.formProject.txtMemo.Text.ToString()),
                             new OracleParameter(":30", iMainApp));

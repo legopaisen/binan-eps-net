@@ -60,9 +60,9 @@ namespace Modules.Transactions
             this.txtLotNo.Text = string.Empty;
             this.txtBlkNo.Text = string.Empty;
             this.txtStreet.Text = string.Empty;
-            this.txtMun.Text = string.Empty;
-            this.txtProv.Text = string.Empty;
-            this.txtZIP.Text = string.Empty;
+            //this.txtMun.Text = string.Empty;
+            //this.txtProv.Text = string.Empty;
+            //this.txtZIP.Text = string.Empty;
         }
 
         private void EnableControls(bool blnEnable)

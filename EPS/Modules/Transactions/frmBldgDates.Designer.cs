@@ -86,6 +86,7 @@
             this.txtBldgName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBldgName.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBldgName.Location = new System.Drawing.Point(121, 40);
+            this.txtBldgName.MaxLength = 60;
             this.txtBldgName.Name = "txtBldgName";
             this.txtBldgName.Size = new System.Drawing.Size(436, 23);
             this.txtBldgName.TabIndex = 3;
@@ -193,9 +194,9 @@
             this.dgvList.Size = new System.Drawing.Size(556, 140);
             this.dgvList.TabIndex = 12;
             this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
-            this.dgvList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvList_CellFormatting);
             this.dgvList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellContentClick);
             this.dgvList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellEndEdit);
+            this.dgvList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvList_CellFormatting);
             this.dgvList.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgvList_Scroll);
             this.dgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvList_KeyDown);
             // 
@@ -315,6 +316,7 @@
             // cmbMaterials
             // 
             this.cmbMaterials.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbMaterials.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMaterials.FormattingEnabled = true;
             this.cmbMaterials.Location = new System.Drawing.Point(121, 121);
             this.cmbMaterials.Name = "cmbMaterials";
@@ -327,7 +329,7 @@
             this.btnBldgUnits.Location = new System.Drawing.Point(491, 67);
             this.btnBldgUnits.Name = "btnBldgUnits";
             this.btnBldgUnits.Size = new System.Drawing.Size(66, 23);
-            this.btnBldgUnits.TabIndex = 6;
+            this.btnBldgUnits.TabIndex = 50;
             this.btnBldgUnits.Text = "Units";
             this.btnBldgUnits.UseVisualStyleBackColor = true;
             this.btnBldgUnits.Click += new System.EventHandler(this.btnBldgUnits_Click);

@@ -70,7 +70,13 @@ namespace Modules.Transactions
                     RecordFrm.ButtonPrint.Enabled = false;
                     RecordFrm.ButtonClear.Enabled = false;
                     RecordFrm.ButtonSearch.Enabled = false;
-                    RecordFrm.arn1.Enabled = true;
+                    if (AppSettingsManager.GetConfigValue("29") == "Y")
+                    {
+                        RecordFrm.arn1.Enabled = true;
+                    }
+                    else
+                        RecordFrm.arn1.Enabled = false;
+
                     RecordFrm.EnableControl(true);
                     //RecordFrm.arn1.GetCode = "";
                     RecordFrm.arn1.GetLGUCode = "";
@@ -266,11 +272,11 @@ namespace Modules.Transactions
         {
             var db = new EPSConnection(dbConn);
 
-            if (string.IsNullOrEmpty(RecordFrm.ARN))
-            {
-                MessageBox.Show("Incomplete ARN", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
-            }
+            //if (string.IsNullOrEmpty(RecordFrm.ARN))
+            //{
+            //    MessageBox.Show("Incomplete ARN", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    return false;
+            //}
 
             // add validation of duplicate arn
             string strQuery = string.Empty;

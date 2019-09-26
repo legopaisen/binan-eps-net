@@ -76,6 +76,7 @@
             this.txtMI.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMI.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMI.Location = new System.Drawing.Point(244, 67);
+            this.txtMI.MaxLength = 2;
             this.txtMI.Name = "txtMI";
             this.txtMI.ReadOnly = true;
             this.txtMI.Size = new System.Drawing.Size(28, 23);
@@ -86,6 +87,7 @@
             this.txtLastName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtLastName.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLastName.Location = new System.Drawing.Point(81, 41);
+            this.txtLastName.MaxLength = 40;
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.ReadOnly = true;
             this.txtLastName.Size = new System.Drawing.Size(191, 23);
@@ -96,6 +98,7 @@
             this.txtFirstName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtFirstName.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFirstName.Location = new System.Drawing.Point(81, 67);
+            this.txtFirstName.MaxLength = 40;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.ReadOnly = true;
             this.txtFirstName.Size = new System.Drawing.Size(125, 23);
@@ -106,6 +109,7 @@
             this.txtPTR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPTR.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPTR.Location = new System.Drawing.Point(81, 93);
+            this.txtPTR.MaxLength = 20;
             this.txtPTR.Name = "txtPTR";
             this.txtPTR.ReadOnly = true;
             this.txtPTR.Size = new System.Drawing.Size(191, 23);
@@ -116,6 +120,7 @@
             this.txtPRC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPRC.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPRC.Location = new System.Drawing.Point(81, 119);
+            this.txtPRC.MaxLength = 20;
             this.txtPRC.Name = "txtPRC";
             this.txtPRC.ReadOnly = true;
             this.txtPRC.Size = new System.Drawing.Size(191, 23);
@@ -126,6 +131,7 @@
             this.txtTIN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtTIN.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTIN.Location = new System.Drawing.Point(81, 145);
+            this.txtTIN.MaxLength = 20;
             this.txtTIN.Name = "txtTIN";
             this.txtTIN.ReadOnly = true;
             this.txtTIN.Size = new System.Drawing.Size(191, 23);
@@ -260,6 +266,7 @@
             this.txtHseNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtHseNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHseNo.Location = new System.Drawing.Point(92, 15);
+            this.txtHseNo.MaxLength = 10;
             this.txtHseNo.Name = "txtHseNo";
             this.txtHseNo.ReadOnly = true;
             this.txtHseNo.Size = new System.Drawing.Size(170, 23);
@@ -270,6 +277,7 @@
             this.txtLotNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtLotNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLotNo.Location = new System.Drawing.Point(92, 41);
+            this.txtLotNo.MaxLength = 10;
             this.txtLotNo.Name = "txtLotNo";
             this.txtLotNo.ReadOnly = true;
             this.txtLotNo.Size = new System.Drawing.Size(170, 23);
@@ -280,6 +288,7 @@
             this.txtBlkNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBlkNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBlkNo.Location = new System.Drawing.Point(92, 67);
+            this.txtBlkNo.MaxLength = 10;
             this.txtBlkNo.Name = "txtBlkNo";
             this.txtBlkNo.ReadOnly = true;
             this.txtBlkNo.Size = new System.Drawing.Size(170, 23);
@@ -290,6 +299,7 @@
             this.txtStreet.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtStreet.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStreet.Location = new System.Drawing.Point(92, 93);
+            this.txtStreet.MaxLength = 60;
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.ReadOnly = true;
             this.txtStreet.Size = new System.Drawing.Size(170, 23);
@@ -300,8 +310,8 @@
             this.txtMun.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMun.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMun.Location = new System.Drawing.Point(92, 145);
+            this.txtMun.MaxLength = 40;
             this.txtMun.Name = "txtMun";
-            this.txtMun.ReadOnly = true;
             this.txtMun.Size = new System.Drawing.Size(170, 23);
             this.txtMun.TabIndex = 16;
             // 
@@ -310,8 +320,8 @@
             this.txtProv.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtProv.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProv.Location = new System.Drawing.Point(92, 171);
+            this.txtProv.MaxLength = 40;
             this.txtProv.Name = "txtProv";
-            this.txtProv.ReadOnly = true;
             this.txtProv.Size = new System.Drawing.Size(170, 23);
             this.txtProv.TabIndex = 17;
             // 
@@ -320,8 +330,8 @@
             this.txtZIP.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtZIP.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtZIP.Location = new System.Drawing.Point(92, 197);
+            this.txtZIP.MaxLength = 20;
             this.txtZIP.Name = "txtZIP";
-            this.txtZIP.ReadOnly = true;
             this.txtZIP.Size = new System.Drawing.Size(170, 23);
             this.txtZIP.TabIndex = 18;
             // 

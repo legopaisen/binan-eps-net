@@ -56,11 +56,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtProjDesc = new System.Windows.Forms.TextBox();
+            this.cmbOwnership = new System.Windows.Forms.ComboBox();
             this.cmbStrucType = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbBussKind = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbOccupancy = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbCategory = new MultiColumnComboBoxDemo.MultiColumnComboBox();
-            this.cmbOwnership = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,7 +89,7 @@
             this.btnSearchLot.Location = new System.Drawing.Point(14, 22);
             this.btnSearchLot.Name = "btnSearchLot";
             this.btnSearchLot.Size = new System.Drawing.Size(98, 26);
-            this.btnSearchLot.TabIndex = 8;
+            this.btnSearchLot.TabIndex = 50;
             this.btnSearchLot.Text = "Search Lot PIN";
             this.btnSearchLot.UseVisualStyleBackColor = true;
             this.btnSearchLot.Click += new System.EventHandler(this.btnSearchLot_Click);
@@ -99,6 +99,7 @@
             this.txtHseNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtHseNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHseNo.Location = new System.Drawing.Point(119, 54);
+            this.txtHseNo.MaxLength = 10;
             this.txtHseNo.Name = "txtHseNo";
             this.txtHseNo.Size = new System.Drawing.Size(170, 23);
             this.txtHseNo.TabIndex = 10;
@@ -108,27 +109,30 @@
             this.txtLotNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtLotNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLotNo.Location = new System.Drawing.Point(119, 83);
+            this.txtLotNo.MaxLength = 10;
             this.txtLotNo.Name = "txtLotNo";
             this.txtLotNo.Size = new System.Drawing.Size(170, 23);
-            this.txtLotNo.TabIndex = 12;
+            this.txtLotNo.TabIndex = 11;
             // 
             // txtBlkNo
             // 
             this.txtBlkNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBlkNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBlkNo.Location = new System.Drawing.Point(119, 112);
+            this.txtBlkNo.MaxLength = 10;
             this.txtBlkNo.Name = "txtBlkNo";
             this.txtBlkNo.Size = new System.Drawing.Size(170, 23);
-            this.txtBlkNo.TabIndex = 14;
+            this.txtBlkNo.TabIndex = 12;
             // 
             // txtStreet
             // 
             this.txtStreet.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtStreet.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStreet.Location = new System.Drawing.Point(119, 141);
+            this.txtStreet.MaxLength = 30;
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.Size = new System.Drawing.Size(170, 23);
-            this.txtStreet.TabIndex = 16;
+            this.txtStreet.TabIndex = 13;
             // 
             // txtMun
             // 
@@ -138,7 +142,7 @@
             this.txtMun.Name = "txtMun";
             this.txtMun.ReadOnly = true;
             this.txtMun.Size = new System.Drawing.Size(167, 23);
-            this.txtMun.TabIndex = 13;
+            this.txtMun.TabIndex = 15;
             // 
             // txtProv
             // 
@@ -148,7 +152,7 @@
             this.txtProv.Name = "txtProv";
             this.txtProv.ReadOnly = true;
             this.txtProv.Size = new System.Drawing.Size(167, 23);
-            this.txtProv.TabIndex = 15;
+            this.txtProv.TabIndex = 16;
             // 
             // txtZIP
             // 
@@ -195,7 +199,7 @@
             this.cmbBrgy.Location = new System.Drawing.Point(383, 54);
             this.cmbBrgy.Name = "cmbBrgy";
             this.cmbBrgy.Size = new System.Drawing.Size(167, 24);
-            this.cmbBrgy.TabIndex = 11;
+            this.cmbBrgy.TabIndex = 14;
             this.cmbBrgy.SelectedIndexChanged += new System.EventHandler(this.cmbBrgy_SelectedIndexChanged);
             this.cmbBrgy.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbBrgy_KeyPress);
             // 
@@ -367,9 +371,24 @@
             this.txtProjDesc.Size = new System.Drawing.Size(447, 23);
             this.txtProjDesc.TabIndex = 1;
             // 
+            // cmbOwnership
+            // 
+            this.cmbOwnership.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOwnership.FormattingEnabled = true;
+            this.cmbOwnership.Items.AddRange(new object[] {
+            "SINGLE PROPRIETORSHIP",
+            "PARTNERSHIP",
+            "CORPORATION"});
+            this.cmbOwnership.Location = new System.Drawing.Point(135, 129);
+            this.cmbOwnership.Name = "cmbOwnership";
+            this.cmbOwnership.Size = new System.Drawing.Size(204, 23);
+            this.cmbOwnership.TabIndex = 5;
+            this.cmbOwnership.Leave += new System.EventHandler(this.cmbOwnership_Leave);
+            // 
             // cmbStrucType
             // 
             this.cmbStrucType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbStrucType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStrucType.FormattingEnabled = true;
             this.cmbStrucType.Location = new System.Drawing.Point(135, 158);
             this.cmbStrucType.Name = "cmbStrucType";
@@ -380,6 +399,7 @@
             // cmbBussKind
             // 
             this.cmbBussKind.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbBussKind.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBussKind.FormattingEnabled = true;
             this.cmbBussKind.Location = new System.Drawing.Point(135, 100);
             this.cmbBussKind.Name = "cmbBussKind";
@@ -407,19 +427,6 @@
             this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
             this.cmbCategory.SelectedValueChanged += new System.EventHandler(this.cmbCategory_SelectedValueChanged);
             this.cmbCategory.Leave += new System.EventHandler(this.cmbCategory_Leave);
-            // 
-            // cmbOwnership
-            // 
-            this.cmbOwnership.FormattingEnabled = true;
-            this.cmbOwnership.Items.AddRange(new object[] {
-            "SINGLE PROPRIETORSHIP",
-            "PARTNERSHIP",
-            "CORPORATION"});
-            this.cmbOwnership.Location = new System.Drawing.Point(135, 129);
-            this.cmbOwnership.Name = "cmbOwnership";
-            this.cmbOwnership.Size = new System.Drawing.Size(204, 23);
-            this.cmbOwnership.TabIndex = 5;
-            this.cmbOwnership.Leave += new System.EventHandler(this.cmbOwnership_Leave);
             // 
             // frmProjectInfo
             // 

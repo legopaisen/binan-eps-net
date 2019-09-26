@@ -89,6 +89,7 @@
             this.connectivityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.taskManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlButton = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnLO = new System.Windows.Forms.Button();
@@ -97,7 +98,6 @@
             this.btnAOF = new System.Windows.Forms.Button();
             this.btnER = new System.Windows.Forms.Button();
             this.btnNewApp = new System.Windows.Forms.Button();
-            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MS.SuspendLayout();
             this.pnlButton.SuspendLayout();
             this.SuspendLayout();
@@ -260,14 +260,14 @@
             this.zoningPermitToolStripMenuItem,
             this.buildingPermitToolStripMenuItem});
             this.permitBillingToolStripMenuItem.Name = "permitBillingToolStripMenuItem";
-            this.permitBillingToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.permitBillingToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.permitBillingToolStripMenuItem.Text = "Permit billing";
             this.permitBillingToolStripMenuItem.Click += new System.EventHandler(this.permitBillingToolStripMenuItem_Click);
             // 
             // mechanicalPermitToolStripMenuItem
             // 
             this.mechanicalPermitToolStripMenuItem.Name = "mechanicalPermitToolStripMenuItem";
-            this.mechanicalPermitToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.mechanicalPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.mechanicalPermitToolStripMenuItem.Text = "Mechanical Permit";
             this.mechanicalPermitToolStripMenuItem.Visible = false;
             this.mechanicalPermitToolStripMenuItem.Click += new System.EventHandler(this.mechanicalPermitToolStripMenuItem_Click);
@@ -275,7 +275,7 @@
             // electricalPermitToolStripMenuItem
             // 
             this.electricalPermitToolStripMenuItem.Name = "electricalPermitToolStripMenuItem";
-            this.electricalPermitToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.electricalPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.electricalPermitToolStripMenuItem.Text = "Electrical Permit";
             this.electricalPermitToolStripMenuItem.Visible = false;
             this.electricalPermitToolStripMenuItem.Click += new System.EventHandler(this.electricalPermitToolStripMenuItem_Click);
@@ -283,7 +283,7 @@
             // zoningPermitToolStripMenuItem
             // 
             this.zoningPermitToolStripMenuItem.Name = "zoningPermitToolStripMenuItem";
-            this.zoningPermitToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.zoningPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.zoningPermitToolStripMenuItem.Text = "Zoning Permit";
             this.zoningPermitToolStripMenuItem.Visible = false;
             this.zoningPermitToolStripMenuItem.Click += new System.EventHandler(this.zoningPermitToolStripMenuItem_Click);
@@ -291,7 +291,7 @@
             // buildingPermitToolStripMenuItem
             // 
             this.buildingPermitToolStripMenuItem.Name = "buildingPermitToolStripMenuItem";
-            this.buildingPermitToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.buildingPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.buildingPermitToolStripMenuItem.Text = "Building Permit";
             this.buildingPermitToolStripMenuItem.Visible = false;
             this.buildingPermitToolStripMenuItem.Click += new System.EventHandler(this.buildingPermitToolStripMenuItem_Click);
@@ -299,7 +299,7 @@
             // reassessmentOfPermitToolStripMenuItem
             // 
             this.reassessmentOfPermitToolStripMenuItem.Name = "reassessmentOfPermitToolStripMenuItem";
-            this.reassessmentOfPermitToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.reassessmentOfPermitToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.reassessmentOfPermitToolStripMenuItem.Text = "Reassessment of Permit";
             this.reassessmentOfPermitToolStripMenuItem.Visible = false;
             this.reassessmentOfPermitToolStripMenuItem.Click += new System.EventHandler(this.reassessmentOfPermitToolStripMenuItem_Click);
@@ -307,7 +307,7 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(222, 6);
             // 
             // certificationBillingToolStripMenuItem
             // 
@@ -315,20 +315,20 @@
             this.occupancyToolStripMenuItem,
             this.annualInspectionToolStripMenuItem});
             this.certificationBillingToolStripMenuItem.Name = "certificationBillingToolStripMenuItem";
-            this.certificationBillingToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.certificationBillingToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.certificationBillingToolStripMenuItem.Text = "Certification Billing";
             // 
             // occupancyToolStripMenuItem
             // 
             this.occupancyToolStripMenuItem.Name = "occupancyToolStripMenuItem";
-            this.occupancyToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.occupancyToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.occupancyToolStripMenuItem.Text = "Occupancy";
             this.occupancyToolStripMenuItem.Click += new System.EventHandler(this.occupancyToolStripMenuItem_Click);
             // 
             // annualInspectionToolStripMenuItem
             // 
             this.annualInspectionToolStripMenuItem.Name = "annualInspectionToolStripMenuItem";
-            this.annualInspectionToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.annualInspectionToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.annualInspectionToolStripMenuItem.Text = "Annual Inspection";
             this.annualInspectionToolStripMenuItem.Click += new System.EventHandler(this.annualInspectionToolStripMenuItem_Click);
             // 
@@ -577,6 +577,13 @@
             this.taskManagerToolStripMenuItem.Text = "Task Manager";
             this.taskManagerToolStripMenuItem.Click += new System.EventHandler(this.taskManagerToolStripMenuItem_Click);
             // 
+            // logOutToolStripMenuItem
+            // 
+            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(62, 22);
+            this.logOutToolStripMenuItem.Text = "Log Out";
+            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
+            // 
             // pnlButton
             // 
             this.pnlButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -691,18 +698,11 @@
             this.btnNewApp.UseVisualStyleBackColor = true;
             this.btnNewApp.Click += new System.EventHandler(this.btnNewApp_Click);
             // 
-            // logOutToolStripMenuItem
-            // 
-            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(62, 22);
-            this.logOutToolStripMenuItem.Text = "Log Out";
-            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
-            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::EPS.Properties.Resources._2012_aeps;
+            this.BackgroundImage = global::EPS.Properties.Resources.eps_background_1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1000, 541);
             this.Controls.Add(this.pnlButton);

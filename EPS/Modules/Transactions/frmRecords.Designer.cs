@@ -78,7 +78,7 @@
             this.btnAdd.Location = new System.Drawing.Point(765, 306);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(101, 33);
-            this.btnAdd.TabIndex = 1;
+            this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);

@@ -262,7 +262,7 @@ namespace Modules.Transactions
             cmbBrgy.Text = string.Empty;
             //txtMun.Text = string.Empty;
             //txtProv.Text= string.Empty;
-            txtZIP.Text = string.Empty;
+            //txtZIP.Text = string.Empty;
         }
 
         private void EnableLocationControls(bool blnEnable)

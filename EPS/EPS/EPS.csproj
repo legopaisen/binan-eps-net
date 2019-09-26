@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="aEPs.ico" />
+    <None Include="Resources\eps-background-1.jpg" />
     <None Include="Resources\bps-nav_logout.png" />
     <None Include="Resources\bps-nav_exit.png" />
     <None Include="Resources\2012_aeps.bmp" />
