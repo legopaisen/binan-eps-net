@@ -13,6 +13,7 @@ using Oracle.ManagedDataAccess.EntityFramework;
 using Oracle.ManagedDataAccess.Client;
 using Common.AppSettings;
 using EPSEntities.Connection;
+using Common.DataConnector;
 
 namespace Modules.Transactions
 {
@@ -74,7 +75,7 @@ namespace Modules.Transactions
             if (intBldgNo == 0)
                 intBldgNo = 1;
 
-            BldgNo = string.Format("{0:####}",intBldgNo);
+            BldgNo = string.Format("{0:####}",intBldgNo + 1); //AFM 20190927
         }
 
         private void UpdateDataControls()
@@ -130,6 +131,20 @@ namespace Modules.Transactions
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public void ClearBuilding() //AFM 20190927
+        {
+            OracleResultSet result = new OracleResultSet();
+            OracleResultSet result2 = new OracleResultSet();
+
+            result.Query = "select * from bldg_units where bldg_no not in (select bldg_no from building)";
+            if (result.Execute())
+                if (result.Read())
+                {
+                    result2.Query = "delete from bldg_units where bldg_no not in (select bldg_no from building)";
+                    result2.ExecuteNonQuery();
+                }
         }
 
         private void PopulateBrgy()

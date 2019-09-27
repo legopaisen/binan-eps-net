@@ -13,6 +13,7 @@ using Common.AppSettings;
 using System.Windows.Forms;
 using Modules.Utilities;
 using Modules.Reports;
+using EPSEntities.Connection;
 
 namespace Modules.Transactions
 {
@@ -21,6 +22,7 @@ namespace Modules.Transactions
         private string m_sSource = string.Empty;
         public string Status { get; set; }
         private RecordForm RecordClass = null;
+        public static ConnectionString dbConn = new ConnectionString();
 
         private ScopeList m_lstScope;
         public frmProjectInfo formProject = new frmProjectInfo();
@@ -238,6 +240,7 @@ namespace Modules.Transactions
 
             if (btnExit.Text == "Cancel")
             {
+                frmBuildingUnits frmbldgunits = new frmBuildingUnits();
                 ClearControls();
                 btnAdd.Text = "Add";
                 btnEdit.Text = "Edit";
@@ -249,6 +252,7 @@ namespace Modules.Transactions
                 btnSearch.Enabled = true;
                 btnClear.Enabled = true;
                 arn1.Enabled = true;
+                frmbldgunits.ClearBuilding();
             }
             else
             {
