@@ -348,6 +348,7 @@
             this.listOfSummaryPermitsToolStripMenuItem.Name = "listOfSummaryPermitsToolStripMenuItem";
             this.listOfSummaryPermitsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.listOfSummaryPermitsToolStripMenuItem.Text = "List of Summary permits";
+            this.listOfSummaryPermitsToolStripMenuItem.Click += new System.EventHandler(this.listOfSummaryPermitsToolStripMenuItem_Click);
             // 
             // printCertificationToolStripMenuItem
             // 

@@ -18,6 +18,9 @@ namespace Modules.Reports
         FormReportClass ReportClass = null;
         private static ConnectionString dbConn = new ConnectionString();
 
+        public DateTime dtTo { get; set; }
+        public DateTime dtFrom { get; set; }
+
         public frmReport()
         {
             InitializeComponent();
@@ -58,6 +61,16 @@ namespace Modules.Reports
 
                 ReportClass = new Application(this);
                 ReportClass.ARN = Arn;
+            }
+            else if(ReportName == "Building Information") //AFM 20190930
+            {
+                this.reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
+                this.reportViewer1.LocalReport.ReportEmbeddedResource = "Modules.Reports.Report.BuildingInformation.rdlc";
+                this.Text = ReportName;
+
+                ReportClass = new BuildingInformation(this);
+                ReportClass.dtTo = dtTo;
+                ReportClass.dtFrom = dtFrom;
             }
 
             ReportClass.LoadForm();

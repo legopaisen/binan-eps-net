@@ -38,13 +38,13 @@ namespace Common.AppSettings
             get
             {
                 string strLguName = string.Empty;
-
+                
                 if (AppSettingsManager.GetConfigValueByDescription("LGU TYPE").Trim() == "CITY")
-                    strLguName = "CITY OF " + AppSettingsManager.GetConfigDescription("02").Trim();
+                    strLguName = "CITY OF " + AppSettingsManager.GetConfigValue("02").Trim(); //changed from GetConfigDescription
                 else if (AppSettingsManager.GetConfigValueByDescription("LGU TYPE").Trim() == "PROVINCIAL")
-                    strLguName = "PROVINCE OF " + AppSettingsManager.GetConfigDescription("02").Trim();
+                    strLguName = "PROVINCE OF " + AppSettingsManager.GetConfigValue("02").Trim();
                 else if (AppSettingsManager.GetConfigValueByDescription("LGU TYPE").Trim() == "MUNICIPALITY")
-                    strLguName = "MUNICIPALITY OF " + AppSettingsManager.GetConfigDescription("02").Trim();
+                    strLguName = "MUNICIPALITY OF " + AppSettingsManager.GetConfigValue("02").Trim();
 
                 return strLguName;
             }

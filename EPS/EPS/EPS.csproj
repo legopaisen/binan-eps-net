@@ -170,6 +170,10 @@
       <Project>{bcfd28a2-0b61-4d7c-aadb-57b9acc5877d}</Project>
       <Name>Billing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\Reports\Reports.csproj">
+      <Project>{A1A0D417-393F-454F-A44B-A9717ABD73E8}</Project>
+      <Name>Reports</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\Tables\Tables.csproj">
       <Project>{e3052cdd-4fbb-44ca-9674-580cc45be0a7}</Project>
       <Name>Tables</Name>

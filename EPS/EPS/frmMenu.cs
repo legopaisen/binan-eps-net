@@ -17,7 +17,7 @@ using Modules.Transactions;
 using Common.AppSettings;
 using Modules.Billing;
 using Modules.Utilities.Forms;
-
+using Modules.Reports;
 
 namespace EPS
 {
@@ -513,5 +513,10 @@ namespace EPS
 
         }
 
+        private void listOfSummaryPermitsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSummaryOfReport frmsummaryofreport = new frmSummaryOfReport();
+            frmsummaryofreport.ShowDialog();
+        }
     }
 }

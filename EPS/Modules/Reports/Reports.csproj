@@ -110,11 +110,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="BuildingInformation.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet2.xsd</DependentUpon>
     </Compile>
     <Compile Include="dtSOA.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -128,6 +134,13 @@
     <Compile Include="frmReport.Designer.cs">
       <DependentUpon>frmReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSummaryOfReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSummaryOfReport.Designer.cs">
+      <DependentUpon>frmSummaryOfReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BuildingInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -149,6 +162,17 @@
     <None Include="DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
+    <None Include="DataSet2.xsc">
+      <DependentUpon>DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSet2.xss">
+      <DependentUpon>DataSet2.xsd</DependentUpon>
+    </None>
     <None Include="dtSOA.xsc">
       <DependentUpon>dtSOA.xsd</DependentUpon>
     </None>
@@ -161,6 +185,7 @@
       <DependentUpon>dtSOA.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Modules.Reports.Model.BuildingInformation.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -170,13 +195,21 @@
     <EmbeddedResource Include="frmReport.resx">
       <DependentUpon>frmReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSummaryOfReport.resx">
+      <DependentUpon>frmSummaryOfReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Application.rdlc" />
+    <EmbeddedResource Include="Report\BuildingInformation.rdlc" />
     <EmbeddedResource Include="Report\SOA.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\AppSettings\AppSettings.csproj">
       <Project>{889d88f6-1668-418f-969a-6466670138b6}</Project>
       <Name>AppSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\DataConnector\DataConnector.csproj">
+      <Project>{7C12DA36-676A-49B3-B59D-C07C96539620}</Project>
+      <Name>DataConnector</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\EPSEntities\EPSEntities.csproj">
       <Project>{64f894bd-df57-4d82-8c15-4bea4081b870}</Project>
