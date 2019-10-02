@@ -73,6 +73,28 @@ namespace Modules.Reports
                 ReportClass.dtFrom = dtFrom;
             }
 
+            else if (ReportName == "List of Approved Permit Application") //AFM 20190930
+            {
+                MessageBox.Show("Under Construction ༼ つ ◕o◕ ༽つ");
+                return;
+                this.reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
+                this.reportViewer1.LocalReport.ReportEmbeddedResource = "Modules.Reports.Report.ApprovedPermitApplication.rdlc";
+                this.Text = ReportName;
+
+                ReportClass = new ApprovedPermitApplication(this);
+            }
+
+            else if (ReportName == "Issued Permits Summary") //AFM 20190930
+            {
+                MessageBox.Show("Under Construction ༼ つ ◕o◕ ༽つ");
+                return;
+                this.reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
+                this.reportViewer1.LocalReport.ReportEmbeddedResource = "Modules.Reports.Report.PermitsSummary.rdlc";
+                this.Text = ReportName;
+
+                ReportClass = new PermitsSummary(this);
+            }
+
             ReportClass.LoadForm();
 
             this.reportViewer1.RefreshReport();

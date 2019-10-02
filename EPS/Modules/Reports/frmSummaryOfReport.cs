@@ -24,6 +24,11 @@ namespace Modules.Reports
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            if(cmbReportType.SelectedIndex == -1)
+            {
+                MessageBox.Show("No report type selected");
+                return;
+            }
 
             if(dtFrom.Value > dtTo.Value)
             {

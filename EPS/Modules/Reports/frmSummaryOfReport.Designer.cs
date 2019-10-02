@@ -62,7 +62,7 @@ namespace Modules.Reports
             this.cmbReportType.Location = new System.Drawing.Point(12, 39);
             this.cmbReportType.Name = "cmbReportType";
             this.cmbReportType.Size = new System.Drawing.Size(230, 21);
-            this.cmbReportType.TabIndex = 1;
+            this.cmbReportType.TabIndex = 5;
             this.cmbReportType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.cmbReportType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbReportType_KeyPress);
             // 
@@ -105,7 +105,7 @@ namespace Modules.Reports
             this.dtTo.Location = new System.Drawing.Point(54, 50);
             this.dtTo.Name = "dtTo";
             this.dtTo.Size = new System.Drawing.Size(134, 21);
-            this.dtTo.TabIndex = 1;
+            this.dtTo.TabIndex = 7;
             this.dtTo.Value = new System.DateTime(2019, 10, 1, 0, 0, 0, 0);
             // 
             // dtFrom
@@ -115,7 +115,7 @@ namespace Modules.Reports
             this.dtFrom.Location = new System.Drawing.Point(54, 23);
             this.dtFrom.Name = "dtFrom";
             this.dtFrom.Size = new System.Drawing.Size(134, 21);
-            this.dtFrom.TabIndex = 0;
+            this.dtFrom.TabIndex = 6;
             this.dtFrom.Value = new System.DateTime(2019, 10, 1, 0, 0, 0, 0);
             // 
             // btnGenerate
@@ -124,7 +124,7 @@ namespace Modules.Reports
             this.btnGenerate.Location = new System.Drawing.Point(16, 66);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(79, 39);
-            this.btnGenerate.TabIndex = 3;
+            this.btnGenerate.TabIndex = 1;
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
@@ -151,7 +151,7 @@ namespace Modules.Reports
             this.Controls.Add(this.cmbReportType);
             this.Controls.Add(this.label1);
             this.Name = "frmSummaryOfReport";
-            this.Text = "REPORT";
+            this.Text = "List of Summary Permits";
             this.Load += new System.EventHandler(this.frmSummaryOfReport_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

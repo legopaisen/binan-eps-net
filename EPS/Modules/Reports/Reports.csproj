@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="ApprovedPermitApplication.cs" />
     <Compile Include="BuildingInformation.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DataSet1.Designer.cs">
@@ -141,6 +142,7 @@
       <DependentUpon>frmSummaryOfReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\BuildingInformation.cs" />
+    <Compile Include="PermitsSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -199,7 +201,9 @@
       <DependentUpon>frmSummaryOfReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Application.rdlc" />
+    <EmbeddedResource Include="Report\ApprovedPermitApplication.rdlc" />
     <EmbeddedResource Include="Report\BuildingInformation.rdlc" />
+    <EmbeddedResource Include="Report\PermitsSummary.rdlc" />
     <EmbeddedResource Include="Report\SOA.rdlc" />
   </ItemGroup>
   <ItemGroup>
