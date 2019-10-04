@@ -151,6 +151,7 @@ namespace Modules.Reports
             this.Controls.Add(this.cmbReportType);
             this.Controls.Add(this.label1);
             this.Name = "frmSummaryOfReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "List of Summary Permits";
             this.Load += new System.EventHandler(this.frmSummaryOfReport_Load);
             this.groupBox1.ResumeLayout(false);

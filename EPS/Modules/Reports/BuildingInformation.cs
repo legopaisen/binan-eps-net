@@ -103,7 +103,7 @@ namespace Modules.Reports
                             item.EstiCost = result2.GetDecimal("EST_COST");
                             item.ActualCost = result2.GetDecimal("ACTUAL_COST");
                         }
-                    item.DtIssued = result.GetDateTime("DATE_APPLIED");
+                    item.DtIssued = result.GetDateTime("DATE_ISSUED");
                     item.BldgPermitNo = result.GetString("PERMIT_NO");
 
                     dtSet.Add(item);

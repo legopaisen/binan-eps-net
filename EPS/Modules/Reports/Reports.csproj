@@ -141,7 +141,9 @@
     <Compile Include="frmSummaryOfReport.Designer.cs">
       <DependentUpon>frmSummaryOfReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\ApprovedPermitApplicationMODEL.cs" />
     <Compile Include="Model\BuildingInformation.cs" />
+    <Compile Include="Model\PermitsSummaryMODEL.cs" />
     <Compile Include="PermitsSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -187,6 +189,7 @@
       <DependentUpon>dtSOA.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Modules.Reports.Model.ApprovedPermitApplicationMODEL.datasource" />
     <None Include="Properties\DataSources\Modules.Reports.Model.BuildingInformation.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

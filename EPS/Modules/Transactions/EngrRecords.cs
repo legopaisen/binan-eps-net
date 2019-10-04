@@ -204,7 +204,7 @@ namespace Modules.Transactions
                             new OracleParameter(":25", sStart),
                             new OracleParameter(":26", sCompleted),
                             new OracleParameter(":27", RecordFrm.dtDateApplied.Value.ToShortDateString()),
-                            new OracleParameter(":28", null),
+                            new OracleParameter(":28", string.Format("{0:dd/MMM/yyyy}", DateTime.Now)),
                             new OracleParameter(":29", RecordFrm.formProject.txtMemo.Text.ToString()),
                             new OracleParameter(":30", iMainApp));
                     }

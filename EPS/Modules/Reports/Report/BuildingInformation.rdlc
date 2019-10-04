@@ -675,7 +675,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>ActualCost</rd:DefaultName>
@@ -1526,7 +1528,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>ActualCost</rd:DefaultName>
@@ -2545,7 +2549,7 @@
         </TablixRowHierarchy>
         <DataSetName>BldgInfoDatasetIND</DataSetName>
         <Top>2.46579in</Top>
-        <Height>1.07257in</Height>
+        <Height>1.07258in</Height>
         <Width>9.8946in</Width>
         <ZIndex>2</ZIndex>
         <Visibility>
@@ -3230,7 +3234,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>ActualCost</rd:DefaultName>
@@ -3397,7 +3403,7 @@
         </TablixRowHierarchy>
         <DataSetName>BldgInfoDatasetSocEd</DataSetName>
         <Top>3.6078in</Top>
-        <Height>1.07419in</Height>
+        <Height>1.0742in</Height>
         <Width>9.8946in</Width>
         <ZIndex>3</ZIndex>
         <Visibility>
@@ -4082,7 +4088,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>ActualCost</rd:DefaultName>
@@ -4249,7 +4257,7 @@
         </TablixRowHierarchy>
         <DataSetName>BldgInfoDatasetAGRI</DataSetName>
         <Top>4.75144in</Top>
-        <Height>1.08126in</Height>
+        <Height>1.08125in</Height>
         <Width>9.8946in</Width>
         <ZIndex>4</ZIndex>
         <Visibility>
@@ -4934,7 +4942,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>ActualCost</rd:DefaultName>
@@ -5101,7 +5111,7 @@
         </TablixRowHierarchy>
         <DataSetName>BldgInfoDatasetANCI</DataSetName>
         <Top>5.90214in</Top>
-        <Height>1.09668in</Height>
+        <Height>1.09667in</Height>
         <Width>9.8946in</Width>
         <ZIndex>5</ZIndex>
         <Visibility>
