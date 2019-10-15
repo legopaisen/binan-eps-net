@@ -71,16 +71,16 @@ namespace Modules.Utilities.Forms
             var db = new EPSConnection(dbConn);
             string sQuery = string.Empty;
             string sUserLevel = string.Empty;
+            List<user_level> epsrec = new List<user_level>();
             
             cmbUserLevel.Items.Add("");
 
             sQuery = "select * from user_level";
-            var epsrec = db.Database.SqlQuery<USER_LEVEL>(sQuery);
+            epsrec = db.Database.SqlQuery<user_level>(sQuery).ToList();
 
             foreach (var items in epsrec)
             {
-                cmbUserLevel.Items.Add(items.USER_LEV);
-                
+                cmbUserLevel.Items.Add(items.USER_LEVEL);  
             }
             
         }
@@ -380,6 +380,7 @@ namespace Modules.Utilities.Forms
             if (btnExit.Text == "Cancel")
             {
                 btnExit.Text = "Exit";
+                btnAdd.Text = "Add";
                 btnAdd.Enabled = true;
                 btnEdit.Enabled = true;
                 btnDelete.Enabled = true;

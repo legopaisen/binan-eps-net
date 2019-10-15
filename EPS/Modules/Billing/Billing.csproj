@@ -100,6 +100,10 @@
       <Project>{889d88f6-1668-418f-969a-6466670138b6}</Project>
       <Name>AppSettings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\DataConnector\DataConnector.csproj">
+      <Project>{7c12da36-676a-49b3-b59d-c07c96539620}</Project>
+      <Name>DataConnector</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Common\StringUtilities\StringUtilities.csproj">
       <Project>{f7cab867-edef-4e74-91bf-6c5385dcf513}</Project>
       <Name>StringUtilities</Name>

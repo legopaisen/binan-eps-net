@@ -355,12 +355,14 @@
             this.printCertificationToolStripMenuItem.Name = "printCertificationToolStripMenuItem";
             this.printCertificationToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.printCertificationToolStripMenuItem.Text = "Print Certification";
+            this.printCertificationToolStripMenuItem.Click += new System.EventHandler(this.printCertificationToolStripMenuItem_Click);
             // 
             // paymentHistoryToolStripMenuItem
             // 
             this.paymentHistoryToolStripMenuItem.Name = "paymentHistoryToolStripMenuItem";
             this.paymentHistoryToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.paymentHistoryToolStripMenuItem.Text = "Payment History";
+            this.paymentHistoryToolStripMenuItem.Click += new System.EventHandler(this.paymentHistoryToolStripMenuItem_Click);
             // 
             // utilitiesToolStripMenuItem
             // 

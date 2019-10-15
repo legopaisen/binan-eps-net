@@ -107,7 +107,7 @@ namespace Modules.Billing
 
         private void dgvAssessment_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
-            RecordClass.CellLeave(sender, e);
+            //RecordClass.CellLeave(sender, e); //remove test
         }
 
         private void dgvParameter_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -132,15 +132,13 @@ namespace Modules.Billing
         private void dgvAssessment_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //bool entry = false;
-            //for (int row = 0; row<dgvPermit.Rows.Count; row++)
+            //for (int row = 0; row < dgvPermit.Rows.Count; row++)
             //{
-            //    if((bool)dgvPermit[0, row].Value == true)
+            //    if ((bool)dgvPermit[0, row].Value == true)
             //    {
-            //        entry = true;
             //    }
             //}
-            //if(entry == true)
-                RecordClass.CellClick(sender, e);
+            RecordClass.CellClick(sender, e);
         }
 
         private void frmBilling_FormClosing(object sender, FormClosingEventArgs e)
@@ -163,23 +161,73 @@ namespace Modules.Billing
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if(txtAmtDue.Text == "0.00" || txtAmtDue.Text == "" || txtAmtDue.Text == string.Empty) //AFM 20191015 uncomputed fees validation
+            {
+                MessageBox.Show("No fees computed");
+                return;
+            }
             RecordClass.Save();
         }
 
-        private void dgvPermit_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private bool ValidatePermit()
         {
+            for(int i = 0; i < dgvPermit.Rows.Count; i++)
+            {
+                if ((bool)dgvPermit[0, i].Value == true)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void dgvPermit_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (ValidatePermit())
+            {
+                btnSave.Enabled = true;
+            }
+            else { btnSave.Enabled = false; }
+
+            try
+            {
+                if ((bool)dgvPermit.CurrentRow.Cells[0].Value == true)
+                    dgvAssessment.Enabled = true;
+                else
+                    dgvAssessment.Enabled = false;
+            }
+            catch { }
+        }
+
+        private void dgvPermit_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (ValidatePermit())
+            {
+                btnSave.Enabled = true;
+            }
+            else { btnSave.Enabled = false; }
+
+            try
+            {
+                if ((bool)dgvPermit.CurrentRow.Cells[0].Value == true)
+                    dgvAssessment.Enabled = true;
+                else
+                    dgvAssessment.Enabled = false;
+            }
+            catch { }
             try
             {
                 RecordClass.PermitCellClick(sender, e);
                 //AFM 20190911 permit checkbox (s)
-                if (dgvPermit.CurrentCell == null) return;
-                if ((bool)dgvPermit.CurrentCell.Value == true)
-                    dgvPermit.CurrentCell.Value = false;
-                else if ((bool)dgvPermit.CurrentCell.Value == false)
+                if ((bool)dgvPermit.CurrentCell.Value != true && (bool)dgvPermit.CurrentCell.Value != false) return;
+                if ((bool)dgvPermit.CurrentRow.Cells[0].Value == true)
+                    dgvPermit.CurrentRow.Cells[0].Value = false;
+                else if ((bool)dgvPermit.CurrentRow.Cells[0].Value == false)
                     dgvPermit.CurrentCell.Value = true;
                 //AFM 20190911 permit checkbox (e)
             }
             catch { }
+            RecordClass.PermitCellClick(sender, e);
             RemoveUnbilled();
         }
 
@@ -189,6 +237,7 @@ namespace Modules.Billing
             string sQuery = string.Empty;
             List<string> feesCode = new List<string>();
             string PermitDlt = string.Empty;
+            bool remove = false;
             for (int cnt = 0; cnt < dgvPermit.Rows.Count; cnt++)
             {
                 if ((bool)dgvPermit[0, cnt].Value == false)
@@ -209,8 +258,20 @@ namespace Modules.Billing
             {
                 sQuery = $"delete from bill_tmp where arn = '{m_sAN}' and fees_code = '{s}'";
                 db.Database.ExecuteSqlCommand(sQuery);
+                remove = true;
             }
+            dgvPermit.Refresh();
+            if (remove == true)
+            {
+                for (int i = 0; i < dgvAssessment.Rows.Count; i++)
+                {
+                    dgvAssessment[0, i].Value = false;
+                    dgvAssessment[7, i].Value = "0";
+                    dgvAssessment[8, i].Value = "0";
+                    dgvAssessment[11, i].Value = "0";
 
+                }
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -256,6 +317,11 @@ namespace Modules.Billing
             double.TryParse(txtAddlAmt.Text.ToString(), out dAmt);
 
             txtAddlAmt.Text = string.Format("{0:#,###.00}", dAmt);
+        }
+
+        private void dgvAssessment_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

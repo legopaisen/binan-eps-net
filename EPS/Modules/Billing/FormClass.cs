@@ -653,14 +653,14 @@ namespace Modules.Billing
 
             sQuery = "select sum(fees_amt) as fess_amt from bill_tmp ";
             sQuery += $" where arn = '{RecordFrm.m_sAN}'";
-            sQuery += $" and permit_code = '{m_sPermitCodeSelected}'";
+            //sQuery += $" and permit_code = '{m_sPermitCodeSelected}'"; //removed for grand total
 
             try
             {
                 dTotalAmt = db.Database.SqlQuery<double>(sQuery).SingleOrDefault();
             }
             catch { }
-            RecordFrm.txtAmtDue.Text = string.Format("{0:#,###.##}", dTotalAmt);
+            RecordFrm.txtAmtDue.Text = string.Format("{0:#,###.#0}", dTotalAmt);
             RecordFrm.txtAmtDue.TextAlign = HorizontalAlignment.Right;
         }
 

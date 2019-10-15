@@ -1614,5 +1614,10 @@ namespace Modules.Utilities.Forms
                 }
             }
         }
+
+        private void dgvMajorFees_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

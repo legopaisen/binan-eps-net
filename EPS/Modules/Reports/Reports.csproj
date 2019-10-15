@@ -112,6 +112,7 @@
     <Compile Include="Application.cs" />
     <Compile Include="ApprovedPermitApplication.cs" />
     <Compile Include="BuildingInformation.cs" />
+    <Compile Include="CertAnnualInsp.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -129,6 +130,18 @@
       <DependentUpon>dtSOA.xsd</DependentUpon>
     </Compile>
     <Compile Include="FormReportClass.cs" />
+    <Compile Include="frmCertification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCertification.Designer.cs">
+      <DependentUpon>frmCertification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPaymentHist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPaymentHist.Designer.cs">
+      <DependentUpon>frmPaymentHist.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +156,7 @@
     </Compile>
     <Compile Include="Model\ApprovedPermitApplicationMODEL.cs" />
     <Compile Include="Model\BuildingInformation.cs" />
+    <Compile Include="Model\CertificateMODEL.cs" />
     <Compile Include="Model\PermitsSummaryMODEL.cs" />
     <Compile Include="PermitsSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -191,12 +205,19 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Modules.Reports.Model.ApprovedPermitApplicationMODEL.datasource" />
     <None Include="Properties\DataSources\Modules.Reports.Model.BuildingInformation.datasource" />
+    <None Include="Properties\DataSources\Modules.Reports.Model.PermitsSummaryMODEL.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmCertification.resx">
+      <DependentUpon>frmCertification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPaymentHist.resx">
+      <DependentUpon>frmPaymentHist.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmReport.resx">
       <DependentUpon>frmReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -206,6 +227,8 @@
     <EmbeddedResource Include="Report\Application.rdlc" />
     <EmbeddedResource Include="Report\ApprovedPermitApplication.rdlc" />
     <EmbeddedResource Include="Report\BuildingInformation.rdlc" />
+    <EmbeddedResource Include="Report\CertAnnualInsp.rdlc" />
+    <EmbeddedResource Include="Report\CertOccupancy.rdlc" />
     <EmbeddedResource Include="Report\PermitsSummary.rdlc" />
     <EmbeddedResource Include="Report\SOA.rdlc" />
   </ItemGroup>
@@ -218,13 +241,25 @@
       <Project>{7C12DA36-676A-49B3-B59D-C07C96539620}</Project>
       <Name>DataConnector</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ARCSEntities\ARCSEntities.csproj">
+      <Project>{F6A001EB-D61B-4A32-8EAB-E123AA412157}</Project>
+      <Name>ARCSEntities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\EPSEntities\EPSEntities.csproj">
       <Project>{64f894bd-df57-4d82-8c15-4bea4081b870}</Project>
       <Name>EPSEntities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ARN\ARN.csproj">
+      <Project>{25fd3db7-ac87-4989-8f78-bd361427490a}</Project>
+      <Name>ARN</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Records\Records.csproj">
       <Project>{06b2ec66-db06-4a88-98db-922969d57da8}</Project>
       <Name>Records</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SearchAccount\SearchAccount.csproj">
+      <Project>{dfc64719-406d-427c-9835-47c69ea2cfe8}</Project>
+      <Name>SearchAccount</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{da501b98-0ae7-440f-bec3-b82eb7b5669d}</Project>

@@ -11,7 +11,7 @@ using Oracle.ManagedDataAccess.Client;
 using Common.AppSettings;
 using ARCSEntities.Connection;
 using Common.StringUtilities;
-
+using Common.DataConnector;
 
 namespace Modules.Billing
 {
@@ -167,6 +167,8 @@ namespace Modules.Billing
                         try
                         {
                             var dbarcs = new ARCSConnection(dbConnArcs);
+                            OracleResultSet result = new OracleResultSet();
+                            result.CreateANGARCS(); //connect to arcs database
 
                             Accounts account = new Accounts();
                             account.GetOwner(m_sProjOwner);
@@ -174,6 +176,12 @@ namespace Modules.Billing
                             string sFeesCode = string.Empty;
                             double dFeesAmt = 0;
                             string sInsert = string.Empty;
+
+                            result.Query = $"delete from eps_billing where arn = '{RecordFrm.m_sAN}' and bill_no = '{RecordFrm.txtBillNo.Text.ToString()}'"; //AFM 20191010 delete previous arcs billing
+                            result.ExecuteNonQuery();
+                            result.Close();
+                            //sQuery = $"delete from eps_billing where arn = '{RecordFrm.m_sAN}' and bill_no = '{RecordFrm.txtBillNo.Text.ToString()}'";
+                            //dbarcs.Database.ExecuteSqlCommand(sQuery); //AFM 20191010 delete previous arcs billing
 
                             sQuery = $"select fees_code, fees_amt from taxdues where arn = '{RecordFrm.m_sAN}' and bill_no = '{RecordFrm.txtBillNo.Text.ToString()}'";
                             var epsrec = db.Database.SqlQuery<TAXDUES>(sQuery);
@@ -183,27 +191,51 @@ namespace Modules.Billing
                                 sFeesCode = "E" + items.FEES_CODE;
                                 dFeesAmt = items.FEES_AMT;
 
-                                sInsert = @"insert into eps_billing(arn,acct_code,mrs_acct_code,
+                                result.Query = @"insert into eps_billing(arn,acct_code,mrs_acct_code,
                                 acct_ln,acct_fn,acct_mi,acct_house_no,acct_street,
                                 acct_brgy,acct_mun,acct_prov,acct_zip,bill_no,
                                 fees_code,fees_amt)
                                 values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15)";
-                                dbarcs.Database.ExecuteSqlCommand(sInsert,
-                                        new OracleParameter(":1", RecordFrm.m_sAN),
-                                        new OracleParameter(":2", m_sProjOwner),
-                                        new OracleParameter(":3", m_sProjOwner),
-                                        new OracleParameter(":4", StringUtilities.HandleApostrophe(account.LastName)),
-                                        new OracleParameter(":5", StringUtilities.HandleApostrophe(account.FirstName)),
-                                        new OracleParameter(":6", StringUtilities.HandleApostrophe(account.MiddleInitial)),
-                                        new OracleParameter(":7", StringUtilities.HandleApostrophe(account.HouseNo)),
-                                        new OracleParameter(":8", StringUtilities.HandleApostrophe(account.Address)),
-                                        new OracleParameter(":9", StringUtilities.HandleApostrophe(account.Barangay)),
-                                        new OracleParameter(":10", StringUtilities.HandleApostrophe(account.City)),
-                                        new OracleParameter(":11", StringUtilities.HandleApostrophe(account.Province)),
-                                        new OracleParameter(":12", account.ZIP),
-                                        new OracleParameter(":13", RecordFrm.txtBillNo.Text.ToString()),
-                                        new OracleParameter(":14", sFeesCode),
-                                        new OracleParameter(":15", dFeesAmt));
+                                result.AddParameter(":1", RecordFrm.m_sAN);
+                                result.AddParameter(":2", m_sProjOwner);
+                                result.AddParameter(":3", m_sProjOwner);
+                                result.AddParameter(":4", StringUtilities.HandleApostrophe(account.LastName));
+                                result.AddParameter(":5", StringUtilities.HandleApostrophe(account.FirstName));
+                                result.AddParameter(":6", StringUtilities.HandleApostrophe(account.MiddleInitial));
+                                result.AddParameter(":7", StringUtilities.HandleApostrophe(account.HouseNo));
+                                result.AddParameter(":8", StringUtilities.HandleApostrophe(account.Address));
+                                result.AddParameter(":9", StringUtilities.HandleApostrophe(account.Barangay));
+                                result.AddParameter(":10", StringUtilities.HandleApostrophe(account.City));
+                                result.AddParameter(":11", StringUtilities.HandleApostrophe(account.Province));
+                                result.AddParameter(":12", account.ZIP);
+                                result.AddParameter(":13", RecordFrm.txtBillNo.Text.ToString());
+                                result.AddParameter(":14", sFeesCode);
+                                result.AddParameter(":15", dFeesAmt);
+
+                                result.ExecuteNonQuery();
+                                result.Close();
+
+                                //sInsert = @"insert into eps_billing(arn,acct_code,mrs_acct_code,
+                                //acct_ln,acct_fn,acct_mi,acct_house_no,acct_street,
+                                //acct_brgy,acct_mun,acct_prov,acct_zip,bill_no,
+                                //fees_code,fees_amt)
+                                //values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15)";
+                                //dbarcs.Database.ExecuteSqlCommand(sInsert,
+                                //        new OracleParameter(":1", RecordFrm.m_sAN),
+                                //        new OracleParameter(":2", m_sProjOwner),
+                                //        new OracleParameter(":3", m_sProjOwner),
+                                //        new OracleParameter(":4", StringUtilities.HandleApostrophe(account.LastName)),
+                                //        new OracleParameter(":5", StringUtilities.HandleApostrophe(account.FirstName)),
+                                //        new OracleParameter(":6", StringUtilities.HandleApostrophe(account.MiddleInitial)),
+                                //        new OracleParameter(":7", StringUtilities.HandleApostrophe(account.HouseNo)),
+                                //        new OracleParameter(":8", StringUtilities.HandleApostrophe(account.Address)),
+                                //        new OracleParameter(":9", StringUtilities.HandleApostrophe(account.Barangay)),
+                                //        new OracleParameter(":10", StringUtilities.HandleApostrophe(account.City)),
+                                //        new OracleParameter(":11", StringUtilities.HandleApostrophe(account.Province)),
+                                //        new OracleParameter(":12", account.ZIP),
+                                //        new OracleParameter(":13", RecordFrm.txtBillNo.Text.ToString()),
+                                //        new OracleParameter(":14", sFeesCode),
+                                //        new OracleParameter(":15", dFeesAmt));
 
                             }
                         }

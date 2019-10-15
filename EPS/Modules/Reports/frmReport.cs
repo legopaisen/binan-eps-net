@@ -105,10 +105,6 @@ namespace Modules.Reports
 
             else if (ReportName == "Issued Permits Summary") //AFM 20190930
             {
-                MessageBox.Show("Under Construction (づ ◕‿◕ )づ");
-                return;
-
-
                 report_desc = string.Empty;
                 report_cd = string.Empty;
                 report_cd = "003";

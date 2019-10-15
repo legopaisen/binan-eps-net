@@ -16,6 +16,7 @@ namespace Modules.Reports
         public string ARN { get; set; }
         public DateTime dtTo { get; set; }
         public DateTime dtFrom { get; set; }
+
         
         public FormReportClass(frmReport Form)
         {

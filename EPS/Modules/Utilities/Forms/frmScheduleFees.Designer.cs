@@ -104,8 +104,10 @@
             // 
             this.txtSubAcctDescNew.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtSubAcctDescNew.Location = new System.Drawing.Point(194, 51);
+            this.txtSubAcctDescNew.MaximumSize = new System.Drawing.Size(369, 27);
+            this.txtSubAcctDescNew.MinimumSize = new System.Drawing.Size(369, 27);
             this.txtSubAcctDescNew.Name = "txtSubAcctDescNew";
-            this.txtSubAcctDescNew.Size = new System.Drawing.Size(376, 26);
+            this.txtSubAcctDescNew.Size = new System.Drawing.Size(369, 27);
             this.txtSubAcctDescNew.TabIndex = 7;
             this.txtSubAcctDescNew.Visible = false;
             // 
@@ -113,8 +115,10 @@
             // 
             this.txtRevenueAcctNew.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtRevenueAcctNew.Location = new System.Drawing.Point(194, 18);
+            this.txtRevenueAcctNew.MaximumSize = new System.Drawing.Size(369, 27);
+            this.txtRevenueAcctNew.MinimumSize = new System.Drawing.Size(369, 27);
             this.txtRevenueAcctNew.Name = "txtRevenueAcctNew";
-            this.txtRevenueAcctNew.Size = new System.Drawing.Size(376, 26);
+            this.txtRevenueAcctNew.Size = new System.Drawing.Size(369, 26);
             this.txtRevenueAcctNew.TabIndex = 3;
             this.txtRevenueAcctNew.Visible = false;
             // 
@@ -259,6 +263,7 @@
             this.dgvMajorFees.Size = new System.Drawing.Size(749, 151);
             this.dgvMajorFees.TabIndex = 12;
             this.dgvMajorFees.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMajorFees_CellClick);
+            this.dgvMajorFees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMajorFees_CellContentClick);
             this.dgvMajorFees.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMajorFees_CellEndEdit);
             // 
             // dataGridViewTextBoxColumn3

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace EPSEntities.Entity
 {
-    public class USER_LEVEL
+    public partial class user_level
     {
-        public string USER_LEV { get; set; }
+        public string USER_LEVEL { get; set; }
     }
 }

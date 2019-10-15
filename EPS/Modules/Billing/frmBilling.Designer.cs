@@ -71,14 +71,11 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCompute = new System.Windows.Forms.Button();
             this.dgvParameter = new System.Windows.Forms.DataGridView();
+            this.Para = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtAmtDue = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dgvAssessment = new System.Windows.Forms.DataGridView();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.Para = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Fees = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FeesCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,6 +88,9 @@
             this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Scope = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrigAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPermit)).BeginInit();
@@ -355,12 +355,14 @@
             this.Permit,
             this.Code});
             this.dgvPermit.Location = new System.Drawing.Point(6, 22);
+            this.dgvPermit.MultiSelect = false;
             this.dgvPermit.Name = "dgvPermit";
             this.dgvPermit.ReadOnly = true;
             this.dgvPermit.RowHeadersVisible = false;
             this.dgvPermit.Size = new System.Drawing.Size(187, 122);
             this.dgvPermit.TabIndex = 3;
-            this.dgvPermit.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPermit_CellContentClick);
+            this.dgvPermit.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPermit_CellClick);
+            this.dgvPermit.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPermit_CellValueChanged);
             // 
             // Select
             // 
@@ -530,6 +532,7 @@
             this.Para,
             this.Value});
             this.dgvParameter.Location = new System.Drawing.Point(6, 22);
+            this.dgvParameter.MultiSelect = false;
             this.dgvParameter.Name = "dgvParameter";
             this.dgvParameter.RowHeadersVisible = false;
             this.dgvParameter.Size = new System.Drawing.Size(249, 100);
@@ -591,51 +594,17 @@
             this.Category,
             this.Scope,
             this.OrigAmt});
+            this.dgvAssessment.Enabled = false;
             this.dgvAssessment.Location = new System.Drawing.Point(6, 26);
+            this.dgvAssessment.MultiSelect = false;
             this.dgvAssessment.Name = "dgvAssessment";
             this.dgvAssessment.RowHeadersVisible = false;
+            this.dgvAssessment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAssessment.Size = new System.Drawing.Size(586, 259);
             this.dgvAssessment.TabIndex = 4;
             this.dgvAssessment.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssessment_CellClick);
+            this.dgvAssessment.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssessment_CellContentClick);
             this.dgvAssessment.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssessment_CellLeave);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(578, 490);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 27);
-            this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "Save Billing";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Enabled = false;
-            this.btnPrint.Location = new System.Drawing.Point(684, 490);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(100, 27);
-            this.btnPrint.TabIndex = 3;
-            this.btnPrint.Text = "Print OP";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(790, 490);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 27);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // Value
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.Value.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Value.HeaderText = "Value";
-            this.Value.Name = "Value";
             // 
             // dataGridViewCheckBoxColumn1
             // 
@@ -710,6 +679,37 @@
             this.OrigAmt.HeaderText = "OrigAmt";
             this.OrigAmt.Name = "OrigAmt";
             this.OrigAmt.Visible = false;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(578, 490);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(100, 27);
+            this.btnSave.TabIndex = 3;
+            this.btnSave.Text = "Save Billing";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Enabled = false;
+            this.btnPrint.Location = new System.Drawing.Point(684, 490);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(100, 27);
+            this.btnPrint.TabIndex = 3;
+            this.btnPrint.Text = "Print OP";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(790, 490);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(100, 27);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // frmBilling
             // 

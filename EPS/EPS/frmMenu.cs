@@ -518,5 +518,19 @@ namespace EPS
             frmSummaryOfReport frmsummaryofreport = new frmSummaryOfReport();
             frmsummaryofreport.ShowDialog();
         }
+
+        private void paymentHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPaymentHist frmpaymenthist = new frmPaymentHist();
+            frmpaymenthist.ShowDialog();
+        }
+
+        private void printCertificationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("UNDER CONSTRUCTION");
+            return;
+            frmCertification frmcertification = new frmCertification();
+            frmcertification.ShowDialog();
+        }
     }
 }

@@ -102,6 +102,23 @@ namespace Common.DataConnector
 
         }
 
+        public void CreateANGARCS()
+        {
+            int intPort = 0;
+            int.TryParse(System.Configuration.ConfigurationManager.AppSettings["AngARCSPort"], out intPort);
+            objOracleDataConn = new OracleDataConnector(
+                       System.Configuration.ConfigurationManager.AppSettings["AngARCSHost"],
+                       intPort,
+                       System.Configuration.ConfigurationManager.AppSettings["AngARCSServiceName"],
+                       System.Configuration.ConfigurationManager.AppSettings["AngARCSUserId"],
+                       System.Configuration.ConfigurationManager.AppSettings["AngARCSPassword"]
+                                            );
+
+            objOracleDataConn.OpenConnection();
+
+            this.CreateInstance(objOracleDataConn.Connection);
+        }
+
         public bool isConnected
         {
             get
