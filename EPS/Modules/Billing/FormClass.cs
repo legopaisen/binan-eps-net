@@ -103,8 +103,16 @@ namespace Modules.Billing
             {
                 strWhereCond = $" where arn = '{RecordFrm.m_sAN}'"; // and permit_code = '{RecordFrm.PermitCode}'"; <- binan version 
 
-                result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
-                         select a;
+                if (AppSettingsManager.GetConfigValue("30") == "1")// AFM 20191016 if posting mode is set for engineering records
+                {
+                    result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
+                             select a;
+                }
+                else
+                {
+                    result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
+                             select a;
+                }
             }
 
             foreach (var item in result)
@@ -213,16 +221,23 @@ namespace Modules.Billing
             if (RecordFrm.Source == "CERTIFICATE OF OCCUPANCY" || RecordFrm.Source == "CERTIFICATE OF ANNUAL INSPECTION")
                 RecordFrm.dgvAssessment.DataSource = subcat.GetSubcategory(sPermitCode, RecordFrm.m_sAN, "application");
             else
-                RecordFrm.dgvAssessment.DataSource = subcat.GetSubcategory(sPermitCode, RecordFrm.m_sAN,"application_que");
-            RecordFrm.dgvAssessment.Columns[0].Width = 30;
-            RecordFrm.dgvAssessment.Columns[1].Width = 250;
-            RecordFrm.dgvAssessment.Columns[2].Visible = false;
-            RecordFrm.dgvAssessment.Columns[3].Visible = false;
-            RecordFrm.dgvAssessment.Columns[5].Visible = false;
-            RecordFrm.dgvAssessment.Columns[6].Visible = false;
-            RecordFrm.dgvAssessment.Columns[9].Visible = false;
-            RecordFrm.dgvAssessment.Columns[10].Visible = false;
-            RecordFrm.dgvAssessment.Columns[11].Visible = false;
+            {
+                if (AppSettingsManager.GetConfigValue("30") == "1") //AFM 20191016 added build up mode condition
+                    RecordFrm.dgvAssessment.DataSource = subcat.GetSubcategory(sPermitCode, RecordFrm.m_sAN, "application");
+                else
+                {
+                    RecordFrm.dgvAssessment.DataSource = subcat.GetSubcategory(sPermitCode, RecordFrm.m_sAN, "application_que");
+                }
+                RecordFrm.dgvAssessment.Columns[0].Width = 30;
+                RecordFrm.dgvAssessment.Columns[1].Width = 250;
+                RecordFrm.dgvAssessment.Columns[2].Visible = false;
+                RecordFrm.dgvAssessment.Columns[3].Visible = false;
+                RecordFrm.dgvAssessment.Columns[5].Visible = false;
+                RecordFrm.dgvAssessment.Columns[6].Visible = false;
+                RecordFrm.dgvAssessment.Columns[9].Visible = false;
+                RecordFrm.dgvAssessment.Columns[10].Visible = false;
+                RecordFrm.dgvAssessment.Columns[11].Visible = false;
+            }
 
             var db = new EPSConnection(dbConn);
 

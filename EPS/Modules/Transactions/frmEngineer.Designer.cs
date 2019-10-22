@@ -78,7 +78,6 @@
             this.txtMI.Location = new System.Drawing.Point(244, 67);
             this.txtMI.MaxLength = 2;
             this.txtMI.Name = "txtMI";
-            this.txtMI.ReadOnly = true;
             this.txtMI.Size = new System.Drawing.Size(28, 23);
             this.txtMI.TabIndex = 6;
             // 
@@ -89,7 +88,6 @@
             this.txtLastName.Location = new System.Drawing.Point(81, 41);
             this.txtLastName.MaxLength = 40;
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.ReadOnly = true;
             this.txtLastName.Size = new System.Drawing.Size(191, 23);
             this.txtLastName.TabIndex = 4;
             // 
@@ -100,7 +98,6 @@
             this.txtFirstName.Location = new System.Drawing.Point(81, 67);
             this.txtFirstName.MaxLength = 40;
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.ReadOnly = true;
             this.txtFirstName.Size = new System.Drawing.Size(125, 23);
             this.txtFirstName.TabIndex = 5;
             // 
@@ -111,7 +108,6 @@
             this.txtPTR.Location = new System.Drawing.Point(81, 93);
             this.txtPTR.MaxLength = 20;
             this.txtPTR.Name = "txtPTR";
-            this.txtPTR.ReadOnly = true;
             this.txtPTR.Size = new System.Drawing.Size(191, 23);
             this.txtPTR.TabIndex = 7;
             // 
@@ -122,7 +118,6 @@
             this.txtPRC.Location = new System.Drawing.Point(81, 119);
             this.txtPRC.MaxLength = 20;
             this.txtPRC.Name = "txtPRC";
-            this.txtPRC.ReadOnly = true;
             this.txtPRC.Size = new System.Drawing.Size(191, 23);
             this.txtPRC.TabIndex = 8;
             // 
@@ -133,7 +128,6 @@
             this.txtTIN.Location = new System.Drawing.Point(81, 145);
             this.txtTIN.MaxLength = 20;
             this.txtTIN.Name = "txtTIN";
-            this.txtTIN.ReadOnly = true;
             this.txtTIN.Size = new System.Drawing.Size(191, 23);
             this.txtTIN.TabIndex = 9;
             // 
@@ -253,7 +247,6 @@
             // 
             // cmbBrgy
             // 
-            this.cmbBrgy.Enabled = false;
             this.cmbBrgy.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBrgy.FormattingEnabled = true;
             this.cmbBrgy.Location = new System.Drawing.Point(92, 119);
@@ -268,7 +261,6 @@
             this.txtHseNo.Location = new System.Drawing.Point(92, 15);
             this.txtHseNo.MaxLength = 10;
             this.txtHseNo.Name = "txtHseNo";
-            this.txtHseNo.ReadOnly = true;
             this.txtHseNo.Size = new System.Drawing.Size(170, 23);
             this.txtHseNo.TabIndex = 11;
             // 
@@ -279,7 +271,6 @@
             this.txtLotNo.Location = new System.Drawing.Point(92, 41);
             this.txtLotNo.MaxLength = 10;
             this.txtLotNo.Name = "txtLotNo";
-            this.txtLotNo.ReadOnly = true;
             this.txtLotNo.Size = new System.Drawing.Size(170, 23);
             this.txtLotNo.TabIndex = 12;
             // 
@@ -290,7 +281,6 @@
             this.txtBlkNo.Location = new System.Drawing.Point(92, 67);
             this.txtBlkNo.MaxLength = 10;
             this.txtBlkNo.Name = "txtBlkNo";
-            this.txtBlkNo.ReadOnly = true;
             this.txtBlkNo.Size = new System.Drawing.Size(170, 23);
             this.txtBlkNo.TabIndex = 13;
             // 
@@ -301,7 +291,6 @@
             this.txtStreet.Location = new System.Drawing.Point(92, 93);
             this.txtStreet.MaxLength = 60;
             this.txtStreet.Name = "txtStreet";
-            this.txtStreet.ReadOnly = true;
             this.txtStreet.Size = new System.Drawing.Size(170, 23);
             this.txtStreet.TabIndex = 14;
             // 
@@ -407,7 +396,7 @@
             // 
             // cmbEngrType
             // 
-            this.cmbEngrType.Enabled = false;
+            this.cmbEngrType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEngrType.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEngrType.FormattingEnabled = true;
             this.cmbEngrType.Location = new System.Drawing.Point(81, 16);

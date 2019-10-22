@@ -23,6 +23,8 @@ namespace Modules.Transactions
         protected string m_sEngr = string.Empty;
         protected string m_sLotOwner = string.Empty;
         protected string m_sStrucOwner = string.Empty;
+        protected int engrIDTmp = 0;
+        protected string engrID = string.Empty;
 
         public RecordForm(frmRecords Form)
         {
@@ -73,6 +75,52 @@ namespace Modules.Transactions
 
         }
 
+        private void SaveEngineer()
+        {
+            OracleResultSet result = new OracleResultSet();
+            OracleResultSet result2 = new OracleResultSet();
+            string EngrTmp = string.Empty;
+            if (m_sArch == "")
+                EngrTmp = m_sEngr;
+            else
+                EngrTmp = m_sArch;
+
+            if (RecordFrm.SourceClass == "ENG_REC_EDIT") //AFM 20191022 saving of engineer for editing
+                try
+                {
+                    for (int cnt = 0; cnt < RecordFrm.formEngr.dgvList.Rows.Count; cnt++)
+                    {
+                        result.Query = $"delete from engineer_tbl where engr_code = '{RecordFrm.formEngr.dgvList[0, cnt].Value.ToString()}'";
+                        result.ExecuteNonQuery();
+                        result.Close();
+
+                        result2.Query = $"insert into engineer_tbl values('{RecordFrm.formEngr.dgvList[0, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[4, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[1, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[2, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[3, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[6, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[7, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[8, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[5, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[9, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[10, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[11, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[12, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[13, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[15, cnt].Value.ToString()}','{RecordFrm.formEngr.dgvList[14, cnt].Value.ToString()}')";
+                        result2.ExecuteNonQuery();
+                        result2.Close();
+                    }
+                }
+                catch { }
+            else //AFM 20191022 saving of engineer for new
+            {
+                result2.Query = $"insert into engineer_tbl values('{EngrTmp}','{RecordFrm.formEngr.cmbEngrType.Text}','{RecordFrm.formEngr.txtLastName.Text}','{RecordFrm.formEngr.txtFirstName.Text}','{RecordFrm.formEngr.txtMI.Text}','{RecordFrm.formEngr.txtHseNo.Text}','{RecordFrm.formEngr.txtLotNo.Text}','{RecordFrm.formEngr.txtBlkNo.Text}','{RecordFrm.formEngr.txtStreet.Text}','{RecordFrm.formEngr.cmbBrgy.Text}','{RecordFrm.formEngr.txtMun.Text}','{RecordFrm.formEngr.txtProv.Text}','{RecordFrm.formEngr.txtZIP.Text}','{RecordFrm.formEngr.txtTIN.Text}','{RecordFrm.formEngr.txtPRC.Text}','{RecordFrm.formEngr.txtPTR.Text}')";
+                result2.ExecuteNonQuery();
+                result2.Close();
+            }
+
+        }
+
+        protected void GenerateEngrNo() //AFM 20191021 add new engineer
+        {
+            OracleResultSet result = new OracleResultSet();
+            result.Query = "select max(engr_code) from engineer_tbl";
+            if(result.Execute())
+                if(result.Read())
+                {
+                    engrIDTmp = Convert.ToInt32(result.GetString(0)) + 1;
+                    engrID = String.Format("{0:000000}", engrIDTmp);
+                }
+        }
+
         protected void GetArchEngr(string sPermit)
         {
             m_sArch = string.Empty;
@@ -87,31 +135,79 @@ namespace Modules.Transactions
                     sTmp = RecordFrm.formEngr.dgvList[4, i].Value.ToString();
                     if (sTmp == "ARCHITECT")
                     {
-                        m_sArch = RecordFrm.formEngr.dgvList[0, i].Value.ToString();
+                        if (RecordFrm.formEngr.dgvList[0, i].Value.ToString() == "")
+                        {
+                            GenerateEngrNo();
+                            m_sArch = engrID;
+                            SaveEngineer();
+                        }
+                        else
+                            m_sArch = RecordFrm.formEngr.dgvList[0, i].Value.ToString();
+                            SaveEngineer();
                     }
                     else
                     {
                         m_sEngr = "";
                         if (sTmp == "ELECTRICAL" && sPermit.Contains("ELECTRICAL"))
                         {
-                            m_sEngr = RecordFrm.formEngr.dgvList[0, i].Value.ToString();
+                            if (RecordFrm.formEngr.dgvList[0, i].Value.ToString() == "")
+                            {
+                                GenerateEngrNo();
+                                m_sEngr = engrID;
+                                SaveEngineer();
+                            }
+                            else
+                            {
+                                m_sEngr = RecordFrm.formEngr.dgvList[0, i].Value.ToString();
+                                SaveEngineer();
+                            }
                             break;
                         }
                         else if (sTmp == "MECHANICAL" && sPermit.Contains("MECHANICAL"))
                         {
-                            m_sEngr = RecordFrm.formEngr.dgvList[0, i].Value.ToString();
+                            if (RecordFrm.formEngr.dgvList[0, i].Value.ToString() == "")
+                            {
+                                GenerateEngrNo();
+                                m_sEngr = engrID;
+                                SaveEngineer();
+                            }
+                            else
+                            {
+                                m_sEngr = RecordFrm.formEngr.dgvList[0, i].Value.ToString();
+                                SaveEngineer();
+                            }
                             break;
                         }
                         else if (sTmp == "SANITARY" && sPermit.Contains("SANITARY"))
                         {
-                            m_sEngr = RecordFrm.formEngr.dgvList[0, i].Value.ToString();
+                            if (RecordFrm.formEngr.dgvList[0, i].Value.ToString() == "")
+                            {
+                                GenerateEngrNo();
+                                m_sEngr = engrID;
+                                SaveEngineer();
+                            }
+                            else
+                            {
+                                m_sEngr = RecordFrm.formEngr.dgvList[0, i].Value.ToString();
+                                SaveEngineer();
+                            }
                             break;
                         }
                         else if (sTmp == "CIVIL")
                         {
                             if (!sPermit.Contains("ELECTRICAL") && !sPermit.Contains("MECHANICAL") && !sPermit.Contains("SANITARY"))
                             {
-                                m_sEngr = RecordFrm.formEngr.dgvList[0, i].Value.ToString();
+                                if (RecordFrm.formEngr.dgvList[0, i].Value.ToString() == "")
+                                {
+                                    GenerateEngrNo();
+                                    m_sEngr = engrID;
+                                    SaveEngineer();
+                                }
+                                else
+                                {
+                                    m_sEngr = RecordFrm.formEngr.dgvList[0, i].Value.ToString();
+                                    SaveEngineer();
+                                }
                                 break;
                             }
                         }

@@ -30,55 +30,55 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPosting));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.grpDetails = new System.Windows.Forms.GroupBox();
+            this.chkOthers = new System.Windows.Forms.CheckBox();
+            this.txtProjOwn = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtProjLoc = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtProjDesc = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.arn1 = new Modules.ARN.ARN();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtProjDesc = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtProjLoc = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtProjOwn = new System.Windows.Forms.TextBox();
-            this.dgvList = new System.Windows.Forms.DataGridView();
-            this.txtOrNo = new System.Windows.Forms.TextBox();
-            this.dtpDate = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.rdoCash = new System.Windows.Forms.RadioButton();
-            this.rdoCheck = new System.Windows.Forms.RadioButton();
-            this.txtAmt = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtMemo = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtTeller = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtBillNo = new System.Windows.Forms.TextBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtCash = new System.Windows.Forms.TextBox();
-            this.txtAmtTendered = new System.Windows.Forms.TextBox();
+            this.grpDetails = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtChange = new System.Windows.Forms.TextBox();
+            this.txtDebit = new System.Windows.Forms.TextBox();
+            this.txtAmtTendered = new System.Windows.Forms.TextBox();
+            this.txtCash = new System.Windows.Forms.TextBox();
+            this.txtBillNo = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtTeller = new System.Windows.Forms.TextBox();
+            this.txtMemo = new System.Windows.Forms.TextBox();
+            this.txtAmt = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rdoCheck = new System.Windows.Forms.RadioButton();
+            this.rdoCash = new System.Windows.Forms.RadioButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.txtOrNo = new System.Windows.Forms.TextBox();
+            this.dgvList = new System.Windows.Forms.DataGridView();
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fees = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtDebit = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtChange = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.arn1 = new Modules.ARN.ARN();
-            this.chkOthers = new System.Windows.Forms.CheckBox();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.grpDetails.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -95,46 +95,95 @@
             this.groupBox1.Controls.Add(this.btnSearch);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(16, 8);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(568, 157);
             this.groupBox1.TabIndex = 111;
             this.groupBox1.TabStop = false;
             // 
-            // grpDetails
+            // chkOthers
             // 
-            this.grpDetails.Controls.Add(this.label14);
-            this.grpDetails.Controls.Add(this.label13);
-            this.grpDetails.Controls.Add(this.label12);
-            this.grpDetails.Controls.Add(this.label11);
-            this.grpDetails.Controls.Add(this.txtChange);
-            this.grpDetails.Controls.Add(this.txtDebit);
-            this.grpDetails.Controls.Add(this.txtAmtTendered);
-            this.grpDetails.Controls.Add(this.txtCash);
-            this.grpDetails.Controls.Add(this.txtBillNo);
-            this.grpDetails.Controls.Add(this.label10);
-            this.grpDetails.Controls.Add(this.label9);
-            this.grpDetails.Controls.Add(this.btnSave);
-            this.grpDetails.Controls.Add(this.label8);
-            this.grpDetails.Controls.Add(this.label7);
-            this.grpDetails.Controls.Add(this.label6);
-            this.grpDetails.Controls.Add(this.txtTeller);
-            this.grpDetails.Controls.Add(this.txtMemo);
-            this.grpDetails.Controls.Add(this.txtAmt);
-            this.grpDetails.Controls.Add(this.groupBox3);
-            this.grpDetails.Controls.Add(this.label5);
-            this.grpDetails.Controls.Add(this.dtpDate);
-            this.grpDetails.Controls.Add(this.txtOrNo);
-            this.grpDetails.Controls.Add(this.dgvList);
-            this.grpDetails.Enabled = false;
-            this.grpDetails.Location = new System.Drawing.Point(16, 167);
-            this.grpDetails.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpDetails.Name = "grpDetails";
-            this.grpDetails.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpDetails.Size = new System.Drawing.Size(568, 438);
-            this.grpDetails.TabIndex = 112;
-            this.grpDetails.TabStop = false;
+            this.chkOthers.AutoSize = true;
+            this.chkOthers.Location = new System.Drawing.Point(382, 19);
+            this.chkOthers.Name = "chkOthers";
+            this.chkOthers.Size = new System.Drawing.Size(135, 22);
+            this.chkOthers.TabIndex = 20;
+            this.chkOthers.Text = "Other Certificates";
+            this.chkOthers.UseVisualStyleBackColor = true;
+            this.chkOthers.CheckedChanged += new System.EventHandler(this.chkOthers_CheckedChanged);
+            // 
+            // txtProjOwn
+            // 
+            this.txtProjOwn.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtProjOwn.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProjOwn.Location = new System.Drawing.Point(148, 123);
+            this.txtProjOwn.Name = "txtProjOwn";
+            this.txtProjOwn.ReadOnly = true;
+            this.txtProjOwn.Size = new System.Drawing.Size(399, 23);
+            this.txtProjOwn.TabIndex = 19;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 126);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(101, 18);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Project Owner:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // txtProjLoc
+            // 
+            this.txtProjLoc.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtProjLoc.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProjLoc.Location = new System.Drawing.Point(148, 94);
+            this.txtProjLoc.Name = "txtProjLoc";
+            this.txtProjLoc.ReadOnly = true;
+            this.txtProjLoc.Size = new System.Drawing.Size(399, 23);
+            this.txtProjLoc.TabIndex = 19;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 97);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(110, 18);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Project Location:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // txtProjDesc
+            // 
+            this.txtProjDesc.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtProjDesc.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProjDesc.Location = new System.Drawing.Point(148, 65);
+            this.txtProjDesc.Name = "txtProjDesc";
+            this.txtProjDesc.ReadOnly = true;
+            this.txtProjDesc.Size = new System.Drawing.Size(399, 23);
+            this.txtProjDesc.TabIndex = 19;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 68);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(129, 18);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Project Description:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // arn1
+            // 
+            this.arn1.GetDistCode = "";
+            this.arn1.GetLGUCode = "";
+            this.arn1.GetSeries = "";
+            this.arn1.GetTaxYear = "";
+            this.arn1.Location = new System.Drawing.Point(58, 15);
+            this.arn1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.arn1.Name = "arn1";
+            this.arn1.Size = new System.Drawing.Size(210, 36);
+            this.arn1.TabIndex = 0;
             // 
             // btnClear
             // 
@@ -167,110 +216,202 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "AN:";
             // 
-            // txtProjDesc
+            // grpDetails
             // 
-            this.txtProjDesc.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtProjDesc.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProjDesc.Location = new System.Drawing.Point(148, 65);
-            this.txtProjDesc.Name = "txtProjDesc";
-            this.txtProjDesc.ReadOnly = true;
-            this.txtProjDesc.Size = new System.Drawing.Size(399, 23);
-            this.txtProjDesc.TabIndex = 19;
+            this.grpDetails.Controls.Add(this.label14);
+            this.grpDetails.Controls.Add(this.label13);
+            this.grpDetails.Controls.Add(this.label12);
+            this.grpDetails.Controls.Add(this.label11);
+            this.grpDetails.Controls.Add(this.txtChange);
+            this.grpDetails.Controls.Add(this.txtDebit);
+            this.grpDetails.Controls.Add(this.txtAmtTendered);
+            this.grpDetails.Controls.Add(this.txtCash);
+            this.grpDetails.Controls.Add(this.txtBillNo);
+            this.grpDetails.Controls.Add(this.label10);
+            this.grpDetails.Controls.Add(this.label9);
+            this.grpDetails.Controls.Add(this.btnSave);
+            this.grpDetails.Controls.Add(this.label8);
+            this.grpDetails.Controls.Add(this.label7);
+            this.grpDetails.Controls.Add(this.label6);
+            this.grpDetails.Controls.Add(this.txtTeller);
+            this.grpDetails.Controls.Add(this.txtMemo);
+            this.grpDetails.Controls.Add(this.txtAmt);
+            this.grpDetails.Controls.Add(this.groupBox3);
+            this.grpDetails.Controls.Add(this.label5);
+            this.grpDetails.Controls.Add(this.dtpDate);
+            this.grpDetails.Controls.Add(this.txtOrNo);
+            this.grpDetails.Controls.Add(this.dgvList);
+            this.grpDetails.Enabled = false;
+            this.grpDetails.Location = new System.Drawing.Point(16, 167);
+            this.grpDetails.Margin = new System.Windows.Forms.Padding(4);
+            this.grpDetails.Name = "grpDetails";
+            this.grpDetails.Padding = new System.Windows.Forms.Padding(4);
+            this.grpDetails.Size = new System.Drawing.Size(568, 438);
+            this.grpDetails.TabIndex = 112;
+            this.grpDetails.TabStop = false;
             // 
-            // label2
+            // label14
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 18);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Project Description:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(248, 356);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(58, 18);
+            this.label14.TabIndex = 117;
+            this.label14.Text = "Change:";
             // 
-            // label3
+            // label13
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 97);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 18);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Project Location:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(221, 329);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(90, 18);
+            this.label13.TabIndex = 117;
+            this.label13.Text = "Debit/Credit:";
             // 
-            // txtProjLoc
+            // label12
             // 
-            this.txtProjLoc.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtProjLoc.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProjLoc.Location = new System.Drawing.Point(148, 94);
-            this.txtProjLoc.Name = "txtProjLoc";
-            this.txtProjLoc.ReadOnly = true;
-            this.txtProjLoc.Size = new System.Drawing.Size(399, 23);
-            this.txtProjLoc.TabIndex = 19;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(207, 300);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(104, 18);
+            this.label12.TabIndex = 117;
+            this.label12.Text = "Amt. Tendered:";
             // 
-            // label4
+            // label11
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 126);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 18);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Project Owner:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(270, 272);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(41, 18);
+            this.label11.TabIndex = 117;
+            this.label11.Text = "Cash:";
             // 
-            // txtProjOwn
+            // txtChange
             // 
-            this.txtProjOwn.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtProjOwn.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProjOwn.Location = new System.Drawing.Point(148, 123);
-            this.txtProjOwn.Name = "txtProjOwn";
-            this.txtProjOwn.ReadOnly = true;
-            this.txtProjOwn.Size = new System.Drawing.Size(399, 23);
-            this.txtProjOwn.TabIndex = 19;
+            this.txtChange.Location = new System.Drawing.Point(317, 353);
+            this.txtChange.Name = "txtChange";
+            this.txtChange.ReadOnly = true;
+            this.txtChange.Size = new System.Drawing.Size(113, 26);
+            this.txtChange.TabIndex = 11;
+            this.txtChange.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // dgvList
+            // txtDebit
             // 
-            this.dgvList.AllowUserToAddRows = false;
-            this.dgvList.AllowUserToDeleteRows = false;
-            this.dgvList.AllowUserToResizeRows = false;
-            this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Code,
-            this.Fees,
-            this.Amount});
-            this.dgvList.Location = new System.Drawing.Point(7, 17);
-            this.dgvList.Name = "dgvList";
-            this.dgvList.ReadOnly = true;
-            this.dgvList.RowHeadersVisible = false;
-            this.dgvList.Size = new System.Drawing.Size(424, 218);
-            this.dgvList.TabIndex = 3;
-            this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
-            this.dgvList.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellLeave);
-            this.dgvList.Leave += new System.EventHandler(this.dgvList_Leave);
+            this.txtDebit.Location = new System.Drawing.Point(317, 325);
+            this.txtDebit.Name = "txtDebit";
+            this.txtDebit.ReadOnly = true;
+            this.txtDebit.Size = new System.Drawing.Size(113, 26);
+            this.txtDebit.TabIndex = 10;
+            this.txtDebit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // txtOrNo
+            // txtAmtTendered
             // 
-            this.txtOrNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtOrNo.Location = new System.Drawing.Point(446, 147);
-            this.txtOrNo.Name = "txtOrNo";
-            this.txtOrNo.Size = new System.Drawing.Size(113, 26);
-            this.txtOrNo.TabIndex = 5;
+            this.txtAmtTendered.Location = new System.Drawing.Point(317, 297);
+            this.txtAmtTendered.Name = "txtAmtTendered";
+            this.txtAmtTendered.ReadOnly = true;
+            this.txtAmtTendered.Size = new System.Drawing.Size(113, 26);
+            this.txtAmtTendered.TabIndex = 9;
+            this.txtAmtTendered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // dtpDate
+            // txtCash
             // 
-            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDate.Location = new System.Drawing.Point(446, 94);
-            this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(111, 26);
-            this.dtpDate.TabIndex = 4;
+            this.txtCash.Location = new System.Drawing.Point(317, 269);
+            this.txtCash.Name = "txtCash";
+            this.txtCash.ReadOnly = true;
+            this.txtCash.Size = new System.Drawing.Size(113, 26);
+            this.txtCash.TabIndex = 8;
+            this.txtCash.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCash.Leave += new System.EventHandler(this.txtCash_Leave);
             // 
-            // label5
+            // txtBillNo
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(443, 126);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 18);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "OR No:";
+            this.txtBillNo.Location = new System.Drawing.Point(446, 38);
+            this.txtBillNo.Name = "txtBillNo";
+            this.txtBillNo.ReadOnly = true;
+            this.txtBillNo.Size = new System.Drawing.Size(113, 26);
+            this.txtBillNo.TabIndex = 115;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(443, 17);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 18);
+            this.label10.TabIndex = 114;
+            this.label10.Text = "Billing No:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(445, 73);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(62, 18);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "OR Date:";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(451, 395);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(108, 28);
+            this.btnSave.TabIndex = 14;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(5, 400);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 18);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "Teller:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 249);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 18);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Memo:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(188, 244);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(123, 18);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Total Amount Due:";
+            // 
+            // txtTeller
+            // 
+            this.txtTeller.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtTeller.Location = new System.Drawing.Point(58, 397);
+            this.txtTeller.MaxLength = 10;
+            this.txtTeller.Name = "txtTeller";
+            this.txtTeller.Size = new System.Drawing.Size(143, 26);
+            this.txtTeller.TabIndex = 13;
+            // 
+            // txtMemo
+            // 
+            this.txtMemo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtMemo.Location = new System.Drawing.Point(7, 270);
+            this.txtMemo.Multiline = true;
+            this.txtMemo.Name = "txtMemo";
+            this.txtMemo.Size = new System.Drawing.Size(194, 121);
+            this.txtMemo.TabIndex = 12;
+            // 
+            // txtAmt
+            // 
+            this.txtAmt.Location = new System.Drawing.Point(317, 241);
+            this.txtAmt.Name = "txtAmt";
+            this.txtAmt.ReadOnly = true;
+            this.txtAmt.Size = new System.Drawing.Size(113, 26);
+            this.txtAmt.TabIndex = 22;
+            this.txtAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // groupBox3
             // 
@@ -282,18 +423,6 @@
             this.groupBox3.TabIndex = 113;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Payment Mode";
-            // 
-            // rdoCash
-            // 
-            this.rdoCash.AutoSize = true;
-            this.rdoCash.Location = new System.Drawing.Point(23, 25);
-            this.rdoCash.Name = "rdoCash";
-            this.rdoCash.Size = new System.Drawing.Size(55, 22);
-            this.rdoCash.TabIndex = 6;
-            this.rdoCash.TabStop = true;
-            this.rdoCash.Text = "Cash";
-            this.rdoCash.UseVisualStyleBackColor = true;
-            this.rdoCash.CheckedChanged += new System.EventHandler(this.rdoCash_CheckedChanged);
             // 
             // rdoCheck
             // 
@@ -307,68 +436,86 @@
             this.rdoCheck.UseVisualStyleBackColor = true;
             this.rdoCheck.CheckedChanged += new System.EventHandler(this.rdoCheck_CheckedChanged);
             // 
-            // txtAmt
+            // rdoCash
             // 
-            this.txtAmt.Location = new System.Drawing.Point(317, 241);
-            this.txtAmt.Name = "txtAmt";
-            this.txtAmt.ReadOnly = true;
-            this.txtAmt.Size = new System.Drawing.Size(113, 26);
-            this.txtAmt.TabIndex = 22;
-            this.txtAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.rdoCash.AutoSize = true;
+            this.rdoCash.Location = new System.Drawing.Point(23, 25);
+            this.rdoCash.Name = "rdoCash";
+            this.rdoCash.Size = new System.Drawing.Size(55, 22);
+            this.rdoCash.TabIndex = 6;
+            this.rdoCash.TabStop = true;
+            this.rdoCash.Text = "Cash";
+            this.rdoCash.UseVisualStyleBackColor = true;
+            this.rdoCash.CheckedChanged += new System.EventHandler(this.rdoCash_CheckedChanged);
             // 
-            // label6
+            // label5
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(188, 244);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(123, 18);
-            this.label6.TabIndex = 23;
-            this.label6.Text = "Total Amount Due:";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(443, 126);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 18);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "OR No:";
             // 
-            // txtMemo
+            // dtpDate
             // 
-            this.txtMemo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtMemo.Location = new System.Drawing.Point(7, 270);
-            this.txtMemo.Multiline = true;
-            this.txtMemo.Name = "txtMemo";
-            this.txtMemo.Size = new System.Drawing.Size(194, 121);
-            this.txtMemo.TabIndex = 12;
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDate.Location = new System.Drawing.Point(446, 94);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(111, 26);
+            this.dtpDate.TabIndex = 4;
             // 
-            // label7
+            // txtOrNo
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 249);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 18);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "Memo:";
+            this.txtOrNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtOrNo.Location = new System.Drawing.Point(446, 147);
+            this.txtOrNo.Name = "txtOrNo";
+            this.txtOrNo.Size = new System.Drawing.Size(113, 26);
+            this.txtOrNo.TabIndex = 5;
             // 
-            // txtTeller
+            // dgvList
             // 
-            this.txtTeller.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtTeller.Location = new System.Drawing.Point(58, 397);
-            this.txtTeller.Name = "txtTeller";
-            this.txtTeller.Size = new System.Drawing.Size(143, 26);
-            this.txtTeller.TabIndex = 13;
+            this.dgvList.AllowUserToAddRows = false;
+            this.dgvList.AllowUserToDeleteRows = false;
+            this.dgvList.AllowUserToResizeRows = false;
+            this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Code,
+            this.Fees,
+            this.Amount});
+            this.dgvList.Location = new System.Drawing.Point(7, 17);
+            this.dgvList.Name = "dgvList";
+            this.dgvList.RowHeadersVisible = false;
+            this.dgvList.Size = new System.Drawing.Size(424, 218);
+            this.dgvList.TabIndex = 3;
+            this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
+            this.dgvList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellValueChanged);
+            this.dgvList.Leave += new System.EventHandler(this.dgvList_Leave);
             // 
-            // label8
+            // Code
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(5, 400);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(47, 18);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Teller:";
+            this.Code.HeaderText = "Code";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            this.Code.Width = 70;
             // 
-            // btnSave
+            // Fees
             // 
-            this.btnSave.Location = new System.Drawing.Point(451, 395);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(108, 28);
-            this.btnSave.TabIndex = 14;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.Fees.HeaderText = "Fees";
+            this.Fees.Name = "Fees";
+            this.Fees.ReadOnly = true;
+            this.Fees.Width = 230;
+            // 
+            // Amount
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = "0";
+            this.Amount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
+            this.Amount.Width = 120;
             // 
             // btnExit
             // 
@@ -379,153 +526,6 @@
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(445, 73);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(62, 18);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "OR Date:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(443, 17);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 18);
-            this.label10.TabIndex = 114;
-            this.label10.Text = "Billing No:";
-            // 
-            // txtBillNo
-            // 
-            this.txtBillNo.Location = new System.Drawing.Point(446, 38);
-            this.txtBillNo.Name = "txtBillNo";
-            this.txtBillNo.ReadOnly = true;
-            this.txtBillNo.Size = new System.Drawing.Size(113, 26);
-            this.txtBillNo.TabIndex = 115;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(270, 272);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 18);
-            this.label11.TabIndex = 117;
-            this.label11.Text = "Cash:";
-            // 
-            // txtCash
-            // 
-            this.txtCash.Location = new System.Drawing.Point(317, 269);
-            this.txtCash.Name = "txtCash";
-            this.txtCash.ReadOnly = true;
-            this.txtCash.Size = new System.Drawing.Size(113, 26);
-            this.txtCash.TabIndex = 8;
-            this.txtCash.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCash.Leave += new System.EventHandler(this.txtCash_Leave);
-            // 
-            // txtAmtTendered
-            // 
-            this.txtAmtTendered.Location = new System.Drawing.Point(317, 297);
-            this.txtAmtTendered.Name = "txtAmtTendered";
-            this.txtAmtTendered.ReadOnly = true;
-            this.txtAmtTendered.Size = new System.Drawing.Size(113, 26);
-            this.txtAmtTendered.TabIndex = 9;
-            this.txtAmtTendered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(207, 300);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(104, 18);
-            this.label12.TabIndex = 117;
-            this.label12.Text = "Amt. Tendered:";
-            // 
-            // Code
-            // 
-            this.Code.HeaderText = "Code";
-            this.Code.Name = "Code";
-            this.Code.Width = 70;
-            // 
-            // Fees
-            // 
-            this.Fees.HeaderText = "Fees";
-            this.Fees.Name = "Fees";
-            this.Fees.Width = 230;
-            // 
-            // Amount
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = "0";
-            this.Amount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
-            this.Amount.Width = 120;
-            // 
-            // txtDebit
-            // 
-            this.txtDebit.Location = new System.Drawing.Point(317, 325);
-            this.txtDebit.Name = "txtDebit";
-            this.txtDebit.ReadOnly = true;
-            this.txtDebit.Size = new System.Drawing.Size(113, 26);
-            this.txtDebit.TabIndex = 10;
-            this.txtDebit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(221, 329);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(90, 18);
-            this.label13.TabIndex = 117;
-            this.label13.Text = "Debit/Credit:";
-            // 
-            // txtChange
-            // 
-            this.txtChange.Location = new System.Drawing.Point(317, 353);
-            this.txtChange.Name = "txtChange";
-            this.txtChange.ReadOnly = true;
-            this.txtChange.Size = new System.Drawing.Size(113, 26);
-            this.txtChange.TabIndex = 11;
-            this.txtChange.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(248, 356);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(58, 18);
-            this.label14.TabIndex = 117;
-            this.label14.Text = "Change:";
-            // 
-            // arn1
-            // 
-            //this.arn1.GetCode = "";
-            this.arn1.GetLGUCode = "";
-            //this.arn1.GetMonth = "";
-            this.arn1.GetDistCode = "";
-            this.arn1.GetSeries = "";
-            this.arn1.GetTaxYear = "";
-            this.arn1.Location = new System.Drawing.Point(58, 15);
-            this.arn1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.arn1.Name = "arn1";
-            this.arn1.Size = new System.Drawing.Size(210, 36);
-            this.arn1.TabIndex = 0;
-            // 
-            // chkOthers
-            // 
-            this.chkOthers.AutoSize = true;
-            this.chkOthers.Location = new System.Drawing.Point(382, 19);
-            this.chkOthers.Name = "chkOthers";
-            this.chkOthers.Size = new System.Drawing.Size(135, 22);
-            this.chkOthers.TabIndex = 20;
-            this.chkOthers.Text = "Other Certificates";
-            this.chkOthers.UseVisualStyleBackColor = true;
-            this.chkOthers.CheckedChanged += new System.EventHandler(this.chkOthers_CheckedChanged);
             // 
             // frmPosting
             // 
@@ -538,7 +538,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmPosting";
@@ -549,9 +549,9 @@
             this.groupBox1.PerformLayout();
             this.grpDetails.ResumeLayout(false);
             this.grpDetails.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvList)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -598,9 +598,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtChange;
         private System.Windows.Forms.TextBox txtDebit;
+        private System.Windows.Forms.CheckBox chkOthers;
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fees;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
-        private System.Windows.Forms.CheckBox chkOthers;
     }
 }

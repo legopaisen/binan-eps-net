@@ -115,6 +115,11 @@ namespace Modules.Transactions
             ClearControls();
         }
 
+        public void ClearDgView()
+        {
+            dgvList.Rows.Clear();
+        }
+
         public void ClearControls()
         {
             iRow = -1;
@@ -133,6 +138,7 @@ namespace Modules.Transactions
             txtProv.Text = "";
             txtStreet.Text = "";
             txtZIP.Text = "";
+            //dgvList.Rows.Clear();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

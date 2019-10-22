@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Common.AppSettings;
 using EPSEntities.Entity;
 using EPSEntities.Connection;
+using System.Data.Entity;
 
 namespace Modules.Records
 {

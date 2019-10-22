@@ -483,7 +483,11 @@ namespace EPS
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            if (MessageBox.Show("Are you sure you want to log out?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                frmLogin frmlogin = new frmLogin();
+                frmlogin.ShowDialog();
+            }
         }
 
 		private void permitBillingToolStripMenuItem_Click(object sender, EventArgs e)

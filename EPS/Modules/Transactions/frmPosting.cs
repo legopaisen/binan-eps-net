@@ -13,6 +13,7 @@ using EPSEntities.Connection;
 using EPSEntities.Entity;
 using Oracle.ManagedDataAccess.Client;
 using ARCSEntities.Connection;
+using Common.DataConnector;
 
 namespace Modules.Transactions
 {
@@ -44,9 +45,31 @@ namespace Modules.Transactions
             toolTip1.SetToolTip(btnSearch, "Search Application");
             toolTip2.SetToolTip(btnClear, "Clear Controls");
         }
+        private bool ValidatePayment()
+        {
+            OracleResultSet result = new OracleResultSet();
+            result.Query = $"select * from mrs_payments where arn = '{arn1.GetArn()}'";
+            if(result.Execute())
+                if(result.Read())
+                {
+                    MessageBox.Show("ARN already paid");
+                    ClearControls();
+                    //arn1.GetCode = "";
+                    arn1.GetLGUCode = "";
+                    arn1.GetTaxYear = "";
+                    //arn1.GetMonth = "";
+                    arn1.GetDistCode = "";
+                    arn1.GetSeries = "";
+                    return false;
+                }
+            return true;
+        }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            if (!ValidatePayment()) //AFM 20191018 check if record has payment
+                return;
+
             if (string.IsNullOrEmpty(arn1.GetTaxYear) && string.IsNullOrEmpty(arn1.GetSeries))
             {
                 SearchAccount.frmSearchARN form = new SearchAccount.frmSearchARN();
@@ -157,9 +180,19 @@ namespace Modules.Transactions
             }
             else
             {
-                strWhereCond = $" where arn = '{arn1.GetArn()}'";
-                result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
+                if (AppSettingsManager.GetConfigValue("30") == "0")
+                {
+                    strWhereCond = $" where arn = '{arn1.GetArn()}'";
+                    result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
                              select a;
+                }
+                if (AppSettingsManager.GetConfigValue("30") == "1") //AFM 20191016 get from application table
+                {
+                    strWhereCond = $" where arn = '{arn1.GetArn()}'";
+                    result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
+                             select a;
+                }
+
             }
 
             foreach (var item in result)
@@ -216,7 +249,12 @@ namespace Modules.Transactions
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearControls();
-            
+            //arn1.GetCode = "";
+            arn1.GetLGUCode = "";
+            arn1.GetTaxYear = "";
+            //arn1.GetMonth = "";
+            arn1.GetDistCode = "";
+            arn1.GetSeries = "";
             taskman.RemTask(arn1.GetArn());
         }
 
@@ -237,10 +275,17 @@ namespace Modules.Transactions
                 txtBillNo.Text = item.BILL_NO;
             }
 
-            if (string.IsNullOrEmpty(txtBillNo.Text.ToString()))
+            if (AppSettingsManager.GetConfigValue("30") == "0") //AFM 20191016
             {
-                MessageBox.Show("Application not yet billed", "Posting", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return;
+                if (string.IsNullOrEmpty(txtBillNo.Text.ToString()))
+                {
+                    MessageBox.Show("Application not yet billed", "Posting", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    return;
+                }
+            }
+            else
+            {
+                txtBillNo.Enabled = true;
             }
 
             string sFeesCode = string.Empty;
@@ -256,6 +301,9 @@ namespace Modules.Transactions
                 sFeesAmt = string.Format("{0:#,###.00}", item.FEES_AMT);
                 dgvList.Rows.Add(sFeesCode, subcat.GetFeesDesc(sFeesCode), sFeesAmt);
             }
+
+            if(AppSettingsManager.GetConfigValue("30") == "1")// AFM 20191017 allow editing of amount in build up mode
+                dgvList.Columns[2].ReadOnly = false;
 
             ComputeTotal();
         }
@@ -702,11 +750,16 @@ namespace Modules.Transactions
 
 
             try
-            {
-                var dbarcs = new ARCSConnection(dbConnArcs);
+            {    
+                OracleResultSet result = new OracleResultSet();
+                result.CreateANGARCS();
+                result.Query = $"delete from eps_billing where arn = '{arn1.GetArn()}'";
+                result.ExecuteNonQuery();
+                result.Close();
 
-                sQuery = $"delete from eps_billing where arn = '{arn1.GetArn()}'";
-                dbarcs.Database.ExecuteSqlCommand(sQuery);
+                //var dbarcs = new ARCSConnection(dbConnArcs);
+                //sQuery = $"delete from eps_billing where arn = '{arn1.GetArn()}'";
+                //dbarcs.Database.ExecuteSqlCommand(sQuery);
 
             }
             catch { }
@@ -1047,11 +1100,19 @@ namespace Modules.Transactions
             // ComputeTotal();
         }
 
-        private void dgvList_CellLeave(object sender, DataGridViewCellEventArgs e)
+        //private void dgvList_CellLeave(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex == 2)
+        //        ComputeTotal();
+        //}
+
+        // AFM 20191017 changed event to properly get value before firing
+        private void dgvList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 2)
                 ComputeTotal();
         }
+
 
         private void txtCash_Leave(object sender, EventArgs e)
         {

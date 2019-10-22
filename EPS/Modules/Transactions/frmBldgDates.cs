@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Modules.Utilities;
 using Common.AppSettings;
 using EPSEntities.Connection;
+using System.Collections.ObjectModel;
 
 namespace Modules.Transactions
 {
@@ -75,9 +76,17 @@ namespace Modules.Transactions
             this.txtStoreys.Text = "";
             this.txtUnits.Text = "";
             this.txtBldgNo.Text = "";
-            dgvList.Rows.Clear();
 
+            dgvList.Controls.Clear(); //for clearing of controls
+            dgvList.Controls.Clear();
+            dgvList.Controls.Clear();
+            dgvList.Controls.Clear();
+            dgvList.Controls.Clear();
+
+            dgvList.Rows.Clear();
         }
+
+
 
 
         private void PopulateMaterials()
@@ -106,6 +115,15 @@ namespace Modules.Transactions
             cmbMaterials.SelectedIndex = 0;
         }
 
+        void dgvList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)//AFM 20191017 maxlength of permit
+        {
+            if (e.Control is TextBox)
+            {
+                (e.Control as TextBox).MaxLength = 20;
+            }
+
+        }
+
         public void LoadGrid()
          {
             comboPermit.HeaderCell.Value = "Permit";
@@ -120,6 +138,7 @@ namespace Modules.Transactions
             dgvList.Columns.Clear();
 
             dgvList.Columns.Add("PermitCode", "");
+            dgvList.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(dgvList_EditingControlShowing);
 
             dgvList.Columns.Insert(1, comboPermit);
             PopulatePermit();
@@ -137,11 +156,10 @@ namespace Modules.Transactions
                 dgvList.Columns.Add("StartDate", "Start Date");
                 dgvList.Columns.Add("CompletionDate", "Completion Date");
             }
-            
-            dgvList.Controls.Add(dtDateStart);
-            dgvList.Controls.Add(dtDateComp);
             dtDateStart.Visible = false;
             dtDateComp.Visible = false;
+            dgvList.Controls.Add(dtDateStart);
+            dgvList.Controls.Add(dtDateComp);
 
             dtDateStart.TextChanged += new EventHandler(dtDateStart_TextChange);
             dtDateComp.TextChanged += new EventHandler(dtDateComp_TextChange);
@@ -153,7 +171,7 @@ namespace Modules.Transactions
             dgvList.Columns[3].Width = 140;
             dgvList.Columns[4].Width = 140;
             //dgvList.Columns[2].DefaultCellStyle.Format = "MM/dd/yyyy";
-            // dgvList.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
+           //dgvList.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
 
         }
 

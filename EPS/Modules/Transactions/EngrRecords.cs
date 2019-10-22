@@ -11,6 +11,7 @@ using Common.StringUtilities;
 using System.Windows.Forms;
 using Common.AppSettings;
 using EPSEntities.Connection;
+using Common.DataConnector;
 
 namespace Modules.Transactions
 {
@@ -93,7 +94,7 @@ namespace Modules.Transactions
 						return;
 
 					Save();
-					MessageBox.Show("Record saved", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show("Record "+RecordFrm.ARN+" saved", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					RecordFrm.arn1.Enabled = true;
 					RecordFrm.EnableControl(false);
 					RecordFrm.ButtonEdit.Enabled = true;
@@ -101,9 +102,10 @@ namespace Modules.Transactions
 					RecordFrm.ButtonPrint.Enabled = true;
 					RecordFrm.ButtonClear.Enabled = true;
 					RecordFrm.ButtonSearch.Enabled = true;
+                    ClearControl();
 
 
-				}
+                }
 			}
 		}
 
@@ -219,10 +221,10 @@ namespace Modules.Transactions
 
 			SaveBuilding();
 
-			//???strQuery = $"UPDATE APPLICATION SET STATUS_CODE = '{RecordFrm.cmbScope.Text.ToString()}' WHERE ARN = '{RecordFrm.ARN}'";
-			//db.Database.ExecuteSqlCommand(strQuery);
+            //???strQuery = $"UPDATE APPLICATION SET STATUS_CODE = '{RecordFrm.cmbScope.Text.ToString()}' WHERE ARN = '{RecordFrm.ARN}'";
+            //db.Database.ExecuteSqlCommand(strQuery);
 
-			if (RecordFrm.SourceClass == "ENG_REC_ADD")
+            if (RecordFrm.SourceClass == "ENG_REC_ADD")
 			{
 				if (Utilities.AuditTrail.InsertTrail("ER-A", "APPLICATION", "ARN: " + RecordFrm.ARN) == 0)
 				{
@@ -239,8 +241,11 @@ namespace Modules.Transactions
 				}
 			}
 
-			ClearControl();
+			//ClearControl();
 		}
+
+        
+        
 
 		public override void ClearControl()
 		{
@@ -268,9 +273,11 @@ namespace Modules.Transactions
 			RecordFrm.formStrucOwn.ClearControls();
 			RecordFrm.formLotOwn.ClearControls();
 			RecordFrm.formEngr.ClearControls();
-		}
+            RecordFrm.formEngr.ClearDgView();
 
-		public override bool ValidateData()
+        }
+
+        public override bool ValidateData()
 		{
 			var db = new EPSConnection(dbConn);
 
@@ -428,6 +435,7 @@ namespace Modules.Transactions
 				{
 					if (RecordFrm.ValidateData())
 						Save();
+                    MessageBox.Show("Record Successfully Updated");
 				}
 			}
 		}
@@ -437,8 +445,11 @@ namespace Modules.Transactions
 			RecordFrm.tabControl1.Enabled = true;
 			RecordFrm.ButtonExit.Text = "Cancel";
 			RecordFrm.ButtonPrint.Enabled = false;
-			RecordFrm.arn1.Enabled = false;
-			RecordFrm.btnSearch.Enabled = false;
+        
+            if(AppSettingsManager.GetConfigValue("30") != "1")
+                RecordFrm.arn1.Enabled = false;
+
+            RecordFrm.btnSearch.Enabled = false;
 			RecordFrm.btnClear.Enabled = false;
 		}
 

@@ -49,20 +49,20 @@ namespace Modules.ARN
 
         private void txtDistCode_Leave(object sender, EventArgs e)
         {
-            int intCount = 0;
-            string strQuery = string.Empty;
+            //int intCount = 0;
+            //string strQuery = string.Empty;
 
-            var db = new EPSConnection(dbConn);
+            //var db = new EPSConnection(dbConn);
 
-            strQuery = $"select count(distinct dist_code) from brgy where dist_code = TRIM('{txtDistCode.Text}')";
-            intCount = db.Database.SqlQuery<Int32>(strQuery).SingleOrDefault();
+            //strQuery = $"select count(distinct dist_code) from brgy where dist_code = TRIM('{txtDistCode.Text}')";
+            //intCount = db.Database.SqlQuery<Int32>(strQuery).SingleOrDefault();
 
-            if (intCount == 0)
-            {
-                MessageBox.Show("District code not found", "EPS", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                txtDistCode.Focus();
-                return;
-            }
+            //if (intCount == 0)
+            //{
+            //    MessageBox.Show("District code not found", "EPS", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    txtDistCode.Focus();
+            //    return;
+            //}
                  
         }
 
@@ -151,6 +151,11 @@ namespace Modules.ARN
         {
             if (txtLGUCode.Text.Trim().Length == 3)
                 txtDistCode.Focus();
+        }
+
+        private void ARN_Load(object sender, EventArgs e)
+        {
+
         }
 
         public string GetArn()

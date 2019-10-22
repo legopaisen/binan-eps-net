@@ -117,7 +117,7 @@
       <Name>EPSEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\ARN\ARN.csproj">
-      <Project>{25FD3DB7-AC87-4989-8F78-BD361427490A}</Project>
+      <Project>{25fd3db7-ac87-4989-8f78-bd361427490a}</Project>
       <Name>ARN</Name>
     </ProjectReference>
     <ProjectReference Include="..\Records\Records.csproj">

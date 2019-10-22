@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Modules.Utilities;
 using Modules.Reports;
 using EPSEntities.Connection;
+using Common.AppSettings;
 
 namespace Modules.Billing
 {
@@ -51,6 +52,14 @@ namespace Modules.Billing
 
             this.Text = "Billing - " + Source;
             RecordClass.FormLoad();
+
+            if (AppSettingsManager.GetConfigValue("30") == "1")// AFM 20191016 prompting for build up mode
+            {
+                MessageBox.Show("System is in Build-up Mode");
+                txtBillNo.ReadOnly = false;
+            }
+            else
+                txtBillNo.ReadOnly = true;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -85,7 +94,7 @@ namespace Modules.Billing
                 return;
 
             if (!RecordClass.DisplayData())
-            {    
+            {
                 RecordClass.ClearControls();
                 return;
             }
@@ -112,14 +121,14 @@ namespace Modules.Billing
 
         private void dgvParameter_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void btnCompute_Click(object sender, EventArgs e)
         {
-            if(!RecordClass.Compute())
+            if (!RecordClass.Compute())
             {
-                MessageBox.Show("Please complete all parameters","Billing",MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                MessageBox.Show("Please complete all parameters", "Billing", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
         }
@@ -161,7 +170,7 @@ namespace Modules.Billing
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(txtAmtDue.Text == "0.00" || txtAmtDue.Text == "" || txtAmtDue.Text == string.Empty) //AFM 20191015 uncomputed fees validation
+            if (txtAmtDue.Text == "0.00" || txtAmtDue.Text == "" || txtAmtDue.Text == string.Empty) //AFM 20191015 uncomputed fees validation
             {
                 MessageBox.Show("No fees computed");
                 return;
@@ -171,7 +180,7 @@ namespace Modules.Billing
 
         private bool ValidatePermit()
         {
-            for(int i = 0; i < dgvPermit.Rows.Count; i++)
+            for (int i = 0; i < dgvPermit.Rows.Count; i++)
             {
                 if ((bool)dgvPermit[0, i].Value == true)
                 {

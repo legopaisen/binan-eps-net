@@ -55,33 +55,90 @@ namespace Modules.Billing
 
             strWhereCond = $" where arn = '{RecordFrm.m_sAN}' order by permit_code";
 
-            var result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
-                         select a;
-            
-            foreach (var item in result)
+            if (AppSettingsManager.GetConfigValue("30") == "1")
             {
-                PermitList permit = new PermitList(null);
-                sPermit = permit.GetPermitDesc(item.PERMIT_CODE);
-                bool bAssessed = false;
+                var result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
+                             select a;
 
-                if (RecordFrm.PermitCode == item.PERMIT_CODE.Substring(0, 2))
+                foreach (var item in result)
                 {
-                    //bAssessed = true;
+                    PermitList permit = new PermitList(null);
+                    sPermit = permit.GetPermitDesc(item.PERMIT_CODE);
+                    bool bAssessed = false;
+
+                    if (RecordFrm.PermitCode == item.PERMIT_CODE.Substring(0, 2))
+                    {
+                        //bAssessed = true;
+                    }
+
+                    else
+                    {
+                        //bAssessed = ValidatePermitAssessed(item.PERMIT_CODE.Substring(0, 2));
+                    }
+                    RecordFrm.dgvPermit.Rows.Add(bAssessed, sPermit, item.PERMIT_CODE);
                 }
 
-                else
-                {
-                    //bAssessed = ValidatePermitAssessed(item.PERMIT_CODE.Substring(0, 2));
-                }
-                RecordFrm.dgvPermit.Rows.Add(bAssessed, sPermit, item.PERMIT_CODE);
             }
+            else
+            {
+                var result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
+                             select a;
+
+                foreach (var item in result)
+                {
+                    PermitList permit = new PermitList(null);
+                    sPermit = permit.GetPermitDesc(item.PERMIT_CODE);
+                    bool bAssessed = false;
+
+                    if (RecordFrm.PermitCode == item.PERMIT_CODE.Substring(0, 2))
+                    {
+                        //bAssessed = true;
+                    }
+
+                    else
+                    {
+                        //bAssessed = ValidatePermitAssessed(item.PERMIT_CODE.Substring(0, 2));
+                    }
+                    RecordFrm.dgvPermit.Rows.Add(bAssessed, sPermit, item.PERMIT_CODE);
+                }
+            }
+
+
+         
 
             m_sPermitCodeSelected = RecordFrm.PermitCode;
             LoadAssessmentGrid(RecordFrm.PermitCode);
         }
 
+        private bool ValidateBillNo()
+        {
+            OracleResultSet result = new OracleResultSet();
+            if (AppSettingsManager.GetConfigValue("30") != "1")
+            {
+                result.Query = "select bill_no from billing_hist where bill_no = '" + RecordFrm.txtBillNo.Text + "'";
+                if (result.Execute())
+                    if (result.Read())
+                    {
+                        return true;
+                    }
+                result.Query = "select bill_no from billing where bill_no = '" + RecordFrm.txtBillNo.Text + "'";
+                if (result.Execute())
+                    if (result.Read())
+                    {
+                        return true;
+                    }
+            }
+            return false;
+        }
+
         public override void Save()
         {
+            if(ValidateBillNo() || RecordFrm.txtBillNo.Text == "")
+            {
+                MessageBox.Show("Bill No. Already Exists/Bill No. is Empty");
+                return;
+            }
+
             string sQuery = string.Empty;
             var db = new EPSConnection(dbConn);
 
@@ -150,12 +207,26 @@ namespace Modules.Billing
                     int iPermitCnt = 0;
                     int iPermitBilled = 0;
 
-                    sQuery = $"select count(*) from application_que where arn = '{RecordFrm.m_sAN}'";
-                    iPermitCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+                    if (AppSettingsManager.GetConfigValue("30") == "1") //AFM 20191016 buildup mode
+                    {
+                        sQuery = $"select count(*) from application where arn = '{RecordFrm.m_sAN}'";
+                        iPermitCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+                    }
+                    else
+                    {
+                        sQuery = $"select count(*) from application_que where arn = '{RecordFrm.m_sAN}'";
+                        iPermitCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+                    }
 
-                    sQuery = $"select count(distinct substr(fees_code,0,2)) from taxdues where arn = '{RecordFrm.m_sAN}'";
-                    iPermitBilled = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
-
+                    //sQuery = $"select count(distinct substr(fees_code,0,2)) from taxdues where arn = '{RecordFrm.m_sAN}'";
+                    //iPermitBilled = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+                    for (int cnt = 0; cnt < RecordFrm.dgvPermit.Rows.Count; cnt++) //AFM 20191018 count "permit"
+                    {
+                        if ((bool)RecordFrm.dgvPermit[0, cnt].Value == true)
+                        {
+                            iPermitBilled += 1;
+                        }
+                    }
                     if (iPermitCnt != iPermitBilled)
                     {
                         MessageBox.Show("Other permits not yet billed, record is not yet ready for payment", "Billing", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -163,85 +234,89 @@ namespace Modules.Billing
                     }
                     else
                     {
-
-                        try
+                        if (AppSettingsManager.GetConfigValue("30") == "0")
                         {
-                            var dbarcs = new ARCSConnection(dbConnArcs);
-                            OracleResultSet result = new OracleResultSet();
-                            result.CreateANGARCS(); //connect to arcs database
-
-                            Accounts account = new Accounts();
-                            account.GetOwner(m_sProjOwner);
-
-                            string sFeesCode = string.Empty;
-                            double dFeesAmt = 0;
-                            string sInsert = string.Empty;
-
-                            result.Query = $"delete from eps_billing where arn = '{RecordFrm.m_sAN}' and bill_no = '{RecordFrm.txtBillNo.Text.ToString()}'"; //AFM 20191010 delete previous arcs billing
-                            result.ExecuteNonQuery();
-                            result.Close();
-                            //sQuery = $"delete from eps_billing where arn = '{RecordFrm.m_sAN}' and bill_no = '{RecordFrm.txtBillNo.Text.ToString()}'";
-                            //dbarcs.Database.ExecuteSqlCommand(sQuery); //AFM 20191010 delete previous arcs billing
-
-                            sQuery = $"select fees_code, fees_amt from taxdues where arn = '{RecordFrm.m_sAN}' and bill_no = '{RecordFrm.txtBillNo.Text.ToString()}'";
-                            var epsrec = db.Database.SqlQuery<TAXDUES>(sQuery);
-
-                            foreach (var items in epsrec)
+                            try
                             {
-                                sFeesCode = "E" + items.FEES_CODE;
-                                dFeesAmt = items.FEES_AMT;
+                                var dbarcs = new ARCSConnection(dbConnArcs);
+                                OracleResultSet result = new OracleResultSet();
+                                result.CreateANGARCS(); //connect to arcs database
 
-                                result.Query = @"insert into eps_billing(arn,acct_code,mrs_acct_code,
+                                Accounts account = new Accounts();
+                                account.GetOwner(m_sProjOwner);
+
+                                string sFeesCode = string.Empty;
+                                double dFeesAmt = 0;
+                                string sInsert = string.Empty;
+
+                                result.Query = $"delete from eps_billing where arn = '{RecordFrm.m_sAN}' and bill_no = '{RecordFrm.txtBillNo.Text.ToString()}'"; //AFM 20191010 delete previous arcs billing
+                                result.ExecuteNonQuery();
+                                result.Close();
+                                //sQuery = $"delete from eps_billing where arn = '{RecordFrm.m_sAN}' and bill_no = '{RecordFrm.txtBillNo.Text.ToString()}'";
+                                //dbarcs.Database.ExecuteSqlCommand(sQuery); //AFM 20191010 delete previous arcs billing
+
+                                sQuery = $"select fees_code, fees_amt from taxdues where arn = '{RecordFrm.m_sAN}' and bill_no = '{RecordFrm.txtBillNo.Text.ToString()}'";
+                                var epsrec = db.Database.SqlQuery<TAXDUES>(sQuery);
+
+                                foreach (var items in epsrec)
+                                {
+                                    sFeesCode = "E" + items.FEES_CODE;
+                                    dFeesAmt = items.FEES_AMT;
+
+                                    result.Query = @"insert into eps_billing(arn,acct_code,mrs_acct_code,
                                 acct_ln,acct_fn,acct_mi,acct_house_no,acct_street,
                                 acct_brgy,acct_mun,acct_prov,acct_zip,bill_no,
                                 fees_code,fees_amt)
                                 values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15)";
-                                result.AddParameter(":1", RecordFrm.m_sAN);
-                                result.AddParameter(":2", m_sProjOwner);
-                                result.AddParameter(":3", m_sProjOwner);
-                                result.AddParameter(":4", StringUtilities.HandleApostrophe(account.LastName));
-                                result.AddParameter(":5", StringUtilities.HandleApostrophe(account.FirstName));
-                                result.AddParameter(":6", StringUtilities.HandleApostrophe(account.MiddleInitial));
-                                result.AddParameter(":7", StringUtilities.HandleApostrophe(account.HouseNo));
-                                result.AddParameter(":8", StringUtilities.HandleApostrophe(account.Address));
-                                result.AddParameter(":9", StringUtilities.HandleApostrophe(account.Barangay));
-                                result.AddParameter(":10", StringUtilities.HandleApostrophe(account.City));
-                                result.AddParameter(":11", StringUtilities.HandleApostrophe(account.Province));
-                                result.AddParameter(":12", account.ZIP);
-                                result.AddParameter(":13", RecordFrm.txtBillNo.Text.ToString());
-                                result.AddParameter(":14", sFeesCode);
-                                result.AddParameter(":15", dFeesAmt);
+                                    result.AddParameter(":1", RecordFrm.m_sAN);
+                                    result.AddParameter(":2", m_sProjOwner);
+                                    result.AddParameter(":3", m_sProjOwner);
+                                    result.AddParameter(":4", StringUtilities.HandleApostrophe(account.LastName));
+                                    result.AddParameter(":5", StringUtilities.HandleApostrophe(account.FirstName));
+                                    result.AddParameter(":6", StringUtilities.HandleApostrophe(account.MiddleInitial));
+                                    result.AddParameter(":7", StringUtilities.HandleApostrophe(account.HouseNo));
+                                    result.AddParameter(":8", StringUtilities.HandleApostrophe(account.Address));
+                                    result.AddParameter(":9", StringUtilities.HandleApostrophe(account.Barangay));
+                                    result.AddParameter(":10", StringUtilities.HandleApostrophe(account.City));
+                                    result.AddParameter(":11", StringUtilities.HandleApostrophe(account.Province));
+                                    result.AddParameter(":12", account.ZIP);
+                                    result.AddParameter(":13", RecordFrm.txtBillNo.Text.ToString());
+                                    result.AddParameter(":14", sFeesCode);
+                                    result.AddParameter(":15", dFeesAmt);
 
-                                result.ExecuteNonQuery();
-                                result.Close();
+                                    result.ExecuteNonQuery();
+                                    result.Close();
 
-                                //sInsert = @"insert into eps_billing(arn,acct_code,mrs_acct_code,
-                                //acct_ln,acct_fn,acct_mi,acct_house_no,acct_street,
-                                //acct_brgy,acct_mun,acct_prov,acct_zip,bill_no,
-                                //fees_code,fees_amt)
-                                //values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15)";
-                                //dbarcs.Database.ExecuteSqlCommand(sInsert,
-                                //        new OracleParameter(":1", RecordFrm.m_sAN),
-                                //        new OracleParameter(":2", m_sProjOwner),
-                                //        new OracleParameter(":3", m_sProjOwner),
-                                //        new OracleParameter(":4", StringUtilities.HandleApostrophe(account.LastName)),
-                                //        new OracleParameter(":5", StringUtilities.HandleApostrophe(account.FirstName)),
-                                //        new OracleParameter(":6", StringUtilities.HandleApostrophe(account.MiddleInitial)),
-                                //        new OracleParameter(":7", StringUtilities.HandleApostrophe(account.HouseNo)),
-                                //        new OracleParameter(":8", StringUtilities.HandleApostrophe(account.Address)),
-                                //        new OracleParameter(":9", StringUtilities.HandleApostrophe(account.Barangay)),
-                                //        new OracleParameter(":10", StringUtilities.HandleApostrophe(account.City)),
-                                //        new OracleParameter(":11", StringUtilities.HandleApostrophe(account.Province)),
-                                //        new OracleParameter(":12", account.ZIP),
-                                //        new OracleParameter(":13", RecordFrm.txtBillNo.Text.ToString()),
-                                //        new OracleParameter(":14", sFeesCode),
-                                //        new OracleParameter(":15", dFeesAmt));
+                                    //sInsert = @"insert into eps_billing(arn,acct_code,mrs_acct_code,
+                                    //acct_ln,acct_fn,acct_mi,acct_house_no,acct_street,
+                                    //acct_brgy,acct_mun,acct_prov,acct_zip,bill_no,
+                                    //fees_code,fees_amt)
+                                    //values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15)";
+                                    //dbarcs.Database.ExecuteSqlCommand(sInsert,
+                                    //        new OracleParameter(":1", RecordFrm.m_sAN),
+                                    //        new OracleParameter(":2", m_sProjOwner),
+                                    //        new OracleParameter(":3", m_sProjOwner),
+                                    //        new OracleParameter(":4", StringUtilities.HandleApostrophe(account.LastName)),
+                                    //        new OracleParameter(":5", StringUtilities.HandleApostrophe(account.FirstName)),
+                                    //        new OracleParameter(":6", StringUtilities.HandleApostrophe(account.MiddleInitial)),
+                                    //        new OracleParameter(":7", StringUtilities.HandleApostrophe(account.HouseNo)),
+                                    //        new OracleParameter(":8", StringUtilities.HandleApostrophe(account.Address)),
+                                    //        new OracleParameter(":9", StringUtilities.HandleApostrophe(account.Barangay)),
+                                    //        new OracleParameter(":10", StringUtilities.HandleApostrophe(account.City)),
+                                    //        new OracleParameter(":11", StringUtilities.HandleApostrophe(account.Province)),
+                                    //        new OracleParameter(":12", account.ZIP),
+                                    //        new OracleParameter(":13", RecordFrm.txtBillNo.Text.ToString()),
+                                    //        new OracleParameter(":14", sFeesCode),
+                                    //        new OracleParameter(":15", dFeesAmt));
 
+                                }
                             }
+                            catch { }
                         }
-                        catch { }
-
-                        RecordFrm.btnPrint.Enabled = true;
+                        if (AppSettingsManager.GetConfigValue("30") == "0")
+                            RecordFrm.btnPrint.Enabled = true;
+                        else
+                            RecordFrm.btnPrint.Enabled = false;
                     }
 
 

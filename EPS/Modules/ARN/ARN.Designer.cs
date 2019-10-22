@@ -82,6 +82,7 @@
             this.Controls.Add(this.txtLGUCode);
             this.Name = "ARN";
             this.Size = new System.Drawing.Size(148, 26);
+            this.Load += new System.EventHandler(this.ARN_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

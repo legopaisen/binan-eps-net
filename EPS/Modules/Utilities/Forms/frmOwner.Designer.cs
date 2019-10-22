@@ -60,13 +60,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cmbEngrType = new System.Windows.Forms.ComboBox();
             this.dgvList = new System.Windows.Forms.DataGridView();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.lblNoRecords = new System.Windows.Forms.Label();
-            this.cmbEngrType = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
@@ -432,6 +432,16 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
+            // cmbEngrType
+            // 
+            this.cmbEngrType.Enabled = false;
+            this.cmbEngrType.FormattingEnabled = true;
+            this.cmbEngrType.Location = new System.Drawing.Point(8, 72);
+            this.cmbEngrType.Name = "cmbEngrType";
+            this.cmbEngrType.Size = new System.Drawing.Size(170, 23);
+            this.cmbEngrType.TabIndex = 5;
+            this.cmbEngrType.Visible = false;
+            // 
             // dgvList
             // 
             this.dgvList.AllowUserToAddRows = false;
@@ -498,17 +508,6 @@
             this.lblNoRecords.Size = new System.Drawing.Size(89, 15);
             this.lblNoRecords.TabIndex = 0;
             this.lblNoRecords.Text = "No. of Records:";
-            // 
-            // cmbEngrType
-            // 
-            this.cmbEngrType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbEngrType.Enabled = false;
-            this.cmbEngrType.FormattingEnabled = true;
-            this.cmbEngrType.Location = new System.Drawing.Point(8, 72);
-            this.cmbEngrType.Name = "cmbEngrType";
-            this.cmbEngrType.Size = new System.Drawing.Size(170, 23);
-            this.cmbEngrType.TabIndex = 5;
-            this.cmbEngrType.Visible = false;
             // 
             // frmOwner
             // 
