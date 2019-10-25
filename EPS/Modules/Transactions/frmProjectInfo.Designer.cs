@@ -185,7 +185,7 @@
             this.groupBox1.Controls.Add(this.txtProv);
             this.groupBox1.Controls.Add(this.txtZIP);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(17, 194);
+            this.groupBox1.Location = new System.Drawing.Point(17, 188);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(565, 175);
             this.groupBox1.TabIndex = 0;

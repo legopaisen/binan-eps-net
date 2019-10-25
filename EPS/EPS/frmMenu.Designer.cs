@@ -98,6 +98,7 @@
             this.btnAOF = new System.Windows.Forms.Button();
             this.btnER = new System.Windows.Forms.Button();
             this.btnNewApp = new System.Windows.Forms.Button();
+            this.engineerTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MS.SuspendLayout();
             this.pnlButton.SuspendLayout();
             this.SuspendLayout();
@@ -423,6 +424,7 @@
             this.toolStripSeparator6,
             this.lotOwnerApplicantToolStripMenuItem,
             this.engineersToolStripMenuItem,
+            this.engineerTypeToolStripMenuItem,
             this.toolStripSeparator7,
             this.scheduleOfFeesToolStripMenuItem,
             this.permitTypeToolStripMenuItem,
@@ -701,6 +703,13 @@
             this.btnNewApp.UseVisualStyleBackColor = true;
             this.btnNewApp.Click += new System.EventHandler(this.btnNewApp_Click);
             // 
+            // engineerTypeToolStripMenuItem
+            // 
+            this.engineerTypeToolStripMenuItem.Name = "engineerTypeToolStripMenuItem";
+            this.engineerTypeToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.engineerTypeToolStripMenuItem.Text = "Engineer Type";
+            this.engineerTypeToolStripMenuItem.Click += new System.EventHandler(this.engineerTypeToolStripMenuItem_Click);
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -799,6 +808,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem taskManagerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem engineerTypeToolStripMenuItem;
     }
 }
 

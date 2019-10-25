@@ -536,5 +536,11 @@ namespace EPS
             frmCertification frmcertification = new frmCertification();
             frmcertification.ShowDialog();
         }
+
+        private void engineerTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmEngineerTypes frmengineertypes = new frmEngineerTypes();
+            frmengineertypes.ShowDialog();
+        }
     }
 }

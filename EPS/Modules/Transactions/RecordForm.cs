@@ -75,6 +75,11 @@ namespace Modules.Transactions
 
         }
 
+        public virtual void InitEdit(bool blnEnable)
+        {
+
+        }
+
         private void SaveEngineer()
         {
             OracleResultSet result = new OracleResultSet();

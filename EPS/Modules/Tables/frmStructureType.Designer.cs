@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStructureType));
             this.dgStruct = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -38,8 +40,6 @@
             this.lblSubject = new System.Windows.Forms.Label();
             this.txtType = new System.Windows.Forms.TextBox();
             this.txtCode = new System.Windows.Forms.TextBox();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgStruct)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,6 +64,20 @@
             this.dgStruct.Size = new System.Drawing.Size(409, 187);
             this.dgStruct.TabIndex = 4;
             this.dgStruct.SelectionChanged += new System.EventHandler(this.dgStruct_SelectionChanged);
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Code";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 130;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Structure Type";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 250;
             // 
             // btnExit
             // 
@@ -130,6 +144,7 @@
             this.txtType.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtType.Location = new System.Drawing.Point(236, 213);
             this.txtType.Margin = new System.Windows.Forms.Padding(4);
+            this.txtType.MaxLength = 50;
             this.txtType.Name = "txtType";
             this.txtType.ReadOnly = true;
             this.txtType.Size = new System.Drawing.Size(186, 26);
@@ -144,20 +159,6 @@
             this.txtCode.ReadOnly = true;
             this.txtCode.Size = new System.Drawing.Size(112, 26);
             this.txtCode.TabIndex = 6;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Code";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 130;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Structure Type";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 250;
             // 
             // frmStructureType
             // 
@@ -176,7 +177,7 @@
             this.Controls.Add(this.txtCode);
             this.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmStructureType";

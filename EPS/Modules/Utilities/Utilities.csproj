@@ -101,6 +101,12 @@
     <Compile Include="Forms\frmCategory.Designer.cs">
       <DependentUpon>frmCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmEngineerTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmEngineerTypes.Designer.cs">
+      <DependentUpon>frmEngineerTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmPermitType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +184,10 @@
       <Project>{889d88f6-1668-418f-969a-6466670138b6}</Project>
       <Name>AppSettings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\DataConnector\DataConnector.csproj">
+      <Project>{7c12da36-676a-49b3-b59d-c07c96539620}</Project>
+      <Name>DataConnector</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Common\EncryptUtilities\EncryptUtilities.csproj">
       <Project>{eb833d79-9d87-48ec-b396-79aace685253}</Project>
       <Name>EncryptUtilities</Name>
@@ -209,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCategory.resx">
       <DependentUpon>frmCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmEngineerTypes.resx">
+      <DependentUpon>frmEngineerTypes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPermitType.resx">
       <DependentUpon>frmPermitType.cs</DependentUpon>

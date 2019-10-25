@@ -7,7 +7,8 @@ using System.Windows.Forms;
 using EPSEntities.Connection;
 using Common.StringUtilities;
 using Modules.Records;
-    
+using Common.DataConnector;
+
 namespace Modules.Utilities
 {
     public class FormEngr:FormOwnerClass
@@ -29,11 +30,21 @@ namespace Modules.Utilities
             RecordFrm.lblTCT.Text = "PTR No. :";
             RecordFrm.lblCTC.Text = "PRC No. :";
 
-            RecordFrm.cmbEngrType.Items.Add("ARCHITECT");
-            RecordFrm.cmbEngrType.Items.Add("CIVIL");
-            RecordFrm.cmbEngrType.Items.Add("ELECTRICAL");
-            RecordFrm.cmbEngrType.Items.Add("MECHANICAL");
-            RecordFrm.cmbEngrType.Items.Add("SANITARY");
+            //AFM 20191025 (s)
+            OracleResultSet result = new OracleResultSet();
+            result.Query = $"select * from engineer_type order by engr_type_code";
+            if (result.Execute())
+                while (result.Read())
+                {
+                    RecordFrm.cmbEngrType.Items.Add(result.GetString("engr_desc"));
+                }
+            //AFM 20191025 (e)
+
+            //RecordFrm.cmbEngrType.Items.Add("ARCHITECT");
+            //RecordFrm.cmbEngrType.Items.Add("CIVIL");
+            //RecordFrm.cmbEngrType.Items.Add("ELECTRICAL");
+            //RecordFrm.cmbEngrType.Items.Add("MECHANICAL");
+            //RecordFrm.cmbEngrType.Items.Add("SANITARY");
 
             RecordFrm.txtLastName.Focus();
         }

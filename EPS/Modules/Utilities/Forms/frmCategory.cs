@@ -261,5 +261,10 @@ namespace Modules.Utilities.Forms
             else
                 this.Close();
         }
+
+        private void dgvList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -493,8 +493,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnCopy;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnSearch;
+        public System.Windows.Forms.Button btnClear;
+        public System.Windows.Forms.Button btnSearch;
         public System.Windows.Forms.TextBox txtMI;
         public System.Windows.Forms.TextBox txtLastName;
         public System.Windows.Forms.TextBox txtFirstName;

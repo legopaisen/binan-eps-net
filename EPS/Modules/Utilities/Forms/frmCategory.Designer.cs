@@ -30,16 +30,16 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtType = new System.Windows.Forms.TextBox();
+            this.dgvList = new System.Windows.Forms.DataGridView();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvList = new System.Windows.Forms.DataGridView();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
@@ -52,9 +52,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(7, 2);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(324, 260);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -67,6 +67,44 @@
             this.txtType.ReadOnly = true;
             this.txtType.Size = new System.Drawing.Size(249, 26);
             this.txtType.TabIndex = 14;
+            // 
+            // dgvList
+            // 
+            this.dgvList.AllowUserToAddRows = false;
+            this.dgvList.AllowUserToDeleteRows = false;
+            this.dgvList.AllowUserToResizeColumns = false;
+            this.dgvList.AllowUserToResizeRows = false;
+            this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Code,
+            this.Desc});
+            this.dgvList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvList.Location = new System.Drawing.Point(8, 17);
+            this.dgvList.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvList.Name = "dgvList";
+            this.dgvList.ReadOnly = true;
+            this.dgvList.RowHeadersVisible = false;
+            this.dgvList.Size = new System.Drawing.Size(307, 180);
+            this.dgvList.TabIndex = 12;
+            this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
+            this.dgvList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellContentClick);
+            // 
+            // Code
+            // 
+            this.Code.HeaderText = "Code";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            this.Code.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Desc
+            // 
+            this.Desc.HeaderText = "Category";
+            this.Desc.Name = "Desc";
+            this.Desc.ReadOnly = true;
+            this.Desc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Desc.Width = 200;
             // 
             // txtCode
             // 
@@ -93,26 +131,6 @@
             this.label1.Size = new System.Drawing.Size(40, 18);
             this.label1.TabIndex = 18;
             this.label1.Text = "Code";
-            // 
-            // dgvList
-            // 
-            this.dgvList.AllowUserToAddRows = false;
-            this.dgvList.AllowUserToDeleteRows = false;
-            this.dgvList.AllowUserToResizeColumns = false;
-            this.dgvList.AllowUserToResizeRows = false;
-            this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Code,
-            this.Desc});
-            this.dgvList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvList.Location = new System.Drawing.Point(8, 17);
-            this.dgvList.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvList.Name = "dgvList";
-            this.dgvList.ReadOnly = true;
-            this.dgvList.RowHeadersVisible = false;
-            this.dgvList.Size = new System.Drawing.Size(307, 180);
-            this.dgvList.TabIndex = 12;
-            this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
             // 
             // btnExit
             // 
@@ -158,23 +176,6 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // Code
-            // 
-            this.Code.HeaderText = "Code";
-            this.Code.Name = "Code";
-            this.Code.ReadOnly = true;
-            this.Code.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Desc
-            // 
-            this.Desc.HeaderText = "Category";
-            this.Desc.Name = "Desc";
-            this.Desc.ReadOnly = true;
-            this.Desc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Desc.Width = 200;
-            // 
             // frmCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -187,7 +188,7 @@
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
             this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmCategory";

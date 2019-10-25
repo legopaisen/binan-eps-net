@@ -64,6 +64,7 @@ namespace Modules.Transactions
 				if (sender == "Add")
 				{
 					ClearControl();
+                    InitEdit(true); //AFM 20191024 ANG-19-11168
 					RecordFrm.ButtonAdd.Text = "Save";
 					RecordFrm.ButtonExit.Text = "Cancel";
 					RecordFrm.ButtonEdit.Enabled = false;
@@ -324,11 +325,100 @@ namespace Modules.Transactions
 
 			DisplayData();
 
-			RecordFrm.tabControl1.Enabled = false;
+            RecordFrm.tabControl1.Enabled = true; //false
+            InitEdit(false);
 
 		}
 
-		public override void DisplayData()
+        public override void InitEdit(bool blnEnable) // AFM 20191024 ANG-19-11168
+        {
+            RecordFrm.formProject.txtProjDesc.Enabled = blnEnable;
+            RecordFrm.formProject.txtMemo.Enabled = blnEnable;
+            RecordFrm.formProject.cmbCategory.Enabled = blnEnable;
+            RecordFrm.formProject.cmbOccupancy.Enabled = blnEnable;
+            RecordFrm.formProject.cmbBussKind.Enabled = blnEnable;
+            RecordFrm.formProject.cmbOwnership.Enabled = blnEnable;
+            RecordFrm.formProject.cmbStrucType.Enabled = blnEnable;
+            RecordFrm.formProject.txtHseNo.Enabled = blnEnable;
+            RecordFrm.formProject.txtLotNo.Enabled = blnEnable;
+            RecordFrm.formProject.txtStreet.Enabled = blnEnable;
+            RecordFrm.formProject.cmbBrgy.Enabled = blnEnable;
+            RecordFrm.formProject.txtMun.Enabled = blnEnable;
+            RecordFrm.formProject.txtProv.Enabled = blnEnable;
+            RecordFrm.formProject.txtZIP.Enabled = blnEnable;
+
+            RecordFrm.formBldgDate.txtPIN.Enabled = blnEnable;
+            RecordFrm.formBldgDate.txtBldgName.Enabled = blnEnable;
+            RecordFrm.formBldgDate.txtCost.Enabled = blnEnable;
+            RecordFrm.formBldgDate.txtUnits.Enabled = blnEnable;
+            RecordFrm.formBldgDate.txtStoreys.Enabled = blnEnable;
+            RecordFrm.formBldgDate.txtArea.Enabled = blnEnable;
+            RecordFrm.formBldgDate.txtAssVal.Enabled = blnEnable;
+            RecordFrm.formBldgDate.cmbMaterials.Enabled = blnEnable;
+            RecordFrm.formBldgDate.txtHeight.Enabled = blnEnable;
+            RecordFrm.formBldgDate.dgvList.Enabled = blnEnable;
+            RecordFrm.formBldgDate.btnAdd.Enabled = blnEnable;
+            RecordFrm.formBldgDate.btnRemove.Enabled = blnEnable;
+
+            RecordFrm.formStrucOwn.txtLastName.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtFirstName.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtMI.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtHseNo.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtLotNo.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtBlkNo.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtStreet.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.cmbBrgy.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtMun.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtProv.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtZIP.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtTCT.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtTelNo.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtCTC.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.txtTIN.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.btnSearch.Enabled = blnEnable;
+            RecordFrm.formStrucOwn.btnClear.Enabled = blnEnable;
+
+            RecordFrm.formLotOwn.txtLastName.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtFirstName.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtMI.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtHseNo.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtLotNo.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtBlkNo.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtStreet.Enabled = blnEnable;
+            RecordFrm.formLotOwn.cmbBrgy.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtMun.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtProv.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtZIP.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtTCT.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtTelNo.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtCTC.Enabled = blnEnable;
+            RecordFrm.formLotOwn.txtTIN.Enabled = blnEnable;
+            RecordFrm.formLotOwn.btnSearch.Enabled = blnEnable;
+            RecordFrm.formLotOwn.btnClear.Enabled = blnEnable;
+
+            RecordFrm.formEngr.txtLastName.Enabled = blnEnable;
+            RecordFrm.formEngr.txtFirstName.Enabled = blnEnable;
+            RecordFrm.formEngr.txtMI.Enabled = blnEnable;
+            RecordFrm.formEngr.txtHseNo.Enabled = blnEnable;
+            RecordFrm.formEngr.txtLotNo.Enabled = blnEnable;
+            RecordFrm.formEngr.txtBlkNo.Enabled = blnEnable;
+            RecordFrm.formEngr.txtStreet.Enabled = blnEnable;
+            RecordFrm.formEngr.cmbBrgy.Enabled = blnEnable;
+            RecordFrm.formEngr.txtMun.Enabled = blnEnable;
+            RecordFrm.formEngr.txtProv.Enabled = blnEnable;
+            RecordFrm.formEngr.txtZIP.Enabled = blnEnable;
+            RecordFrm.formEngr.txtPTR.Enabled = blnEnable;
+            RecordFrm.formEngr.txtPRC.Enabled = blnEnable;
+            RecordFrm.formEngr.txtTIN.Enabled = blnEnable;
+            RecordFrm.formEngr.btnSearch.Enabled = blnEnable;
+            RecordFrm.formEngr.btnAdd.Enabled = blnEnable;
+            RecordFrm.formEngr.btnRemove.Enabled = blnEnable;
+            RecordFrm.formEngr.cmbEngrType.Enabled = blnEnable;
+            RecordFrm.formEngr.dgvList.Enabled = blnEnable;
+            RecordFrm.formEngr.btnClear.Enabled = blnEnable;
+        }
+
+        public override void DisplayData()
 		{
 			var db = new EPSConnection(dbConn);
 			string strWhereCond = string.Empty;
@@ -427,6 +517,7 @@ namespace Modules.Transactions
 				if (sender == "Edit")
 				{    
 					EnableRecordEntry();
+                    InitEdit(true);
 					RecordFrm.ButtonAdd.Enabled = false;
 					RecordFrm.ButtonEdit.Text = "Update";
 					RecordFrm.ButtonDelete.Enabled = false;
@@ -453,7 +544,10 @@ namespace Modules.Transactions
 			RecordFrm.btnClear.Enabled = false;
 		}
 
-		public override void DisplayBuilding(int iBldgNo)
+
+
+
+        public override void DisplayBuilding(int iBldgNo)
 		{
 			var db = new EPSConnection(dbConn);
 			string sQuery = string.Empty;

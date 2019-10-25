@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Modules.Utilities;
 using Common.AppSettings;
 using Modules.SearchAccount;
+using Common.DataConnector;
 
 namespace Modules.Transactions
 {
@@ -31,12 +32,22 @@ namespace Modules.Transactions
             PopulateBrgy();
             LoadGrid();
 
-            cmbEngrType.Items.Add("");
-            cmbEngrType.Items.Add("ARCHITECT");
-            cmbEngrType.Items.Add("CIVIL");
-            cmbEngrType.Items.Add("ELECTRICAL");
-            cmbEngrType.Items.Add("MECHANICAL");
-            cmbEngrType.Items.Add("SANITARY");
+            //AFM 20191025 (s)
+            OracleResultSet result = new OracleResultSet();
+            result.Query = "select * from engineer_type order by engr_type_code";
+            if(result.Execute())
+                while(result.Read())
+                {
+                    cmbEngrType.Items.Add(result.GetString("engr_desc"));
+                }
+            //AFM 20191025 (e)
+
+            //cmbEngrType.Items.Add("");
+            //cmbEngrType.Items.Add("ARCHITECT");
+            //cmbEngrType.Items.Add("CIVIL");
+            //cmbEngrType.Items.Add("ELECTRICAL");
+            //cmbEngrType.Items.Add("MECHANICAL");
+            //cmbEngrType.Items.Add("SANITARY");
         }
 
         public void LoadGrid()

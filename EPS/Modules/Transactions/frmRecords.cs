@@ -242,6 +242,7 @@ namespace Modules.Transactions
             {
                 frmBuildingUnits frmbldgunits = new frmBuildingUnits();
                 ClearControls();
+                RecordClass.InitEdit(true); //AFM 20191024 ANG-19-11168
                 btnAdd.Text = "Add";
                 btnEdit.Text = "Edit";
                 btnExit.Text = "Exit";
@@ -445,6 +446,11 @@ namespace Modules.Transactions
                 form.ReportName = "Records";
             form.Arn = ARN;
             form.ShowDialog();
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

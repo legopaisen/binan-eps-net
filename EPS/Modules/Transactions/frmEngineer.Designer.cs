@@ -526,11 +526,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnRemove;
+        public System.Windows.Forms.Button btnAdd;
+        public System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnSearch;
+        public System.Windows.Forms.Button btnClear;
+        public System.Windows.Forms.Button btnSearch;
         public System.Windows.Forms.TextBox txtMI;
         public System.Windows.Forms.TextBox txtLastName;
         public System.Windows.Forms.TextBox txtFirstName;
