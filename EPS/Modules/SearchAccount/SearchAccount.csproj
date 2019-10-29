@@ -101,6 +101,10 @@
       <Project>{889d88f6-1668-418f-969a-6466670138b6}</Project>
       <Name>AppSettings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\DataConnector\DataConnector.csproj">
+      <Project>{7c12da36-676a-49b3-b59d-c07c96539620}</Project>
+      <Name>DataConnector</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Common\MultiColumnComboBox\MultiColumnComboBox.csproj">
       <Project>{4DD47A19-1A17-4C59-94BA-575E0C2ECC17}</Project>
       <Name>MultiColumnComboBox</Name>

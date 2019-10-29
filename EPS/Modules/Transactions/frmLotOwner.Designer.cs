@@ -87,7 +87,6 @@
             this.btnCopy.TabIndex = 17;
             this.btnCopy.Text = "Structure Owner";
             this.btnCopy.UseVisualStyleBackColor = true;
-            this.btnCopy.Visible = false;
             this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
             // txtLastName

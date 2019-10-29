@@ -20,6 +20,10 @@ namespace Modules.Transactions
         public string LotAcctNo { get; set; }
         public string DialogText { get; set; }
 
+        public OwnerInfo ownerinfo = new OwnerInfo();
+
+        public string LastName { get; set; } //test
+
         public Button ButtonStrucOwner
         {
             get { return this.btnCopy; }
@@ -174,6 +178,21 @@ namespace Modules.Transactions
             // temp disabled button
             frmRecords record = new frmRecords();
             record.CopyLotStrucOwner("CopyStruc");
+
+            //txtLastName.Text = ownerinfo.LastName;
+            //record.Fname = txtFirstName.Text;
+            //record.MiName = txtMI.Text;
+            //record.TelNo = txtTelNo.Text;
+            //record.TIN = txtTIN.Text;
+            //record.TCT = txtTCT.Text;
+            //record.CTC = txtCTC.Text;
+            //record.LotNo = txtLotNo.Text;
+            //record.BlkNo = txtBlkNo.Text;
+            //record.Addr = txtStreet.Text;
+            //record.Brgy = cmbBrgy.Text;
+            //record.Municipality = txtMun.Text;
+            //record.Province = txtProv.Text;
+            //record.ZIP = txtZIP.Text;
         }
 
         public bool ValidateData()
