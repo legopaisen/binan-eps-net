@@ -113,7 +113,7 @@ namespace Modules.Billing
         private bool ValidateBillNo()
         {
             OracleResultSet result = new OracleResultSet();
-            if (AppSettingsManager.GetConfigValue("30") != "1")
+            if (AppSettingsManager.GetConfigValue("30") == "1")
             {
                 result.Query = "select bill_no from billing_hist where bill_no = '" + RecordFrm.txtBillNo.Text + "'";
                 if (result.Execute())
@@ -133,11 +133,19 @@ namespace Modules.Billing
 
         public override void Save()
         {
-            if(ValidateBillNo() || RecordFrm.txtBillNo.Text == "")
+            //AFM 20191105 validations (s)
+            if(ValidateBillNo())
             {
-                MessageBox.Show("Bill No. Already Exists/Bill No. is Empty");
+                MessageBox.Show("Bill No. Already Exists!");
                 return;
             }
+            if (AppSettingsManager.GetConfigValue("30") == "1" & RecordFrm.txtBillNo.Text == "")
+            {
+                MessageBox.Show("Bill No. is empty!");
+                return;
+            }
+            //AFM 20191105 validations (e)
+
 
             string sQuery = string.Empty;
             var db = new EPSConnection(dbConn);
@@ -201,7 +209,7 @@ namespace Modules.Billing
                     if (!UpdateReassessmentBilling())
                         return;
 
-                    MessageBox.Show("Billing Successfully Updated!", "Billing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Billing Successfully Saved!\nARN: "+ RecordFrm.m_sAN +"\nBill No.: "+ RecordFrm.txtBillNo.Text.ToString() +" ", "Billing", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     //VALIDATE FIRST IF ALL PERMIT WAS BILLED
                     int iPermitCnt = 0;
