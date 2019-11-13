@@ -67,6 +67,8 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.lblNoRecords = new System.Windows.Forms.Label();
+            this.dtpValidDt = new System.Windows.Forms.DateTimePicker();
+            this.lblValidity = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
@@ -164,7 +166,7 @@
             this.groupBox1.Controls.Add(this.txtProv);
             this.groupBox1.Controls.Add(this.txtZIP);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 279);
+            this.groupBox1.Location = new System.Drawing.Point(12, 309);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(585, 132);
             this.groupBox1.TabIndex = 9;
@@ -411,6 +413,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblValidity);
+            this.groupBox2.Controls.Add(this.dtpValidDt);
             this.groupBox2.Controls.Add(this.cmbEngrType);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.txtLastName);
@@ -428,7 +432,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(12, 166);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(585, 111);
+            this.groupBox2.Size = new System.Drawing.Size(585, 137);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -458,7 +462,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(515, 418);
+            this.btnCancel.Location = new System.Drawing.Point(515, 448);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(78, 26);
@@ -469,7 +473,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(351, 418);
+            this.btnEdit.Location = new System.Drawing.Point(351, 448);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(78, 26);
@@ -480,7 +484,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(269, 418);
+            this.btnAdd.Location = new System.Drawing.Point(269, 448);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(78, 26);
@@ -491,7 +495,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(433, 418);
+            this.btnDelete.Location = new System.Drawing.Point(433, 448);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(78, 26);
@@ -509,12 +513,33 @@
             this.lblNoRecords.TabIndex = 0;
             this.lblNoRecords.Text = "No. of Records:";
             // 
+            // dtpValidDt
+            // 
+            this.dtpValidDt.Enabled = false;
+            this.dtpValidDt.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpValidDt.Location = new System.Drawing.Point(438, 101);
+            this.dtpValidDt.Name = "dtpValidDt";
+            this.dtpValidDt.Size = new System.Drawing.Size(138, 23);
+            this.dtpValidDt.TabIndex = 9;
+            this.dtpValidDt.Visible = false;
+            // 
+            // lblValidity
+            // 
+            this.lblValidity.AutoSize = true;
+            this.lblValidity.Location = new System.Drawing.Point(354, 105);
+            this.lblValidity.Name = "lblValidity";
+            this.lblValidity.Size = new System.Drawing.Size(80, 15);
+            this.lblValidity.TabIndex = 10;
+            this.lblValidity.Text = "Validity Date:";
+            this.lblValidity.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblValidity.Visible = false;
+            // 
             // frmOwner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(608, 449);
+            this.ClientSize = new System.Drawing.Size(608, 483);
             this.ControlBox = false;
             this.Controls.Add(this.lblNoRecords);
             this.Controls.Add(this.btnCancel);
@@ -579,5 +604,7 @@
         public System.Windows.Forms.Label lblTelNo;
         public System.Windows.Forms.Label lblTCT;
         public System.Windows.Forms.Label lblCTC;
+        public System.Windows.Forms.Label lblValidity;
+        public System.Windows.Forms.DateTimePicker dtpValidDt;
     }
 }

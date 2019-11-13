@@ -29,6 +29,8 @@ namespace Modules.Utilities
             RecordFrm.txtTelNo.Visible = false;
             RecordFrm.lblTCT.Text = "PTR No. :";
             RecordFrm.lblCTC.Text = "PRC No. :";
+            RecordFrm.lblValidity.Visible = true;
+            RecordFrm.dtpValidDt.Visible = true;
 
             //AFM 20191025 (s)
             OracleResultSet result = new OracleResultSet();
@@ -69,7 +71,8 @@ namespace Modules.Utilities
             RecordFrm.dgvList.Columns.Add("TIN", "TIN");
             RecordFrm.dgvList.Columns.Add("PRC", "PRC");
             RecordFrm.dgvList.Columns.Add("PTR", "PTR");
-            
+            RecordFrm.dgvList.Columns.Add("ValidityDt", "Validity Date");
+
             EngineersList engr = new EngineersList("", "", "", "","");
             int iCnt = 0;
             for (int i = 0; i < engr.AcctLst.Count; i++)
@@ -80,6 +83,15 @@ namespace Modules.Utilities
                     engr.AcctLst[i].HouseNo, engr.AcctLst[i].LotNo, engr.AcctLst[i].BlkNo,
                     engr.AcctLst[i].Barangay, engr.AcctLst[i].City, engr.AcctLst[i].Province,
                     engr.AcctLst[i].ZIP, engr.AcctLst[i].EngrType, engr.AcctLst[i].TIN, engr.AcctLst[i].PRC, engr.AcctLst[i].PTR);
+
+                //AFM 20191113 ANG-19-11104
+                OracleResultSet result = new OracleResultSet();
+                result.Query = $"select * from engineer_tbl where 1=1 and engr_code = '{engr.AcctLst[i].OwnerCode}'";
+                if (result.Execute())
+                    if (result.Read())
+                    {
+                        RecordFrm.dgvList.Rows[i].Cells["ValidityDt"].Value = String.Format("{0:MM/dd/yyyy}", result.GetDateTime("VALIDITY_DT"));
+                    }
             }
 
             RecordFrm.lblNoRecords.Text += " " + iCnt.ToString("#,###");
@@ -163,7 +175,7 @@ namespace Modules.Utilities
                     RecordFrm.txtMI.Text.ToString(), RecordFrm.txtStreet.Text.ToString(), RecordFrm.txtHseNo.Text.ToString(),
                     RecordFrm.txtLotNo.Text.ToString(), RecordFrm.txtBlkNo.Text.ToString(), RecordFrm.cmbBrgy.Text.ToString(),
                     RecordFrm.txtMun.Text.ToString(), RecordFrm.txtProv.Text.ToString(), RecordFrm.txtZIP.Text.ToString(),
-                    RecordFrm.cmbEngrType.Text.ToString(), RecordFrm.txtTIN.Text.ToString(), RecordFrm.txtCTC.Text.ToString(), RecordFrm.txtTCT.Text.ToString());
+                    RecordFrm.cmbEngrType.Text.ToString(), RecordFrm.txtTIN.Text.ToString(), RecordFrm.txtCTC.Text.ToString(), RecordFrm.txtTCT.Text.ToString(), RecordFrm.dtpValidDt.Value);
 
                 RecordFrm.AcctNo = account.OwnerCode;
 
@@ -203,7 +215,8 @@ namespace Modules.Utilities
                 strQuery += $" ENGR_ZIP = '{StringUtilities.HandleApostrophe(RecordFrm.txtZIP.Text.ToString()).Trim()}', ";
                 strQuery += $" ENGR_PRC= '{StringUtilities.HandleApostrophe(RecordFrm.txtCTC.Text.ToString()).Trim()}', ";
                 strQuery += $" ENGR_PTR = '{StringUtilities.HandleApostrophe(RecordFrm.txtTCT.Text.ToString()).Trim()}', ";
-                strQuery += $" ENGR_TYPE = '{StringUtilities.HandleApostrophe(RecordFrm.cmbEngrType.Text.ToString()).Trim()}'";
+                strQuery += $" ENGR_TYPE = '{StringUtilities.HandleApostrophe(RecordFrm.cmbEngrType.Text.ToString()).Trim()}',";
+                strQuery += $" VALIDITY_DT = to_date('{RecordFrm.dtpValidDt.Value.ToShortDateString()}', 'MM/dd/yyyy')"; //AFM 20191113
                 strQuery += $" where ENGR_CODE = '{RecordFrm.AcctNo}' ";
                 db.Database.ExecuteSqlCommand(strQuery);
 
@@ -296,7 +309,12 @@ namespace Modules.Utilities
                 RecordFrm.txtCTC.Text = RecordFrm.dgvList[14, e.RowIndex].Value.ToString();
             }
             catch { }
-            
+            try
+            {
+                RecordFrm.dtpValidDt.Text = RecordFrm.dgvList[16, e.RowIndex].Value.ToString();
+            }
+            catch { }
+
 
         }
 

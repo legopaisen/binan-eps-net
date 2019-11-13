@@ -59,6 +59,7 @@ namespace Modules.Utilities
             this.txtMun.Text = string.Empty;
             this.txtProv.Text = string.Empty;
             this.txtZIP.Text = string.Empty;
+            this.dtpValidDt.Value = AppSettingsManager.GetSystemDate();
         }
 
         private void EnableControls(bool blnEnable)
@@ -79,6 +80,8 @@ namespace Modules.Utilities
             this.txtProv.ReadOnly = !blnEnable;
             this.txtZIP.ReadOnly = !blnEnable;
             this.cmbEngrType.Enabled = blnEnable;
+            this.dtpValidDt.Enabled = blnEnable;
+            this.dgvList.Enabled = !blnEnable;
         }
 
         private void PopulateBrgy()

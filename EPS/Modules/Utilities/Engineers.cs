@@ -292,7 +292,7 @@ namespace Modules.Utilities
         public void CreateAccount(string sLastName, string sFirstName, string sMI,
             string sAddress, string sHouseNo, string sLotNo, string sBlkNo, string sBrgy,
             string sCity, string sProv, string sZip, string sEngrType, string sTIN,
-            string sPRC, string sPTR)
+            string sPRC, string sPTR, DateTime sValidDt)
         {
             var db = new EPSConnection(dbConn);
             string strQuery = string.Empty;
@@ -303,9 +303,10 @@ namespace Modules.Utilities
             {
                 CreateAccountCode();
 
+
                 if (!string.IsNullOrEmpty(m_sOwnerCode))
                 {
-                    strQuery = $"insert into engineer_tbl values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15,:16)";
+                    strQuery = $"insert into engineer_tbl values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15,:16,:17)";
                     db.Database.ExecuteSqlCommand(strQuery,
                         new OracleParameter(":1", m_sOwnerCode),
                         new OracleParameter(":2", StringUtilities.HandleApostrophe(sEngrType)),
@@ -322,7 +323,8 @@ namespace Modules.Utilities
                         new OracleParameter(":13", StringUtilities.HandleApostrophe(sZip)),
                         new OracleParameter(":14", StringUtilities.HandleApostrophe(sTIN)),
                         new OracleParameter(":15", StringUtilities.HandleApostrophe(sPRC)),
-                        new OracleParameter(":16", StringUtilities.HandleApostrophe(sPTR)));
+                        new OracleParameter(":16", StringUtilities.HandleApostrophe(sPTR)),
+                        new OracleParameter(":17", sValidDt)); //AFM 20191113 ANG-19-11104
                 }
             }
         }

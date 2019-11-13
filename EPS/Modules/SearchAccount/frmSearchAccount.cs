@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Modules.Utilities;
 using Common.DataConnector;
+using Common.AppSettings;
 
 namespace Modules.SearchAccount
 {
@@ -281,7 +282,20 @@ namespace Modules.SearchAccount
         private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            ClearControl();
+            ClearControl(); 
+            //AFM 20191113 ANG-19-11104 (s)
+            OracleResultSet result = new OracleResultSet();
+            result.Query = $"select validity_dt from engineer_tbl where engr_code = '{dgvList[0, e.RowIndex].Value}'";
+            if(result.Execute())
+                if(result.Read())
+                {
+                    if(result.GetDateTime(0) < AppSettingsManager.GetCurrentDate())
+                    {
+                        MessageBox.Show("Selected Engineer's license has expired!");
+                        return;
+                    }
+                }
+            //AFM 20191113 ANG-19-11104 (e)
 
             try
             {
