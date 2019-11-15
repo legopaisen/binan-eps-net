@@ -16,6 +16,7 @@ namespace Modules.SearchAccount
     public partial class frmSearchAccount : Form
     {
         public string SearchMode { get; set; }
+
         private AccountsList m_lstAccount;
         private EngineersList m_lstEngr;
         public string AcctNo
@@ -281,22 +282,7 @@ namespace Modules.SearchAccount
 
         private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            ClearControl(); 
-            //AFM 20191113 ANG-19-11104 (s)
-            OracleResultSet result = new OracleResultSet();
-            result.Query = $"select validity_dt from engineer_tbl where engr_code = '{dgvList[0, e.RowIndex].Value}'";
-            if(result.Execute())
-                if(result.Read())
-                {
-                    if(result.GetDateTime(0) < AppSettingsManager.GetCurrentDate())
-                    {
-                        MessageBox.Show("Selected Engineer's license has expired!");
-                        return;
-                    }
-                }
-            //AFM 20191113 ANG-19-11104 (e)
-
+            ClearControl();
             try
             {
                 if (dgvList[0, e.RowIndex].Value != null)
@@ -352,6 +338,11 @@ namespace Modules.SearchAccount
                 }
             }
             catch { }
+
+        }
+
+        private void dgvList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

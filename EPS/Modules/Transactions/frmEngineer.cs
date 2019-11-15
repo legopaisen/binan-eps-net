@@ -189,14 +189,30 @@ namespace Modules.Transactions
                         sTIN == txtTIN.Text.ToString())
                     {
                         MessageBox.Show("The engineer you are adding is already in the list.", "EPS", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        ClearControls();
                         return;
                     }
 
                     if (sEngrType == cmbEngrType.Text.ToString())
                     {
                         MessageBox.Show("The engineer type you are adding is already in the list.", "EPS", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        ClearControls();
                         return;
                     }
+                    //AFM 20191113 ANG-19-11104 (s)
+                    OracleResultSet result = new OracleResultSet();
+                    result.Query = $"select validity_dt from engineer_tbl where engr_code = '{EngrAcctNo}'";
+                    if (result.Execute())
+                        if (result.Read())
+                        {
+                            if (result.GetDateTime(0) < AppSettingsManager.GetCurrentDate())
+                            {
+                                MessageBox.Show("Selected Engineer's license has expired!", "EPS", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                ClearControls();
+                                return;
+                            }
+                        }
+                    //AFM 20191113 ANG-19-11104 (e)
                 }
 
                 //addrow
@@ -213,6 +229,7 @@ namespace Modules.Transactions
                 MessageBox.Show("Engineer's information required",DialogText,MessageBoxButtons.OK,MessageBoxIcon.Stop);
                 return;
             }
+            ClearControls();
         }
 
         private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
