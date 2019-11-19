@@ -246,7 +246,7 @@ namespace Modules.Transactions
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-
+           formLotOwn.LastName = LastName;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -429,6 +429,8 @@ namespace Modules.Transactions
             {
                 if (!string.IsNullOrEmpty(formStrucOwn.StrucAcctNo))
                 {
+                    formLotOwn.txtLastName.Text = LastName;
+
                     formLotOwn.LotAcctNo = formStrucOwn.StrucAcctNo;
                     formLotOwn.txtLastName.Text = formStrucOwn.txtLastName.Text;
                     formLotOwn.txtFirstName.Text = formStrucOwn.txtFirstName.Text;
@@ -466,6 +468,11 @@ namespace Modules.Transactions
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
         {
 
         }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Common.AppSettings;
 using Modules.Utilities;
 using Modules.SearchAccount;
+using Common.DataConnector;
 
 namespace Modules.Transactions
 {
@@ -21,6 +22,9 @@ namespace Modules.Transactions
         public string DialogText { get; set; }
 
         public OwnerInfo ownerinfo = new OwnerInfo();
+
+        public string sLastName
+        { get { return txtLastName.Text; } }
 
         public Button ButtonLotOwner
         {
@@ -174,10 +178,113 @@ namespace Modules.Transactions
             ClearControls();
         }
 
+        public bool ValidateOwner()
+        {
+            OracleResultSet result = new OracleResultSet();
+            result.Query = "select * from owner_tmp";
+            if(result.Execute())
+                if(result.Read())
+                {
+                    return true;
+                }
+            return false;
+        }
+
+        private void CopyOwner(string AcctNo)
+        {
+            if (AcctNo != "")
+            {
+                OracleResultSet result = new OracleResultSet();
+                result.Query = "INSERT INTO OWNER_TMP ";
+                result.Query += $"VALUES ('{AcctNo}', ";
+                result.Query += $"'{txtLastName.Text}', ";
+                result.Query += $"'{txtFirstName.Text}', ";
+                result.Query += $"'{txtMI.Text}', ";
+                result.Query += $"'{txtHseNo.Text}', ";
+                result.Query += $"'{txtLotNo.Text}', ";
+                result.Query += $"'{txtBlkNo.Text}', ";
+                result.Query += $"'{txtStreet.Text}', ";
+                result.Query += $"'{cmbBrgy.Text}', ";
+                result.Query += $"'{txtMun.Text}', ";
+                result.Query += $"'{txtProv.Text}', ";
+                result.Query += $"'{txtZIP.Text}', ";
+                result.Query += $"'{txtTCT.Text}', ";
+                result.Query += $"'{txtTIN.Text}', ";
+                result.Query += $"'{txtCTC.Text}', ";
+                result.Query += $"'{txtTelNo.Text}', ";
+                result.Query += $"'')";
+                result.ExecuteNonQuery();
+                result.Close();
+            }
+            else
+                return;
+        }
+
         private void btnCopy_Click(object sender, EventArgs e)
         {
+            OracleResultSet result = new OracleResultSet();
+            OracleResultSet result2 = new OracleResultSet();
+            if (!ValidateOwner() && StrucAcctNo != null)
+            {
+                result.Query = "INSERT INTO OWNER_TMP ";
+                result.Query += $"VALUES ('{StrucAcctNo}', ";
+                result.Query += $"'{txtLastName.Text}', ";
+                result.Query += $"'{txtFirstName.Text}', ";
+                result.Query += $"'{txtMI.Text}', ";
+                result.Query += $"'{txtHseNo.Text}', ";
+                result.Query += $"'{txtLotNo.Text}', ";
+                result.Query += $"'{txtBlkNo.Text}', ";
+                result.Query += $"'{txtStreet.Text}', ";
+                result.Query += $"'{cmbBrgy.Text}', ";
+                result.Query += $"'{txtMun.Text}', ";
+                result.Query += $"'{txtProv.Text}', ";
+                result.Query += $"'{txtZIP.Text}', ";
+                result.Query += $"'{txtTCT.Text}', ";
+                result.Query += $"'{txtTIN.Text}', ";
+                result.Query += $"'{txtCTC.Text}', ";
+                result.Query += $"'{txtTelNo.Text}', ";
+                result.Query += $"'')";
+                result.ExecuteNonQuery();
+                result.Close();
+
+            }
+            else
+            {
+                result.Query = "select * from owner_tmp";
+                if (result.Execute())
+                    if (result.Read())
+                    {
+                        StrucAcctNo = result.GetString("acct_code");
+                        txtLastName.Text = result.GetString("acct_ln");
+                        txtFirstName.Text = result.GetString("acct_fn");
+                        txtMI.Text = result.GetString("acct_mi");
+                        txtHseNo.Text = result.GetString("acct_hse_no");
+                        txtLotNo.Text = result.GetString("acct_lot_no");
+                        txtBlkNo.Text = result.GetString("acct_blk_no");
+                        txtStreet.Text = result.GetString("acct_addr");
+                        cmbBrgy.Text = result.GetString("acct_brgy");
+                        txtMun.Text = result.GetString("acct_city");
+                        txtProv.Text = result.GetString("acct_prov");
+                        txtZIP.Text = result.GetString("acct_zip");
+                        txtTCT.Text = result.GetString("acct_tct");
+                        txtCTC.Text = result.GetString("acct_ctc");
+                        txtTelNo.Text = result.GetString("acct_telno");
+
+                        result2.Query = "delete from owner_tmp";
+                        result2.ExecuteNonQuery();
+                        result2.Close();
+
+                    }
+                    else
+                    {
+                        result.Query = "delete from owner_tmp";
+                        result.ExecuteNonQuery();
+                        result.Close();
+                        CopyOwner(StrucAcctNo);
+                    }
+            }
             // temp disabled button
-            frmRecords record = new frmRecords();
+            // frmRecords record = new frmRecords();
             //ownerinfo.LastName = txtLastName.Text;
             //record.Fname = txtFirstName.Text;
             //record.MiName = txtMI.Text;
@@ -192,8 +299,9 @@ namespace Modules.Transactions
             //record.Municipality = txtMun.Text;
             //record.Province = txtProv.Text;
             //record.ZIP = txtZIP.Text;
+            //record.LastName = txtLastName.Text;
 
-            record.CopyLotStrucOwner("CopyLot");
+            //record.CopyLotStrucOwner("CopyLot");
         }
 
         public bool ValidateData()

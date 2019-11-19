@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Common.AppSettings;
 using Modules.Utilities;
 using Modules.SearchAccount;
+using Common.DataConnector;
 
 namespace Modules.Transactions
 {
@@ -21,6 +22,7 @@ namespace Modules.Transactions
         public string DialogText { get; set; }
 
         public OwnerInfo ownerinfo = new OwnerInfo();
+
 
         public string LastName { get; set; } //test
 
@@ -42,7 +44,7 @@ namespace Modules.Transactions
             ClearControls();
 
             PopulateBrgy();
-
+ 
             txtMun.Text = AppSettingsManager.GetConfigValue("02");
             txtProv.Text = AppSettingsManager.GetConfigValue("03");
             txtZIP.Text = AppSettingsManager.GetConfigValue("28");
@@ -173,11 +175,82 @@ namespace Modules.Transactions
             ClearControls();
         }
 
+        private void CopyOwner(string AcctNo)
+        {
+            if (AcctNo != "")
+            {
+                OracleResultSet result = new OracleResultSet();
+                result.Query = "INSERT INTO OWNER_TMP ";
+                result.Query += $"VALUES ('{AcctNo}', ";
+                result.Query += $"'{txtLastName.Text}', ";
+                result.Query += $"'{txtFirstName.Text}', ";
+                result.Query += $"'{txtMI.Text}', ";
+                result.Query += $"'{txtHseNo.Text}', ";
+                result.Query += $"'{txtLotNo.Text}', ";
+                result.Query += $"'{txtBlkNo.Text}', ";
+                result.Query += $"'{txtStreet.Text}', ";
+                result.Query += $"'{cmbBrgy.Text}', ";
+                result.Query += $"'{txtMun.Text}', ";
+                result.Query += $"'{txtProv.Text}', ";
+                result.Query += $"'{txtZIP.Text}', ";
+                result.Query += $"'{txtTCT.Text}', ";
+                result.Query += $"'{txtTIN.Text}', ";
+                result.Query += $"'{txtCTC.Text}', ";
+                result.Query += $"'{txtTelNo.Text}', ";
+                result.Query += $"'')";
+                result.ExecuteNonQuery();
+                result.Close();
+            }
+            else
+                return;
+        }
+
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            // temp disabled button
-            frmRecords record = new frmRecords();
-            record.CopyLotStrucOwner("CopyStruc");
+            frmStrucOwner frmstrucowner = new frmStrucOwner();
+            OracleResultSet result = new OracleResultSet();
+            if (frmstrucowner.ValidateOwner())
+            {
+                result.Query = $"select * from owner_tmp";
+                if(result.Execute())
+                    if(result.Read())
+                    {
+                        if (result.GetString("acct_code") == LotAcctNo || LotAcctNo != null)
+                        {
+                            LotAcctNo = result.GetString("acct_code");
+                            txtLastName.Text = result.GetString("acct_ln");
+                            txtFirstName.Text = result.GetString("acct_fn");
+                            txtMI.Text = result.GetString("acct_mi");
+                            txtHseNo.Text = result.GetString("acct_hse_no");
+                            txtLotNo.Text = result.GetString("acct_lot_no");
+                            txtBlkNo.Text = result.GetString("acct_blk_no");
+                            txtStreet.Text = result.GetString("acct_addr");
+                            cmbBrgy.Text = result.GetString("acct_brgy");
+                            txtMun.Text = result.GetString("acct_city");
+                            txtProv.Text = result.GetString("acct_prov");
+                            txtZIP.Text = result.GetString("acct_zip");
+                            txtTCT.Text = result.GetString("acct_tct");
+                            txtCTC.Text = result.GetString("acct_ctc");
+                            txtTelNo.Text = result.GetString("acct_telno");
+                        }
+                    }
+            }
+            else
+            {
+                result.Query = "delete from owner_tmp";
+                result.ExecuteNonQuery();
+                result.Close();
+
+                CopyOwner(LotAcctNo);
+                return;
+            }
+            result.Query = "delete from owner_tmp";
+            result.ExecuteNonQuery();
+            result.Close();
+
+            //// temp disabled button
+            //frmRecords record = new frmRecords();
+            //record.CopyLotStrucOwner("CopyStruc");
 
             //txtLastName.Text = ownerinfo.LastName;
             //record.Fname = txtFirstName.Text;
