@@ -221,6 +221,8 @@
             this.dgvCategory.RowHeadersVisible = false;
             this.dgvCategory.Size = new System.Drawing.Size(185, 138);
             this.dgvCategory.TabIndex = 9;
+            this.dgvCategory.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategory_CellEndEdit);
+
             // 
             // dataGridViewCheckBoxColumn2
             // 
@@ -334,6 +336,7 @@
             this.dgvStruc.RowHeadersVisible = false;
             this.dgvStruc.Size = new System.Drawing.Size(127, 138);
             this.dgvStruc.TabIndex = 10;
+            this.dgvStruc.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStruc_CellEndEdit);
             // 
             // dataGridViewCheckBoxColumn1
             // 
@@ -369,6 +372,8 @@
             this.dgvScope.RowHeadersVisible = false;
             this.dgvScope.Size = new System.Drawing.Size(185, 138);
             this.dgvScope.TabIndex = 8;
+            this.dgvScope.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScope_CellEndEdit);
+
             // 
             // Select
             // 

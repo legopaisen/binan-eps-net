@@ -12,6 +12,7 @@ using EPSEntities.Entity;
 using Oracle.ManagedDataAccess.Client;
 using Common.AppSettings;
 using Common.StringUtilities;
+using Common.DataConnector;
 
 namespace Modules.Utilities.Forms
 {
@@ -42,6 +43,11 @@ namespace Modules.Utilities.Forms
             PopulateCategory();
             EnableControls(false);
             InitializeControls();
+            try
+            {
+                dgvMajorFees.CurrentCell.Selected = false;
+            }
+            catch { }
         }
 
         private void InitializeControls()
@@ -255,8 +261,8 @@ namespace Modules.Utilities.Forms
                 txtSubAcctDescNew.Text = "";
                 txtSubAcctDescNew.Visible = false;
                 PopulateMajorFees();
+                dgvMajorFees.CurrentCell = null;
 
-                
             }
             catch { }
         }
@@ -606,6 +612,18 @@ namespace Modules.Utilities.Forms
 
         private void SetCheckStructure(string sStruc)
         {
+            if (sStruc == "") //AFM 20191122 if all structure is unchecked (s)
+            {
+                for (int i = 0; i < dgvStruc.Rows.Count; i++)
+                {
+                    try
+                    {
+                            dgvStruc[0, i].Value = false;
+                    }
+                    catch { }
+                }
+                return;  //AFM 20191122 if all structure is unchecked (e)
+            }
             string[] separator = { "|" };
             int iCount = dgvStruc.Rows.Count;
 
@@ -646,6 +664,19 @@ namespace Modules.Utilities.Forms
 
         private void SetCheckCategory(string sCategory)
         {
+            if (sCategory == "") //AFM 20191122 if all category is unchecked (s)
+            {
+                for (int i = 0; i < dgvCategory.Rows.Count; i++)
+                {
+                    try
+                    {
+                        dgvCategory[0, i].Value = false;
+                    }
+                    catch { }
+                }
+                return;  //AFM 20191122 if all category is unchecked (e)
+            }
+
             string[] separator = { "|" };
             int iCount = dgvCategory.Rows.Count;
 
@@ -686,6 +717,19 @@ namespace Modules.Utilities.Forms
 
         private void SetCheckScope(string sScope)
         {
+            if (sScope == "") //AFM 20191122 if all scope is unchecked (s)
+            {
+                for (int i = 0; i < dgvScope.Rows.Count; i++)
+                {
+                    try
+                    {
+                        dgvScope[0, i].Value = false;
+                    }
+                    catch { }
+                }
+                return;  //AFM 20191122 if all scope is unchecked (e)
+            }
+
             string[] separator = { "|" };
             int iCount = dgvScope.Rows.Count;
 
@@ -1100,6 +1144,84 @@ namespace Modules.Utilities.Forms
             PopulateSchedule();
         }
 
+        private void OnUpdateScopeCatStruc(string sScope, string sCategory, string sStruc)
+        {
+            OracleResultSet pSet = new OracleResultSet();
+            int row = dgvMajorFees.SelectedCells[0].RowIndex;
+            pSet.Query = $"UPDATE SUBCATEGORIES_X SET SCOPE_CODE = '{sScope}', CATEGORY_CODE = '{sCategory}', STRUC_CODE = '{sStruc}' where fees_code = '{dgvMajorFees.Rows[row].Cells[0].Value.ToString()}'";
+            pSet.ExecuteNonQuery();
+            pSet.Close();
+        }
+
+        private void dgvCategory_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            string sScope = string.Empty;
+            string sCategory = string.Empty;
+            string sStruc = string.Empty;
+            try
+            {
+                if (dgvMajorFees.CurrentCell.Value.ToString() != "")
+                {
+                    int row = dgvMajorFees.SelectedCells[0].RowIndex;
+                    sScope = SelectScope();
+                    dgvMajorFees[5, row].Value = sScope;
+                    sCategory = SelectCategory();
+                    dgvMajorFees[6, row].Value = sCategory;
+                    sStruc = SelectStruc();
+                    dgvMajorFees[9, row].Value = sCategory;
+                }
+            }
+            catch { return; }
+
+            OnUpdateScopeCatStruc(sScope, sCategory, sStruc);
+        }
+
+        private void dgvScope_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+                string sScope = string.Empty;
+                string sCategory = string.Empty;
+                string sStruc = string.Empty;
+                try
+                {
+                    if (dgvMajorFees.CurrentCell.Value.ToString() != "")
+                    {
+                        int row = dgvMajorFees.SelectedCells[0].RowIndex;
+                        sScope = SelectScope();
+                        dgvMajorFees[5, row].Value = sScope;
+                        sCategory = SelectCategory();
+                        dgvMajorFees[6, row].Value = sCategory;
+                        sStruc = SelectStruc();
+                        dgvMajorFees[9, row].Value = sCategory;
+                    }
+                }
+                catch { return; }
+
+                OnUpdateScopeCatStruc(sScope, sCategory, sStruc);
+        }
+
+        private void dgvStruc_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            string sScope = string.Empty;
+            string sCategory = string.Empty;
+            string sStruc = string.Empty;
+            try
+            {
+                if (dgvMajorFees.CurrentCell.Value.ToString() != "")
+                {
+                    int row = dgvMajorFees.SelectedCells[0].RowIndex;
+                    sScope = SelectScope();
+                    dgvMajorFees[5, row].Value = sScope;
+                    sCategory = SelectCategory();
+                    dgvMajorFees[6, row].Value = sCategory;
+                    sStruc = SelectStruc();
+                    dgvMajorFees[9, row].Value = sStruc;
+                }
+            }
+            catch { return; }
+
+            OnUpdateScopeCatStruc(sScope, sCategory, sStruc);
+        }
+
         private void dgvMajorFees_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             string sFeesTerm = string.Empty;
@@ -1263,6 +1385,8 @@ namespace Modules.Utilities.Forms
                 txtSubAcctDescNew.Visible = true;
                 cmbSubAcctDesc.Visible = true;
                 EnableControls(true);
+                dgvMajorFees.CurrentCell = null;
+
             }
             else
             {
