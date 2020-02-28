@@ -77,6 +77,7 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.lotOwnerApplicantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.engineersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.engineerTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.scheduleOfFeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.permitTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,7 +99,6 @@
             this.btnAOF = new System.Windows.Forms.Button();
             this.btnER = new System.Windows.Forms.Button();
             this.btnNewApp = new System.Windows.Forms.Button();
-            this.engineerTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MS.SuspendLayout();
             this.pnlButton.SuspendLayout();
             this.SuspendLayout();
@@ -270,7 +270,6 @@
             this.mechanicalPermitToolStripMenuItem.Name = "mechanicalPermitToolStripMenuItem";
             this.mechanicalPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.mechanicalPermitToolStripMenuItem.Text = "Mechanical Permit";
-            this.mechanicalPermitToolStripMenuItem.Visible = false;
             this.mechanicalPermitToolStripMenuItem.Click += new System.EventHandler(this.mechanicalPermitToolStripMenuItem_Click);
             // 
             // electricalPermitToolStripMenuItem
@@ -278,7 +277,6 @@
             this.electricalPermitToolStripMenuItem.Name = "electricalPermitToolStripMenuItem";
             this.electricalPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.electricalPermitToolStripMenuItem.Text = "Electrical Permit";
-            this.electricalPermitToolStripMenuItem.Visible = false;
             this.electricalPermitToolStripMenuItem.Click += new System.EventHandler(this.electricalPermitToolStripMenuItem_Click);
             // 
             // zoningPermitToolStripMenuItem
@@ -286,7 +284,6 @@
             this.zoningPermitToolStripMenuItem.Name = "zoningPermitToolStripMenuItem";
             this.zoningPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.zoningPermitToolStripMenuItem.Text = "Zoning Permit";
-            this.zoningPermitToolStripMenuItem.Visible = false;
             this.zoningPermitToolStripMenuItem.Click += new System.EventHandler(this.zoningPermitToolStripMenuItem_Click);
             // 
             // buildingPermitToolStripMenuItem
@@ -294,7 +291,6 @@
             this.buildingPermitToolStripMenuItem.Name = "buildingPermitToolStripMenuItem";
             this.buildingPermitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.buildingPermitToolStripMenuItem.Text = "Building Permit";
-            this.buildingPermitToolStripMenuItem.Visible = false;
             this.buildingPermitToolStripMenuItem.Click += new System.EventHandler(this.buildingPermitToolStripMenuItem_Click);
             // 
             // reassessmentOfPermitToolStripMenuItem
@@ -508,6 +504,13 @@
             this.engineersToolStripMenuItem.Text = "Engineers";
             this.engineersToolStripMenuItem.Click += new System.EventHandler(this.engineersToolStripMenuItem_Click);
             // 
+            // engineerTypeToolStripMenuItem
+            // 
+            this.engineerTypeToolStripMenuItem.Name = "engineerTypeToolStripMenuItem";
+            this.engineerTypeToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.engineerTypeToolStripMenuItem.Text = "Engineer Type";
+            this.engineerTypeToolStripMenuItem.Click += new System.EventHandler(this.engineerTypeToolStripMenuItem_Click);
+            // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
@@ -702,13 +705,6 @@
             this.btnNewApp.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnNewApp.UseVisualStyleBackColor = true;
             this.btnNewApp.Click += new System.EventHandler(this.btnNewApp_Click);
-            // 
-            // engineerTypeToolStripMenuItem
-            // 
-            this.engineerTypeToolStripMenuItem.Name = "engineerTypeToolStripMenuItem";
-            this.engineerTypeToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.engineerTypeToolStripMenuItem.Text = "Engineer Type";
-            this.engineerTypeToolStripMenuItem.Click += new System.EventHandler(this.engineerTypeToolStripMenuItem_Click);
             // 
             // frmMenu
             // 

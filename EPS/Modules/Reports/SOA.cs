@@ -34,7 +34,7 @@ namespace Modules.Reports
             int iBldgNo = 0;
             var result = (dynamic)null;
 
-            strWhereCond = $" where arn = '{ReportForm.Arn}'";
+            strWhereCond = $" where arn = '{ReportForm.An}'";
 
             result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
                          select a;
@@ -85,7 +85,7 @@ namespace Modules.Reports
             {
                 new Microsoft.Reporting.WinForms.ReportParameter("ReportName", ReportForm.ReportName),
                 new Microsoft.Reporting.WinForms.ReportParameter("BillNo", BillNo),
-                new Microsoft.Reporting.WinForms.ReportParameter("AppNo", ReportForm.Arn),
+                new Microsoft.Reporting.WinForms.ReportParameter("AppNo", ReportForm.An),
                 new Microsoft.Reporting.WinForms.ReportParameter("ProjDesc", sProjDesc),
                 new Microsoft.Reporting.WinForms.ReportParameter("ProjLoc", sProjLoc),
                 new Microsoft.Reporting.WinForms.ReportParameter("NoStorey", sNoStorey),
@@ -163,7 +163,7 @@ namespace Modules.Reports
             sQuery = "select major_fees.fees_desc as fees_desc,";
             sQuery += "sum(taxdues.fees_amt) as fees_amt from taxdues,major_fees ";
             sQuery += "where substr(taxdues.fees_code,1,2) = major_fees.fees_code and ";   
-            sQuery += $"taxdues.arn = '{ReportForm.Arn}' group by major_fees.fees_desc";
+            sQuery += $"taxdues.arn = '{ReportForm.An}' group by major_fees.fees_desc";
             var record = db.Database.SqlQuery<SOA_TBL>(sQuery);
             string sOwnCode = string.Empty;
 

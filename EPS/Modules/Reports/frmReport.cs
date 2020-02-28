@@ -16,7 +16,7 @@ namespace Modules.Reports
     public partial class frmReport : Form
     {
         public string ReportName { get; set; }
-        public string Arn { get; set; }
+        public string An { get; set; }
         FormReportClass ReportClass = null;
         private static ConnectionString dbConn = new ConnectionString();
 
@@ -41,7 +41,7 @@ namespace Modules.Reports
 
                 try
                 {
-                    sQuery = $"select distinct bill_no from billing where arn = '{Arn}'";
+                    sQuery = $"select distinct bill_no from billing where arn = '{An}'";
                     sBillNo = db.Database.SqlQuery<string>(sQuery).SingleOrDefault();
                 }
                 catch
@@ -65,7 +65,7 @@ namespace Modules.Reports
                 this.Text = ReportName;
 
                 ReportClass = new Application(this);
-                ReportClass.ARN = Arn;
+                ReportClass.AN = An;
             }
             else if(ReportName == "Building Information") //AFM 20190930
             {

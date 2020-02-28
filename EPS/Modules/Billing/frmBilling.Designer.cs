@@ -52,7 +52,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.an1 = new Modules.ARN.ARN();
+            this.an1 = new Modules.ARN.AN();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvPermit = new System.Windows.Forms.DataGridView();
             this.Select = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -325,8 +325,10 @@
             // 
             // an1
             // 
-            this.an1.GetDistCode = "";
-            this.an1.GetLGUCode = "";
+            //this.an1.GetDistCode = "";
+            //this.an1.GetLGUCode = "";
+            this.an1.GetCode = "";
+            this.an1.GetMonth = "";
             this.an1.GetSeries = "";
             this.an1.GetTaxYear = "";
             this.an1.Location = new System.Drawing.Point(106, 17);
@@ -766,7 +768,7 @@
         public System.Windows.Forms.TextBox txtOccupancy;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
-        public ARN.ARN an1;
+        public ARN.AN an1;
         public System.Windows.Forms.DataGridView dgvPermit;
         public System.Windows.Forms.DataGridView dgvAssessment;
         public System.Windows.Forms.TextBox txtAmtDue;

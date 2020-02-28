@@ -39,7 +39,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtProjDesc = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.arn1 = new Modules.ARN.ARN();
+            this.arn1 = new Modules.ARN.AN();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -175,8 +175,10 @@
             // 
             // arn1
             // 
-            this.arn1.GetDistCode = "";
-            this.arn1.GetLGUCode = "";
+            //this.arn1.GetDistCode = "";
+            //this.arn1.GetLGUCode = "";
+            this.arn1.GetCode = "";
+            this.arn1.GetMonth = "";
             this.arn1.GetSeries = "";
             this.arn1.GetTaxYear = "";
             this.arn1.Location = new System.Drawing.Point(58, 15);
@@ -560,7 +562,7 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox grpDetails;
-        public ARN.ARN arn1;
+        public ARN.AN arn1;
         public System.Windows.Forms.Button btnClear;
         public System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label1;

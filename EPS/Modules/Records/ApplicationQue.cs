@@ -17,7 +17,7 @@ namespace Modules.Records
     public class ApplicationQue
     {
         public static ConnectionString dbConn = new ConnectionString();
-        private string ARN { get; set; }
+        private string AN { get; set; }
         private string PROJ_DESC { get; set; }
         private string PERMIT_CODE { get; set; }
         private string PERMIT_NO { get; set; }
@@ -55,7 +55,7 @@ namespace Modules.Records
 
         public void Clear()
         {
-            ARN = string.Empty;
+            AN = string.Empty;
             PROJ_DESC = string.Empty;
             PERMIT_CODE = string.Empty;
             PERMIT_NO = string.Empty;
@@ -100,7 +100,7 @@ namespace Modules.Records
 
             foreach (var items in trsrec)
             {
-                ARN = items.ARN;
+                AN = items.ARN;
                 PROJ_DESC = items.PROJ_DESC;
                 PERMIT_CODE = items.PERMIT_CODE;
                 PERMIT_NO = items.PERMIT_NO;
@@ -142,7 +142,7 @@ namespace Modules.Records
         string sARCHITECT, Nullable<DateTime> dPROP_START, Nullable<DateTime> dPROP_COMPLETE, Nullable<DateTime> dDATE_APPLIED,
         Nullable<DateTime> dDATE_ISSUED,string sMEMO,int iMAIN_APPLICATION )
         {
-            ARN = sARN;
+            AN = sARN;
             PROJ_DESC = sPROJ_DESC;
             PERMIT_CODE = sPERMIT_CODE;
             PERMIT_NO = sPERMIT_NO;

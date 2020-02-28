@@ -64,7 +64,7 @@ namespace Modules.Billing
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            m_sAN = an1.GetArn();
+            m_sAN = an1.GetAn();
             TaskManager taskman = new TaskManager();
 
             if (string.IsNullOrEmpty(m_sAN))
@@ -77,12 +77,12 @@ namespace Modules.Billing
 
                 form.ShowDialog();
 
-                an1.SetArn(form.sArn);
+                an1.SetAn(form.sArn);
 
-                m_sAN = an1.GetArn();
+                m_sAN = an1.GetAn();
             }
             else
-                m_sAN = an1.GetArn();
+                m_sAN = an1.GetAn();
 
             if (string.IsNullOrEmpty(m_sAN))
                 return;
@@ -105,11 +105,11 @@ namespace Modules.Billing
         {
             RecordClass.ClearControls();
             taskman.RemTask(m_sAN);
-            //an1.GetCode = "";
-            an1.GetLGUCode = "";
+            an1.GetCode = "";
+            //an1.GetLGUCode = "";
             an1.GetTaxYear = "";
-            //an1.GetMonth = "";
-            an1.GetDistCode = "";
+            an1.GetMonth = "";
+            //an1.GetDistCode = "";
             an1.GetSeries = "";
             m_sAN = "";
         }
@@ -155,11 +155,11 @@ namespace Modules.Billing
             if (MessageBox.Show("Are you sure you want to exit?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 taskman.RemTask(m_sAN);
-                //an1.GetCode = "";
-                an1.GetLGUCode = "";
+                an1.GetCode = "";
+                //an1.GetLGUCode = "";
                 an1.GetTaxYear = "";
-                //an1.GetMonth = "";
-                an1.GetDistCode = "";
+                an1.GetMonth = "";
+               //an1.GetDistCode = "";
                 an1.GetSeries = "";
                 m_sAN = "";
 
@@ -293,11 +293,11 @@ namespace Modules.Billing
                 {
                     RecordClass.ClearControls();
                     taskman.RemTask(m_sAN);
-                    //an1.GetCode = "";
-                    an1.GetLGUCode = "";
+                    an1.GetCode = "";
+                    //an1.GetLGUCode = "";
                     an1.GetTaxYear = "";
-                    //an1.GetMonth = "";
-                    an1.GetDistCode = "";
+                    an1.GetMonth = "";
+                    //an1.GetDistCode = "";
                     an1.GetSeries = "";
                     m_sAN = "";
                     this.Close();
@@ -311,7 +311,7 @@ namespace Modules.Billing
         {
             frmReport form = new frmReport();
             form.ReportName = "ORDER OF PAYMENT";
-            form.Arn = m_sAN;
+            form.An = m_sAN;
             form.ShowDialog();
         }
 

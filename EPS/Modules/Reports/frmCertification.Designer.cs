@@ -35,7 +35,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.an1 = new Modules.ARN.ARN();
+            this.an1 = new Modules.ARN.AN();
             this.SuspendLayout();
             // 
             // cmbCert
@@ -88,7 +88,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "ARN";
+            this.label2.Text = "AN";
             // 
             // btnSearch
             // 
@@ -103,8 +103,10 @@
             // 
             // an1
             // 
-            this.an1.GetDistCode = "";
-            this.an1.GetLGUCode = "";
+            //this.an1.GetDistCode = "";
+            //this.an1.GetLGUCode = "";
+            this.an1.GetCode = "";
+            this.an1.GetMonth = "";
             this.an1.GetSeries = "";
             this.an1.GetTaxYear = "";
             this.an1.Location = new System.Drawing.Point(12, 81);
@@ -144,7 +146,7 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label2;
-        public ARN.ARN an1;
+        public ARN.AN an1;
         public System.Windows.Forms.Button btnSearch;
     }
 }

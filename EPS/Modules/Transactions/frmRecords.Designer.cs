@@ -51,7 +51,7 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.cmbScope = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbPermit = new MultiColumnComboBoxDemo.MultiColumnComboBox();
-            this.arn1 = new Modules.ARN.ARN();
+            this.arn1 = new Modules.ARN.AN();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -282,8 +282,10 @@
             // 
             // arn1
             // 
-            this.arn1.GetDistCode = "";
-            this.arn1.GetLGUCode = "";
+            //this.arn1.GetDistCode = "";
+            this.arn1.GetCode = "";
+            //this.arn1.GetLGUCode = "";
+            this.arn1.GetMonth = "";
             this.arn1.GetSeries = "";
             this.arn1.GetTaxYear = "";
             this.arn1.Location = new System.Drawing.Point(52, 12);
@@ -355,6 +357,6 @@
         public System.Windows.Forms.Button btnClear;
         public MultiColumnComboBoxDemo.MultiColumnComboBox cmbPermit;
         public MultiColumnComboBoxDemo.MultiColumnComboBox cmbScope;
-        public ARN.ARN arn1;
+        public ARN.AN arn1;
     }
 }

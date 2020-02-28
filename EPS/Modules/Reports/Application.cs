@@ -66,7 +66,7 @@ namespace Modules.Reports
             CreateParameters();
             Microsoft.Reporting.WinForms.ReportParameter[] para = new Microsoft.Reporting.WinForms.ReportParameter[]
             {
-            new Microsoft.Reporting.WinForms.ReportParameter("pARN",ARN),
+            new Microsoft.Reporting.WinForms.ReportParameter("pARN",AN),
             new Microsoft.Reporting.WinForms.ReportParameter("pNew",pNew),
             new Microsoft.Reporting.WinForms.ReportParameter("pRen",pRen),
             new Microsoft.Reporting.WinForms.ReportParameter("pAppLN",pAppLN),
@@ -176,7 +176,7 @@ namespace Modules.Reports
             string sScope = string.Empty;
             int iBldgNo = 0;
 
-            strWhereCond = $" where arn = '{ARN}' and main_application = '{1}'";
+            strWhereCond = $" where arn = '{AN}' and main_application = '{1}'";
 
             if (ReportForm.ReportName == "Application")
             {

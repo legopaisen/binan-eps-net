@@ -201,7 +201,7 @@ namespace Modules.Transactions
                 RecordFrm.ButtonDelete.Text = "Cancel App";
             }
 
-            taskman.RemTask(RecordFrm.ARN);
+            taskman.RemTask(RecordFrm.AN);
             RecordFrm.arn1.Clear();
         }
 
@@ -234,18 +234,18 @@ namespace Modules.Transactions
             var db = new EPSConnection(dbConn);
             string strQuery = string.Empty;
 
-            strQuery = $"delete from application_que where arn = '{RecordFrm.ARN}'";
+            strQuery = $"delete from application_que where arn = '{RecordFrm.AN}'";
             db.Database.ExecuteSqlCommand(strQuery);
 
             //if (string.IsNullOrEmpty(RecordFrm.ARN))
 
             if(RecordFrm.SourceClass == "NEW_ADD")
-                RecordFrm.arn1.CreateARN(DateTime.Now.Year.ToString(), frmProjectInfo.BrgyCode); //RecordFrm.cmbPermit.Text.ToString()
+                RecordFrm.arn1.CreateAN(RecordFrm.cmbPermit.Text.ToString());
 
             if (RecordFrm.SourceClass == "REN_ADD")
-                RecordFrm.arn1.CreateARN(RecordFrm.arn1.GetTaxYear, frmProjectInfo.BrgyCode); //RecordFrm.cmbPermit.Text.ToString()
+                RecordFrm.arn1.CreateAN(RecordFrm.cmbPermit.Text.ToString());
 
-            if (string.IsNullOrEmpty(RecordFrm.ARN))
+            if (string.IsNullOrEmpty(RecordFrm.AN))
             {
                 MessageBox.Show("Error generating application no.\nPlease check permit table",RecordFrm.DialogText,MessageBoxButtons.OK,MessageBoxIcon.Stop);
                 return;
@@ -261,7 +261,7 @@ namespace Modules.Transactions
                         return;
                     }
 
-                    if (Utilities.AuditTrail.InsertTrail("TA-LD", "APPLICATION_QUE", "ARN: " + RecordFrm.ARN) == 0)
+                    if (Utilities.AuditTrail.InsertTrail("TA-LD", "APPLICATION_QUE", "ARN: " + RecordFrm.AN) == 0)
                     {
                         MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
@@ -320,7 +320,7 @@ namespace Modules.Transactions
                     {
                         strQuery = $"insert into application_que values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15,:16,:17,:18,:19,:20,:21,:22,:23,:24,to_date(:25,'MM/dd/yyyy'),to_date(:26,'MM/dd/yyyy'),to_date(:27,'MM/dd/yyyy'),:28,:29,:30)";
                         db.Database.ExecuteSqlCommand(strQuery,
-                            new OracleParameter(":1", RecordFrm.ARN),
+                            new OracleParameter(":1", RecordFrm.AN),
                             new OracleParameter(":2", RecordFrm.formProject.txtProjDesc.Text.Trim()),
                             new OracleParameter(":3", sPermitCode),
                             new OracleParameter(":4", sPermitNo),
@@ -364,7 +364,7 @@ namespace Modules.Transactions
 
             if (this.RecordFrm.SourceClass == "NEW_ADD")
             {
-                if (Utilities.AuditTrail.InsertTrail("TNA-SAVE", "APPLICATION_QUE", "ARN: " + RecordFrm.ARN) == 0)
+                if (Utilities.AuditTrail.InsertTrail("TNA-SAVE", "APPLICATION_QUE", "ARN: " + RecordFrm.AN) == 0)
                 {
                     MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -372,7 +372,7 @@ namespace Modules.Transactions
             }
             if (this.RecordFrm.SourceClass == "REN_ADD")
             {
-                if (Utilities.AuditTrail.InsertTrail("TRA-SAVE", "APPLICATION_QUE", "ARN: " + RecordFrm.ARN) == 0)
+                if (Utilities.AuditTrail.InsertTrail("TRA-SAVE", "APPLICATION_QUE", "ARN: " + RecordFrm.AN) == 0)
                 {
                     MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -380,7 +380,7 @@ namespace Modules.Transactions
             }
             if (this.RecordFrm.SourceClass == "NEW_EDIT")
             {
-                if (Utilities.AuditTrail.InsertTrail("TEA-UPDATE", "APPLICATION_QUE", "ARN: " + RecordFrm.ARN) == 0)
+                if (Utilities.AuditTrail.InsertTrail("TEA-UPDATE", "APPLICATION_QUE", "ARN: " + RecordFrm.AN) == 0)
                 {
                     MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -388,7 +388,7 @@ namespace Modules.Transactions
             }
             if (this.RecordFrm.SourceClass == "REN_EDIT")
             {
-                if (Utilities.AuditTrail.InsertTrail("TER-UPDATE", "APPLICATION_QUE", "ARN: " + RecordFrm.ARN) == 0)
+                if (Utilities.AuditTrail.InsertTrail("TER-UPDATE", "APPLICATION_QUE", "ARN: " + RecordFrm.AN) == 0)
                 {
                     MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -396,7 +396,7 @@ namespace Modules.Transactions
             }
 
             if (this.RecordFrm.SourceClass == "NEW_ADD" || this.RecordFrm.SourceClass == "REN_ADD")
-                MessageBox.Show("ARN: " + RecordFrm.ARN + "  is successfully saved.", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("ARN: " + RecordFrm.AN + "  is successfully saved.", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 MessageBox.Show("Changes successfully saved.", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -457,10 +457,10 @@ namespace Modules.Transactions
                     form.SearchCriteria = "APP";
                 form.ShowDialog();
 
-                RecordFrm.arn1.SetArn(form.sArn);
+                RecordFrm.arn1.SetAn(form.sArn);
             }
 
-            if (!taskman.AddTask(RecordFrm.SourceClass, RecordFrm.ARN))
+            if (!taskman.AddTask(RecordFrm.SourceClass, RecordFrm.AN))
                 return;
 
             DisplayData();
@@ -482,20 +482,20 @@ namespace Modules.Transactions
             var db = new EPSConnection(dbConn);
             string strWhereCond = string.Empty;
 
-            if (!string.IsNullOrEmpty(RecordFrm.ARN))
+            if (!string.IsNullOrEmpty(RecordFrm.AN))
                 RecordFrm.arn1.Enabled = false;
 
             var result = (dynamic)null;
 
             if (RecordFrm.SourceClass == "REN_ADD")
             {
-                strWhereCond = $" where arn = '{RecordFrm.ARN}' and main_application = 1";
+                strWhereCond = $" where arn = '{RecordFrm.AN}' and main_application = 1";
                 result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
                          select a;
             }
             else
             {
-                strWhereCond = $" where arn = '{RecordFrm.ARN}' and main_application = 1";
+                strWhereCond = $" where arn = '{RecordFrm.AN}' and main_application = 1";
                 if (RecordFrm.SourceClass == "NEW_EDIT" || RecordFrm.SourceClass == "NEW_VIEW" || RecordFrm.SourceClass == "NEW_CANCEL")
                     strWhereCond += $" and status_code = 'NEW'";
                 else
@@ -592,8 +592,8 @@ namespace Modules.Transactions
                 RecordFrm.cmbPermit.Enabled = true;
 
                 RecordFrm.arn1.GetTaxYear = "";
-                //RecordFrm.arn1.GetMonth = "";
-                RecordFrm.arn1.GetDistCode = "";
+                RecordFrm.arn1.GetMonth = "";
+                //RecordFrm.arn1.GetDistCode = "";
                 RecordFrm.arn1.GetSeries = "";
             }
             if(RecordFrm.SourceClass == "REN_EDIT")
@@ -637,7 +637,7 @@ namespace Modules.Transactions
             {
                 string strWhereCond = string.Empty;
 
-                strWhereCond = $" where arn = '{RecordFrm.ARN}' order by main_application desc";
+                strWhereCond = $" where arn = '{RecordFrm.AN}' order by main_application desc";
 
                 var pset = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
                            select a;
@@ -677,7 +677,7 @@ namespace Modules.Transactions
             string strWhereCond = string.Empty;
             string sEngrNo = string.Empty;
 
-            strWhereCond = $" where arn = '{RecordFrm.ARN}' order by main_application desc";
+            strWhereCond = $" where arn = '{RecordFrm.AN}' order by main_application desc";
 
             var pset = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
                        select a;
@@ -702,7 +702,7 @@ namespace Modules.Transactions
 
         public override void ButtonDeleteClick()
         {
-            if (!string.IsNullOrEmpty(RecordFrm.ARN))
+            if (!string.IsNullOrEmpty(RecordFrm.AN))
             {
                 if (MessageBox.Show("Are you sure you want to cancel this application?", RecordFrm.DialogText, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
@@ -719,29 +719,29 @@ namespace Modules.Transactions
             var db = new EPSConnection(dbConn);
             string strQuery = string.Empty;
 
-            strQuery = $"insert into cancel_application select * from application_que where arn = '{RecordFrm.ARN}'";
+            strQuery = $"insert into cancel_application select * from application_que where arn = '{RecordFrm.AN}'";
             db.Database.ExecuteSqlCommand(strQuery);
 
-            strQuery = $"delete from application_que where arn = '{RecordFrm.ARN}'";
+            strQuery = $"delete from application_que where arn = '{RecordFrm.AN}'";
             db.Database.ExecuteSqlCommand(strQuery);
 
-            strQuery = $"insert into billing_hist select * from billing where arn = '{RecordFrm.ARN}'";
+            strQuery = $"insert into billing_hist select * from billing where arn = '{RecordFrm.AN}'";
             db.Database.ExecuteSqlCommand(strQuery);
 
-            strQuery = $"delete from billing where arn = '{RecordFrm.ARN}'";
+            strQuery = $"delete from billing where arn = '{RecordFrm.AN}'";
             db.Database.ExecuteSqlCommand(strQuery);
 
-            strQuery = $"insert into taxdues_hist select * from taxdues where arn = '{RecordFrm.ARN}'";
+            strQuery = $"insert into taxdues_hist select * from taxdues where arn = '{RecordFrm.AN}'";
             db.Database.ExecuteSqlCommand(strQuery);
 
-            strQuery = $"delete from taxdues where arn= '{RecordFrm.ARN}'";
+            strQuery = $"delete from taxdues where arn= '{RecordFrm.AN}'";
             db.Database.ExecuteSqlCommand(strQuery);
 
             try
             {
                 var dbarcs = new ARCSConnection(dbConnArcs);
 
-                strQuery = $"delete from eps_billing where arn = '{RecordFrm.ARN}'";
+                strQuery = $"delete from eps_billing where arn = '{RecordFrm.AN}'";
                 dbarcs.Database.ExecuteSqlCommand(strQuery);
                 
             }
@@ -749,13 +749,13 @@ namespace Modules.Transactions
 
             MessageBox.Show("Application is cancelled.", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            if (Utilities.AuditTrail.InsertTrail("TDA-CANCEL", "APPLICATION_QUE", "ARN: " + RecordFrm.ARN) == 0)
+            if (Utilities.AuditTrail.InsertTrail("TDA-CANCEL", "APPLICATION_QUE", "ARN: " + RecordFrm.AN) == 0)
             {
                 MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            taskman.RemTask(RecordFrm.ARN);
+            taskman.RemTask(RecordFrm.AN);
             RecordFrm.Close();
         }
 
@@ -763,7 +763,7 @@ namespace Modules.Transactions
         {
             if (RecordFrm.SourceClass != "NEW_ADD" && RecordFrm.SourceClass != "REN_ADD")
             {
-                if (string.IsNullOrEmpty(RecordFrm.ARN))
+                if (string.IsNullOrEmpty(RecordFrm.AN))
                 {
                     MessageBox.Show("Incomplete ARN", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     return false;

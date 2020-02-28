@@ -44,7 +44,7 @@ namespace Modules.Reports
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            m_sAN = an1.GetArn();
+            m_sAN = an1.GetAn();
             TaskManager taskman = new TaskManager();
 
             if (string.IsNullOrEmpty(m_sAN))
@@ -52,11 +52,11 @@ namespace Modules.Reports
                 SearchAccount.frmSearchARN form = new SearchAccount.frmSearchARN();
 
                 form.ShowDialog();
-                an1.SetArn(form.sArn);
-                m_sAN = an1.GetArn();
+                an1.SetAn(form.sArn);
+                m_sAN = an1.GetAn();
             }
             else
-                m_sAN = an1.GetArn();
+                m_sAN = an1.GetAn();
         }
 
         private void btnOK_Click(object sender, EventArgs e)

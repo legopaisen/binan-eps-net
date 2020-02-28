@@ -102,9 +102,9 @@ namespace Modules.Transactions
             set { this.btnClear = value; }
         }
 
-        public string ARN
+        public string AN
         {
-            get { return this.arn1.GetArn(); }
+            get { return this.arn1.GetAn(); }
         }
 
 
@@ -252,7 +252,7 @@ namespace Modules.Transactions
         private void btnExit_Click(object sender, EventArgs e)
         {
             TaskManager taskman = new TaskManager();
-            taskman.RemTask(ARN);
+            taskman.RemTask(AN);
 
             if (btnExit.Text == "Cancel")
             {
@@ -463,7 +463,7 @@ namespace Modules.Transactions
                 form.ReportName = "Application";
             else
                 form.ReportName = "Records";
-            form.Arn = ARN;
+            form.An = AN;
             form.ShowDialog();
         }
 

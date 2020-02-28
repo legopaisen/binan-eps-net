@@ -266,7 +266,7 @@ namespace Modules.Transactions
                     MessageBox.Show(ex.Message.ToString());
                 }
 
-                strQuery = $"update bldg_units set arn = '{RecordFrm.ARN}' where bldg_no = {iBldg}";
+                strQuery = $"update bldg_units set arn = '{RecordFrm.AN}' where bldg_no = {iBldg}";
                 db.Database.ExecuteSqlCommand(strQuery);
             }
         }

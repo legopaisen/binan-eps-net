@@ -80,11 +80,11 @@ namespace Modules.Transactions
 						RecordFrm.arn1.Enabled = false;
 
 					RecordFrm.EnableControl(true);
-					//RecordFrm.arn1.GetCode = "";
-					RecordFrm.arn1.GetLGUCode = "";
+					RecordFrm.arn1.GetCode = "";
+					//RecordFrm.arn1.GetLGUCode = "";
 					RecordFrm.arn1.GetTaxYear = "";
-					//RecordFrm.arn1.GetMonth = "";
-					RecordFrm.arn1.GetDistCode = "";
+					RecordFrm.arn1.GetMonth = "";
+					//RecordFrm.arn1.GetDistCode = "";
 					RecordFrm.arn1.GetSeries = "";
 				}
 				else
@@ -95,7 +95,7 @@ namespace Modules.Transactions
 						return;
 
 					Save();
-					MessageBox.Show("Record "+RecordFrm.ARN+" saved", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show("Record "+RecordFrm.AN + " saved", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					RecordFrm.arn1.Enabled = true;
 					RecordFrm.EnableControl(false);
 					RecordFrm.ButtonEdit.Enabled = true;
@@ -117,10 +117,10 @@ namespace Modules.Transactions
 			string sYear = AppSettingsManager.GetCurrentDate().Year.ToString();
 			string sBrgyCode = frmProjectInfo.BrgyCode;
 
-			if (string.IsNullOrEmpty(RecordFrm.ARN))
-				RecordFrm.arn1.CreateARN(sYear, sBrgyCode);
+			if (string.IsNullOrEmpty(RecordFrm.AN))
+				RecordFrm.arn1.CreateAN(RecordFrm.cmbPermit.Text);
 
-			strQuery = $"delete from application where arn = '{RecordFrm.ARN}'";
+			strQuery = $"delete from application where arn = '{RecordFrm.AN}'";
 			db.Database.ExecuteSqlCommand(strQuery);
 
 			
@@ -182,7 +182,7 @@ namespace Modules.Transactions
 					{
 						strQuery = $"insert into application values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15,:16,:17,:18,:19,:20,:21,:22,:23,:24,to_date(:25,'MM/dd/yyyy'),to_date(:26,'MM/dd/yyyy'),to_date(:27,'MM/dd/yyyy'),to_date(:28,'MM/dd/yyyy'),:29,:30)";
 						db.Database.ExecuteSqlCommand(strQuery,
-							new OracleParameter(":1", RecordFrm.ARN),
+							new OracleParameter(":1", RecordFrm.AN),
 							new OracleParameter(":2", RecordFrm.formProject.txtProjDesc.Text.Trim()),
 							new OracleParameter(":3", sPermitCode),
 							new OracleParameter(":4", sPermitNo),
@@ -227,7 +227,7 @@ namespace Modules.Transactions
 
             if (RecordFrm.SourceClass == "ENG_REC_ADD")
 			{
-				if (Utilities.AuditTrail.InsertTrail("ER-A", "APPLICATION", "ARN: " + RecordFrm.ARN) == 0)
+				if (Utilities.AuditTrail.InsertTrail("ER-A", "APPLICATION", "ARN: " + RecordFrm.AN) == 0)
 				{
 					MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
@@ -235,7 +235,7 @@ namespace Modules.Transactions
 			}
 			if (RecordFrm.SourceClass == "ENG_REC_EDIT")
 			{
-				if (Utilities.AuditTrail.InsertTrail("ER-E", "APPLICATION", "ARN: " + RecordFrm.ARN) == 0)
+				if (Utilities.AuditTrail.InsertTrail("ER-E", "APPLICATION", "ARN: " + RecordFrm.AN) == 0)
 				{
 					MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
@@ -263,11 +263,11 @@ namespace Modules.Transactions
 
 			RecordFrm.EnableControl(false);
 			RecordFrm.arn1.Enabled = true;
-			//RecordFrm.arn1.GetCode = "";
-			RecordFrm.arn1.GetLGUCode = "";
+			RecordFrm.arn1.GetCode = "";
+			//RecordFrm.arn1.GetLGUCode = "";
 			RecordFrm.arn1.GetTaxYear = "";
-			//RecordFrm.arn1.GetMonth = ""; 
-			RecordFrm.arn1.GetDistCode = "";
+			RecordFrm.arn1.GetMonth = ""; 
+			//RecordFrm.arn1.GetDistCode = "";
 			RecordFrm.arn1.GetSeries = "";
 			RecordFrm.formProject.ClearControls();
 			RecordFrm.formBldgDate.ClearControls();
@@ -294,8 +294,8 @@ namespace Modules.Transactions
 
 			if (RecordFrm.SourceClass == "ENG_REC_ADD")
 			{
-				strQuery = $"select count(*) from (select arn from application where arn = '{RecordFrm.ARN}' union ";
-				strQuery += $"select arn from application_que where arn = '{RecordFrm.ARN}')";
+				strQuery = $"select count(*) from (select arn from application where arn = '{RecordFrm.AN}' union ";
+				strQuery += $"select arn from application_que where arn = '{RecordFrm.AN}')";
 				iCnt = db.Database.SqlQuery<Int32>(strQuery).SingleOrDefault();
 
 				if (iCnt > 0)
@@ -317,10 +317,10 @@ namespace Modules.Transactions
 				form.SearchCriteria = "APP";
 				form.ShowDialog();
 
-				RecordFrm.arn1.SetArn(form.sArn);
+				RecordFrm.arn1.SetAn(form.sArn);
 			}
 
-			if (!taskman.AddTask(RecordFrm.SourceClass, RecordFrm.ARN))
+			if (!taskman.AddTask(RecordFrm.SourceClass, RecordFrm.AN))
 				return;
 
 			DisplayData();
@@ -423,12 +423,12 @@ namespace Modules.Transactions
 			var db = new EPSConnection(dbConn);
 			string strWhereCond = string.Empty;
 
-			if (!string.IsNullOrEmpty(RecordFrm.ARN))
+			if (!string.IsNullOrEmpty(RecordFrm.AN))
 				RecordFrm.arn1.Enabled = false;
 
 			var result = (dynamic)null;
 
-			strWhereCond = $" where arn = '{RecordFrm.ARN}' and main_application = 1";
+			strWhereCond = $" where arn = '{RecordFrm.AN}' and main_application = 1";
 			result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
 						 select a;
 			int iBldgNo = 0;
@@ -577,7 +577,7 @@ namespace Modules.Transactions
 
 			string strWhereCond = string.Empty;
 
-			strWhereCond = $" where arn = '{RecordFrm.ARN}' order by main_application desc";
+			strWhereCond = $" where arn = '{RecordFrm.AN}' order by main_application desc";
 
 			var pset = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
 					   select a;
@@ -619,7 +619,7 @@ namespace Modules.Transactions
 			string strWhereCond = string.Empty;
 			string sEngrNo = string.Empty;
 
-			strWhereCond = $" where arn = '{RecordFrm.ARN}' order by main_application desc";
+			strWhereCond = $" where arn = '{RecordFrm.AN}' order by main_application desc";
 
 			var pset = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
 					   select a;
@@ -646,7 +646,7 @@ namespace Modules.Transactions
 		{
 			if (AppSettingsManager.Granted("ERD"))
 			{
-				if (!string.IsNullOrEmpty(RecordFrm.ARN))
+				if (!string.IsNullOrEmpty(RecordFrm.AN))
 				{
 					if (MessageBox.Show("Are you sure you want to delete this record?", RecordFrm.DialogText, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
 					{
@@ -663,18 +663,18 @@ namespace Modules.Transactions
 			var db = new EPSConnection(dbConn);
 			string strQuery = string.Empty;
 
-			strQuery = $"delete from application where arn = '{RecordFrm.ARN}'";
+			strQuery = $"delete from application where arn = '{RecordFrm.AN}'";
 			db.Database.ExecuteSqlCommand(strQuery);
 
 			MessageBox.Show("Record is deleted.", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-			if (Utilities.AuditTrail.InsertTrail("ER-D", "APPLICATION", "ARN: " + RecordFrm.ARN) == 0)
+			if (Utilities.AuditTrail.InsertTrail("ER-D", "APPLICATION", "ARN: " + RecordFrm.AN) == 0)
 			{
 				MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
-			taskman.RemTask(RecordFrm.ARN);
+			taskman.RemTask(RecordFrm.AN);
 			RecordFrm.Close();
 		}
 	}
