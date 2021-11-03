@@ -14,5 +14,7 @@ namespace EPSEntities.Entity
         public string TRANS_TIME { get; set; }
         public string TABLE_FLD { get; set; }
         public string OBJECT_FLD { get; set; }
+
+        public string MODULE_DESC { get; set; }
     }
 }

@@ -11,6 +11,6 @@ namespace EPSEntities.Entity
         public string FEES_CODE { get; set; }
         public string FEES_DESC { get; set; }
         public float FEES_AMT { get; set; }
-        
+        public string PERMIT_CODE { get; set; }
     }
 }

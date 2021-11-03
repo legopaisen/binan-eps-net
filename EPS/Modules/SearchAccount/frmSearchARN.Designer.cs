@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSearchARN));
             this.txtProjDesc = new System.Windows.Forms.TextBox();
             this.lblBrgy = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,9 +54,21 @@
             this.bntList = new System.Windows.Forms.Button();
             this.cmbBrgy = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.arn1 = new Modules.ARN.AN();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtProjStreet = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtProjVill = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtProjBlkNo = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtProjHseNo = new System.Windows.Forms.TextBox();
+            this.txtProjLotNo = new System.Windows.Forms.TextBox();
             this.grpBox1.SuspendLayout();
             this.grpBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtProjDesc
@@ -248,17 +261,21 @@
             // dgvList
             // 
             this.dgvList.AllowUserToAddRows = false;
+            this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.AllowUserToResizeRows = false;
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvList.Location = new System.Drawing.Point(12, 200);
+            this.dgvList.Location = new System.Drawing.Point(12, 317);
+            this.dgvList.MultiSelect = false;
             this.dgvList.Name = "dgvList";
+            this.dgvList.ReadOnly = true;
+            this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvList.Size = new System.Drawing.Size(630, 183);
             this.dgvList.TabIndex = 12;
             this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(452, 389);
+            this.btnOk.Location = new System.Drawing.Point(452, 506);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(90, 25);
             this.btnOk.TabIndex = 13;
@@ -268,7 +285,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(548, 389);
+            this.btnCancel.Location = new System.Drawing.Point(548, 506);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(90, 25);
             this.btnCancel.TabIndex = 14;
@@ -278,7 +295,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(548, 169);
+            this.btnClear.Location = new System.Drawing.Point(548, 286);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(90, 25);
             this.btnClear.TabIndex = 11;
@@ -288,7 +305,7 @@
             // 
             // bntList
             // 
-            this.bntList.Location = new System.Drawing.Point(452, 169);
+            this.bntList.Location = new System.Drawing.Point(452, 286);
             this.bntList.Name = "bntList";
             this.bntList.Size = new System.Drawing.Size(90, 25);
             this.bntList.TabIndex = 10;
@@ -308,9 +325,6 @@
             // arn1
             // 
             this.arn1.GetCode = "";
-            //this.arn1.GetLGUCode = ""; angono
-            this.arn1.GetMonth = "";
-            //this.arn1.GetDistCode = ""; angono
             this.arn1.GetSeries = "";
             this.arn1.GetTaxYear = "";
             this.arn1.Location = new System.Drawing.Point(103, 12);
@@ -318,12 +332,128 @@
             this.arn1.Size = new System.Drawing.Size(183, 31);
             this.arn1.TabIndex = 15;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtProjStreet);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.txtProjVill);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.txtProjBlkNo);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.txtProjHseNo);
+            this.groupBox2.Controls.Add(this.txtProjLotNo);
+            this.groupBox2.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(12, 163);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(630, 117);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Project Location";
+            // 
+            // txtProjStreet
+            // 
+            this.txtProjStreet.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtProjStreet.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProjStreet.Location = new System.Drawing.Point(369, 22);
+            this.txtProjStreet.Name = "txtProjStreet";
+            this.txtProjStreet.Size = new System.Drawing.Size(224, 23);
+            this.txtProjStreet.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(325, 25);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 15);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Street";
+            // 
+            // txtProjVill
+            // 
+            this.txtProjVill.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtProjVill.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProjVill.Location = new System.Drawing.Point(369, 49);
+            this.txtProjVill.Name = "txtProjVill";
+            this.txtProjVill.Size = new System.Drawing.Size(224, 23);
+            this.txtProjVill.TabIndex = 8;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(326, 52);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 15);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Subd.";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(21, 25);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(49, 15);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Hse No.";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(23, 52);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 15);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Lot No.";
+            // 
+            // txtProjBlkNo
+            // 
+            this.txtProjBlkNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtProjBlkNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProjBlkNo.Location = new System.Drawing.Point(76, 77);
+            this.txtProjBlkNo.Name = "txtProjBlkNo";
+            this.txtProjBlkNo.Size = new System.Drawing.Size(224, 23);
+            this.txtProjBlkNo.TabIndex = 6;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(27, 80);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(45, 15);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Blk No.";
+            // 
+            // txtProjHseNo
+            // 
+            this.txtProjHseNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtProjHseNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProjHseNo.Location = new System.Drawing.Point(76, 22);
+            this.txtProjHseNo.Name = "txtProjHseNo";
+            this.txtProjHseNo.Size = new System.Drawing.Size(224, 23);
+            this.txtProjHseNo.TabIndex = 4;
+            // 
+            // txtProjLotNo
+            // 
+            this.txtProjLotNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtProjLotNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProjLotNo.Location = new System.Drawing.Point(76, 49);
+            this.txtProjLotNo.Name = "txtProjLotNo";
+            this.txtProjLotNo.Size = new System.Drawing.Size(224, 23);
+            this.txtProjLotNo.TabIndex = 5;
+            // 
             // frmSearchARN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(654, 426);
+            this.ClientSize = new System.Drawing.Size(654, 541);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.arn1);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.bntList);
@@ -338,6 +468,8 @@
             this.Controls.Add(this.lblBrgy);
             this.Controls.Add(this.txtProjDesc);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmSearchARN";
@@ -348,6 +480,8 @@
             this.grpBox2.ResumeLayout(false);
             this.grpBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,5 +513,16 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button bntList;
         private ARN.AN arn1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtProjStreet;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtProjVill;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtProjBlkNo;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtProjHseNo;
+        private System.Windows.Forms.TextBox txtProjLotNo;
     }
 }

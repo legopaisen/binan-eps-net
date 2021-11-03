@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Modules.Reports</RootNamespace>
     <AssemblyName>Reports</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -111,8 +112,11 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="ApprovedPermitApplication.cs" />
+    <Compile Include="AuditTrail.cs" />
     <Compile Include="BuildingInformation.cs" />
+    <Compile Include="BuildingPermit.cs" />
     <Compile Include="CertAnnualInsp.cs" />
+    <Compile Include="CertificateOccupancyBinan.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -129,18 +133,43 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dtSOA.xsd</DependentUpon>
     </Compile>
+    <Compile Include="EncdersLog.cs" />
     <Compile Include="FormReportClass.cs" />
+    <Compile Include="frmAuditTrail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAuditTrail.designer.cs">
+      <DependentUpon>frmAuditTrail.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCertification.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmCertification.Designer.cs">
       <DependentUpon>frmCertification.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEncoderLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEncoderLog.Designer.cs">
+      <DependentUpon>frmEncoderLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEngrAssigned.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEngrAssigned.Designer.cs">
+      <DependentUpon>frmEngrAssigned.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPaymentHist.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPaymentHist.Designer.cs">
       <DependentUpon>frmPaymentHist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPermits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPermits.Designer.cs">
+      <DependentUpon>frmPermits.cs</DependentUpon>
     </Compile>
     <Compile Include="frmReport.cs">
       <SubType>Form</SubType>
@@ -157,6 +186,7 @@
     <Compile Include="Model\ApprovedPermitApplicationMODEL.cs" />
     <Compile Include="Model\BuildingInformation.cs" />
     <Compile Include="Model\CertificateMODEL.cs" />
+    <Compile Include="Model\EncoderLog.cs" />
     <Compile Include="Model\PermitsSummaryMODEL.cs" />
     <Compile Include="PermitsSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -203,8 +233,11 @@
       <DependentUpon>dtSOA.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\dtSOA.datasource" />
+    <None Include="Properties\DataSources\EPSEntities.Entity.TRAIL.datasource" />
     <None Include="Properties\DataSources\Modules.Reports.Model.ApprovedPermitApplicationMODEL.datasource" />
     <None Include="Properties\DataSources\Modules.Reports.Model.BuildingInformation.datasource" />
+    <None Include="Properties\DataSources\Modules.Reports.Model.EncoderLog.datasource" />
     <None Include="Properties\DataSources\Modules.Reports.Model.PermitsSummaryMODEL.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -212,11 +245,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAuditTrail.resx">
+      <DependentUpon>frmAuditTrail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCertification.resx">
       <DependentUpon>frmCertification.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEncoderLog.resx">
+      <DependentUpon>frmEncoderLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEngrAssigned.resx">
+      <DependentUpon>frmEngrAssigned.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPaymentHist.resx">
       <DependentUpon>frmPaymentHist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPermits.resx">
+      <DependentUpon>frmPermits.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReport.resx">
       <DependentUpon>frmReport.cs</DependentUpon>
@@ -226,9 +271,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Application.rdlc" />
     <EmbeddedResource Include="Report\ApprovedPermitApplication.rdlc" />
+    <EmbeddedResource Include="Report\AuditTrail.rdlc" />
     <EmbeddedResource Include="Report\BuildingInformation.rdlc" />
+    <EmbeddedResource Include="Report\BuildingPermit.rdlc" />
     <EmbeddedResource Include="Report\CertAnnualInsp.rdlc" />
     <EmbeddedResource Include="Report\CertOccupancy.rdlc" />
+    <EmbeddedResource Include="Report\CertOccupancyBinan.rdlc" />
+    <EmbeddedResource Include="Report\EncoderLog.rdlc" />
     <EmbeddedResource Include="Report\PermitsSummary.rdlc" />
     <EmbeddedResource Include="Report\SOA.rdlc" />
   </ItemGroup>
@@ -265,6 +314,9 @@
       <Project>{da501b98-0ae7-440f-bec3-b82eb7b5669d}</Project>
       <Name>Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

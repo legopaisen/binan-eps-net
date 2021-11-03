@@ -52,6 +52,9 @@
             this.cmbScope = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbPermit = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.arn1 = new Modules.ARN.AN();
+            this.btnImgView = new System.Windows.Forms.Button();
+            this.btnImgAttach = new System.Windows.Forms.Button();
+            this.btnImgDetach = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +68,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(765, 384);
+            this.btnDelete.Location = new System.Drawing.Point(767, 422);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(101, 33);
             this.btnDelete.TabIndex = 3;
@@ -75,7 +78,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(765, 306);
+            this.btnAdd.Location = new System.Drawing.Point(767, 344);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(101, 33);
             this.btnAdd.TabIndex = 5;
@@ -85,7 +88,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(765, 345);
+            this.btnEdit.Location = new System.Drawing.Point(767, 383);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(101, 33);
             this.btnEdit.TabIndex = 2;
@@ -95,7 +98,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(765, 423);
+            this.btnPrint.Location = new System.Drawing.Point(767, 461);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(101, 33);
             this.btnPrint.TabIndex = 4;
@@ -168,7 +171,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 78);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(683, 424);
+            this.tabControl1.Size = new System.Drawing.Size(683, 457);
             this.tabControl1.TabIndex = 8;
             this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             // 
@@ -177,7 +180,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(675, 393);
+            this.tabPage1.Size = new System.Drawing.Size(675, 426);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -188,7 +191,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(675, 393);
+            this.tabPage2.Size = new System.Drawing.Size(675, 426);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -198,7 +201,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 27);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(675, 393);
+            this.tabPage3.Size = new System.Drawing.Size(675, 426);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -209,7 +212,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 27);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(675, 393);
+            this.tabPage4.Size = new System.Drawing.Size(675, 426);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -219,14 +222,14 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 27);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(675, 393);
+            this.tabPage5.Size = new System.Drawing.Size(675, 426);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(765, 462);
+            this.btnExit.Location = new System.Drawing.Point(767, 500);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(101, 33);
             this.btnExit.TabIndex = 5;
@@ -282,10 +285,8 @@
             // 
             // arn1
             // 
-            //this.arn1.GetDistCode = "";
-            this.arn1.GetCode = "";
-            //this.arn1.GetLGUCode = "";
-            this.arn1.GetMonth = "";
+            //this.arn1.GetCode = "BP";
+            //this.arn1.GetMonth = ""; // disabled for new arn of binan
             this.arn1.GetSeries = "";
             this.arn1.GetTaxYear = "";
             this.arn1.Location = new System.Drawing.Point(52, 12);
@@ -294,13 +295,52 @@
             this.arn1.Size = new System.Drawing.Size(216, 39);
             this.arn1.TabIndex = 1;
             // 
+            // btnImgView
+            // 
+            this.btnImgView.Enabled = false;
+            this.btnImgView.Location = new System.Drawing.Point(767, 200);
+            this.btnImgView.Name = "btnImgView";
+            this.btnImgView.Size = new System.Drawing.Size(101, 33);
+            this.btnImgView.TabIndex = 13;
+            this.btnImgView.Text = "View Image";
+            this.btnImgView.UseVisualStyleBackColor = true;
+            this.btnImgView.Visible = false;
+            this.btnImgView.Click += new System.EventHandler(this.btnImgView_Click);
+            // 
+            // btnImgAttach
+            // 
+            this.btnImgAttach.Enabled = false;
+            this.btnImgAttach.Location = new System.Drawing.Point(767, 239);
+            this.btnImgAttach.Name = "btnImgAttach";
+            this.btnImgAttach.Size = new System.Drawing.Size(101, 33);
+            this.btnImgAttach.TabIndex = 14;
+            this.btnImgAttach.Text = "Attach Image";
+            this.btnImgAttach.UseVisualStyleBackColor = true;
+            this.btnImgAttach.Visible = false;
+            this.btnImgAttach.Click += new System.EventHandler(this.btnImgAttach_Click);
+            // 
+            // btnImgDetach
+            // 
+            this.btnImgDetach.Enabled = false;
+            this.btnImgDetach.Location = new System.Drawing.Point(767, 278);
+            this.btnImgDetach.Name = "btnImgDetach";
+            this.btnImgDetach.Size = new System.Drawing.Size(101, 33);
+            this.btnImgDetach.TabIndex = 15;
+            this.btnImgDetach.Text = "Detach Image";
+            this.btnImgDetach.UseVisualStyleBackColor = true;
+            this.btnImgDetach.Visible = false;
+            this.btnImgDetach.Click += new System.EventHandler(this.btnImgDetach_Click);
+            // 
             // frmRecords
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Aqua;
-            this.ClientSize = new System.Drawing.Size(880, 508);
+            this.ClientSize = new System.Drawing.Size(880, 547);
             this.ControlBox = false;
+            this.Controls.Add(this.btnImgDetach);
+            this.Controls.Add(this.btnImgAttach);
+            this.Controls.Add(this.btnImgView);
             this.Controls.Add(this.arn1);
             this.Controls.Add(this.cmbScope);
             this.Controls.Add(this.cmbPermit);
@@ -358,5 +398,8 @@
         public MultiColumnComboBoxDemo.MultiColumnComboBox cmbPermit;
         public MultiColumnComboBoxDemo.MultiColumnComboBox cmbScope;
         public ARN.AN arn1;
+        private System.Windows.Forms.Button btnImgView;
+        private System.Windows.Forms.Button btnImgAttach;
+        private System.Windows.Forms.Button btnImgDetach;
     }
 }

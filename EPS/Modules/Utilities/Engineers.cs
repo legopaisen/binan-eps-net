@@ -35,6 +35,7 @@ namespace Modules.Utilities
         private string m_sTIN;
         private string m_sPRC;
         private string m_sPTR;
+        private string m_sVill;
 
         public Engineers()
         {
@@ -56,6 +57,7 @@ namespace Modules.Utilities
             m_sCity = string.Empty;
             m_sProvince = string.Empty;
             m_sZip = string.Empty;
+            m_sVill = string.Empty;
         }
 
         /// <summary>
@@ -76,22 +78,27 @@ namespace Modules.Utilities
 
             foreach (var items in trsrec)
             {
-                m_sOwnerCode = sOwnerCode;
-                m_sLastName = items.ENGR_LN;
-                m_sFirstName = items.ENGR_FN;
-                m_sMI = items.ENGR_MI;
-                m_sHouseNo = items.ENGR_HSE_NO;
-                m_sLotNo = items.ENGR_LOT_NO;
-                m_sBlkNo = items.ENGR_BLK_NO;
-                m_sAddress = items.ENGR_ADDR;
-                m_sBarangay = items.ENGR_BRGY;
-                m_sCity = items.ENGR_CITY;
-                m_sProvince = items.ENGR_PROV;
-                m_sZip = items.ENGR_ZIP;
-                m_sEngrType = items.ENGR_TYPE;
-                m_sTIN = items.ENGR_TIN;
-                m_sPRC = items.ENGR_PRC;
-                m_sPTR = items.ENGR_PTR;
+                if(sOwnerCode != null && (items.ENGR_LN != null && items.ENGR_FN != null))
+                {
+                    m_sOwnerCode = sOwnerCode;
+                    m_sLastName = items.ENGR_LN;
+                    m_sFirstName = items.ENGR_FN;
+                    m_sMI = items.ENGR_MI;
+                    m_sHouseNo = items.ENGR_HSE_NO;
+                    m_sLotNo = items.ENGR_LOT_NO;
+                    m_sBlkNo = items.ENGR_BLK_NO;
+                    m_sAddress = items.ENGR_ADDR;
+                    m_sBarangay = items.ENGR_BRGY;
+                    m_sCity = items.ENGR_CITY;
+                    m_sProvince = items.ENGR_PROV;
+                    m_sZip = items.ENGR_ZIP;
+                    m_sEngrType = items.ENGR_TYPE;
+                    m_sTIN = items.ENGR_TIN;
+                    m_sPRC = items.ENGR_PRC;
+                    m_sPTR = items.ENGR_PTR;
+                    m_sVill = items.ENGR_VILL; //requested subdivision
+                }
+
             }
 
         }
@@ -133,6 +140,7 @@ namespace Modules.Utilities
                 m_sTIN = items.ENGR_TIN;
                 m_sPRC = items.ENGR_PRC;
                 m_sPTR = items.ENGR_PTR;
+                m_sVill = items.ENGR_VILL; //requested subdivision
             }
 
         }
@@ -218,6 +226,12 @@ namespace Modules.Utilities
             set { m_sZip = value; }
         }
 
+        public string Village
+        {
+            get { return m_sVill; }
+            set { m_sVill = value; }
+        }
+
         /// <summary>
         /// This property returns address, barangay, municipality, and province of owner.
         /// </summary>
@@ -269,7 +283,7 @@ namespace Modules.Utilities
         public Engineers(string sOwnCode, string sLastName, string sFirstName, string sMI,
             string sAddress, string sHouseNo, string sLotNo, string sBlkNo, string sBrgy,
             string sCity, string m_sProv, string sZip, string sEngrType, string sTIN,
-            string sPRC, string sPTR)
+            string sPRC, string sPTR, string sVill) //requested subdivision
         {
             m_sOwnerCode = sOwnCode;
             m_sLastName = sLastName;
@@ -287,12 +301,13 @@ namespace Modules.Utilities
             m_sTIN = sTIN;
             m_sPRC = sPRC;
             m_sPTR = sPTR;
+            m_sVill = sVill;
         }
 
         public void CreateAccount(string sLastName, string sFirstName, string sMI,
             string sAddress, string sHouseNo, string sLotNo, string sBlkNo, string sBrgy,
             string sCity, string sProv, string sZip, string sEngrType, string sTIN,
-            string sPRC, string sPTR, DateTime sValidDt)
+            string sPRC, string sPTR, DateTime sValidDt, string sVill) //added requested subdivision
         {
             var db = new EPSConnection(dbConn);
             string strQuery = string.Empty;
@@ -306,7 +321,7 @@ namespace Modules.Utilities
 
                 if (!string.IsNullOrEmpty(m_sOwnerCode))
                 {
-                    strQuery = $"insert into engineer_tbl values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15,:16,:17)";
+                    strQuery = $"insert into engineer_tbl values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15,:16,:17,:18)";
                     db.Database.ExecuteSqlCommand(strQuery,
                         new OracleParameter(":1", m_sOwnerCode),
                         new OracleParameter(":2", StringUtilities.HandleApostrophe(sEngrType)),
@@ -324,7 +339,9 @@ namespace Modules.Utilities
                         new OracleParameter(":14", StringUtilities.HandleApostrophe(sTIN)),
                         new OracleParameter(":15", StringUtilities.HandleApostrophe(sPRC)),
                         new OracleParameter(":16", StringUtilities.HandleApostrophe(sPTR)),
-                        new OracleParameter(":17", sValidDt)); //AFM 20191113 ANG-19-11104
+                        //new OracleParameter(":17", sValidDt)); //AFM 20191113 ANG-19-11104
+                        new OracleParameter(":17", null),//AFM 20200630 changed to null for binan ver
+                        new OracleParameter(":18", StringUtilities.HandleApostrophe(sVill))); //added requested subdivision
                 }
             }
         }
@@ -406,6 +423,7 @@ namespace Modules.Utilities
         private string m_sTIN;
         private string m_sPRC;
         private string m_sPTR;
+        private string m_sVill;
 
         public void Clear()
         {
@@ -484,11 +502,12 @@ namespace Modules.Utilities
                     m_sTIN = items.ENGR_TIN;
                     m_sPRC = items.ENGR_PRC;
                     m_sPTR = items.ENGR_PTR;
+                    m_sVill = items.ENGR_VILL;  //added requested subdivision             
 
                     m_lstAcct.Add(new Engineers(m_sOwnerCode, m_sLastName, m_sFirstName,
                         m_sMI, m_sAddress, m_sHouseNo, m_sLotNo,
                         m_sBlkNo, m_sBarangay, m_sCity, m_sProvince, m_sZip,
-                        m_sEngrType, m_sTIN, m_sPRC, m_sPTR));
+                        m_sEngrType, m_sTIN, m_sPRC, m_sPTR, m_sVill));
                 }
             }
         }

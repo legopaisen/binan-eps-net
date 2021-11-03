@@ -21,6 +21,7 @@ namespace Modules.Transactions
         public string EngrAcctNo { get; set; }
         public int iRow = -1;
         public string DialogText { get; set; }
+        private bool SearchMode { get; set; } //AFM20200908
 
         public frmEngineer()
         {
@@ -48,6 +49,11 @@ namespace Modules.Transactions
             //cmbEngrType.Items.Add("ELECTRICAL");
             //cmbEngrType.Items.Add("MECHANICAL");
             //cmbEngrType.Items.Add("SANITARY");
+
+            //AFM 20200828
+            txtMun.Text = AppSettingsManager.GetConfigValue("02");
+            txtProv.Text = AppSettingsManager.GetConfigValue("03");
+            txtZIP.Text = AppSettingsManager.GetConfigValue("26");
         }
 
         public void LoadGrid()
@@ -71,6 +77,7 @@ namespace Modules.Transactions
             dgvList.Columns.Add("TIN", "TIN");
             dgvList.Columns.Add("PTR", "PTR");
             dgvList.Columns.Add("PRC", "PRC");
+            dgvList.Columns.Add("Vill", "Village");
         }
 
         private void PopulateBrgy()
@@ -104,7 +111,8 @@ namespace Modules.Transactions
             form.ShowDialog();
 
             EngrAcctNo = form.AcctNo;
-            cmbEngrType.Text = form.EngrType;
+            //cmbEngrType.Text = form.EngrType;
+            cmbEngrType.SelectedItem = form.EngrType;
             txtLastName.Text = form.LastName;
             txtFirstName.Text = form.FirstName;
             txtMI.Text = form.MI;
@@ -152,6 +160,35 @@ namespace Modules.Transactions
             //dgvList.Rows.Clear();
         }
 
+        private bool ValidateUsage() //AFM 20200908
+        {
+            if (EngrAcctNo == "")
+            {
+                OracleResultSet result = new OracleResultSet();
+
+                result.Query = "select * from engineer_tbl where engr_ln = '" + txtLastName.Text.Trim() + "' and engr_fn = '" + txtFirstName.Text.Trim() + "'";
+                if (result.Execute())
+                    if (result.Read())
+                    {
+                        MessageBox.Show("Engineer with name " + txtLastName.Text.Trim() + ", " + txtFirstName.Text.Trim() + " already exists!", " ", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return false;
+                    }
+                return true;
+            }
+            else
+                return true;
+        }
+
+        private int GetEngrCode(int iCode)
+        {
+            OracleResultSet result = new OracleResultSet();
+            result.Query = "select max(engr_code) from engineer_tbl";
+            int.TryParse(result.ExecuteScalar(), out iCode);
+            result.Close();
+
+            return iCode + 1;
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             string sLastName = string.Empty;
@@ -160,7 +197,8 @@ namespace Modules.Transactions
             string sEngrType = string.Empty;
             string sTIN = string.Empty;
 
-            if(!string.IsNullOrEmpty(txtLastName.Text.Trim().ToString()) &&
+
+            if (!string.IsNullOrEmpty(txtLastName.Text.Trim().ToString()) &&
                 !string.IsNullOrEmpty(txtFirstName.Text.Trim().ToString()))
             {
                 //validate duplicate
@@ -193,27 +231,111 @@ namespace Modules.Transactions
                         return;
                     }
 
-                    if (sEngrType == cmbEngrType.Text.ToString())
-                    {
-                        MessageBox.Show("The engineer type you are adding is already in the list.", "EPS", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                        ClearControls();
-                        return;
-                    }
-                    //AFM 20191113 ANG-19-11104 (s)
-                    OracleResultSet result = new OracleResultSet();
-                    result.Query = $"select validity_dt from engineer_tbl where engr_code = '{EngrAcctNo}'";
-                    if (result.Execute())
-                        if (result.Read())
-                        {
-                            if (result.GetDateTime(0) < AppSettingsManager.GetCurrentDate())
-                            {
-                                MessageBox.Show("Selected Engineer's license has expired!", "EPS", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                                ClearControls();
-                                return;
-                            }
-                        }
-                    //AFM 20191113 ANG-19-11104 (e)
+                    //requested to remove validation 20201202
+                    //if (sEngrType == cmbEngrType.Text.ToString())
+                    //{
+                    //    MessageBox.Show("The engineer type you are adding is already in the list.", "EPS", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    //    ClearControls();
+                    //    return;
+                    //}
+
+                    //AFM 20200630 disabled block below for binan ver
+                    ////AFM 20191113 ANG-19-11104 (s)
+                    //OracleResultSet result = new OracleResultSet();
+                    //result.Query = $"select validity_dt from engineer_tbl where engr_code = '{EngrAcctNo}'";
+                    //if (result.Execute())
+                    //    if (result.Read())
+                    //    {
+                    //        if (result.GetDateTime(0) < AppSettingsManager.GetCurrentDate())
+                    //        {
+                    //            MessageBox.Show("Selected Engineer's license has expired!", "EPS", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    //            ClearControls();
+                    //            return;
+                    //        }
+                    //    }
+                    ////AFM 20191113 ANG-19-11104 (e)
                 }
+
+                if (!ValidateUsage())
+                    return;
+                else
+                {
+                    if(string.IsNullOrEmpty(EngrAcctNo.Trim().ToString()))
+                        {
+
+                            if (MessageBox.Show("Add new record?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                int iCode = 0;
+                                string strCode = string.Empty;
+                                iCode = GetEngrCode(iCode);
+
+                                switch ((iCode).ToString().Length)
+                                {
+                                    case 1:
+                                        {
+                                            strCode = "00000" + (iCode).ToString();
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            strCode = "0000" + (iCode).ToString();
+                                            break;
+                                        }
+                                    case 3:
+                                        {
+                                            strCode = "000" + (iCode).ToString();
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            strCode = "00" + (iCode).ToString();
+                                            break;
+                                        }
+                                    case 5:
+                                        {
+                                            strCode = "0" + (iCode).ToString();
+                                            break;
+                                        }
+                                    case 6:
+                                        {
+                                            strCode = (iCode).ToString();
+                                            break;
+                                        }
+
+                                }
+
+                            OracleResultSet result2 = new OracleResultSet();
+                            result2.Query = "INSERT INTO ENGINEER_TBL VALUES(";
+                            result2.Query += "'" + strCode + "', ";
+                            result2.Query += " '" + cmbEngrType.Text.Trim() + "', ";
+                            result2.Query += " '" + txtLastName.Text.Trim() + "', ";
+                            result2.Query += " '" + txtFirstName.Text.Trim() + "', ";
+                            result2.Query += " '" + txtMI.Text.Trim() + "', ";
+                            result2.Query += " '" + txtHseNo.Text.Trim() + "', ";
+                            result2.Query += " '" + txtLotNo.Text.Trim() + "', ";
+                            result2.Query += " '" + txtBlkNo.Text.Trim() + "', ";
+                            result2.Query += " '" + txtStreet.Text.Trim() + "', ";
+                            result2.Query += " '" + cmbBrgy.Text.Trim() + "', ";
+                            result2.Query += " '" + txtMun.Text.Trim() + "', ";
+                            result2.Query += " '" + txtProv.Text.Trim() + "', ";
+                            result2.Query += " '" + txtZIP.Text.Trim() + "', ";
+                            result2.Query += " '" + txtTIN.Text.Trim() + "', ";
+                            result2.Query += " '" + txtPRC.Text.Trim() + "', ";
+                            result2.Query += " '" + txtPTR.Text.Trim() + "', ";
+                            result2.Query += " '" + "" + "',";
+                            result2.Query += " '" + txtVillage.Text.Trim() + "')"; //requested subdivison data
+                            if (result2.ExecuteNonQuery() == 0)
+                            { }
+                            EngrAcctNo = strCode.Trim();
+                            }
+                            else
+                                return;
+
+                        }
+                    //AFM 20200923 add new record of engineer (s)
+                    
+                }
+                //AFM 20200923 add new record of engineer (e)
 
                 //addrow
                 int iRow = dgvList.Rows.Count - 1;
@@ -221,7 +343,7 @@ namespace Modules.Transactions
                 dgvList.Rows.Add(EngrAcctNo,txtLastName.Text,txtFirstName.Text,txtMI.Text,
                     cmbEngrType.Text,txtStreet.Text, txtHseNo.Text,txtLotNo.Text,
                     txtBlkNo.Text,cmbBrgy.Text,txtMun.Text,txtProv.Text,
-                    txtZIP.Text,txtTIN.Text,txtPTR.Text,txtPRC.Text);
+                    txtZIP.Text,txtTIN.Text,txtPTR.Text,txtPRC.Text,txtVillage.Text); //added subdivision
 
             }
             else
@@ -274,10 +396,21 @@ namespace Modules.Transactions
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to remove "+txtLastName.Text.ToString() + ", " + txtFirstName.Text.ToString() + " from the list?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                dgvList.Rows.RemoveAt(iRow);
+            try // AFM 20200922 added catch
+            { 
+                if (dgvList.Rows[iRow].Cells[1].Value != null && dgvList.Rows[iRow].Cells[1].Value != null) //AFM 20200907
+                {
+                    if (MessageBox.Show("Are you sure you want to remove "+txtLastName.Text.ToString() + ", " + txtFirstName.Text.ToString() + " from the list?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            dgvList.Rows.RemoveAt(iRow);
+                        }
+                        catch { }
+                    }
+                }
             }
+            catch { }
         }
 
         public bool ValidateData()
@@ -317,6 +450,16 @@ namespace Modules.Transactions
         public void EnableFormControls(bool blnEnable)
         {
             EnableControls(blnEnable);
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

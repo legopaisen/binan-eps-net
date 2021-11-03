@@ -17,6 +17,8 @@ namespace Modules.Utilities.Forms
     {
         public static ConnectionString dbConn = new ConnectionString();
 
+        public string ScheduleMode = string.Empty;
+
         public frmScheduleDelete()
         {
             InitializeComponent();
@@ -71,13 +73,32 @@ namespace Modules.Utilities.Forms
                 sCode = txtRevAcct.Text.ToString().Trim();
                 if (MessageBox.Show("The Revenue Account " + sCode + " will be permanently deleted.\nDo you want to continue? ", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    sQuery = $"delete from major_fees where fees_code = '{sCode}'";
+
+                    if(ScheduleMode == "MAIN")
+                        sQuery = $"delete from major_fees where fees_code = '{sCode}'";
+                    else if(ScheduleMode == "OTHERS")
+                        sQuery = $"delete from other_major_fees where fees_code = '{sCode}'";
+                    else if (ScheduleMode == "ADDITIONAL")
+                        sQuery = $"delete from addl_major_fees where fees_code = '{sCode}'";
+
                     db.Database.ExecuteSqlCommand(sQuery);
 
-                    sQuery = $"delete from subcategories where fees_code like '{sCode}%'";
+                    if (ScheduleMode == "MAIN")
+                        sQuery = $"delete from subcategories where fees_code like '{sCode}%'";
+                    else if (ScheduleMode == "OTHERS")
+                        sQuery = $"delete from other_subcategories where fees_code like '{sCode}%'";
+                    else if (ScheduleMode == "ADDITIONAL")
+                        sQuery = $"delete from addl_subcategories where fees_code = '{sCode}'";
+
                     db.Database.ExecuteSqlCommand(sQuery);
 
-                    sQuery = $"delete from schedules where fees_code like '{sCode}%'";
+                    if (ScheduleMode == "MAIN")
+                        sQuery = $"delete from schedules where fees_code like '{sCode}%'";
+                    else if (ScheduleMode == "OTHERS")
+                        sQuery = $"delete from other_schedules where fees_code like '{sCode}%'";
+                    else if (ScheduleMode == "ADDITIONAL")
+                        sQuery = $"delete from addl_schedules where fees_code like '{sCode}%'";
+
                     db.Database.ExecuteSqlCommand(sQuery);
 
                     MessageBox.Show("Schedule was deleted.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -96,10 +117,22 @@ namespace Modules.Utilities.Forms
 
                 if (MessageBox.Show("Subcategory " + sCode + " will be permanently deleted.\nDo you want to continue? ", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    sQuery = $"delete from subcategories where fees_code = '{sCode}'";
+                    if (ScheduleMode == "MAIN")
+                        sQuery = $"delete from subcategories where fees_code = '{sCode}'";
+                    if (ScheduleMode == "OTHERS")
+                        sQuery = $"delete from other_subcategories where fees_code = '{sCode}'";
+                    if (ScheduleMode == "ADDITIONAL")
+                        sQuery = $"delete from addl_subcategories where fees_code = '{sCode}'";
+
                     db.Database.ExecuteSqlCommand(sQuery);
 
-                    sQuery = $"delete from schedules where fees_code like '{sCode}%'";
+                    if (ScheduleMode == "MAIN")
+                        sQuery = $"delete from schedules where fees_code like '{sCode}%'";
+                    if (ScheduleMode == "OTHERS")
+                        sQuery = $"delete from other_schedules where fees_code like '{sCode}%'";
+                    if (ScheduleMode == "ADDITIONAL")
+                        sQuery = $"delete from addl_schedules where fees_code like '{sCode}%'";
+
                     db.Database.ExecuteSqlCommand(sQuery);
 
                     MessageBox.Show("Schedule was deleted.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -120,10 +153,22 @@ namespace Modules.Utilities.Forms
 
                 if (MessageBox.Show("Subsidiary " + sCode + " will be permanently deleted.\nDo you want to continue? ", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    sQuery = $"delete from subcategories where fees_code = '{sCode}'";
+                    if (ScheduleMode == "MAIN")
+                        sQuery = $"delete from subcategories where fees_code = '{sCode}'";
+                    if (ScheduleMode == "OTHERS")
+                        sQuery = $"delete from other_subcategories where fees_code = '{sCode}'";
+                    if (ScheduleMode == "ADDITIONAL")
+                        sQuery = $"delete from addl_subcategories where fees_code = '{sCode}'";
+
                     db.Database.ExecuteSqlCommand(sQuery);
 
-                    sQuery = $"delete from schedules where fees_code = '{sCode}'";
+                    if (ScheduleMode == "MAIN")
+                        sQuery = $"delete from schedules where fees_code = '{sCode}'";
+                    if (ScheduleMode == "OTHERS")
+                        sQuery = $"delete from other_schedules where fees_code = '{sCode}'";
+                    if (ScheduleMode == "ADDITIONAL")
+                        sQuery = $"delete from addl_schedules where fees_code = '{sCode}'";
+
                     db.Database.ExecuteSqlCommand(sQuery);
 
                     MessageBox.Show("Schedule was deleted.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -162,7 +207,7 @@ namespace Modules.Utilities.Forms
                 catch { }
                 try
                 {
-                    sQuery = $"select count(*) from mrs_payments where fees_code like '{sFeesCode}%'";
+                    sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}%'";
                     iPayCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
                 }
                 catch { }
@@ -180,7 +225,7 @@ namespace Modules.Utilities.Forms
 
                 try
                 {
-                    sQuery = $"select count(*) from mrs_payments where fees_code like '{sFeesCode}%'";
+                    sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}%'";
                     iPayCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
                 }
                 catch { }
@@ -196,7 +241,7 @@ namespace Modules.Utilities.Forms
                 catch { }
                 try
                 {
-                    sQuery = $"select count(*) from mrs_payments where fees_code = '{sFeesCode}'";
+                    sQuery = $"select count(*) from payments_info where fees_code = '{sFeesCode}'";
                     iPayCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
                 }
                 catch { }
@@ -231,7 +276,13 @@ namespace Modules.Utilities.Forms
                     return false;
                 }
 
-                sQuery = $"select count(*) from major_fees where fees_code = '{txtRevAcct.Text.ToString().Trim()}'";
+                if(ScheduleMode == "MAIN")
+                    sQuery = $"select count(*) from major_fees where fees_code = '{txtRevAcct.Text.ToString().Trim()}'";
+                else if(ScheduleMode == "OTHERS")
+                    sQuery = $"select count(*) from other_major_fees where fees_code = '{txtRevAcct.Text.ToString().Trim()}'";
+                else if (ScheduleMode == "ADDITIONAL")
+                    sQuery = $"select count(*) from addl_major_fees where fees_code = '{txtRevAcct.Text.ToString().Trim()}'";
+
                 iCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
             }
 
@@ -243,7 +294,14 @@ namespace Modules.Utilities.Forms
                     return false;
                 }
 
-                sQuery = $"select count(*) from subcategories where fees_code = '{txtSubCat.Text.ToString().Trim()}'";
+                if(ScheduleMode == "MAIN")
+                    sQuery = $"select count(*) from subcategories where fees_code = '{txtSubCat.Text.ToString().Trim()}'";
+                else if (ScheduleMode == "OTHERS")
+                    sQuery = $"select count(*) from other_subcategories where fees_code = '{txtSubCat.Text.ToString().Trim()}'";
+                else if (ScheduleMode == "ADDITIONAL")
+                    sQuery = $"select count(*) from addl_subcategories where fees_code = '{txtSubCat.Text.ToString().Trim()}'";
+
+
                 sQuery += " and fees_term = 'SUBCATEGORY'";
                 iCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
             }
@@ -255,8 +313,13 @@ namespace Modules.Utilities.Forms
                     MessageBox.Show("Enter a subsidiary code first", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     return false;
                 }
+                if (ScheduleMode == "MAIN")
+                    sQuery = $"select count(*) from subcategories where fees_code = '{txtSubsidiary.Text.ToString().Trim()}'";
+                else if (ScheduleMode == "OTHERS")
+                    sQuery = $"select count(*) from other_subcategories where fees_code = '{txtSubsidiary.Text.ToString().Trim()}'";
+                else if (ScheduleMode == "ADDITIONAL")
+                    sQuery = $"select count(*) from addl_subcategories where fees_code = '{txtSubsidiary.Text.ToString().Trim()}'";
 
-                sQuery = $"select count(*) from subcategories where fees_code = '{txtSubsidiary.Text.ToString().Trim()}'";
                 sQuery += " and fees_term <> 'SUBCATEGORY'";
                 iCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
             }

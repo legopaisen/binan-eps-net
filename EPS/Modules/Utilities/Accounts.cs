@@ -33,6 +33,7 @@ namespace Modules.Utilities
         private string m_sTCT;
         private string m_sCTC;
         private string m_sTelNo;
+        private string m_sVill;
 
         public Accounts()
         {
@@ -57,6 +58,7 @@ namespace Modules.Utilities
             m_sTCT = string.Empty;
             m_sCTC = string.Empty;
             m_sTelNo = string.Empty;
+            m_sVill = string.Empty;
         }
     
 
@@ -94,6 +96,7 @@ namespace Modules.Utilities
                 m_sTCT = items.ACCT_TCT;
                 m_sCTC = items.ACCT_CTC;
                 m_sTelNo = items.ACCT_TELNO;
+                m_sVill = items.ACCT_VILL;
             }
             
         }
@@ -129,7 +132,15 @@ namespace Modules.Utilities
                 m_sTCT = items.ACCT_TCT;
                 m_sCTC = items.ACCT_CTC;
                 m_sTelNo = items.ACCT_TELNO;
+                m_sVill = items.ACCT_VILL;
             }
+
+        }
+
+        public string Village
+        {
+            get { return m_sVill; }
+            set { m_sVill = value; }
 
         }
 
@@ -262,7 +273,7 @@ namespace Modules.Utilities
         public Accounts(string sOwnCode, string sLastName, string sFirstName, string sMI,
             string sAddress, string sHouseNo, string sLotNo, string sBlkNo, string sBrgy,
             string sCity, string sProv, string sZip, string sTIN, string sTCT,
-            string sCTC, string sTelNo)
+            string sCTC, string sTelNo, string sVill)
         {
             m_sOwnerCode = sOwnCode;
             m_sLastName = sLastName;
@@ -280,12 +291,13 @@ namespace Modules.Utilities
             m_sTCT = sTCT;
             m_sCTC = sCTC;
             m_sTelNo = sTelNo;
+            m_sVill = sVill;
         }
 
         public void CreateAccount(string sLastName, string sFirstName, string sMI,
             string sAddress, string sHouseNo, string sLotNo, string sBlkNo, string sBrgy,
             string sCity, string sProv, string sZip, string sTIN, string sTCT,
-            string sCTC, string sTelNo)
+            string sCTC, string sTelNo, string sVill)
         {
             var db = new EPSConnection(dbConn);
             string strQuery = string.Empty;
@@ -298,7 +310,7 @@ namespace Modules.Utilities
 
                 if (!string.IsNullOrEmpty(m_sOwnerCode))
                 {
-                    strQuery = $"insert into account values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15,:16,:17)";
+                    strQuery = $"insert into account values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15,:16,:17,:18)";
                     db.Database.ExecuteSqlCommand(strQuery,
                         new OracleParameter(":1", m_sOwnerCode),
                         new OracleParameter(":2", StringUtilities.HandleApostrophe(sLastName)),
@@ -316,7 +328,8 @@ namespace Modules.Utilities
                         new OracleParameter(":14", StringUtilities.HandleApostrophe(sTIN)),
                         new OracleParameter(":15", StringUtilities.HandleApostrophe(sCTC)),
                         new OracleParameter(":16", StringUtilities.HandleApostrophe(sTelNo)),
-                        new OracleParameter(":17", StringUtilities.HandleApostrophe(sLotNo)));
+                        new OracleParameter(":17", StringUtilities.HandleApostrophe(sLotNo)),
+                        new OracleParameter(":18", StringUtilities.HandleApostrophe(sVill))); // ADDED REQUESTED VILL
                 }
             }
         }
@@ -395,6 +408,7 @@ namespace Modules.Utilities
         private string m_sTCT;
         private string m_sCTC;
         private string m_sTelNo;
+        private string m_sVill;
 
         public void Clear()
         {
@@ -414,6 +428,7 @@ namespace Modules.Utilities
             m_sTCT = string.Empty;
             m_sCTC = string.Empty;
             m_sTelNo = string.Empty;
+            m_sVill = string.Empty;
         }
 
 
@@ -468,11 +483,12 @@ namespace Modules.Utilities
                     m_sTCT = items.ACCT_TCT;
                     m_sCTC = items.ACCT_CTC;
                     m_sTelNo = items.ACCT_TELNO;
+                    m_sVill = items.ACCT_VILL;
 
                     m_lstAcct.Add(new Accounts(m_sOwnerCode, m_sLastName, m_sFirstName,
                         m_sMI, m_sAddress, m_sHouseNo, m_sLotNo,
                         m_sBlkNo, m_sBarangay, m_sCity, m_sProvince, m_sZip,
-                        m_sTIN, m_sTCT, m_sCTC, m_sTelNo));
+                        m_sTIN, m_sTCT, m_sCTC, m_sTelNo, m_sVill));
                 }
             }
         }

@@ -18,6 +18,7 @@ using Common.AppSettings;
 using Modules.Billing;
 using Modules.Utilities.Forms;
 using Modules.Reports;
+using System.Reflection;
 
 namespace EPS
 {
@@ -28,16 +29,65 @@ namespace EPS
             InitializeComponent();
         }
 
+        //AFM 20210112 merged from malolos
+        //JARS 20181127 (S)
+        //Version version = Assembly.GetExecutingAssembly().GetName().Version;
+        //DateTime creationDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.MinorRevision * 2);
+        internal static class AssemblyCreationDate
+        {
+            public static readonly DateTime Value;
+            public static readonly string version;
+
+            static AssemblyCreationDate()
+            {
+
+                Version version = Assembly.GetExecutingAssembly().GetName().Version;
+                Value = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.MinorRevision * 2);
+            }
+        }
+        //JARS 20181127 (E)
+
+
         private void frmMenu_Load(object sender, EventArgs e)
         {
             panelLoc();
 
+            this.Text = "Engineering Permit System - ASSESS | Version: " + AssemblyCreationDate.Value.ToString(); //AFM 20210112
+
             frmLogin login = new frmLogin();
             login.ShowDialog();
+            LabelPanel();
+
+            AppSettingsManager.GetSystemType = "E"; // for blob
+
             if (login.State == frmLogin.LogInState.CancelState)
             {
-                this.Dispose();
+                //this.Dispose();
+                this.Close(); //AFM 20200630
             }
+
+        }
+
+        private void LabelPanel() //AFM20200504
+        {
+            string sUser = string.Empty;
+            string sUserCode = string.Empty;
+            try
+            {
+                sUser = AppSettingsManager.g_objSystemUser.UserName.ToString();
+                sUserCode = AppSettingsManager.g_objSystemUser.UserCode.ToString();
+            }
+            catch { }
+
+            lblUser.Visible = true;
+            lblDesc.Visible = true;
+            lblCode.Visible = true;
+            lblDate.Visible = true;
+
+            lblUser.Text = "USER: " + sUser;
+            lblCode.Text = "USERCODE: " + sUserCode;
+            lblDesc.Text = "AMELLAR SOLUTIONS: INFORMATION IS THE BUSINESS. TECHNOLOGY IS THE TOOL. PEOPLE MAKE THE SYSTEM WORK.";
+            lblDate.Text = "Today is " + string.Format("{0:MMMM dd, yyyy}", AppSettingsManager.GetSystemDate());
         }
 
         private void panelLoc()
@@ -314,7 +364,19 @@ namespace EPS
 
         private void zoningPermitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (AppSettingsManager.Granted("TB-B"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("BILLING", "", ""))
+                {
+                    frmBilling form = new frmBilling();
+                    form.Source = "ZONING";
+                    form.ModuleCode = "TB-Z";
+                    form.ShowDialog();
 
+                    taskman.IsObjectLock("BILLING", "DELETE", "");
+                }
+            }
         }
 
         private void annualInspectionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -341,7 +403,8 @@ namespace EPS
 
         private void auditTrailToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmAuditTrail frmaudittrail = new frmAuditTrail();
+            frmaudittrail.ShowDialog();
         }
 
         private void connectivityToolStripMenuItem_Click(object sender, EventArgs e)
@@ -351,7 +414,7 @@ namespace EPS
 
         private void categoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (AppSettingsManager.Granted("SC"))
+            if (AppSettingsManager.Granted("SUTS"))
             {
                 TaskManager taskman = new TaskManager();
                 if (!taskman.IsObjectLock("CATEGORY", "", ""))
@@ -385,6 +448,7 @@ namespace EPS
                 if (!taskman.IsObjectLock("FEES", "", ""))
                 {
                     frmScheduleFees form = new frmScheduleFees();
+                    form.ScheduleMode = "MAIN";
                     form.ShowDialog();
                     taskman.IsObjectLock("FEES", "DELETE", "");
                 }
@@ -487,6 +551,9 @@ namespace EPS
             {
                 frmLogin frmlogin = new frmLogin();
                 frmlogin.ShowDialog();
+
+                if (frmlogin.State.ToString() == "CancelState") //AFM 20200903
+                    this.Close();
             }
         }
 
@@ -506,6 +573,21 @@ namespace EPS
             //        taskman.IsObjectLock("BILLING", "DELETE", "");
             //    }
             //}
+
+            // requested by binan/support
+            if (AppSettingsManager.Granted("TB-B"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("BILLING", "", ""))
+                {
+                    frmBilling form = new frmBilling();
+                    form.Source = "BUILDING PERMIT";
+                    form.ModuleCode = "TB-UBB";
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("BILLING", "DELETE", "");
+                }
+            }
         }
 		
 		private void assessmentOfFeesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -532,8 +614,6 @@ namespace EPS
 
         private void printCertificationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("UNDER CONSTRUCTION");
-            return;
             frmCertification frmcertification = new frmCertification();
             frmcertification.ShowDialog();
         }
@@ -542,6 +622,275 @@ namespace EPS
         {
             frmEngineerTypes frmengineertypes = new frmEngineerTypes();
             frmengineertypes.ShowDialog();
+        }
+
+        private void lblUser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void moduleSetupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmModuleSetup frmmodulesetup = new frmModuleSetup();
+            frmmodulesetup.ShowDialog();
+        }
+
+        private void encodersLogToolStripMenuItem_Click(object sender, EventArgs e) //AFM 20201029
+        {
+            frmEncoderLog frmencoderslog = new frmEncoderLog();
+            frmencoderslog.ShowDialog();
+        }
+
+        private void additionalFeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("STS"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("FEES", "", ""))
+                {
+                    frmScheduleFees form = new frmScheduleFees();
+                    form.ScheduleMode = "ADDITIONAL";
+                    form.ShowDialog();
+                    taskman.IsObjectLock("FEES", "DELETE", "");
+                }
+            }
+        }
+
+        private void otherFeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("STS"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("FEES", "", ""))
+                {
+                    frmScheduleFees form = new frmScheduleFees();
+                    form.ScheduleMode = "OTHERS";
+                    form.ShowDialog();
+                    taskman.IsObjectLock("FEES", "DELETE", "");
+                }
+            }
+        }
+
+        private void engineersModuleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TEM"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("ENGINEERS MODULE", "", ""))
+                {
+                    frmEngineerModule form = new frmEngineerModule();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("ENGINEERS MODULE", "DELETE", "");
+                }
+            }
+        }
+
+        private void permitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void postingEditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("P"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("POSTING-EDIT", "", ""))
+                {
+                    frmPosting form = new frmPosting();
+                    form.FormMode = "EDIT";
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("POSTING-EDIT", "DELETE", "");
+                }
+
+            }
+        }
+
+        private void buildingPermitRequirementsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void electricalPermitRequirementsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void requirementsSetupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("STR"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("SETTINGS-Requirement", "", ""))
+                {
+                    frmRequirement form = new frmRequirement();
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("SETTINGS-Requirement", "DELETE", "");
+                }
+
+            }
+        }
+
+        private void buildingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TNA"))
+            {
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_ADD";
+                form.PermitApplication = "BUILDING";
+                form.ShowDialog();
+            }
+        }
+
+        private void electricalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TNA"))
+            {
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_ADD_ELEC";
+                form.PermitApplication = "ELECTRICAL";
+                form.ShowDialog();
+            }
+        }
+
+        private void occupancyToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TNA"))
+            {
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_ADD_OCC";
+                form.PermitApplication = "OCCUPANCY";
+                form.ShowDialog();
+            }
+        }
+
+        private void mechanicalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TNA"))
+            {
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_ADD_MECH";
+                form.PermitApplication = "MECHANICAL";
+                form.ShowDialog();
+            }
+        }
+
+        private void buildingToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TP"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("PERMIT", "", ""))
+                {
+                    frmPermits form = new frmPermits();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("PERMIT", "DELETE", "");
+                }
+            }
+        }
+
+        private void otherPermitsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TNA"))
+            {
+                frmPermitSelect frmpermitselect = new frmPermitSelect();
+                frmpermitselect.ShowDialog();
+
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_ADD_OTH";
+                form.PermitApplication = "OTHERS";
+                form.SelectedPermitCode = frmpermitselect.m_sPermitCode;
+                form.SelectedPermitDesc = frmpermitselect.m_sPermitDesc;
+                form.ShowDialog();
+            }
+        }
+
+        private void cFEIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TNA"))
+            {
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_ADD_CFEI";
+                form.PermitApplication = "CFEI";
+                form.ShowDialog();
+            }
+        }
+
+        private void buildingToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void permitNoMonitoringToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TP"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("PERMIT", "", ""))
+                {
+                    frmPermits form = new frmPermits();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("PERMIT", "DELETE", "");
+                }
+            }
+        }
+
+        private void editApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bUILDINGToolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TEA"))
+            {
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_EDIT";
+                form.PermitApplication = "BUILDING";
+                OracleResultSet res = new OracleResultSet();
+                res.Query = "select permit_code from permit_tbl where permit_desc like 'BUILDING%'";
+                if (res.Execute())
+                    if (res.Read())
+                        form.SelectedPermitCode = res.GetString(0);
+                res.Close();
+
+                form.ShowDialog();
+            }
+        }
+
+        private void mECHANICALToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TEA"))
+            {
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_EDIT";
+                form.PermitApplication = "MECHANICAL";
+                OracleResultSet res = new OracleResultSet();
+                res.Query = "select permit_code from permit_tbl where permit_desc like 'MECHANICAL%'";
+                if (res.Execute())
+                    if (res.Read())
+                        form.SelectedPermitCode = res.GetString(0);
+                res.Close();
+                form.ShowDialog();
+            }
+        }
+
+        private void cFEIToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TEA"))
+            {
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_EDIT";
+                form.PermitApplication = "CFEI";
+                OracleResultSet res = new OracleResultSet();
+                res.Query = "select permit_code from permit_tbl where permit_desc like 'CFEI%'";
+                if (res.Execute())
+                    if (res.Read())
+                        form.SelectedPermitCode = res.GetString(0);
+                res.Close();
+                form.ShowDialog();
+            }
         }
     }
 }

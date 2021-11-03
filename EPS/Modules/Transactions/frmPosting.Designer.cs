@@ -44,6 +44,8 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.grpDetails = new System.Windows.Forms.GroupBox();
+            this.cmbTeller = new System.Windows.Forms.ComboBox();
+            this.btnImageView = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -69,12 +71,14 @@
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.txtOrNo = new System.Windows.Forms.TextBox();
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fees = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExit = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fees = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PermitCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FeesCat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.grpDetails.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -175,10 +179,7 @@
             // 
             // arn1
             // 
-            //this.arn1.GetDistCode = "";
-            //this.arn1.GetLGUCode = "";
             this.arn1.GetCode = "";
-            this.arn1.GetMonth = "";
             this.arn1.GetSeries = "";
             this.arn1.GetTaxYear = "";
             this.arn1.Location = new System.Drawing.Point(58, 15);
@@ -220,6 +221,8 @@
             // 
             // grpDetails
             // 
+            this.grpDetails.Controls.Add(this.cmbTeller);
+            this.grpDetails.Controls.Add(this.btnImageView);
             this.grpDetails.Controls.Add(this.label14);
             this.grpDetails.Controls.Add(this.label13);
             this.grpDetails.Controls.Add(this.label12);
@@ -251,6 +254,24 @@
             this.grpDetails.Size = new System.Drawing.Size(568, 438);
             this.grpDetails.TabIndex = 112;
             this.grpDetails.TabStop = false;
+            // 
+            // cmbTeller
+            // 
+            this.cmbTeller.FormattingEnabled = true;
+            this.cmbTeller.Location = new System.Drawing.Point(58, 397);
+            this.cmbTeller.Name = "cmbTeller";
+            this.cmbTeller.Size = new System.Drawing.Size(143, 26);
+            this.cmbTeller.TabIndex = 113;
+            // 
+            // btnImageView
+            // 
+            this.btnImageView.Location = new System.Drawing.Point(446, 262);
+            this.btnImageView.Name = "btnImageView";
+            this.btnImageView.Size = new System.Drawing.Size(108, 28);
+            this.btnImageView.TabIndex = 118;
+            this.btnImageView.Text = "View Image";
+            this.btnImageView.UseVisualStyleBackColor = true;
+            this.btnImageView.Click += new System.EventHandler(this.btnImageView_Click);
             // 
             // label14
             // 
@@ -396,6 +417,7 @@
             this.txtTeller.Name = "txtTeller";
             this.txtTeller.Size = new System.Drawing.Size(143, 26);
             this.txtTeller.TabIndex = 13;
+            this.txtTeller.Visible = false;
             // 
             // txtMemo
             // 
@@ -484,7 +506,9 @@
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Code,
             this.Fees,
-            this.Amount});
+            this.Amount,
+            this.PermitCode,
+            this.FeesCat});
             this.dgvList.Location = new System.Drawing.Point(7, 17);
             this.dgvList.Name = "dgvList";
             this.dgvList.RowHeadersVisible = false;
@@ -494,11 +518,22 @@
             this.dgvList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellValueChanged);
             this.dgvList.Leave += new System.EventHandler(this.dgvList_Leave);
             // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(467, 612);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(108, 28);
+            this.btnExit.TabIndex = 11;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // Code
             // 
             this.Code.HeaderText = "Code";
             this.Code.Name = "Code";
             this.Code.ReadOnly = true;
+            this.Code.Visible = false;
             this.Code.Width = 70;
             // 
             // Fees
@@ -519,15 +554,17 @@
             this.Amount.ReadOnly = true;
             this.Amount.Width = 120;
             // 
-            // btnExit
+            // PermitCode
             // 
-            this.btnExit.Location = new System.Drawing.Point(467, 612);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(108, 28);
-            this.btnExit.TabIndex = 11;
-            this.btnExit.Text = "Exit";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.PermitCode.HeaderText = "PermitCode";
+            this.PermitCode.Name = "PermitCode";
+            this.PermitCode.Visible = false;
+            // 
+            // FeesCat
+            // 
+            this.FeesCat.HeaderText = "FeesCat";
+            this.FeesCat.Name = "FeesCat";
+            this.FeesCat.Visible = false;
             // 
             // frmPosting
             // 
@@ -540,6 +577,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -601,8 +639,12 @@
         private System.Windows.Forms.TextBox txtChange;
         private System.Windows.Forms.TextBox txtDebit;
         private System.Windows.Forms.CheckBox chkOthers;
+        private System.Windows.Forms.Button btnImageView;
+        private System.Windows.Forms.ComboBox cmbTeller;
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fees;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PermitCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FeesCat;
     }
 }

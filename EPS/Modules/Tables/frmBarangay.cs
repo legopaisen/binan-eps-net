@@ -68,16 +68,22 @@ namespace Modules.Tables
             int iCode = 0;
             string sCode = "";
             OracleResultSet pSet = new OracleResultSet();
-            pSet.Query = "select max(brgy_code) from brgy";
+            //pSet.Query = "select max(brgy_code) from brgy";
+            pSet.Query = "select nvl(max(brgy_code), 0) from brgy"; //AFM 20200904
             if (pSet.Execute())
                 if (pSet.Read())
                 {
-                    iCode = Convert.ToInt16(pSet.GetString(0));
-                    iCode++;
-                    sCode = iCode.ToString("000");
+                    if(pSet.GetString(0) != "0")
+                    {
+                        iCode = Convert.ToInt16(pSet.GetString(0));
+                        iCode++;
+                        sCode = iCode.ToString("000");
+                    }
+                    else
+                        sCode = "001";
                 }
-                else
-                    sCode = "001";
+                //else
+                   // sCode = "001";
             pSet.Close();
 
             return sCode;
@@ -191,6 +197,9 @@ namespace Modules.Tables
                 return;
             }
 
+            if (ValidateUsage())
+                return;
+
             if (MessageBox.Show("Are you sure you want to delete?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 OracleResultSet pSet = new OracleResultSet();
@@ -209,6 +218,21 @@ namespace Modules.Tables
             }
         }
 
+        private bool ValidateUsage() //AFM 20200904
+        {
+            OracleResultSet result = new OracleResultSet();
+            result.Query = "select * from application where proj_brgy = '"+ txtName.Text.Trim() +"'";
+            if (result.Execute())
+                if (result.Read())
+                {
+                    MessageBox.Show("Cannot delete. Barangay has existing record!");
+                    return true;
+                }
+                else
+                    return false;
+            else
+                return false;
+        }
         private bool CheckIfBrgyIsInUse(string sBrgyName)
         {
             OracleResultSet pSet = new OracleResultSet();

@@ -7,7 +7,8 @@ using System.Windows.Forms;
 using EPSEntities.Connection;
 using Common.StringUtilities;
 using Modules.Records;
-    
+using Common.DataConnector;
+
 namespace Modules.Utilities
 {
     public class FormOwner:FormOwnerClass
@@ -50,6 +51,7 @@ namespace Modules.Utilities
             RecordFrm.dgvList.Columns.Add("TCT", "TCT");
             RecordFrm.dgvList.Columns.Add("CTC", "CTC");
             RecordFrm.dgvList.Columns.Add("TelNo", "TelNo");
+            RecordFrm.dgvList.Columns.Add("Vill", "Village");
 
             AccountsList account = new AccountsList("", "", "", "");
             int iCnt = 0;
@@ -60,7 +62,7 @@ namespace Modules.Utilities
                     account.AcctLst[i].FirstName, account.AcctLst[i].MiddleInitial, account.AcctLst[i].Address,
                     account.AcctLst[i].HouseNo, account.AcctLst[i].LotNo, account.AcctLst[i].BlkNo,
                     account.AcctLst[i].Barangay, account.AcctLst[i].City, account.AcctLst[i].Province,
-                    account.AcctLst[i].ZIP, account.AcctLst[i].TIN, account.AcctLst[i].TCT, account.AcctLst[i].CTC, account.AcctLst[i].TelNo);
+                    account.AcctLst[i].ZIP, account.AcctLst[i].TIN, account.AcctLst[i].TCT, account.AcctLst[i].CTC, account.AcctLst[i].TelNo, account.AcctLst[i].Village); //added requested subdivision
             }
 
             RecordFrm.lblNoRecords.Text += " " + iCnt.ToString("#,###");
@@ -144,7 +146,7 @@ namespace Modules.Utilities
                     RecordFrm.txtMI.Text.ToString(), RecordFrm.txtStreet.Text.ToString(), RecordFrm.txtHseNo.Text.ToString(),
                     RecordFrm.txtLotNo.Text.ToString(), RecordFrm.txtBlkNo.Text.ToString(), RecordFrm.cmbBrgy.Text.ToString(),
                     RecordFrm.txtMun.Text.ToString(), RecordFrm.txtProv.Text.ToString(), RecordFrm.txtZIP.Text.ToString(),
-                    RecordFrm.txtTIN.Text.ToString(), RecordFrm.txtTCT.Text.ToString(), RecordFrm.txtCTC.Text.ToString(), RecordFrm.txtTelNo.Text.ToString());
+                    RecordFrm.txtTIN.Text.ToString(), RecordFrm.txtTCT.Text.ToString(), RecordFrm.txtCTC.Text.ToString(), RecordFrm.txtTelNo.Text.ToString(), RecordFrm.txtVillage.Text.ToString().Trim()); //added requested subdivision
 
                 RecordFrm.AcctNo = account.OwnerCode;
 
@@ -185,7 +187,8 @@ namespace Modules.Utilities
                 strQuery += $" ACCT_TCT= '{StringUtilities.HandleApostrophe(RecordFrm.txtTCT.Text.ToString()).Trim()}', ";
                 strQuery += $" ACCT_TIN = '{StringUtilities.HandleApostrophe(RecordFrm.txtTIN.Text.ToString()).Trim()}', ";
                 strQuery += $" ACCT_CTC = '{StringUtilities.HandleApostrophe(RecordFrm.txtCTC.Text.ToString()).Trim()}', ";
-                strQuery += $" ACCT_TELNO = '{StringUtilities.HandleApostrophe(RecordFrm.txtTelNo.Text.ToString()).Trim()}' ";
+                strQuery += $" ACCT_TELNO = '{StringUtilities.HandleApostrophe(RecordFrm.txtTelNo.Text.ToString()).Trim()}', ";
+                strQuery += $" ACCT_VILL = '{StringUtilities.HandleApostrophe(RecordFrm.txtVillage.Text.ToString()).Trim()}' "; //ADDED REQUESTED SUBDIVISION
                 strQuery += $" where ACCT_CODE = '{RecordFrm.AcctNo}' ";
                 db.Database.ExecuteSqlCommand(strQuery);
 
@@ -276,11 +279,47 @@ namespace Modules.Utilities
             RecordFrm.txtTelNo.Text = RecordFrm.dgvList[15, e.RowIndex].Value.ToString();
             }
             catch { }
+            try
+            {
+                RecordFrm.txtVillage.Text = RecordFrm.dgvList[16, e.RowIndex].Value.ToString(); //added requested subdivision
+            }
+            catch { }
 
         }
 
+        private bool ValidationUsage() //AFM 20200901
+        {
+            OracleResultSet result = new OracleResultSet();
+            result.Query = "select * from application where proj_owner = '"+ RecordFrm.AcctNo +"' or proj_lot_owner = '" + RecordFrm.AcctNo + "'";
+            if (result.Execute())
+                if (result.Read())
+                {
+                    MessageBox.Show("Cannot delete. Owner has existing record!");
+                    return true;
+                }
+                else
+                {
+                    result.Close();
+                    result.Query = "select * from application where proj_owner = '" + RecordFrm.AcctNo + "' or proj_lot_owner = '" + RecordFrm.AcctNo + "'";
+                    if (result.Execute())
+                        if (result.Read())
+                        {
+                            MessageBox.Show("Cannot delete. Owner has existing record!");
+                            return true;
+                        }
+                        else
+                            return false;
+                    return false;
+                }
+            else
+                return false;
+
+
+        }
         public override void Delete()
         {
+            if (ValidationUsage())
+                return;
             var db = new EPSConnection(dbConn);
             string strQuery = string.Empty;
 

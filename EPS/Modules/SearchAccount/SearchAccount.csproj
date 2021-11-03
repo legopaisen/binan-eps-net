@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Modules.SearchAccount</RootNamespace>
     <AssemblyName>SearchAccount</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,10 +56,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="EPSEntities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\EPSEntities\bin\Debug\EPSEntities.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -112,6 +109,10 @@
     <ProjectReference Include="..\..\..\Common\StringUtilities\StringUtilities.csproj">
       <Project>{f7cab867-edef-4e74-91bf-6c5385dcf513}</Project>
       <Name>StringUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EPSEntities\EPSEntities.csproj">
+      <Project>{64f894bd-df57-4d82-8c15-4bea4081b870}</Project>
+      <Name>EPSEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\ARN\ARN.csproj">
       <Project>{25FD3DB7-AC87-4989-8F78-BD361427490A}</Project>

@@ -14,6 +14,7 @@ using EPSEntities.Entity;
 using Oracle.ManagedDataAccess.Client;
 using ARCSEntities.Connection;
 using Common.DataConnector;
+using Amellar.Common.ImageViewer;
 
 namespace Modules.Transactions
 {
@@ -33,7 +34,14 @@ namespace Modules.Transactions
         private string m_sCategoryCd = string.Empty;
         private double m_dDrCr = 0;
         private double m_dDebitCredit = 0;
-        
+        private string m_sORNoOld = string.Empty;
+
+        protected frmImageList m_frmImageList;
+        protected frmImageViewer m_frmImageViewer;
+        public static int m_intImageListInstance;
+
+        public string FormMode = string.Empty;
+
 
         public frmPosting()
         {
@@ -44,20 +52,22 @@ namespace Modules.Transactions
         {
             toolTip1.SetToolTip(btnSearch, "Search Application");
             toolTip2.SetToolTip(btnClear, "Clear Controls");
+
+            frmImageList frmimagelist = new frmImageList();
         }
         private bool ValidatePayment()
         {
             OracleResultSet result = new OracleResultSet();
-            result.Query = $"select * from mrs_payments where arn = '{arn1.GetAn()}'";
-            if(result.Execute())
-                if(result.Read())
+            result.Query = $"select * from PAYMENTS_INFO where refno = '{arn1.GetAn()}' AND DATA_MODE = 'POS'";
+            if (result.Execute())
+                if (result.Read())
                 {
                     MessageBox.Show("ARN already paid");
                     ClearControls();
-                    arn1.GetCode = "";
-                   // arn1.GetLGUCode = "";
+                    //arn1.GetCode = "";
+                    // arn1.GetLGUCode = "";
                     arn1.GetTaxYear = "";
-                    arn1.GetMonth = "";
+                    //arn1.GetMonth = ""; // disabled for new arn of binan
                     //arn1.GetDistCode = "";
                     arn1.GetSeries = "";
                     return false;
@@ -67,10 +77,15 @@ namespace Modules.Transactions
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (!ValidatePayment()) //AFM 20191018 check if record has payment
-                return;
+            if (FormMode != "EDIT")
+            {
+                if (!ValidatePayment()) //AFM 20191018 check if record has payment
+                    return;
+            }
 
-            if (string.IsNullOrEmpty(arn1.GetTaxYear) && string.IsNullOrEmpty(arn1.GetSeries))
+            //if (string.IsNullOrEmpty(arn1.GetTaxYear) && string.IsNullOrEmpty(arn1.GetSeries))
+            //if (string.IsNullOrEmpty(arn1.GetMonth) || string.IsNullOrEmpty(arn1.GetSeries)) //AFM 20200702 // AFM 20201027 disabled for new arn of binan
+            if (string.IsNullOrEmpty(arn1.GetTaxYear) || string.IsNullOrEmpty(arn1.GetSeries))
             {
                 SearchAccount.frmSearchARN form = new SearchAccount.frmSearchARN();
 
@@ -83,18 +98,29 @@ namespace Modules.Transactions
                 else if (m_sCertType.Contains("WIRING PERMIT"))
                     form.SearchCriteria = "AppWire";
                 else
-                    form.SearchCriteria = "QUE";
+                {
+                    if (AppSettingsManager.GetConfigValue("30") == "1") //for build up mode
+                        form.SearchCriteria = "APP";
+                    else
+                        form.SearchCriteria = "QUE";
+                }
                 form.ShowDialog();
 
                 arn1.SetAn(form.sArn);
+
+                if (FormMode != "EDIT")
+                {
+                    if (!ValidatePayment()) //AFM 20191018 check if record has payment
+                        return;
+                }
             }
 
             if (!taskman.AddTask("POSTING", arn1.GetAn()))
             {
-                arn1.GetCode = "";
+                //arn1.GetCode = "";
                 //arn1.GetLGUCode = "";
                 arn1.GetTaxYear = "";
-                arn1.GetMonth = "";
+                //arn1.GetMonth = ""; // disabled for new arn of binan
                 //arn1.GetDistCode = "";
                 arn1.GetSeries = "";
 
@@ -103,11 +129,25 @@ namespace Modules.Transactions
 
             ClearControls();
             DisplayData();
+            LoadTeller();
             OnCashPayment();
             grpDetails.Enabled = true;
         }
 
-        
+        private void LoadTeller()
+        {
+            cmbTeller.Items.Clear();
+            OracleResultSet res = new OracleResultSet();
+            res.Query = "select teller_code from tellers order by teller_code";
+            if (res.Execute())
+                while (res.Read())
+                {
+                    cmbTeller.Items.Add(res.GetString("teller_code"));
+                }
+            res.Close();
+        }
+
+
         private void ClearControls()
         {
             txtProjDesc.Text = string.Empty;
@@ -118,6 +158,7 @@ namespace Modules.Transactions
             txtOrNo.Text = string.Empty;
             txtMemo.Text = string.Empty;
             txtTeller.Text = string.Empty;
+            cmbTeller.Text = "";
             txtBillNo.Text = string.Empty;
             txtCash.Text = string.Empty;
             txtAmtTendered.Text = string.Empty;
@@ -144,6 +185,7 @@ namespace Modules.Transactions
             string strWhereCond = string.Empty;
             m_sProjOwner = string.Empty;
             var result = (dynamic)null;
+
 
             if (m_sCertType.Contains("EXCAVATION PERMIT"))
             {
@@ -176,22 +218,13 @@ namespace Modules.Transactions
             {
                 strWhereCond = $" where arn = '{arn1.GetAn()}'";
                 result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
-                             select a;
+                         select a;
             }
             else
             {
-                if (AppSettingsManager.GetConfigValue("30") == "0")
-                {
-                    strWhereCond = $" where arn = '{arn1.GetAn()}'";
-                    result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
-                             select a;
-                }
-                if (AppSettingsManager.GetConfigValue("30") == "1") //AFM 20191016 get from application table
-                {
-                    strWhereCond = $" where arn = '{arn1.GetAn()}'";
-                    result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
-                             select a;
-                }
+                strWhereCond = $" where arn = '{arn1.GetAn()}'";
+                result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
+                         select a;
 
             }
 
@@ -249,30 +282,55 @@ namespace Modules.Transactions
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearControls();
-            arn1.GetCode = "";
+            taskman.RemTask(arn1.GetAn());
+            //arn1.GetCode = "";
             //arn1.GetLGUCode = "";
-            arn1.GetTaxYear = "";
-            arn1.GetMonth = "";
+            //arn1.GetTaxYear = "";
+            //arn1.GetMonth = ""; // disabled for new arn of binan
             //arn1.GetDistCode = "";
             arn1.GetSeries = "";
-            taskman.RemTask(arn1.GetAn());
         }
 
         private void LoadGrid()
         {
             var db = new EPSConnection(dbConn);
             var result = (dynamic)null;
+            OracleResultSet res = new OracleResultSet();
 
             dgvList.Rows.Clear();
 
             string sQuery = string.Empty;
 
-            sQuery = $"select * from billing where arn = '{arn1.GetAn()}' ";
-            result = db.Database.SqlQuery<BILLING>(sQuery).ToList();
-
-            foreach (var item in result)
+            if (FormMode != "EDIT")
             {
-                txtBillNo.Text = item.BILL_NO;
+                sQuery = $"select * from billing where arn = '{arn1.GetAn()}' ";
+                result = db.Database.SqlQuery<BILLING>(sQuery).ToList();
+
+                foreach (var item in result)
+                {
+                    txtBillNo.Text = item.BILL_NO;
+                }
+            }
+            else
+            {
+                sQuery = $"select * from tax_details_paid where arn = '{arn1.GetAn()}' ";
+                result = db.Database.SqlQuery<TAX_DETAILS>(sQuery).ToList();
+
+                foreach (var item in result)
+                {
+                    txtBillNo.Text = item.BILL_NO;
+                }
+            }
+
+            if (FormMode == "EDIT")
+            {
+                res.Query = $"select * from payments_info where refno = '{arn1.GetAn()}' and data_mode = 'POS'";
+                if (res.Execute())
+                    if (res.Read())
+                    {
+                        txtOrNo.Text = res.GetString("or_no");
+                        m_sORNoOld = txtOrNo.Text.Trim();
+                    }
             }
 
             if (AppSettingsManager.GetConfigValue("30") == "0") //AFM 20191016
@@ -290,8 +348,15 @@ namespace Modules.Transactions
 
             string sFeesCode = string.Empty;
             string sFeesAmt = string.Empty;
+            string sFeesCat = string.Empty;
+            string sPermitCode = string.Empty;
 
-            sQuery = $"select * from tax_details where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}' order by fees_code";
+
+            if (FormMode != "EDIT")
+                sQuery = $"select * from tax_details where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}' order by permit_code, fees_code";
+            else
+                sQuery = $"select * from tax_details_paid where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}' order by permit_code, fees_code";
+
             result = db.Database.SqlQuery<TAX_DETAILS>(sQuery).ToList();
             foreach (var item in result)
             {
@@ -299,10 +364,18 @@ namespace Modules.Transactions
 
                 sFeesCode = item.FEES_CODE;
                 sFeesAmt = string.Format("{0:#,###.00}", item.FEES_AMT);
-                dgvList.Rows.Add(sFeesCode, subcat.GetFeesDesc(sFeesCode), sFeesAmt);
+                sFeesCat = item.FEES_CATEGORY;
+                sPermitCode = item.PERMIT_CODE;
+
+                if (sFeesCat == "MAIN")
+                    dgvList.Rows.Add(sFeesCode, subcat.GetFeesDesc(sFeesCode), sFeesAmt, sPermitCode, sFeesCat);
+                else if (sFeesCat == "OTHERS")
+                    dgvList.Rows.Add(sFeesCode, subcat.GetOtherFeesDesc(sFeesCode), sFeesAmt, sPermitCode, sFeesCat);
+                else if (sFeesCat == "ADDITIONAL")
+                    dgvList.Rows.Add(sFeesCode, subcat.GetAddlFeesDesc(sFeesCode), sFeesAmt, sPermitCode, sFeesCat);
             }
 
-            if(AppSettingsManager.GetConfigValue("30") == "1")// AFM 20191017 allow editing of amount in build up mode
+            if (AppSettingsManager.GetConfigValue("30") == "1")// AFM 20191017 allow editing of amount in build up mode
                 dgvList.Columns[2].ReadOnly = false;
 
             ComputeTotal();
@@ -349,9 +422,9 @@ namespace Modules.Transactions
                 if (!string.IsNullOrEmpty(txtOrNo.Text.ToString().Trim()))
                 {
                     frmCheck check = new frmCheck();
-                    check.txtFirstName.Text = m_sOwnFn;
-                    check.txtLastName.Text = m_sOwnLn;
-                    check.txtMI.Text = m_sOwnMi;
+                    //check.txtFirstName.Text = m_sOwnFn;
+                    //check.txtLastName.Text = m_sOwnLn;
+                    //check.txtMI.Text = m_sOwnMi;
                     if (!string.IsNullOrEmpty(m_sCheckNo))
                         check.txtCheckNo.Text = m_sCheckNo;
                     check.m_sOrNo = txtOrNo.Text.ToString().Trim();
@@ -359,8 +432,8 @@ namespace Modules.Transactions
                     check.ShowDialog();
 
                     if (!string.IsNullOrEmpty(check.txtBankCode.Text.ToString()) &&
-                        !string.IsNullOrEmpty(check.txtCheckNo.Text.ToString()) &&
-                        !string.IsNullOrEmpty(check.txtAcctNo.Text.ToString()))
+                        !string.IsNullOrEmpty(check.txtCheckNo.Text.ToString()))
+                    //!string.IsNullOrEmpty(check.txtAcctNo.Text.ToString()))
                     {
                         m_sCheckNo = check.txtCheckNo.Text.ToString();
 
@@ -409,19 +482,19 @@ namespace Modules.Transactions
                         double.TryParse(check.txtCheckAmt.Text.ToString(), out dAmt);
                         try
                         {
-                            sQuery = $"insert into check_tbl values (:1,to_date(:2,'MM/dd/yyyy'),:3,:4,:5,:6,:7,:8,to_date(:9,'MM/dd/yyyy'),:10,:11)";
-                            db.Database.ExecuteSqlCommand(sQuery,
-                                        new OracleParameter(":1", txtOrNo.Text.ToString().Trim()),
-                                        new OracleParameter(":2", string.Format("{0:MM/dd/yyyy}", check.dtpCheckDate.Text.ToString())),
-                                        new OracleParameter(":3", check.txtCheckNo.Text.ToString().Trim()),
-                                        new OracleParameter(":4", check.txtAcctNo.Text.ToString().Trim()),
-                                        new OracleParameter(":5", check.txtLastName.Text.ToString().Trim()),
-                                        new OracleParameter(":6", check.txtFirstName.Text.ToString().Trim()),
-                                        new OracleParameter(":7", check.txtMI.Text.ToString().Trim()),
-                                        new OracleParameter(":8", dAmt),
-                                        new OracleParameter(":9", string.Format("{0:MM/dd/yyyy}", AppSettingsManager.GetCurrentDate())),
-                                        new OracleParameter(":10", check.txtBankCode.Text.ToString().Trim()),
-                                        new OracleParameter(":11", dDebitCredit));
+                            //sQuery = $"insert into check_tbl values (:1,to_date(:2,'MM/dd/yyyy'),:3,:4,:5,:6,:7,:8,to_date(:9,'MM/dd/yyyy'),:10,:11)";
+                            //db.Database.ExecuteSqlCommand(sQuery,
+                            //            new OracleParameter(":1", txtOrNo.Text.ToString().Trim()),
+                            //            new OracleParameter(":2", string.Format("{0:MM/dd/yyyy}", check.dtpCheckDate.Text.ToString())),
+                            //            new OracleParameter(":3", check.txtCheckNo.Text.ToString().Trim()),
+                            //            new OracleParameter(":4", check.txtAcctNo.Text.ToString().Trim()),
+                            //            new OracleParameter(":5", check.txtLastName.Text.ToString().Trim()),
+                            //            new OracleParameter(":6", check.txtFirstName.Text.ToString().Trim()),
+                            //            new OracleParameter(":7", check.txtMI.Text.ToString().Trim()),
+                            //            new OracleParameter(":8", dAmt),
+                            //            new OracleParameter(":9", string.Format("{0:MM/dd/yyyy}", AppSettingsManager.GetCurrentDate())),
+                            //            new OracleParameter(":10", check.txtBankCode.Text.ToString().Trim()),
+                            //            new OracleParameter(":11", dDebitCredit));
                         }
                         catch (Exception ex)
                         {
@@ -550,18 +623,18 @@ namespace Modules.Transactions
             string sQuery = string.Empty;
             int iCnt = 0;
 
-            sQuery = $"select count(*) from mrs_payments where or_no ='{txtOrNo.Text.ToString().Trim()}'";
-            iCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+            //sQuery = $"select count(*) from mrs_payments where or_no ='{txtOrNo.Text.ToString().Trim()}'";
+            //iCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
 
-            if(iCnt > 0)
-            {
-                MessageBox.Show("The OR No you entered has already been used online.", "POSTING", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
-            }
+            //if(iCnt > 0)
+            //{
+            //    MessageBox.Show("The OR No you entered has already been used online.", "POSTING", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    return false;
+            //}
 
-            if(string.IsNullOrEmpty(txtTeller.Text.ToString()))
+            if (string.IsNullOrEmpty(cmbTeller.Text.ToString()))
             {
-                MessageBox.Show("Teller is required","POSTING",MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                MessageBox.Show("Teller is required", "POSTING", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return false;
             }
 
@@ -609,7 +682,7 @@ namespace Modules.Transactions
                     dtDate = db.Database.SqlQuery<DateTime>(sQuery).SingleOrDefault();
                     sYear = dtDate.Year.ToString();
                 }
-                
+
                 if (sYear != sYear1 && !string.IsNullOrEmpty(sYear))
                 {
                     MessageBox.Show("The Permit No assigned to " + sPermitName + " already expired. \n Please update permit nos. before payments.", "POSTING", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -626,6 +699,25 @@ namespace Modules.Transactions
             string sFeesCode = string.Empty;
             double dFeesDue = 0;
             double dTotalFeesDue = 0;
+            string sMode = string.Empty;
+            string sORType = string.Empty;
+            double dSurch = 0;
+            string m_sAN = arn1.GetAn();
+            string sPaymentType = string.Empty;
+            OracleResultSet res = new OracleResultSet();
+            sORType = string.Empty;
+            if (rdoCash.Checked == true)
+                sPaymentType = "CS";
+            if (rdoCheck.Checked == true)
+                sPaymentType = "CQ";
+
+
+            sQuery = $"DELETE FROM payments_info WHERE refno = '{arn1.GetAn()}'";
+            db.Database.ExecuteSqlCommand(sQuery);
+            sQuery = $"DELETE FROM payments_tendered WHERE or_no = '{m_sORNoOld}'";
+            db.Database.ExecuteSqlCommand(sQuery);
+            sQuery = $"DELETE FROM or_used WHERE or_no = '{m_sORNoOld}'";
+            db.Database.ExecuteSqlCommand(sQuery);
 
             for (int i = 0; i <= dgvList.Rows.Count; i++)
             {
@@ -648,32 +740,117 @@ namespace Modules.Transactions
                 {
                     try
                     {
-                        string sTime = string.Empty;
-                        sTime = string.Format("{0:HH:mm:ss}", AppSettingsManager.GetCurrentDate());
+                        //string sTime = string.Empty;
+                        //sTime = string.Format("{0:HH:mm:ss}", AppSettingsManager.GetCurrentDate());
 
-                        sQuery = $"insert into mrs_payments values (:1,:2,:3,:4,:5,to_date(:6,'MM/dd/yyyy'),:7,:8,to_date(:9,'MM/dd/yyyy'),:10,:11,:12)";
-                        db.Database.ExecuteSqlCommand(sQuery,
-                                    new OracleParameter(":1", arn1.GetAn()),
-                                    new OracleParameter(":2", txtBillNo.Text.ToString()),
-                                    new OracleParameter(":3", m_sProjOwner),
-                                    new OracleParameter(":4", ""),
-                                    new OracleParameter(":5", txtOrNo.Text.ToString().Trim()),
-                                    new OracleParameter(":6", string.Format("{0:MM/dd/yyyy}", dtpDate.Text.ToString())),
-                                    new OracleParameter(":7", sFeesCode),
-                                    new OracleParameter(":8", dFeesDue),
-                                    new OracleParameter(":9", string.Format("{0:MM/dd/yyyy}", AppSettingsManager.GetCurrentDate())),
-                                    new OracleParameter(":10", sTime),
-                                    new OracleParameter(":11", txtTeller.Text.ToString().Trim()),
-                                    new OracleParameter(":12", AppSettingsManager.SystemUser.UserCode));
+                        //sQuery = $"insert into mrs_payments values (:1,:2,:3,:4,:5,to_date(:6,'MM/dd/yyyy'),:7,:8,to_date(:9,'MM/dd/yyyy'),:10,:11,:12)";
+                        //db.Database.ExecuteSqlCommand(sQuery,
+                        //            new OracleParameter(":1", arn1.GetAn()),
+                        //            new OracleParameter(":2", txtBillNo.Text.ToString()),
+                        //            new OracleParameter(":3", m_sProjOwner),
+                        //            new OracleParameter(":4", ""),
+                        //            new OracleParameter(":5", txtOrNo.Text.ToString().Trim()),
+                        //            new OracleParameter(":6", string.Format("{0:MM/dd/yyyy}", dtpDate.Text.ToString())),
+                        //            new OracleParameter(":7", sFeesCode),
+                        //            new OracleParameter(":8", dFeesDue),
+                        //            new OracleParameter(":9", string.Format("{0:MM/dd/yyyy}", AppSettingsManager.GetCurrentDate())),
+                        //            new OracleParameter(":10", sTime),
+                        //            new OracleParameter(":11", cmbTeller.Text.ToString().Trim()),
+                        //            new OracleParameter(":12", AppSettingsManager.SystemUser.UserCode));
+
+                        //double.TryParse(dgvList[5, i].Value.ToString(), out dFeesAmtdue);
+                        //double.TryParse(dgvList[2, i].Value.ToString(), out dFeesDue);
+                        //double.TryParse(dgvList[3, i].Value.ToString(), out dSurch);
+
+                        double.TryParse(txtAmt.Text.Trim(), out dTotalFeesDue);
+
+                        string sVal = dgvList[1, i].Value.ToString();
+                        if (sVal.Contains("SURCHARGE"))
+                        {
+                            double.TryParse(dgvList[2, i].Value.ToString(), out dSurch);
+                            goto Skip;
+                        }
+
+                        res.Query = $"INSERT INTO PAYMENTS_INFO VALUES( ";
+                        res.Query += $"'{m_sProjOwner}', ";
+                        res.Query += $"'{txtBillNo.Text}', ";
+                        res.Query += $"'EPS', ";
+                        res.Query += $"'{txtOrNo.Text.Trim()}', ";
+                        res.Query += $"to_date('{dtpDate.Text.ToString()}','MM/dd/yyyy'), ";
+                        res.Query += $"'{sORType}', ";
+                        res.Query += $"'{dgvList[0, i].Value.ToString()}', "; //fees code
+                        res.Query += $"{dFeesDue}, "; //fees due
+                        res.Query += $"0, "; //int
+                        res.Query += $"{dSurch}, "; //surch
+                        res.Query += $"{dTotalFeesDue}, "; //fees amt due
+                        res.Query += $"'{sPaymentType}', ";
+                        res.Query += $"'POS', "; //posting
+                        res.Query += $"'{AppSettingsManager.GetSystemDate().Year.ToString()}', "; //tax year
+                        res.Query += $"'F', ";
+                        res.Query += $"'F', ";
+                        res.Query += $"to_date('{AppSettingsManager.GetSystemDate().ToShortDateString()}','MM/dd/yyyy'), ";
+                        res.Query += $"'{AppSettingsManager.GetSystemDate().ToString("HH:mm")}', ";
+                        res.Query += $"'{txtTeller.Text.Trim()}', ";
+                        res.Query += $"'{txtMemo.Text.Trim()}', ";
+                        res.Query += $"'{m_sAN}', ";
+                        res.Query += $"{dFeesDue}, "; //fees due
+                        res.Query += $"'{dgvList[4, i].Value.ToString()}', "; //fees cat
+                        res.Query += $"'{dgvList[3, i].Value.ToString()}')"; //permit code
+                        if (res.ExecuteNonQuery() == 0)
+                        { }
+                        res.Close();
+
+                    Skip:
+                        res.Query = $"UPDATE PAYMENTS_INFO SET FEES_SURCH = {dSurch} WHERE PERMIT_CODE = '{dgvList[3, i].Value.ToString()}' AND OR_NO = '{txtOrNo.Text.Trim()}'";
+                        if (res.ExecuteNonQuery() == 0)
+                        { }
+
                     }
+
                     catch (Exception ex)
                     {
                         ex.ToString();
                         MessageBox.Show("Unable to save to the database", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
+
                 }
             }
+            double dTotAmt = 0;
+            double dCashAmt = 0;
+            double dChkAmt = 0;
+            double dTaxCredLess = 0;
+            double dAmtTendered = 0;
+            double dNewCred = 0;
+            double.TryParse(txtAmt.Text.Trim(), out dTotAmt);
+            double.TryParse(txtCash.Text.Trim(), out dCashAmt);
+            double.TryParse(txtAmtTendered.Text.Trim(), out dAmtTendered);
+
+            res.Query = $"INSERT INTO PAYMENTS_TENDERED VALUES( ";
+            res.Query += $"'{m_sProjOwner}', ";
+            res.Query += $"'{txtOrNo.Text.Trim()}', ";
+            res.Query += $"to_date('{dtpDate.Text.ToString()}','MM/dd/yyyy'), ";
+            res.Query += $"'{sORType}', ";
+            res.Query += $"'{sPaymentType}', ";
+            res.Query += $"{dTotAmt}, "; //orig amt due
+            res.Query += $"{dCashAmt}, ";
+            res.Query += $"{dChkAmt}, ";
+            res.Query += $"{dTaxCredLess}, "; //tax cr used
+            res.Query += $"{dAmtTendered}, ";
+            res.Query += $"{dNewCred}) ";
+            if (res.ExecuteNonQuery() == 0)
+            { }
+
+            res.Query = "INSERT INTO OR_USED VALUES(";
+            res.Query += $"'{txtOrNo.Text.Trim()}', ";
+            res.Query += $"'{txtTeller.Text.Trim()}', ";
+            res.Query += $"to_date('{AppSettingsManager.GetSystemDate().ToShortDateString()}','MM/dd/yyyy'), ";
+            res.Query += $"{txtOrNo.Text.Trim()}, ";
+            res.Query += $"NULL, ";
+            res.Query += $"null) ";
+            if (res.ExecuteNonQuery() == 0)
+            { }
+
 
             try
             {
@@ -685,28 +862,64 @@ namespace Modules.Transactions
                 sQuery = $"delete from application_que where arn = '{arn1.GetAn()}'";
                 db.Database.ExecuteSqlCommand(sQuery);
 
-                sQuery = $"insert into billing_paid select * from billing where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
-                db.Database.ExecuteSqlCommand(sQuery);
+                if (FormMode == "EDIT")
+                {
+                    sQuery = $"UPDATE billing_paid SET BILL_NO = '{txtBillNo.Text.ToString()}' WHERE arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                    db.Database.ExecuteSqlCommand(sQuery);
+                }
+                else
+                {
+                    sQuery = $"insert into billing_paid select * from billing where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                    db.Database.ExecuteSqlCommand(sQuery);
 
-                sQuery = $"delete from billing where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
-                db.Database.ExecuteSqlCommand(sQuery);
+                    sQuery = $"delete from billing where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                    db.Database.ExecuteSqlCommand(sQuery);
+                }
 
-                sQuery = $"insert into taxdues_paid select * from taxdues where arn = '{arn1.GetAn()}'  and bill_no  = '{txtBillNo.Text.ToString()}'";
-                db.Database.ExecuteSqlCommand(sQuery);
+                if (FormMode == "EDIT")
+                {
 
-                sQuery = $"delete from taxdues where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
-                db.Database.ExecuteSqlCommand(sQuery);
+                    sQuery = $"UPDATE taxdues_paid SET BILL_NO = '{txtBillNo.Text.ToString()}' WHERE arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                    db.Database.ExecuteSqlCommand(sQuery);
+                }
+                else
+                {
+                    sQuery = $"insert into taxdues_paid select * from taxdues where arn = '{arn1.GetAn()}'  and bill_no  = '{txtBillNo.Text.ToString()}'";
+                    db.Database.ExecuteSqlCommand(sQuery);
 
-                sQuery = $"insert into tax_details_paid select * from tax_details where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
-                db.Database.ExecuteSqlCommand(sQuery);
+                    sQuery = $"delete from taxdues where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                    db.Database.ExecuteSqlCommand(sQuery);
+                }
 
-                sQuery = $"delete from tax_details where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
-                db.Database.ExecuteSqlCommand(sQuery);
+                if (FormMode == "EDIT")
+                {
+                    sQuery = $"UPDATE tax_details_paid SET BILL_NO = '{txtBillNo.Text.ToString()}' WHERE arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                    db.Database.ExecuteSqlCommand(sQuery);
+                }
+                else
+                {
+                    sQuery = $"insert into tax_details_paid select * from tax_details where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                    db.Database.ExecuteSqlCommand(sQuery);
+
+                    sQuery = $"delete from tax_details where arn = '{arn1.GetAn()}' and bill_no = '{txtBillNo.Text.ToString()}'";
+                    db.Database.ExecuteSqlCommand(sQuery);
+                }
+
+
+
+
 
                 double dCash = 0;
                 double.TryParse(txtCash.Text.ToString(), out dCash);
                 double dCheck = 0;
                 double.TryParse(txtAmtTendered.Text.ToString(), out dCheck);
+
+                if (FormMode == "EDIT")
+                {
+                    sQuery = $"delete from payment_denom where arn = '{arn1.GetAn()}' and or_no = '{m_sORNoOld}'";
+                    db.Database.ExecuteSqlCommand(sQuery);
+                }
+
 
                 sQuery = $"insert into payment_denom values (:1,to_date(:2,'MM/dd/yyyy'),:3,:4,:5,:6,:7)";
                 db.Database.ExecuteSqlCommand(sQuery,
@@ -750,7 +963,7 @@ namespace Modules.Transactions
 
 
             try
-            {    
+            {
                 OracleResultSet result = new OracleResultSet();
                 result.CreateANGARCS();
                 result.Query = $"delete from eps_billing where arn = '{arn1.GetAn()}'";
@@ -766,11 +979,23 @@ namespace Modules.Transactions
 
             MessageBox.Show("Payment Successfully Posted.", "POSTING", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            if (Utilities.AuditTrail.InsertTrail("P-PP", "PAYMENTS", "ARN: " + arn1.GetAn()) == 0)
+            if (FormMode == "EDIT")
             {
-                MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (Utilities.AuditTrail.InsertTrail("P-EP", "PAYMENTS", "ARN: " + arn1.GetAn()) == 0)
+                {
+                    MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
+            else
+            {
+                if (Utilities.AuditTrail.InsertTrail("P-PP", "PAYMENTS", "ARN: " + arn1.GetAn()) == 0)
+                {
+                    MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
 
             ClearControls();
         }
@@ -919,10 +1144,10 @@ namespace Modules.Transactions
             sCertNo = sYear + "-" + sMonth + "-" + sSeries;
 
             string sTmpCert = string.Empty;
-            
+
             if (iOccu == 1)
             {
-                sTmpCert = sYear + "-" + sMonth + "-" + FormatSeries(iOccu+1);
+                sTmpCert = sYear + "-" + sMonth + "-" + FormatSeries(iOccu + 1);
 
                 sQuery = $"insert into curr_cert_no values (:1)";
                 db.Database.ExecuteSqlCommand(sQuery,
@@ -930,7 +1155,7 @@ namespace Modules.Transactions
             }
             else
             {
-                sTmpCert = sYear + "-" + sMonth + "-" + FormatSeries(iOccu+1);
+                sTmpCert = sYear + "-" + sMonth + "-" + FormatSeries(iOccu + 1);
                 sQuery = "update curr_cert_no set cert_no = '" + sTmpCert + "' ";
                 sQuery += "where cert_no like '{sYear}%'";
                 db.Database.ExecuteSqlCommand(sQuery);
@@ -940,7 +1165,7 @@ namespace Modules.Transactions
             db.Database.ExecuteSqlCommand(sQuery,
                         new OracleParameter(":1", arn1.GetAn()),
                         new OracleParameter(":2", sCertNo),
-                        new OracleParameter(":3", string.Format("{0:MM/dd/yyyy}",AppSettingsManager.GetCurrentDate())));
+                        new OracleParameter(":3", string.Format("{0:MM/dd/yyyy}", AppSettingsManager.GetCurrentDate())));
 
             string sPermitFr, sPermitTo, sPermitCode;
 
@@ -950,7 +1175,7 @@ namespace Modules.Transactions
 
             sQuery = $"Select count(*) from other_permit_ass where permit_code = '{permit.GetPermitCode("OCCUPANCY")}'";
             iCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
-            
+
             if (iCnt > 0)
             {
                 sQuery = $"update other_permit_ass set cu_permit_no = '{sSeries}' where permit_code = '{sPermitCode}'";
@@ -1080,7 +1305,7 @@ namespace Modules.Transactions
             }
             else
                 m_sCertType = "";
-            
+
 
         }
 
@@ -1121,5 +1346,76 @@ namespace Modules.Transactions
 
             txtCash.Text = string.Format("{0:#,###.00}", dTmp);
         }
+
+        private void btnImageView_Click(object sender, EventArgs e)
+        {
+            // RMC 20111206 Added viewing of blob
+
+            //if (frmImageList.IsDisposed)
+            //{
+            //    m_intImageListInstance = 0;
+            //    m_frmImageList = new frmImageList();
+            //    m_frmImageList.IsBuildUpPosting = true;
+            //}
+            //if (!m_frmImageList.IsDisposed && m_intImageListInstance == 0)
+            //{
+            //if (m_frmImageList.ValidateImage(bin1.GetBin(), "A"))
+
+            m_intImageListInstance = 0;
+            m_frmImageList = new frmImageList();
+            m_frmImageList.IsBuildUpPosting = true;
+
+            if (m_frmImageList.ValidateImage(this.arn1.GetAn(), AppSettingsManager.GetSystemType)) //MCR 20141209
+            {
+                ImageInfo objImageInfo;
+                objImageInfo = new ImageInfo();
+
+                objImageInfo.TRN = this.arn1.GetAn();
+                //objImageInfo.System = "A"; 
+                objImageInfo.System = AppSettingsManager.GetSystemType; //MCR 20121209
+                m_frmImageList.isFortagging = false;
+                m_frmImageList.setImageInfo(objImageInfo);
+                m_frmImageList.Text = this.arn1.GetAn();
+                m_frmImageList.IsAutoDisplay = true;
+                m_frmImageList.Source = "VIEW";
+                m_frmImageList.Show();
+                m_intImageListInstance += 1;
+            }
+            else
+            {
+
+                MessageBox.Show(string.Format("ARN {0} has no image", this.arn1.GetAn()));
+            }
+
+            //}
+        }
+
+        private void txtOrNo_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtOrNo.Text.Trim()))
+            {
+                OracleResultSet res = new OracleResultSet();
+                int iCnt = 0;
+                res.Query = $"select count(*) from or_used where or_no = '{txtOrNo.Text.Trim()}'";
+                int.TryParse(res.ExecuteScalar(), out iCnt);
+
+                res.Query = $"select count(*) from or_inv where '{txtOrNo.Text.Trim()}' between from_or and to_or";
+                int.TryParse(res.ExecuteScalar(), out iCnt);
+
+                res.Query = $"select count(*) from or_assigned where '{txtOrNo.Text.Trim()}' between from_or_no and to_or_no";
+                int.TryParse(res.ExecuteScalar(), out iCnt);
+
+                res.Query = $"select count(*) from or_assigned_hist where '{txtOrNo.Text.Trim()}' between from_or_no and to_or_no";
+                int.TryParse(res.ExecuteScalar(), out iCnt);
+
+                if (iCnt > 0)
+                {
+                    MessageBox.Show("OR Already Used");
+                    txtOrNo.Text = string.Empty;
+                    return;
+                }
+            }
+        }
     }
 }
+

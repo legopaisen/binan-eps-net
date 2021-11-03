@@ -18,5 +18,6 @@ namespace EPSEntities.Entity
         public string CUMULATIVE { get; set; }
         public string SCOPE_CODE { get; set; }
         public string STRUC_CODE { get; set; }
+        public string LM_NEEDED { get; set; }
     }
 }

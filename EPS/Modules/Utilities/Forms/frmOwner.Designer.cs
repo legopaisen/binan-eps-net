@@ -36,6 +36,8 @@
             this.txtTCT = new System.Windows.Forms.TextBox();
             this.txtTIN = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtVillage = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -60,6 +62,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblValidity = new System.Windows.Forms.Label();
+            this.dtpValidDt = new System.Windows.Forms.DateTimePicker();
             this.cmbEngrType = new System.Windows.Forms.ComboBox();
             this.dgvList = new System.Windows.Forms.DataGridView();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -67,8 +71,6 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.lblNoRecords = new System.Windows.Forms.Label();
-            this.dtpValidDt = new System.Windows.Forms.DateTimePicker();
-            this.lblValidity = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
@@ -149,6 +151,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txtVillage);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label13);
@@ -168,10 +172,32 @@
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 309);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(585, 132);
+            this.groupBox1.Size = new System.Drawing.Size(585, 160);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " Address ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(63, 134);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 15);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Subd.";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // txtVillage
+            // 
+            this.txtVillage.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtVillage.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVillage.Location = new System.Drawing.Point(107, 131);
+            this.txtVillage.MaxLength = 200;
+            this.txtVillage.Name = "txtVillage";
+            this.txtVillage.ReadOnly = true;
+            this.txtVillage.Size = new System.Drawing.Size(170, 23);
+            this.txtVillage.TabIndex = 19;
             // 
             // label15
             // 
@@ -199,11 +225,11 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(298, 47);
+            this.label13.Location = new System.Drawing.Point(350, 48);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(81, 15);
+            this.label13.Size = new System.Drawing.Size(31, 15);
             this.label13.TabIndex = 0;
-            this.label13.Text = "Municipality:";
+            this.label13.Text = "City:";
             this.label13.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label12
@@ -221,11 +247,11 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(36, 105);
+            this.label11.Location = new System.Drawing.Point(62, 105);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(64, 15);
+            this.label11.Size = new System.Drawing.Size(38, 15);
             this.label11.TabIndex = 0;
-            this.label11.Text = "St/Ave/Vil:";
+            this.label11.Text = "Street";
             this.label11.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label10
@@ -276,6 +302,7 @@
             this.txtHseNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtHseNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHseNo.Location = new System.Drawing.Point(107, 15);
+            this.txtHseNo.MaxLength = 60;
             this.txtHseNo.Name = "txtHseNo";
             this.txtHseNo.ReadOnly = true;
             this.txtHseNo.Size = new System.Drawing.Size(170, 23);
@@ -286,6 +313,7 @@
             this.txtLotNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtLotNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLotNo.Location = new System.Drawing.Point(107, 44);
+            this.txtLotNo.MaxLength = 60;
             this.txtLotNo.Name = "txtLotNo";
             this.txtLotNo.ReadOnly = true;
             this.txtLotNo.Size = new System.Drawing.Size(170, 23);
@@ -296,6 +324,7 @@
             this.txtBlkNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBlkNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBlkNo.Location = new System.Drawing.Point(107, 73);
+            this.txtBlkNo.MaxLength = 60;
             this.txtBlkNo.Name = "txtBlkNo";
             this.txtBlkNo.ReadOnly = true;
             this.txtBlkNo.Size = new System.Drawing.Size(170, 23);
@@ -306,6 +335,7 @@
             this.txtStreet.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtStreet.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStreet.Location = new System.Drawing.Point(107, 102);
+            this.txtStreet.MaxLength = 200;
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.ReadOnly = true;
             this.txtStreet.Size = new System.Drawing.Size(170, 23);
@@ -436,6 +466,27 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
+            // lblValidity
+            // 
+            this.lblValidity.AutoSize = true;
+            this.lblValidity.Location = new System.Drawing.Point(354, 105);
+            this.lblValidity.Name = "lblValidity";
+            this.lblValidity.Size = new System.Drawing.Size(80, 15);
+            this.lblValidity.TabIndex = 10;
+            this.lblValidity.Text = "Validity Date:";
+            this.lblValidity.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblValidity.Visible = false;
+            // 
+            // dtpValidDt
+            // 
+            this.dtpValidDt.Enabled = false;
+            this.dtpValidDt.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpValidDt.Location = new System.Drawing.Point(438, 101);
+            this.dtpValidDt.Name = "dtpValidDt";
+            this.dtpValidDt.Size = new System.Drawing.Size(138, 23);
+            this.dtpValidDt.TabIndex = 9;
+            this.dtpValidDt.Visible = false;
+            // 
             // cmbEngrType
             // 
             this.cmbEngrType.Enabled = false;
@@ -462,7 +513,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(515, 448);
+            this.btnCancel.Location = new System.Drawing.Point(515, 476);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(78, 26);
@@ -473,7 +524,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(351, 448);
+            this.btnEdit.Location = new System.Drawing.Point(351, 476);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(78, 26);
@@ -484,7 +535,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(269, 448);
+            this.btnAdd.Location = new System.Drawing.Point(269, 476);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(78, 26);
@@ -495,7 +546,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(433, 448);
+            this.btnDelete.Location = new System.Drawing.Point(433, 476);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(78, 26);
@@ -513,33 +564,12 @@
             this.lblNoRecords.TabIndex = 0;
             this.lblNoRecords.Text = "No. of Records:";
             // 
-            // dtpValidDt
-            // 
-            this.dtpValidDt.Enabled = false;
-            this.dtpValidDt.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpValidDt.Location = new System.Drawing.Point(438, 101);
-            this.dtpValidDt.Name = "dtpValidDt";
-            this.dtpValidDt.Size = new System.Drawing.Size(138, 23);
-            this.dtpValidDt.TabIndex = 9;
-            this.dtpValidDt.Visible = false;
-            // 
-            // lblValidity
-            // 
-            this.lblValidity.AutoSize = true;
-            this.lblValidity.Location = new System.Drawing.Point(354, 105);
-            this.lblValidity.Name = "lblValidity";
-            this.lblValidity.Size = new System.Drawing.Size(80, 15);
-            this.lblValidity.TabIndex = 10;
-            this.lblValidity.Text = "Validity Date:";
-            this.lblValidity.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.lblValidity.Visible = false;
-            // 
             // frmOwner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(608, 483);
+            this.ClientSize = new System.Drawing.Size(608, 517);
             this.ControlBox = false;
             this.Controls.Add(this.lblNoRecords);
             this.Controls.Add(this.btnCancel);
@@ -606,5 +636,7 @@
         public System.Windows.Forms.Label lblCTC;
         public System.Windows.Forms.Label lblValidity;
         public System.Windows.Forms.DateTimePicker dtpValidDt;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.TextBox txtVillage;
     }
 }

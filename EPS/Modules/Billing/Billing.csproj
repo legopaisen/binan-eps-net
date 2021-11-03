@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Modules.Billing</RootNamespace>
     <AssemblyName>Billing</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -78,6 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BillCertificate.cs" />
+    <Compile Include="frmAddOn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddOn.Designer.cs">
+      <DependentUpon>frmAddOn.cs</DependentUpon>
+    </Compile>
     <Compile Include="OtherPermit.cs" />
     <Compile Include="Building.cs" />
     <Compile Include="Class1.cs" />
@@ -91,6 +98,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAddOn.resx">
+      <DependentUpon>frmAddOn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBilling.resx">
       <DependentUpon>frmBilling.cs</DependentUpon>
     </EmbeddedResource>
@@ -103,6 +113,10 @@
     <ProjectReference Include="..\..\..\Common\DataConnector\DataConnector.csproj">
       <Project>{7c12da36-676a-49b3-b59d-c07c96539620}</Project>
       <Name>DataConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\ImageViewer\ImageViewer.csproj">
+      <Project>{3510C616-DCE8-42F0-94E3-E457909D5381}</Project>
+      <Name>ImageViewer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Common\StringUtilities\StringUtilities.csproj">
       <Project>{f7cab867-edef-4e74-91bf-6c5385dcf513}</Project>
@@ -131,6 +145,10 @@
     <ProjectReference Include="..\SearchAccount\SearchAccount.csproj">
       <Project>{dfc64719-406d-427c-9835-47c69ea2cfe8}</Project>
       <Name>SearchAccount</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Transactions\Transactions.csproj">
+      <Project>{f34e5205-51e9-4d82-bf7a-bceb77139dc2}</Project>
+      <Name>Transactions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{da501b98-0ae7-440f-bec3-b82eb7b5669d}</Project>

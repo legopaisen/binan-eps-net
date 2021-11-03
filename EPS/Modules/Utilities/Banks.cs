@@ -20,7 +20,8 @@ namespace Modules.Utilities
             {
                 strQuery = "select * from bank_table ";
                 if (!string.IsNullOrEmpty(sBankCode))
-                    strQuery += $" where bank_code = '{sBankCode}'";
+                    //strQuery += $" where bank_code = '{sBankCode}'";
+                    strQuery += $" where bank_id = '{sBankCode}'";
                 strQuery += "order by bank_nm ";
                 return db.Database.SqlQuery<BANK_TABLE>(strQuery).ToList();
             }

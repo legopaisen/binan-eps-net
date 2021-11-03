@@ -27,8 +27,8 @@ namespace Modules.Transactions
 
         private void LoadList()
         {
-            result.Query = @"select distinct a.arn, b.acct_code, b.acct_ln, b.acct_fn, b.acct_mi, a.bill_no, a.or_no, a.date_posted 
-                            from mrs_payments a, account b where a.acct_code = b.acct_code";
+            result.Query = @"SELECT distinct a.refno, b.acct_code, b.acct_ln, b.acct_fn, b.acct_mi, a.bill_no, a.or_no, a.date_posted
+                                FROM payments_info a, account b WHERE a.payer_code = b.acct_code and a.data_mode = 'POS'";
             dgView.Rows.Clear();
             if (result.Execute())
             {
@@ -54,8 +54,8 @@ namespace Modules.Transactions
         {
             try
             {
-                result.Query = @"SELECT distinct a.arn, b.acct_code, b.acct_ln, b.acct_fn, b.acct_mi, a.bill_no, a.or_no, a.date_posted
-                                FROM mrs_payments a, account b WHERE a.acct_code = b.acct_code ";
+                result.Query = @"SELECT distinct a.refno, b.acct_code, b.acct_ln, b.acct_fn, b.acct_mi, a.bill_no, a.or_no, a.date_posted
+                                FROM payments_info a, account b WHERE a.payer_code = b.acct_code and a.data_mode = 'POS' ";
 
                 if (txtLastName.Text.Trim() != string.Empty ||
                     txtFirstName.Text.Trim() != string.Empty ||
@@ -77,7 +77,7 @@ namespace Modules.Transactions
                 }
 
                 if (txtARN.Text.Trim() != string.Empty)
-                    result.Query += string.Format("AND a.arn = '{0}' ", StringUtilities.HandleApostrophe(txtARN.Text));
+                    result.Query += string.Format("AND a.refno = '{0}' ", StringUtilities.HandleApostrophe(txtARN.Text));
 
                 if (txtBillNo.Text.Trim() != string.Empty)
                     result.Query += string.Format("AND a.bill_no = '{0}' ", StringUtilities.HandleApostrophe(txtBillNo.Text));
@@ -114,7 +114,7 @@ namespace Modules.Transactions
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            foreach (Control ctrl in this.grpFields.Controls) 
+            foreach (Control ctrl in this.grpFields.Controls)
             {
                 if (ctrl is TextBox)
                     ctrl.Text = string.Empty;
@@ -131,15 +131,22 @@ namespace Modules.Transactions
             if (MessageBox.Show("Are you sure you want to Cancel?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 string strARN = dgView.CurrentRow.Cells[0].Value.ToString();
+                string strORNo = dgView.CurrentRow.Cells[6].Value.ToString();
                 OracleResultSet rs = new OracleResultSet();
                 rs.Transaction = true;
-                rs.Query = string.Format("DELETE FROM mrs_payments WHERE arn = '{0}' ", strARN);
+                //rs.Query = string.Format("DELETE FROM mrs_payments WHERE arn = '{0}' ", strARN);
+                //if (rs.ExecuteNonQuery() == 0) { }
+
+                //rs.Query = string.Format("INSERT INTO application_que SELECT * FROM application WHERE arn = '{0}' ", strARN);
+                //if (rs.ExecuteNonQuery() == 0) { }
+
+                //rs.Query = string.Format("DELETE FROM application WHERE arn = '{0}' ", strARN);
+                //if (rs.ExecuteNonQuery() == 0) { }
+
+                rs.Query = string.Format("DELETE FROM payments_info WHERE refno = '{0}' and data_mode = 'POS'", strARN);
                 if (rs.ExecuteNonQuery() == 0) { }
 
-                rs.Query = string.Format("INSERT INTO application_que SELECT * FROM application WHERE arn = '{0}' ", strARN);
-                if (rs.ExecuteNonQuery() == 0) { }
-
-                rs.Query = string.Format("DELETE FROM application WHERE arn = '{0}' ", strARN);
+                rs.Query = string.Format("DELETE FROM payments_tendered WHERE or_no = '{0}' ", strORNo);
                 if (rs.ExecuteNonQuery() == 0) { }
 
                 rs.Query = string.Format("DELETE FROM billing_paid WHERE arn = '{0}' ", strARN);
@@ -166,7 +173,7 @@ namespace Modules.Transactions
                 rs.Commit();
                 MessageBox.Show("Payment cancelled.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                if (AuditTrail.InsertTrail("TC-PC", "PAYMENTS", "ARN: " + strARN) == 0)
+                if (Utilities.AuditTrail.InsertTrail("P-CP", "PAYMENTS", "ARN: " + strARN) == 0)
                 {
                     MessageBox.Show("Failed to insert audit trail.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

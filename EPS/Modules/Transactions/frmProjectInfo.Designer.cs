@@ -39,6 +39,8 @@
             this.txtProv = new System.Windows.Forms.TextBox();
             this.txtZIP = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtVillage = new System.Windows.Forms.TextBox();
             this.cmbBrgy = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -99,7 +101,7 @@
             this.txtHseNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtHseNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHseNo.Location = new System.Drawing.Point(119, 54);
-            this.txtHseNo.MaxLength = 10;
+            this.txtHseNo.MaxLength = 60;
             this.txtHseNo.Name = "txtHseNo";
             this.txtHseNo.Size = new System.Drawing.Size(170, 23);
             this.txtHseNo.TabIndex = 10;
@@ -109,7 +111,7 @@
             this.txtLotNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtLotNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLotNo.Location = new System.Drawing.Point(119, 83);
-            this.txtLotNo.MaxLength = 10;
+            this.txtLotNo.MaxLength = 60;
             this.txtLotNo.Name = "txtLotNo";
             this.txtLotNo.Size = new System.Drawing.Size(170, 23);
             this.txtLotNo.TabIndex = 11;
@@ -119,7 +121,7 @@
             this.txtBlkNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBlkNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBlkNo.Location = new System.Drawing.Point(119, 112);
-            this.txtBlkNo.MaxLength = 10;
+            this.txtBlkNo.MaxLength = 60;
             this.txtBlkNo.Name = "txtBlkNo";
             this.txtBlkNo.Size = new System.Drawing.Size(170, 23);
             this.txtBlkNo.TabIndex = 12;
@@ -129,7 +131,7 @@
             this.txtStreet.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtStreet.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStreet.Location = new System.Drawing.Point(119, 141);
-            this.txtStreet.MaxLength = 30;
+            this.txtStreet.MaxLength = 200;
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.Size = new System.Drawing.Size(170, 23);
             this.txtStreet.TabIndex = 13;
@@ -142,7 +144,7 @@
             this.txtMun.Name = "txtMun";
             this.txtMun.ReadOnly = true;
             this.txtMun.Size = new System.Drawing.Size(167, 23);
-            this.txtMun.TabIndex = 15;
+            this.txtMun.TabIndex = 16;
             // 
             // txtProv
             // 
@@ -152,7 +154,7 @@
             this.txtProv.Name = "txtProv";
             this.txtProv.ReadOnly = true;
             this.txtProv.Size = new System.Drawing.Size(167, 23);
-            this.txtProv.TabIndex = 16;
+            this.txtProv.TabIndex = 17;
             // 
             // txtZIP
             // 
@@ -162,10 +164,12 @@
             this.txtZIP.Name = "txtZIP";
             this.txtZIP.ReadOnly = true;
             this.txtZIP.Size = new System.Drawing.Size(167, 23);
-            this.txtZIP.TabIndex = 17;
+            this.txtZIP.TabIndex = 18;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.txtVillage);
             this.groupBox1.Controls.Add(this.cmbBrgy);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label14);
@@ -192,6 +196,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project Location";
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(340, 28);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(37, 15);
+            this.label16.TabIndex = 52;
+            this.label16.Text = "Subd.";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // txtVillage
+            // 
+            this.txtVillage.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtVillage.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVillage.Location = new System.Drawing.Point(383, 25);
+            this.txtVillage.MaxLength = 200;
+            this.txtVillage.Name = "txtVillage";
+            this.txtVillage.Size = new System.Drawing.Size(170, 23);
+            this.txtVillage.TabIndex = 14;
+            // 
             // cmbBrgy
             // 
             this.cmbBrgy.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
@@ -199,7 +224,7 @@
             this.cmbBrgy.Location = new System.Drawing.Point(383, 54);
             this.cmbBrgy.Name = "cmbBrgy";
             this.cmbBrgy.Size = new System.Drawing.Size(167, 24);
-            this.cmbBrgy.TabIndex = 14;
+            this.cmbBrgy.TabIndex = 15;
             this.cmbBrgy.SelectedIndexChanged += new System.EventHandler(this.cmbBrgy_SelectedIndexChanged);
             this.cmbBrgy.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbBrgy_KeyPress);
             // 
@@ -230,11 +255,11 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(296, 86);
+            this.label13.Location = new System.Drawing.Point(348, 86);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(81, 15);
+            this.label13.Size = new System.Drawing.Size(31, 15);
             this.label13.TabIndex = 0;
-            this.label13.Text = "Municipality:";
+            this.label13.Text = "City:";
             this.label13.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label12
@@ -252,11 +277,11 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(48, 144);
+            this.label11.Location = new System.Drawing.Point(75, 144);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(64, 15);
+            this.label11.Size = new System.Drawing.Size(38, 15);
             this.label11.TabIndex = 0;
-            this.label11.Text = "St/Ave/Vil:";
+            this.label11.Text = "Street";
             this.label11.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label10
@@ -399,7 +424,6 @@
             // cmbBussKind
             // 
             this.cmbBussKind.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbBussKind.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBussKind.FormattingEnabled = true;
             this.cmbBussKind.Location = new System.Drawing.Point(135, 100);
             this.cmbBussKind.Name = "cmbBussKind";
@@ -495,5 +519,7 @@
         public MultiColumnComboBoxDemo.MultiColumnComboBox cmbBussKind;
         public MultiColumnComboBoxDemo.MultiColumnComboBox cmbStrucType;
         public System.Windows.Forms.ComboBox cmbOwnership;
+        private System.Windows.Forms.Label label16;
+        public System.Windows.Forms.TextBox txtVillage;
     }
 }

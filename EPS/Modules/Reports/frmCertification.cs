@@ -31,6 +31,7 @@ namespace Modules.Reports
         }
 
         public string m_sAN = string.Empty;
+        private string PermitCode = string.Empty;
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -51,12 +52,35 @@ namespace Modules.Reports
             {
                 SearchAccount.frmSearchARN form = new SearchAccount.frmSearchARN();
 
+                form.PermitCode = PermitCode;
+                form.SearchCriteria = "CERTIFICATE";
                 form.ShowDialog();
                 an1.SetAn(form.sArn);
                 m_sAN = an1.GetAn();
             }
             else
                 m_sAN = an1.GetAn();
+
+            txtCertNo.Enabled = true;
+            txtFSIC.Enabled = true;
+            dtpCertNo.Enabled = true;
+            dtpCertNo.Enabled = true;
+        }
+
+        private bool CheckBldgPermit()
+        {
+            OracleResultSet res = new OracleResultSet();
+            res.Query = $"select permit_no from application where arn = '{m_sAN}' and permit_code = '01'";
+            if(res.Execute())
+                if(res.Read())
+                {
+                    string sPermit = res.GetString(0);
+                    if (string.IsNullOrEmpty(sPermit))
+                        return false;
+                    else
+                        return true;
+                }
+            return false;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -66,11 +90,38 @@ namespace Modules.Reports
                 MessageBox.Show("No ARN selected");
                 return;
             }
-            if (SendValues())
-            {
 
+            if(cmbCert.Text == "Certificate of Occupancy")
+            {
+                if(!CheckBldgPermit())
+                {
+                    MessageBox.Show("Application No. has not generated a Building Permit. Generate Permit first before proceeding.", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    return;
+                }
             }
-            
+
+
+            frmReport frmreport = new frmReport();
+
+            if (MessageBox.Show("Pre-printed form?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                frmreport.isPrePrint = true;
+            else
+                frmreport.isPrePrint = false;
+
+            frmreport.An = this.m_sAN;
+            frmreport.ReportName = "CERTIFICATE OF OCCUPANCY";
+            frmreport.CertNo = txtCertNo.Text.Trim();
+            frmreport.FSICNo = txtFSIC.Text.Trim();
+            frmreport.CertDtIssued = dtpCertNo.Value;
+            frmreport.FSICDtIssued = dtpFSIC.Value;
+
+            frmreport.ShowDialog();
+
+            //if (SendValues())
+            //{
+
+            //}
+
         }
         private bool SendValues()
         {
@@ -107,6 +158,45 @@ namespace Modules.Reports
         }
 
         private void frmCertification_Load(object sender, EventArgs e)
+        {
+            LoadCertificates();
+            an1.ArnCode.Enabled = true;
+
+        }
+
+        private void LoadCertificates()
+        {
+            cmbCert.Items.Clear();
+            cmbCert.Items.Add("Certificate of Occupancy"); //temporarily hardcoded
+        }
+
+        private void cmbCert_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbCert.Text == "Certificate of Occupancy")
+            {
+                PermitCode = GetPermit();
+            }
+        }
+
+        private string GetPermit()
+        {
+            OracleResultSet res = new OracleResultSet();
+            res.Query = $"select permit_code from permit_tbl where permit_desc like '%OCCUPANCY%'"; //temporarily hardcoded
+            if (res.Execute())
+                if (res.Read())
+                    return res.GetString("permit_code");
+                else
+                    return "";
+            else
+                return "";
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }

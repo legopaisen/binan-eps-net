@@ -16,5 +16,6 @@ namespace EPSEntities.Entity
         public string BLK_NO { get; set; }
         public string STREET_ADDR { get; set; }
         public string BRGY { get; set; }
+        public string BLDG_VILL { get; set; }
     }
 }

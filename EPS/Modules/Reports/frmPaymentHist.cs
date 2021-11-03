@@ -12,6 +12,7 @@ using Common.DataConnector;
 using System.Windows.Forms;
 using ARCSEntities.Connection;
 using ARCSEntities.Entity;
+using Modules.SearchAccount;
 
 namespace Modules.Reports
 {
@@ -23,6 +24,7 @@ namespace Modules.Reports
         }
 
         public static ARCSConnectionString dbConnArcs = new ARCSConnectionString();
+        private string m_sAn = string.Empty;
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -31,7 +33,7 @@ namespace Modules.Reports
 
         private void frmPaymentHist_Load(object sender, EventArgs e)
         {
-
+            arn1.ArnCode.Enabled = true;
         }
         private void ClearAll()
         {
@@ -54,24 +56,67 @@ namespace Modules.Reports
             }
             else
             {
-                if(txtAcct.Text == "")
-                {
-                    MessageBox.Show("Enter account no.");
-                    return;
-                }
+                m_sAn = arn1.GetAn();
                 btnSearch.Text = "Clear";
                 OracleResultSet result = new OracleResultSet();
-                result.Query = "select distinct((account.acct_ln ||', '|| account.acct_fn ||' '|| account.acct_mi)) as account_name, " +
-                    " (account.acct_hse_no ||' '|| account.acct_lot_no ||' '|| account.acct_blk_no ||' '|| account.acct_addr ||' '|| account.acct_brgy ||' '|| account.acct_city ||' '|| account.acct_prov) as addr " +
-                    " from account INNER JOIN mrs_payments ON mrs_payments.acct_code = account.acct_code where mrs_payments.acct_code = '" + txtAcct.Text + "'";
-                if (result.Execute())
-                    if (result.Read())
-                    {
-                        txtPayerNm.Text = result.GetString(0);
-                        txtAddr.Text = result.GetString(1);
-                    }
+                if (txtAcct.Text == "" && m_sAn == "")
+                {
+                    //AFM2 20200805 BIN-20-13402 (s)
+                    frmSearchAccount frmsearchaccount = new frmSearchAccount();
+                    frmsearchaccount.SearchMode = "ACCOUNT";
+                    frmsearchaccount.ShowDialog();
 
-                result.Query = "select distinct or_no, or_date from mrs_payments where acct_code = '" + txtAcct.Text + "'";
+                    txtAcct.Text = frmsearchaccount.AcctNo;
+                    txtPayerNm.Text = frmsearchaccount.LastName + ", " + frmsearchaccount.FirstName + " " + frmsearchaccount.MI;
+                    txtAddr.Text = frmsearchaccount.HouseNo + " " + frmsearchaccount.LotNo + " " + frmsearchaccount.BlkNo + ", " + frmsearchaccount.Brgy + ", " + frmsearchaccount.City + ", " + frmsearchaccount.Province;
+                    //AFM2 20200805 BIN-20-13402 (e)
+
+                    //MessageBox.Show("Enter account no.");
+                    //return;
+                }
+                else
+                {
+                    if (txtAcct.Text != "" && m_sAn != "")
+                    {
+                        result.Query = "select distinct((account.acct_ln ||', '|| account.acct_fn ||' '|| account.acct_mi)) as account_name, " +
+                                                " (account.acct_hse_no ||' '|| account.acct_lot_no ||' '|| account.acct_blk_no ||' '|| account.acct_addr ||' '|| account.acct_brgy ||' '|| account.acct_city ||' '|| account.acct_prov) as addr " +
+                                                " from account INNER JOIN payments_info ON payments_info.payer_code = account.acct_code where payments_info.payer_code = '" + txtAcct.Text + "' and payments_info.refno = '" + m_sAn + "'";
+                    }
+                    else if (m_sAn != "")
+                    {
+                        result.Query = "select distinct((account.acct_ln ||', '|| account.acct_fn ||' '|| account.acct_mi)) as account_name, " +
+                                                " (account.acct_hse_no ||' '|| account.acct_lot_no ||' '|| account.acct_blk_no ||' '|| account.acct_addr ||' '|| account.acct_brgy ||' '|| account.acct_city ||' '|| account.acct_prov) as addr " +
+                                                " from account INNER JOIN payments_info ON payments_info.payer_code = account.acct_code where payments_info.refno = '" + m_sAn + "'";
+                    }
+                    else if (txtAcct.Text.Trim() != "")
+                    {
+                        result.Query = "select distinct((account.acct_ln ||', '|| account.acct_fn ||' '|| account.acct_mi)) as account_name, " +
+                                                " (account.acct_hse_no ||' '|| account.acct_lot_no ||' '|| account.acct_blk_no ||' '|| account.acct_addr ||' '|| account.acct_brgy ||' '|| account.acct_city ||' '|| account.acct_prov) as addr " +
+                                                " from account INNER JOIN payments_info ON payments_info.payer_code = account.acct_code where payments_info.payer_code = '" + txtAcct.Text + "'";
+                    }
+                    else
+                        return;
+
+                    if (result.Execute())
+                        if (result.Read())
+                        {
+                            txtPayerNm.Text = result.GetString(0);
+                            txtAddr.Text = result.GetString(1);
+                        }
+                }
+                if (txtAcct.Text != "" && m_sAn != "")
+                {
+                    result.Query = "select distinct or_no, or_date from payments_info where payer_code = '" + txtAcct.Text + "' and refno = '"+ m_sAn +"'";
+                }
+                else if (m_sAn != "")
+                {
+                    result.Query = "select distinct or_no, or_date from payments_info where refno = '" + m_sAn + "'";
+                }
+                else if (txtAcct.Text.Trim() != "")
+                {
+                    result.Query = "select distinct or_no, or_date from payments_info where payer_code = '" + txtAcct.Text + "'";
+
+                }
                 if (result.Execute())
                     while (result.Read())
                     {
@@ -85,27 +130,59 @@ namespace Modules.Reports
             OracleResultSet result = new OracleResultSet();
             OracleResultSet result2 = new OracleResultSet();
             string sFeesCode = string.Empty;
-            result.Query = "select distinct or_no, or_date, fees_code, fees_due, sum(fees_due) as amount from mrs_payments where acct_code = '" + txtAcct.Text + "' and or_no = '"+ cmbOR.Text + "' group by or_no, or_date, fees_code, fees_due";
+            string sFeesCat = string.Empty;
+            string sFeesDesc = string.Empty;
+            double dFeesDue = 0;
+            double dSurch = 0;
+            double dFeesAmtDue = 0;
+            result.Query = "select distinct or_no, or_date, fees_code, fees_due, fees_surch, fees_amt_due, fees_category, permit_code from payments_info where payer_code = '" + txtAcct.Text + "' and or_no = '"+ cmbOR.Text + "'";
             if (result.Execute())
                 while (result.Read())
                 {
                     txtORdt.Text = result.GetDateTime(1).ToShortDateString();
                     sFeesCode = result.GetString(2);
+                    sFeesCat = result.GetString("fees_category");
+                    dFeesDue = result.GetDouble("fees_due");
+                    dSurch = result.GetDouble("fees_surch");
+                    dFeesAmtDue = result.GetDouble("fees_amt_due");
+                    //result2.CreateANGARCS();
 
-                    result2.CreateANGARCS();
-                    result2.Query = "select fees_code, fees_desc from eps_major_fees where fees_code = '" + sFeesCode + "'";
-                    if (result2.Execute())
-                        if (result2.Read())
-                        {
-                            dgvFees.Rows.Add(result2.GetString(0), result2.GetString(1), string.Format("{0:#,###.00}", result.GetDouble("fees_due")), 0.00, string.Format("{0:#,###.00}", result.GetDouble("amount")));
-                        }
+                    if (sFeesCat == "MAIN")
+                    {
+                        result2.Query = $"select fees_desc from subcategories where fees_code = '{sFeesCode}'";
+                        if (result2.Execute())
+                            if (result2.Read())
+                                sFeesDesc = result2.GetString("fees_desc");
+                    }
+                    else if (sFeesCat == "OTHERS")
+                    {
+                        result2.Query = $"select fees_desc from other_subcategories where fees_code = '{sFeesCode}'";
+                        if (result2.Execute())
+                            if (result2.Read())
+                                sFeesDesc = result2.GetString("fees_desc");
+                    }
+                    else if (sFeesCat == "ADDITIONAL")
+                    {
+                        result2.Query = $"select fees_desc from addl_subcategories where fees_code = '{sFeesCode}'";
+                        if (result2.Execute())
+                            if (result2.Read())
+                                sFeesDesc = result2.GetString("fees_desc");
+                    }
+
+                        dgvFees.Rows.Add(sFeesCode, sFeesDesc, string.Format("{0:#,###.00}", dFeesDue), string.Format("{0:#,###.00}", dSurch), string.Format("{0:#,###.00}", dFeesDue));
+
                 }
-            result.Query = "select sum(amount) as GRAND_TOTAL from (select distinct or_no, or_date, fees_code, fees_due, sum(fees_due) as amount from mrs_payments where acct_code = '" + txtAcct.Text + "' and or_no = '" + cmbOR.Text + "' group by or_no, or_date, fees_code, fees_due)";
+            result.Query = "select fees_amt_due from payments_info where payer_code = '" + txtAcct.Text + "' and or_no = '" + cmbOR.Text + "'";
             if(result.Execute())
                 if(result.Read())
                 {
-                    txtGrandTotal.Text = string.Format("{0:#,###.00}", result.GetDouble("GRAND_TOTAL"));
+                    txtGrandTotal.Text = string.Format("{0:#,###.00}", result.GetDouble("fees_amt_due"));
                 }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

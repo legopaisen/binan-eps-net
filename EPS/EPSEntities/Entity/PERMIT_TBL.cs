@@ -13,5 +13,6 @@ namespace EPSEntities.Entity
         public string FEES_CODE { get; set; }
         public string OTHER_TYPE { get; set; }
         public string APP_CODE { get; set; }
+        public string PERMIT_DESC_CODE { get; set; }
     }
 }

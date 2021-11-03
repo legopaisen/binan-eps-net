@@ -24,6 +24,7 @@ namespace Modules.Utilities
         public string PermitAppCode { get; set; }
         public string PermitFeesCode { get; set; }
         public string PermitOtherType { get; set; }
+        public string PermitDescCode { get; set; }
 
         public Permit()
         {
@@ -39,13 +40,14 @@ namespace Modules.Utilities
             PermitOtherType = string.Empty;
         }
 
-        public Permit(string sCode, string sDesc, string sFeesCode, string sAppCode, string sOtherType)
+        public Permit(string sCode, string sDesc, string sFeesCode, string sAppCode, string sOtherType, string sPermitDescCode)
         {
             PermitCode = sCode;
             PermitDesc = sDesc;
             PermitFeesCode = sFeesCode;
             PermitAppCode = sAppCode;
             PermitOtherType = sOtherType;
+            PermitDescCode = sPermitDescCode;
         }
 
         public void CreatePermitCode()
@@ -110,7 +112,7 @@ namespace Modules.Utilities
 
                 foreach (var items in epsrec)
                 {
-                    m_List.Add(new Permit(items.PERMIT_CODE, items.PERMIT_DESC, items.FEES_CODE, items.APP_CODE,items.OTHER_TYPE ));
+                    m_List.Add(new Permit(items.PERMIT_CODE, items.PERMIT_DESC, items.FEES_CODE, items.APP_CODE,items.OTHER_TYPE,items.PERMIT_DESC_CODE ));
                 }
             }
         }

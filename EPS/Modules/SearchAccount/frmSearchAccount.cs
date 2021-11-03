@@ -46,6 +46,7 @@ namespace Modules.SearchAccount
             set { cmbEngrType.Text = value; }
         }
 
+
         public string Address { get; set; }
         public string TIN { get; set; }
         public string TCT { get; set; }
@@ -60,6 +61,7 @@ namespace Modules.SearchAccount
         public string City { get; set; }
         public string Province { get; set; }
         public string Zip { get; set; }
+        public string Village { get; set; }
 
         public frmSearchAccount()
         {
@@ -93,7 +95,8 @@ namespace Modules.SearchAccount
                         m_lstAccount.AcctLst[i].TIN,
                         m_lstAccount.AcctLst[i].TCT,
                         m_lstAccount.AcctLst[i].CTC,
-                        m_lstAccount.AcctLst[i].TelNo);
+                        m_lstAccount.AcctLst[i].TelNo,
+                        m_lstAccount.AcctLst[i].Village); //added requested subdivision
 
                 }
             }
@@ -119,7 +122,8 @@ namespace Modules.SearchAccount
                         m_lstEngr.AcctLst[i].TIN,
                         m_lstEngr.AcctLst[i].PTR,
                         m_lstEngr.AcctLst[i].PRC,
-                        m_lstEngr.AcctLst[i].EngrType);
+                        m_lstEngr.AcctLst[i].EngrType,
+                        m_lstEngr.AcctLst[i].Village);//added requested subdivision
 
                 }
             }
@@ -148,7 +152,8 @@ namespace Modules.SearchAccount
                 dgvList.Columns.Add("TIN", "TIN");
                 dgvList.Columns.Add("TCT", "TCT");
                 dgvList.Columns.Add("CTC", "CTC");
-                dgvList.Columns.Add("Phone", "Phone");
+                dgvList.Columns.Add("Phone", "Phone"); 
+                dgvList.Columns.Add("Vill", "Village");//added requested subdivision
             }
             else
             {
@@ -168,6 +173,7 @@ namespace Modules.SearchAccount
                 dgvList.Columns.Add("PTR", "PTR");
                 dgvList.Columns.Add("PRC", "PRC");
                 dgvList.Columns.Add("Type", "Type");
+                dgvList.Columns.Add("Village", "Vill");//added requested subdivision
             }
 
             dgvList.RowHeadersVisible = false;
@@ -187,6 +193,7 @@ namespace Modules.SearchAccount
             dgvList.Columns[13].Width = 100;
             dgvList.Columns[14].Width = 100;
             dgvList.Columns[15].Width = 100;
+            dgvList.Columns[16].Width = 100;
         }
 
         private void frmSearchAccount_Load(object sender, EventArgs e)
@@ -254,7 +261,8 @@ namespace Modules.SearchAccount
             PTR = "";
             PRC = "";
             EngrType = "";
-           
+            Village = "";
+
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -320,6 +328,8 @@ namespace Modules.SearchAccount
                         CTC = dgvList[14, e.RowIndex].Value.ToString();
                     if (dgvList[15, e.RowIndex].Value != null)
                         Phone = dgvList[15, e.RowIndex].Value.ToString();
+                    if (dgvList[16, e.RowIndex].Value != null)
+                        Village = dgvList[16, e.RowIndex].Value.ToString();
                     PTR = "";
                     PRC = "";
                     EngrType = "";
@@ -332,6 +342,8 @@ namespace Modules.SearchAccount
                         PRC = dgvList[14, e.RowIndex].Value.ToString();
                     if (dgvList[15, e.RowIndex].Value != null)
                         EngrType = dgvList[15, e.RowIndex].Value.ToString();
+                    if (dgvList[16, e.RowIndex].Value != null)
+                        Village = dgvList[16, e.RowIndex].Value.ToString();
                     TCT = "";
                     CTC = "";
                     Phone = "";

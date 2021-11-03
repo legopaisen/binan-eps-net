@@ -29,8 +29,8 @@ namespace Modules.Utilities
             RecordFrm.txtTelNo.Visible = false;
             RecordFrm.lblTCT.Text = "PTR No. :";
             RecordFrm.lblCTC.Text = "PRC No. :";
-            RecordFrm.lblValidity.Visible = true;
-            RecordFrm.dtpValidDt.Visible = true;
+            //RecordFrm.lblValidity.Visible = true; //AFM 20200630 disabled for binan ver
+            //RecordFrm.dtpValidDt.Visible = true; //AFM 20200630 disabled for binan ver
 
             //AFM 20191025 (s)
             OracleResultSet result = new OracleResultSet();
@@ -72,6 +72,7 @@ namespace Modules.Utilities
             RecordFrm.dgvList.Columns.Add("PRC", "PRC");
             RecordFrm.dgvList.Columns.Add("PTR", "PTR");
             RecordFrm.dgvList.Columns.Add("ValidityDt", "Validity Date");
+            RecordFrm.dgvList.Columns.Add("Vill", "Village");
 
             EngineersList engr = new EngineersList("", "", "", "","");
             int iCnt = 0;
@@ -82,7 +83,7 @@ namespace Modules.Utilities
                     engr.AcctLst[i].FirstName, engr.AcctLst[i].MiddleInitial, engr.AcctLst[i].Address,
                     engr.AcctLst[i].HouseNo, engr.AcctLst[i].LotNo, engr.AcctLst[i].BlkNo,
                     engr.AcctLst[i].Barangay, engr.AcctLst[i].City, engr.AcctLst[i].Province,
-                    engr.AcctLst[i].ZIP, engr.AcctLst[i].EngrType, engr.AcctLst[i].TIN, engr.AcctLst[i].PRC, engr.AcctLst[i].PTR);
+                    engr.AcctLst[i].ZIP, engr.AcctLst[i].EngrType, engr.AcctLst[i].TIN, engr.AcctLst[i].PRC, engr.AcctLst[i].PTR,"", engr.AcctLst[i].Village); //added requested village
 
                 //AFM 20191113 ANG-19-11104
                 OracleResultSet result = new OracleResultSet();
@@ -90,7 +91,11 @@ namespace Modules.Utilities
                 if (result.Execute())
                     if (result.Read())
                     {
-                        RecordFrm.dgvList.Rows[i].Cells["ValidityDt"].Value = String.Format("{0:MM/dd/yyyy}", result.GetDateTime("VALIDITY_DT"));
+                        try
+                        {
+                            RecordFrm.dgvList.Rows[i].Cells["ValidityDt"].Value = String.Format("{0:MM/dd/yyyy}", result.GetDateTime("VALIDITY_DT"));
+                        }
+                        catch { }
                     }
             }
 
@@ -139,17 +144,18 @@ namespace Modules.Utilities
                 return false;
             }
 
-            if (string.IsNullOrEmpty(RecordFrm.txtTCT.Text.ToString().Trim()))
-            {
-                MessageBox.Show("PTR no. is required", RecordFrm.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
-            }
+            //AFM 20200824 disabled for binan version
+            //if (string.IsNullOrEmpty(RecordFrm.txtTCT.Text.ToString().Trim()))
+            //{
+            //    MessageBox.Show("PTR no. is required", RecordFrm.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    return false;
+            //}
 
-            if (string.IsNullOrEmpty(RecordFrm.txtCTC.Text.ToString().Trim()))
-            {
-                MessageBox.Show("PCR no. is required", RecordFrm.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
-            }
+            //if (string.IsNullOrEmpty(RecordFrm.txtCTC.Text.ToString().Trim()))
+            //{
+            //    MessageBox.Show("PCR no. is required", RecordFrm.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    return false;
+            //}
 
             Engineers account = new Engineers();
             account.GetOwner(RecordFrm.txtLastName.Text.ToString().Trim(),RecordFrm.txtFirstName.Text.ToString().Trim(), RecordFrm.cmbEngrType.Text);
@@ -175,7 +181,7 @@ namespace Modules.Utilities
                     RecordFrm.txtMI.Text.ToString(), RecordFrm.txtStreet.Text.ToString(), RecordFrm.txtHseNo.Text.ToString(),
                     RecordFrm.txtLotNo.Text.ToString(), RecordFrm.txtBlkNo.Text.ToString(), RecordFrm.cmbBrgy.Text.ToString(),
                     RecordFrm.txtMun.Text.ToString(), RecordFrm.txtProv.Text.ToString(), RecordFrm.txtZIP.Text.ToString(),
-                    RecordFrm.cmbEngrType.Text.ToString(), RecordFrm.txtTIN.Text.ToString(), RecordFrm.txtCTC.Text.ToString(), RecordFrm.txtTCT.Text.ToString(), RecordFrm.dtpValidDt.Value);
+                    RecordFrm.cmbEngrType.Text.ToString(), RecordFrm.txtTIN.Text.ToString(), RecordFrm.txtCTC.Text.ToString(), RecordFrm.txtTCT.Text.ToString(), RecordFrm.dtpValidDt.Value, RecordFrm.txtVillage.Text.ToString().Trim()); //added requested subdivision
 
                 RecordFrm.AcctNo = account.OwnerCode;
 
@@ -216,7 +222,9 @@ namespace Modules.Utilities
                 strQuery += $" ENGR_PRC= '{StringUtilities.HandleApostrophe(RecordFrm.txtCTC.Text.ToString()).Trim()}', ";
                 strQuery += $" ENGR_PTR = '{StringUtilities.HandleApostrophe(RecordFrm.txtTCT.Text.ToString()).Trim()}', ";
                 strQuery += $" ENGR_TYPE = '{StringUtilities.HandleApostrophe(RecordFrm.cmbEngrType.Text.ToString()).Trim()}',";
-                strQuery += $" VALIDITY_DT = to_date('{RecordFrm.dtpValidDt.Value.ToShortDateString()}', 'MM/dd/yyyy')"; //AFM 20191113
+                //strQuery += $" VALIDITY_DT = to_date('{RecordFrm.dtpValidDt.Value.ToShortDateString()}', 'MM/dd/yyyy')"; //AFM 20191113
+                strQuery += $" VALIDITY_DT = null,"; //AFM 20200630 changed to null for binan ver
+                strQuery += $" ENGR_VILL = '{StringUtilities.HandleApostrophe(RecordFrm.txtVillage.Text.ToString()).Trim()}'"; //ADDED REQUESTED SUBDIVISION
                 strQuery += $" where ENGR_CODE = '{RecordFrm.AcctNo}' ";
                 db.Database.ExecuteSqlCommand(strQuery);
 
@@ -312,6 +320,11 @@ namespace Modules.Utilities
             try
             {
                 RecordFrm.dtpValidDt.Text = RecordFrm.dgvList[16, e.RowIndex].Value.ToString();
+            }
+            catch { }
+            try
+            {
+                RecordFrm.txtVillage.Text = RecordFrm.dgvList[17, e.RowIndex].Value.ToString(); //added requested subdivision
             }
             catch { }
 

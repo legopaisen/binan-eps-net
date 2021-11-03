@@ -12,5 +12,7 @@ namespace EPSEntities.Entity
         public string BILL_NO { get; set; }
         public string FEES_CODE { get; set; }
         public float FEES_AMT { get; set; }
+        public string FEES_CATEGORY { get; set; }
+        public string PERMIT_CODE { get; set; }
     }
 }

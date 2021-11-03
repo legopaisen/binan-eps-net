@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Modules.Utilities</RootNamespace>
     <AssemblyName>Utilities</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -169,6 +169,8 @@
     </Compile>
     <Compile Include="Material.cs" />
     <Compile Include="MajorFees.cs" />
+    <Compile Include="AddlMajorFees.cs" />
+    <Compile Include="OtherMajorFees.cs" />
     <Compile Include="Structure.cs" />
     <Compile Include="Occupancy.cs" />
     <Compile Include="Category.cs" />

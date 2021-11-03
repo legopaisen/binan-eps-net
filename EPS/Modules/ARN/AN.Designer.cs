@@ -30,7 +30,6 @@
         {
             this.txtCode = new System.Windows.Forms.TextBox();
             this.txtYear = new System.Windows.Forms.TextBox();
-            this.txtMonth = new System.Windows.Forms.TextBox();
             this.txtSeries = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -39,16 +38,15 @@
             this.txtCode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCode.Location = new System.Drawing.Point(3, 3);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(27, 20);
+            this.txtCode.Size = new System.Drawing.Size(41, 20);
             this.txtCode.TabIndex = 0;
-            this.txtCode.Text = "BP";
             this.txtCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtCode.TextChanged += new System.EventHandler(this.txtCode_TextChanged);
             // 
             // txtYear
             // 
             this.txtYear.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtYear.Location = new System.Drawing.Point(36, 3);
+            this.txtYear.Location = new System.Drawing.Point(50, 3);
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(39, 20);
             this.txtYear.TabIndex = 1;
@@ -57,26 +55,14 @@
             this.txtYear.TextChanged += new System.EventHandler(this.txtYear_TextChanged);
             this.txtYear.Leave += new System.EventHandler(this.txtYear_Leave);
             // 
-            // txtMonth
-            // 
-            this.txtMonth.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtMonth.Location = new System.Drawing.Point(81, 3);
-            this.txtMonth.Name = "txtMonth";
-            this.txtMonth.Size = new System.Drawing.Size(27, 20);
-            this.txtMonth.TabIndex = 2;
-            this.txtMonth.Text = "07";
-            this.txtMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtMonth.TextChanged += new System.EventHandler(this.txtMonth_TextChanged);
-            this.txtMonth.Leave += new System.EventHandler(this.txtMonth_Leave);
-            // 
             // txtSeries
             // 
             this.txtSeries.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtSeries.Location = new System.Drawing.Point(114, 3);
+            this.txtSeries.Location = new System.Drawing.Point(95, 3);
             this.txtSeries.MaxLength = 4;
             this.txtSeries.Name = "txtSeries";
             this.txtSeries.Size = new System.Drawing.Size(39, 20);
-            this.txtSeries.TabIndex = 3;
+            this.txtSeries.TabIndex = 2;
             this.txtSeries.Text = "0001";
             this.txtSeries.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtSeries.Leave += new System.EventHandler(this.txtSeries_Leave);
@@ -86,7 +72,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.txtSeries);
-            this.Controls.Add(this.txtMonth);
             this.Controls.Add(this.txtYear);
             this.Controls.Add(this.txtCode);
             this.Name = "AN";
@@ -101,7 +86,6 @@
 
         private System.Windows.Forms.TextBox txtCode;
         private System.Windows.Forms.TextBox txtYear;
-        private System.Windows.Forms.TextBox txtMonth;
         private System.Windows.Forms.TextBox txtSeries;
     }
 }

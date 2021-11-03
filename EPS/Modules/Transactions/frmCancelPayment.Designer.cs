@@ -397,7 +397,7 @@
             this.MinimumSize = new System.Drawing.Size(569, 421);
             this.Name = "frmCancelPayment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cancel Payment";
+            this.Text = "Cancel Posted Payment";
             this.Load += new System.EventHandler(this.frmCancelPayment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgView)).EndInit();
             this.grpDatePosted.ResumeLayout(false);

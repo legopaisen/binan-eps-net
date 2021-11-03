@@ -101,6 +101,8 @@ namespace Modules.Utilities.Forms
             if (btnAdd.Text == "Save")
             {
                 cnt = GetEngrTypeCode(engrCnt);
+                //switch(cnt.ToString().Length)
+                //    case 1: //here
                 engrCntStr = cnt.ToString().PadLeft(cnt.ToString().Length + 1, '0');
             }
             if (MessageBox.Show("Are you sure you want to Save this record?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

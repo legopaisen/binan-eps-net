@@ -24,5 +24,6 @@ namespace EPSEntities.Entity
         public string ENGR_TIN { get; set; }
         public string ENGR_PRC { get; set; }
         public string ENGR_PTR { get; set; }
+        public string ENGR_VILL { get; set; }
     }
 }

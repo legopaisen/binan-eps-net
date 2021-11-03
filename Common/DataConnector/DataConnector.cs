@@ -13,6 +13,8 @@ namespace Common.DataConnector
         protected string m_strConnectionString;
         protected string m_strErrorDescription;
 
+
+
         public string ErrorDescription
         {
             get { return m_strErrorDescription; }
@@ -27,5 +29,7 @@ namespace Common.DataConnector
         {
             return true;
         }
+
+
     }
 }

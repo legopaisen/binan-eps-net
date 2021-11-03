@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Modules.Tables</RootNamespace>
     <AssemblyName>Tables</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -84,6 +84,18 @@
     <Compile Include="frmConfig.Designer.cs">
       <DependentUpon>frmConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmModuleSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModuleSetup.Designer.cs">
+      <DependentUpon>frmModuleSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRequirement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRequirement.Designer.cs">
+      <DependentUpon>frmRequirement.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmStructureType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +120,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConfig.resx">
       <DependentUpon>frmConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModuleSetup.resx">
+      <DependentUpon>frmModuleSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRequirement.resx">
+      <DependentUpon>frmRequirement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStructureType.resx">
       <DependentUpon>frmStructureType.cs</DependentUpon>

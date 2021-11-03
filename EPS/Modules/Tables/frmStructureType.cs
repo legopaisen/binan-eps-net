@@ -66,16 +66,22 @@ namespace Modules.Tables
             int iCode = 0;
             string sCode = "";
             OracleResultSet pSet = new OracleResultSet();
-            pSet.Query = "select max(struc_code) from struc_tbl";
+           // pSet.Query = "select max(struc_code) from struc_tbl";
+            pSet.Query = "select nvl(max(struc_code), 0) as max from struc_tbl"; //AFM 20200903
             if (pSet.Execute())
                 if (pSet.Read())
                 {
-                    iCode = Convert.ToInt16(pSet.GetString(0));
-                    iCode++;
-                    sCode = iCode.ToString("00");
+                    if(pSet.GetString("max") != "0") //AFM 20200903
+                    { 
+                        iCode = Convert.ToInt16(pSet.GetString(0));
+                        iCode++;
+                        sCode = iCode.ToString("00");
+                    }
+                    else
+                        sCode = "01";
                 }
-                else
-                    sCode = "01";
+                //else
+                    //sCode = "01";
             pSet.Close();
 
             return sCode;

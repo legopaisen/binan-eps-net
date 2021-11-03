@@ -78,7 +78,8 @@ namespace Modules.Tables
             }
 
             OracleResultSet pSet = new OracleResultSet();
-            pSet.Query = "select * from user_level where user_lev = '" + StringUtilities.HandleApostrophe(txtUlvl.Text.Trim()) + "'";
+            //pSet.Query = "select * from user_level where user_lev = '" + StringUtilities.HandleApostrophe(txtUlvl.Text.Trim()) + "'";
+            pSet.Query = "select * from user_level where user_level = '" + StringUtilities.HandleApostrophe(txtUlvl.Text.Trim()) + "'"; //AFM 20200902
             if (pSet.Execute())
                 if (pSet.Read())
                 {
@@ -93,7 +94,8 @@ namespace Modules.Tables
         private bool CheckIfThereAreUsersOfThisUserLevel()
         {
             OracleResultSet pSet = new OracleResultSet();
-            pSet.Query = "select user_level from users where user_lev = '" + StringUtilities.HandleApostrophe(txtUlvl.Text.Trim()) + "'";
+            //pSet.Query = "select user_level from users where user_lev = '" + StringUtilities.HandleApostrophe(txtUlvl.Text.Trim()) + "'";
+            pSet.Query = "select user_level from users where user_level = '" + StringUtilities.HandleApostrophe(txtUlvl.Text.Trim()) + "'"; //AFM 20200901
             if (pSet.Execute())
                 if (pSet.Read())
                 {
@@ -151,9 +153,11 @@ namespace Modules.Tables
                 if (MessageBox.Show("Are you sure you want to save the changes?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     OracleResultSet pSet = new OracleResultSet();
-                    pSet.Query = "update user_level set user_lev = '";
+                    //pSet.Query = "update user_level set user_lev = '";
+                    pSet.Query = "update user_level set user_level = '"; //AFM 20200902
                     pSet.Query += StringUtilities.HandleApostrophe(txtUlvl.Text.Trim()) + "'";
-                    pSet.Query += "where user_lev = '" + dgULT.CurrentRow.Cells[0].Value?.ToString() + "'";
+                    //pSet.Query += "where user_lev = '" + dgULT.CurrentRow.Cells[0].Value?.ToString() + "'";
+                    pSet.Query += "where user_level = '" + dgULT.CurrentRow.Cells[0].Value?.ToString() + "'"; //AFM 20200902
                     pSet.ExecuteNonQuery();
                     
                     pSet.Query = "update user_level_rights set user_level = '";
@@ -161,9 +165,11 @@ namespace Modules.Tables
                     pSet.Query += "where user_level = '" + dgULT.CurrentRow.Cells[0].Value?.ToString() + "'";
                     pSet.ExecuteNonQuery();
 
-                    pSet.Query = "update users set user_lev = '";
+                    //pSet.Query = "update users set user_lev = '";
+                    pSet.Query = "update users set user_level = '"; //AFM 20200902
                     pSet.Query += StringUtilities.HandleApostrophe(txtUlvl.Text.Trim()) + "'";
-                    pSet.Query += "where user_lev = '" + dgULT.CurrentRow.Cells[0].Value?.ToString() + "'";
+                    //pSet.Query += "where user_lev = '" + dgULT.CurrentRow.Cells[0].Value?.ToString() + "'";
+                    pSet.Query += "where user_level = '" + dgULT.CurrentRow.Cells[0].Value?.ToString() + "'"; //AFM 20200902
                     pSet.ExecuteNonQuery();
 
                     MessageBox.Show("Changes successfully saved.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -189,7 +195,8 @@ namespace Modules.Tables
             if (MessageBox.Show("Are you sure you want to delete?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 OracleResultSet pSet = new OracleResultSet();
-                pSet.Query = "delete from user_level where user_lev = '" + dgULT.CurrentRow.Cells[0].Value?.ToString() + "'";
+                //pSet.Query = "delete from user_level where user_lev = '" + dgULT.CurrentRow.Cells[0].Value?.ToString() + "'";
+                pSet.Query = "delete from user_level where user_level = '" + dgULT.CurrentRow.Cells[0].Value?.ToString() + "'"; //AFM 20200902
                 pSet.ExecuteNonQuery();
 
                 pSet.Query = "delete from user_level_rights where user_level = '" + dgULT.CurrentRow.Cells[0].Value?.ToString() + "'";

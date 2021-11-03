@@ -55,20 +55,26 @@ namespace Common.StringUtilities
             strDictionaryValues[3] = strLastName;
             strDictionaryValues[4] = strLastName;
 
-            strDictionaryValues[5] = strFirstName.ToUpper();
-            strDictionaryValues[6] = strFirstName.ToLower();
+            if (strFirstName != null)
+            {
+                strDictionaryValues[5] = strFirstName.ToUpper();
+                strDictionaryValues[6] = strFirstName.ToLower();
+            }
             strDictionaryValues[7] = string.Empty;
-            if (strFirstName.Length != 0)
+            if (strFirstName != null)
             {
                 strDictionaryValues[7] = strFirstName.Substring(0, 1);
             }
             strDictionaryValues[8] = strFirstName;
             strDictionaryValues[9] = strFirstName;
 
-            strDictionaryValues[10] = strMI.ToUpper();
-            strDictionaryValues[11] = strMI.ToLower();
+            if (strMI != null)
+            {
+                strDictionaryValues[10] = strMI.ToUpper();
+                strDictionaryValues[11] = strMI.ToLower();
+            }
             strDictionaryValues[12] = string.Empty;
-            if (strMI.Length != 0)
+            if (strMI != null)
             {
                 strDictionaryValues[12] = strMI.Substring(0, 1);
             }

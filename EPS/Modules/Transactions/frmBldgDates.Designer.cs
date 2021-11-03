@@ -112,6 +112,7 @@
             this.txtArea.Size = new System.Drawing.Size(81, 23);
             this.txtArea.TabIndex = 8;
             this.txtArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtArea.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtArea_KeyPress);
             this.txtArea.Leave += new System.EventHandler(this.txtArea_Leave);
             // 
             // txtCost
@@ -197,6 +198,7 @@
             this.dgvList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellContentClick);
             this.dgvList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellEndEdit);
             this.dgvList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvList_CellFormatting);
+            this.dgvList.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvList_CellValidating);
             this.dgvList.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgvList_Scroll);
             this.dgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvList_KeyDown);
             // 
@@ -249,6 +251,7 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Materials Used:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label5.Visible = false;
             // 
             // label6
             // 
@@ -322,6 +325,7 @@
             this.cmbMaterials.Name = "cmbMaterials";
             this.cmbMaterials.Size = new System.Drawing.Size(241, 24);
             this.cmbMaterials.TabIndex = 10;
+            this.cmbMaterials.Visible = false;
             this.cmbMaterials.Leave += new System.EventHandler(this.cmbMaterials_Leave);
             // 
             // btnBldgUnits

@@ -38,5 +38,6 @@ namespace EPSEntities.Entity
         public Nullable<DateTime> DATE_ISSUED { get; set; }
         public string MEMO { get; set; }
         public int MAIN_APPLICATION { get; set; }
+        public string PROJ_VILL { get; set; }
     }
 }

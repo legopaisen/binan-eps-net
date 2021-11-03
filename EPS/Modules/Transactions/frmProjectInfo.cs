@@ -399,7 +399,7 @@ namespace Modules.Transactions
 
         private void cmbBrgy_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = true;
+            //e.Handled = true;
         }
 
         private void cmbBrgy_SelectedIndexChanged(object sender, EventArgs e)

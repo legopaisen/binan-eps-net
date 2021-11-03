@@ -22,8 +22,13 @@ namespace Modules.Billing
 
         public override void FormLoad()
         {
-            RecordFrm.dgvPermit.Enabled = false;
+            //RecordFrm.dgvPermit.Enabled = false;
+            RecordFrm.dgvPermit.Enabled = true;
             RecordFrm.grpAddFees.Visible = false;
+
+            if(RecordFrm.Source == "ELECTRICAL PERMIT")
+                RecordFrm.an1.SetAn("EP");
+
         }
 
         public override void DisplayAssessmentData()
@@ -36,20 +41,46 @@ namespace Modules.Billing
 
             strWhereCond = $" where arn = '{RecordFrm.m_sAN}' and permit_code = '{RecordFrm.PermitCode}'";
 
-            var result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
-                         select a;
-
-            foreach (var item in result)
+            if (AppSettingsManager.GetConfigValue("30") == "1") // for build up mode
             {
-                PermitList permit = new PermitList(null);
-                sPermit = permit.GetPermitDesc(item.PERMIT_CODE);
-                bool bAssessed = false;
+                var result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
+                            select a;
+           
 
-                if (RecordFrm.PermitCode == item.PERMIT_CODE.Substring(0, 2))
-                    bAssessed = true;
-                else
-                    bAssessed = ValidatePermitAssessed(item.PERMIT_CODE.Substring(0, 2));
-                RecordFrm.dgvPermit.Rows.Add(bAssessed, sPermit, item.PERMIT_CODE);
+                foreach (var item in result)
+                {
+                    PermitList permit = new PermitList(null);
+                    sPermit = permit.GetPermitDesc(item.PERMIT_CODE);
+                    bool bAssessed = false;
+
+                    if (RecordFrm.PermitCode == item.PERMIT_CODE.Substring(0, 2))
+                        //bAssessed = true;
+                        bAssessed = false;
+                    else
+                        bAssessed = ValidatePermitAssessed(item.PERMIT_CODE.Substring(0, 2));
+                    RecordFrm.dgvPermit.Rows.Add(bAssessed, sPermit, item.PERMIT_CODE);
+                }
+
+            }
+            else
+            {
+                var result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
+                             select a;
+
+
+                foreach (var item in result)
+                {
+                    PermitList permit = new PermitList(null);
+                    sPermit = permit.GetPermitDesc(item.PERMIT_CODE);
+                    bool bAssessed = false;
+
+                    if (RecordFrm.PermitCode == item.PERMIT_CODE.Substring(0, 2))
+                        //bAssessed = true;
+                        bAssessed = false;
+                    else
+                        bAssessed = ValidatePermitAssessed(item.PERMIT_CODE.Substring(0, 2));
+                    RecordFrm.dgvPermit.Rows.Add(bAssessed, sPermit, item.PERMIT_CODE);
+                }
             }
 
             m_sPermitCodeSelected = RecordFrm.PermitCode;
@@ -124,11 +155,30 @@ namespace Modules.Billing
                 int iPermitCnt = 0;
                 int iPermitBilled = 0;
 
-                sQuery = $"select count(*) from application_que where arn = '{RecordFrm.m_sAN}'";
-                iPermitCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+                //sQuery = $"select count(*) from application_que where arn = '{RecordFrm.m_sAN}'";
+                //iPermitCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
 
-                sQuery = $"select count(distinct substr(fees_code,0,2)) from taxdues where arn = '{RecordFrm.m_sAN}'";
-                iPermitBilled = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+                //sQuery = $"select count(distinct substr(fees_code,0,2)) from taxdues where arn = '{RecordFrm.m_sAN}'";
+                //iPermitBilled = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+
+                if (AppSettingsManager.GetConfigValue("30") == "1") //AFM 20191016 buildup mode
+                {
+                    sQuery = $"select count(*) from application where arn = '{RecordFrm.m_sAN}'";
+                    iPermitCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+                }
+                else
+                {
+                    sQuery = $"select count(*) from application_que where arn = '{RecordFrm.m_sAN}'";
+                    iPermitCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
+                }
+
+                for (int cnt = 0; cnt < RecordFrm.dgvPermit.Rows.Count; cnt++) //AFM 20191018 count "permit"
+                {
+                    if ((bool)RecordFrm.dgvPermit[0, cnt].Value == true)
+                    {
+                        iPermitBilled += 1;
+                    }
+                }
 
                 if (iPermitCnt != iPermitBilled)
                 {

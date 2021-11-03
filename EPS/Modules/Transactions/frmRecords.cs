@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using Modules.Utilities;
 using Modules.Reports;
 using EPSEntities.Connection;
+using Amellar.Common.ImageViewer;
 
 namespace Modules.Transactions
 {
@@ -53,6 +54,12 @@ namespace Modules.Transactions
             Add, Edit, View, Delete, Print
         }
         public PostingState state;
+
+        public string PermitApplication = string.Empty;
+
+        public string SelectedPermitCode = string.Empty;
+
+        public string SelectedPermitDesc = string.Empty;
 
         public string SourceClass
         {
@@ -106,6 +113,24 @@ namespace Modules.Transactions
         {
             get { return this.arn1.GetAn(); }
         }
+        
+        public Button ButtonImgView
+        {
+            get { return this.btnImgView; }
+            set { this.btnImgView = value; }
+        }
+
+        public Button ButtonImgAttach
+        {
+            get { return this.btnImgAttach; }
+            set { this.btnImgAttach = value; }
+        }
+
+        public Button ButtonImgDetach
+        {
+            get { return this.btnImgDetach; }
+            set { this.btnImgDetach = value; }
+        }
 
 
 
@@ -117,15 +142,18 @@ namespace Modules.Transactions
 
         private void frmRecords_Load(object sender, EventArgs e)
         {
-            RecordClass = new RecordForm(this);
+             RecordClass = new RecordForm(this);
             if (this.SourceClass == "ENG_REC")
             {
                 this.Status = "NEW";
                 RecordClass = new EngrRecords(this);
                 this.Text = "Engineering Records";
+                btnImgAttach.Visible = true; //temporary
+                btnImgView.Visible = true;
+                btnImgDetach.Visible = true;
             }
             else if (this.SourceClass == "NEW_ADD" || this.SourceClass == "NEW_EDIT"
-                || this.SourceClass == "NEW_VIEW" || this.SourceClass == "NEW_CANCEL")
+                || this.SourceClass == "NEW_VIEW" || this.SourceClass == "NEW_CANCEL" || this.SourceClass.Contains("NEW_ADD_")) //AFM 20210316 added condition for other applications
             {
                 this.Status = "NEW";
                 RecordClass = new Application(this);
@@ -141,6 +169,7 @@ namespace Modules.Transactions
 
             DialogText = this.Text;
             RecordClass.FormLoad();
+
 
             formProject.SourceClass = m_sSource;
             formProject.DialogText = this.Text;
@@ -188,9 +217,25 @@ namespace Modules.Transactions
             tabControl1.TabPages[4].Controls.Add(formEngr);
             tabControl1.TabPages[4].Text = "Architect & Engineers";
 
-
             RecordClass.PopulatePermit();
+            if (PermitApplication.Contains("BUILDING") || PermitApplication.Contains("MECHANICAL") || PermitApplication.Contains("CFEI"))
+                cmbPermit.SelectedIndex = 1;
             PopulateScope();
+
+            if(PermitApplication.Contains("ELECTRICAL") || PermitApplication.Contains("OCCUPANCY") || PermitApplication.Contains("OTHERS"))
+            {
+                this.btnSearch.Enabled = true;
+                this.arn1.Enabled = true;
+                this.btnEdit.Enabled = false;
+                this.btnAdd.Enabled = false;
+            }
+            else if(SourceClass == "NEW_EDIT")
+            {
+                this.btnSearch.Enabled = true;
+                this.arn1.Enabled = true;
+                btnExit.Text = "Exit";
+            }
+
         }
 
 
@@ -259,16 +304,17 @@ namespace Modules.Transactions
                 frmBuildingUnits frmbldgunits = new frmBuildingUnits();
                 ClearControls();
                 RecordClass.InitEdit(true); //AFM 20191024 ANG-19-11168
-                btnAdd.Text = "Add";
-                btnEdit.Text = "Edit";
-                btnExit.Text = "Exit";
-                btnAdd.Enabled = true;
-                btnEdit.Enabled = true;
-                btnDelete.Enabled = true;
-                btnPrint.Enabled = true;
+                //btnAdd.Text = "Add";
+                //btnEdit.Text = "Edit";
+                //btnExit.Text = "Exit";
+                //btnAdd.Enabled = true;
+                //btnEdit.Enabled = true;
+                //btnDelete.Enabled = true;
+                //btnPrint.Enabled = true;
                 btnSearch.Enabled = true;
                 btnClear.Enabled = true;
                 arn1.Enabled = true;
+                btnImgAttach.Enabled = false;
                 frmbldgunits.ClearBuilding();
             }
             else
@@ -323,7 +369,10 @@ namespace Modules.Transactions
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            RecordClass.ButtonEditClick(btnEdit.Text);
+            if (arn1.Enabled == false && cmbPermit.Text.Trim() != "" && cmbScope.Text.Trim() != "") //AFM 20200910
+                RecordClass.ButtonEditClick(btnEdit.Text);
+            else
+                MessageBox.Show("No record selected!");
         }
 
         private void cmbScope_SelectedIndexChanged(object sender, EventArgs e)
@@ -343,9 +392,13 @@ namespace Modules.Transactions
                 RecordClass.EnableRecordEntry();
             }
 
+            string sPermit = ((DataRowView)cmbPermit.SelectedItem)["PermitCode"].ToString();
+            RecordClass.SetPermitAN(sPermit);
+
+
             try
             {
-                if (!string.IsNullOrEmpty(cmbPermit.Text.ToString()) && (SourceClass == "NEW_ADD" || SourceClass == "REN_ADD" || SourceClass == "ENG_REC_ADD"))
+                if (!string.IsNullOrEmpty(cmbPermit.Text.ToString()) && (SourceClass == "NEW_ADD" || SourceClass == "REN_ADD" || SourceClass == "ENG_REC_ADD") || SourceClass == "NEW_ADD_MECH" || SourceClass == "NEW_ADD_CFEI")
                 {
                     formBldgDate.LoadGrid();
                     formBldgDate.dgvList.Rows.Add(((DataRowView)cmbPermit.SelectedItem)["PermitCode"].ToString(), ((DataRowView)cmbPermit.SelectedItem)["PermitDesc"].ToString(), null, null, null);
@@ -362,6 +415,16 @@ namespace Modules.Transactions
             catch (Exception ex) // catches any error
             {
                 MessageBox.Show(ex.Message.ToString());
+            }
+            if (this.SourceClass.Contains("ENG_REC"))
+            {
+                formBldgDate.dgvList.Columns[3].ReadOnly = true;
+                formBldgDate.dgvList.Columns[4].ReadOnly = true;
+            }
+            else
+            {
+                formBldgDate.dgvList.Columns[2].ReadOnly = true;
+                formBldgDate.dgvList.Columns[3].ReadOnly = true;
             }
         }
 
@@ -475,6 +538,21 @@ namespace Modules.Transactions
         private void tabPage3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnImgView_Click(object sender, EventArgs e)
+        {
+            RecordClass.ButtonImgView();
+        }
+
+        private void btnImgAttach_Click(object sender, EventArgs e)
+        {
+            RecordClass.ButtonImgAttach();
+        }
+
+        private void btnImgDetach_Click(object sender, EventArgs e)
+        {
+            RecordClass.ButtonImgDetach();
         }
     }
 }

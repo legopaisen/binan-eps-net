@@ -34,6 +34,16 @@ namespace Common.AppSettings
             set { g_objSystemUser = value; }
         }
 
+
+        //MCR 20141209 (s)
+        private static string m_sSystemType = string.Empty;
+        public static string GetSystemType
+        {
+            get { return m_sSystemType; }
+            set { m_sSystemType = value; }
+        }
+        //MCR 20141209 (e)
+
         /// <summary>
         /// This static method returns current date/time of database server
         /// </summary>
@@ -341,6 +351,7 @@ namespace Common.AppSettings
             string sStreet = string.Empty;
             string sBrgy = string.Empty;
             string sCity = string.Empty;
+            string sTCT = string.Empty;
 
             pSet.Query = "select * from account where acct_code = '" + p_sAcctCode + "'";
             if (pSet.Execute())
@@ -361,6 +372,7 @@ namespace Common.AppSettings
                     sStreet = pSet.GetString("acct_addr").Trim();
                     sBrgy = pSet.GetString("acct_brgy").Trim();
                     sCity = pSet.GetString("acct_city").Trim();
+                    sTCT = pSet.GetString("acct_tct").Trim();
 
                     if (sHseNo != "")
                         sHseNo = "#" + sHseNo;
@@ -384,6 +396,10 @@ namespace Common.AppSettings
             if (p_sReturnValue == "AcctName")
             {
                 return sAcctName;
+            }
+            else if(p_sReturnValue == "TCT")
+            {
+                return sTCT;
             }
             else
             {
@@ -484,6 +500,83 @@ namespace Common.AppSettings
             result.Close();
 
             return strDistCode;
+        }
+
+        public static string GetBlobImageConfig()
+        {
+            // RMC 20150226 adjustment in blob configuration
+            string sConfig = string.Empty;
+            string sTmp = string.Empty;
+            OracleResultSet result = new OracleResultSet();
+            result.CreateBlobConnection();
+
+            //if (m_sSystemType == "A")
+            //{
+            //    sTmp = AppSettingsManager.GetConfigValue("62");
+            //}
+            //else
+            //{
+            //    sTmp = AppSettingsManager.GetConfigValue("63");
+            //}
+
+            //result.Query = "select * from sourcedoc_tbl where srcdoc_desc = '" + sTmp + "' and system_code = '" + m_sSystemType + "'";
+            //if (result.Execute())
+            //{
+            //    if (result.Read())
+            //        sConfig = result.GetString("srcdoc_code");
+            //}
+            //result.Close();
+
+            //TEMPORARILY APPLIED FIXED EPS QUERY
+            result.Query = "select * from sourcedoc_tbl where srcdoc_desc = 'ENGINEERING RECORDS' and system_code = 'E'";
+            if (result.Execute())
+            {
+                if (result.Read())
+                    sConfig = result.GetString("srcdoc_code");
+            }
+            result.Close();
+
+
+            return sConfig;
+        }
+
+        public static string GetPermitAcro(string sPermit)
+        {
+            OracleResultSet result = new OracleResultSet();
+            result.Query = "select permit_desc_code from permit_tbl where permit_code = '" + sPermit + "'";
+            if (result.Execute())
+                if (result.Read())
+                    sPermit = result.GetString("permit_desc_code");
+            result.Close();
+            return sPermit;
+        }
+
+        public static string GetPermitDesc(string sPermit)
+        {
+            OracleResultSet result = new OracleResultSet();
+            result.Query = "select permit_desc from permit_tbl where permit_code = '" + sPermit + "'";
+            if (result.Execute())
+                if (result.Read())
+                    sPermit = result.GetString("permit_desc");
+            result.Close();
+
+            return sPermit;
+        }
+
+        public static bool GetAreaNeedValue(string sFeesCode)
+        {
+            OracleResultSet result = new OracleResultSet();
+            result.Query = "select area_needed,fees_means from subcategories where fees_term <> 'SUBCATEGORIES' and fees_code = '" + sFeesCode + "'";
+            if (result.Execute())
+                if (result.Read())
+                {
+                    if (result.GetString("area_needed") == "Y" || result.GetString("fees_means") == "AR")
+                        return true;
+                    else
+                        return false;
+                }
+            result.Close();
+            return false;
         }
     }
 }

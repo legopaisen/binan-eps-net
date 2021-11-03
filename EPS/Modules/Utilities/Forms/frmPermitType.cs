@@ -36,6 +36,8 @@ namespace Modules.Utilities.Forms
             txtType.ReadOnly = !bEnable;
             txtAppCode.ReadOnly = !bEnable;
             //txtFeesCode.ReadOnly = !bEnable;
+            txtPermitAcronym.ReadOnly = !bEnable;
+
         }
         private void ClearControls()
         {
@@ -45,6 +47,7 @@ namespace Modules.Utilities.Forms
             txtAppCode.Text = "";
             chkOther.Checked = false;
             m_sPermitType = "";
+            txtPermitAcronym.Text = "";
         }
         private void UpdateList()
         {
@@ -56,7 +59,7 @@ namespace Modules.Utilities.Forms
 
             for (int i = 0; i < iCnt; i++)
             {
-                dgvList.Rows.Add(permit.PermitLst[i].PermitCode, permit.PermitLst[i].PermitDesc, permit.PermitLst[i].PermitFeesCode,permit.PermitLst[i].PermitAppCode, permit.PermitLst[i].PermitOtherType);
+                dgvList.Rows.Add(permit.PermitLst[i].PermitCode, permit.PermitLst[i].PermitDesc, permit.PermitLst[i].PermitFeesCode,permit.PermitLst[i].PermitAppCode, permit.PermitLst[i].PermitOtherType, permit.PermitLst[i].PermitDescCode);
             }
         }
 
@@ -84,6 +87,13 @@ namespace Modules.Utilities.Forms
             }
             else
             {
+
+                if (string.IsNullOrEmpty(txtPermitAcronym.Text.ToString().Trim()))
+                {
+                    MessageBox.Show("Permit Acronym Code field requires an entry", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    txtType.Focus();
+                    return;
+                }
                 if (string.IsNullOrEmpty(txtType.Text.ToString().Trim()))
                 {
                     MessageBox.Show("Permit Type field requires an entry", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -136,13 +146,14 @@ namespace Modules.Utilities.Forms
 
                 if (MessageBox.Show("Are you sure you want to Save this record?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    sQuery = $"insert into permit_tbl values (:1,:2,:3,:4,:5)";
+                    sQuery = $"insert into permit_tbl values (:1,:2,:3,:4,:5,:6)";
                     db.Database.ExecuteSqlCommand(sQuery,
                         new OracleParameter(":1", txtCode.Text.ToString().Trim()),
                         new OracleParameter(":2", StringUtilities.HandleApostrophe(txtType.Text.ToString().Trim())),
                         new OracleParameter(":3", StringUtilities.HandleApostrophe(txtFeesCode.Text.ToString().Trim())),
                         new OracleParameter(":4", sOther),
-                        new OracleParameter(":5", StringUtilities.HandleApostrophe(txtAppCode.Text.ToString().Trim())));
+                        new OracleParameter(":5", StringUtilities.HandleApostrophe(txtAppCode.Text.ToString().Trim())),
+                        new OracleParameter(":6", StringUtilities.HandleApostrophe(txtPermitAcronym.Text.ToString().Trim())));
 
                     sQuery = $"insert into permit_fees_tbl select * from permit_fees_tbl_tmp where permit_code = '{txtCode.Text.ToString().Trim()}'";
                     db.Database.ExecuteSqlCommand(sQuery);
@@ -201,6 +212,7 @@ namespace Modules.Utilities.Forms
                 btnAdd.Enabled = true;
                 btnEdit.Enabled = true;
                 btnDelete.Enabled = true;
+                dgvList.Enabled = true; // AFM 20200930
             }
             else
                 this.Close();
@@ -239,6 +251,12 @@ namespace Modules.Utilities.Forms
                     chkOther.Checked = true;
                 else
                     chkOther.Checked = false;
+            }
+            catch { }
+
+            try
+            {
+                txtPermitAcronym.Text = dgvList[5, e.RowIndex].Value.ToString();
             }
             catch { }
         }
@@ -312,7 +330,7 @@ namespace Modules.Utilities.Forms
                     else
                         sOther = "FALSE";
 
-                    sQuery = $"update permit_tbl set permit_desc = '{txtType.Text.ToString().Trim()}', other_type = '{sOther}' where permit_code = '{txtCode.Text.ToString()}'";
+                    sQuery = $"update permit_tbl set permit_desc = '{txtType.Text.ToString().Trim()}', other_type = '{sOther}', permit_desc_code = '{txtPermitAcronym.Text.Trim()}' where permit_code = '{txtCode.Text.ToString()}'";
                     db.Database.ExecuteSqlCommand(sQuery);
 
                     sQuery = $"delete from permit_fees_tbl where permit_code = '{txtCode.Text.ToString()}'";

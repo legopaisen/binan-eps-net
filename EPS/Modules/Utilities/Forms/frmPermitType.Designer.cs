@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPermitType));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPermitAcronym = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtAppCode = new System.Windows.Forms.TextBox();
             this.chkOther = new System.Windows.Forms.CheckBox();
@@ -47,6 +49,7 @@
             this.FeeCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AppNoCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OtherType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PermitAcronym = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -58,6 +61,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtPermitAcronym);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtAppCode);
             this.groupBox1.Controls.Add(this.chkOther);
@@ -73,9 +78,28 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(395, 335);
+            this.groupBox1.Size = new System.Drawing.Size(395, 379);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // txtPermitAcronym
+            // 
+            this.txtPermitAcronym.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtPermitAcronym.Location = new System.Drawing.Point(151, 328);
+            this.txtPermitAcronym.MaxLength = 4;
+            this.txtPermitAcronym.Name = "txtPermitAcronym";
+            this.txtPermitAcronym.ReadOnly = true;
+            this.txtPermitAcronym.Size = new System.Drawing.Size(88, 26);
+            this.txtPermitAcronym.TabIndex = 19;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 331);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(143, 18);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Permit Acronym Code";
             // 
             // label4
             // 
@@ -181,7 +205,8 @@
             this.Desc,
             this.FeeCode,
             this.AppNoCode,
-            this.OtherType});
+            this.OtherType,
+            this.PermitAcronym});
             this.dgvList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvList.Location = new System.Drawing.Point(8, 20);
             this.dgvList.Margin = new System.Windows.Forms.Padding(4);
@@ -230,9 +255,16 @@
             this.OtherType.ReadOnly = true;
             this.OtherType.Visible = false;
             // 
+            // PermitAcronym
+            // 
+            this.PermitAcronym.HeaderText = "Permit Acronym";
+            this.PermitAcronym.Name = "PermitAcronym";
+            this.PermitAcronym.ReadOnly = true;
+            this.PermitAcronym.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(323, 346);
+            this.btnExit.Location = new System.Drawing.Point(329, 390);
             this.btnExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(78, 33);
@@ -243,7 +275,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(159, 346);
+            this.btnEdit.Location = new System.Drawing.Point(165, 390);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(78, 33);
@@ -254,7 +286,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(77, 346);
+            this.btnAdd.Location = new System.Drawing.Point(83, 390);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(78, 33);
@@ -265,7 +297,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(241, 346);
+            this.btnDelete.Location = new System.Drawing.Point(247, 390);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(78, 33);
@@ -279,7 +311,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(416, 389);
+            this.ClientSize = new System.Drawing.Size(420, 436);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
@@ -323,5 +355,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FeeCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn AppNoCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn OtherType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PermitAcronym;
+        private System.Windows.Forms.TextBox txtPermitAcronym;
+        private System.Windows.Forms.Label label5;
     }
 }

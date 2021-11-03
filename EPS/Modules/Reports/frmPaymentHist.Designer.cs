@@ -30,6 +30,7 @@ namespace Modules.Reports
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPaymentHist));
             this.dgvFees = new System.Windows.Forms.DataGridView();
             this.fees_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.particulars = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,12 +55,17 @@ namespace Modules.Reports
             this.txtGrandTotal = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.arn1 = new Modules.ARN.AN();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFees)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvFees
             // 
+            this.dgvFees.AllowUserToAddRows = false;
+            this.dgvFees.AllowUserToDeleteRows = false;
+            this.dgvFees.AllowUserToResizeRows = false;
             this.dgvFees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fees_code,
@@ -108,6 +114,8 @@ namespace Modules.Reports
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.arn1);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.txtORdt);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.cmbOR);
@@ -201,7 +209,7 @@ namespace Modules.Reports
             // btnSearch
             // 
             this.btnSearch.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(244, 18);
+            this.btnSearch.Location = new System.Drawing.Point(429, 21);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 13;
@@ -213,7 +221,7 @@ namespace Modules.Reports
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 22);
+            this.label1.Location = new System.Drawing.Point(244, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 15);
             this.label1.TabIndex = 12;
@@ -221,9 +229,9 @@ namespace Modules.Reports
             // 
             // txtAcct
             // 
-            this.txtAcct.Location = new System.Drawing.Point(94, 20);
+            this.txtAcct.Location = new System.Drawing.Point(310, 23);
             this.txtAcct.Name = "txtAcct";
-            this.txtAcct.Size = new System.Drawing.Size(144, 20);
+            this.txtAcct.Size = new System.Drawing.Size(115, 20);
             this.txtAcct.TabIndex = 11;
             // 
             // txtMemo
@@ -284,6 +292,28 @@ namespace Modules.Reports
             this.btnPrint.TabIndex = 24;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // arn1
+            // 
+            this.arn1.GetCode = "";
+            this.arn1.GetSeries = "";
+            this.arn1.GetTaxYear = "";
+            this.arn1.Location = new System.Drawing.Point(94, 19);
+            this.arn1.Name = "arn1";
+            this.arn1.Size = new System.Drawing.Size(140, 31);
+            this.arn1.TabIndex = 23;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(7, 25);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(28, 15);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "AN:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // frmPaymentHist
             // 
@@ -298,11 +328,12 @@ namespace Modules.Reports
             this.Controls.Add(this.txtMemo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvFees);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmPaymentHist";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "frmPaymentHist";
+            this.Text = "Payment History";
             this.Load += new System.EventHandler(this.frmPaymentHist_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFees)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -337,5 +368,7 @@ namespace Modules.Reports
         private System.Windows.Forms.TextBox txtGrandTotal;
         private System.Windows.Forms.Button btnClose;
         private Button btnPrint;
+        private ARN.AN arn1;
+        private Label label8;
     }
 }

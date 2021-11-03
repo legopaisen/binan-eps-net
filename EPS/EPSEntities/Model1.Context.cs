@@ -25,6 +25,8 @@ namespace EPSEntities
             throw new UnintentionalCodeFirstException();
         }
     
-       
+        public DbSet<BLDG_PERMIT> BLDG_PERMIT { get; set; }
+        public DbSet<BNS_TABLE> BNS_TABLE { get; set; }
+        public DbSet<OTHER_CERT> OTHER_CERT { get; set; }
     }
 }

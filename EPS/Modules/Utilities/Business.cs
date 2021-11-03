@@ -53,7 +53,7 @@ namespace Modules.Utilities
             Desc = string.Empty;
 
             strQuery = $"select * from bns_table where bns_code = '{sCode}' order by bns_code ";
-            var epsrec = db.Database.SqlQuery<BNS_TABLE>(strQuery);
+            var epsrec = db.Database.SqlQuery<EPSEntities.BNS_TABLE>(strQuery); //test
 
             foreach (var items in epsrec)
             {
@@ -84,7 +84,7 @@ namespace Modules.Utilities
             using (var db = new EPSConnection(dbConn))
             {
                 strQuery = $"select * from bns_table order by bns_code ";
-                var epsrec = db.Database.SqlQuery<BNS_TABLE>(strQuery);
+                var epsrec = db.Database.SqlQuery<EPSEntities.BNS_TABLE>(strQuery); //test
 
                 foreach (var items in epsrec)
                 {

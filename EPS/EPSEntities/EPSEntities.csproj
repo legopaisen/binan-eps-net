@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EPSEntities</RootNamespace>
     <AssemblyName>EPSEntities</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -81,12 +81,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLDG_PERMIT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BNS_TABLE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="Connection\ConnectionString.cs" />
     <Compile Include="Connection\EPSConnection.cs" />
     <Compile Include="Connection\IConnectionString.cs" />
-    <Compile Include="Entity\BNS_TABLE.cs" />
+    <Compile Include="Entity\ADDL_MAJOR_FEES_X.cs" />
     <Compile Include="Entity\BRGY.cs" />
+    <Compile Include="Entity\ADDL_MAJOR_FEES.cs" />
+    <Compile Include="Entity\OTHER_MAJOR_FEES_X.cs" />
+    <Compile Include="Entity\OTHER_MAJOR_FEES.cs" />
+    <Compile Include="Entity\ADDL_SCHEDULES.cs" />
+    <Compile Include="Entity\OTHER_SCHEDULES.cs" />
+    <Compile Include="Entity\ADDL_SCHEDULES_X.cs" />
+    <Compile Include="Entity\OTHER_SCHEDULES_X.cs" />
+    <Compile Include="Entity\ADDL_SUBCATEGORIES.cs" />
+    <Compile Include="Entity\OTHER_SUBCATEGORIES.cs" />
+    <Compile Include="Entity\ADDL_SUBCATEGORIES_X.cs" />
+    <Compile Include="Entity\OTHER_SUBCATEGORIES_X.cs" />
     <Compile Include="Entity\RIGHTS.cs" />
     <Compile Include="Entity\MAJOR_FEES.cs" />
     <Compile Include="Entity\PERMIT_FEES_TBL_TMP.cs" />
@@ -94,7 +111,6 @@
     <Compile Include="Entity\SUBCATEGORIES_X.cs" />
     <Compile Include="Entity\USER_LEVEL.cs" />
     <Compile Include="Entity\WIRING_TBL.cs" />
-    <Compile Include="Entity\OTHER_CERT.cs" />
     <Compile Include="Entity\EXCAVATION_TBL.cs" />
     <Compile Include="Entity\PERMIT_ASSIGNED.cs" />
     <Compile Include="Entity\BANK_TABLE.cs" />
@@ -138,6 +154,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="OTHER_CERT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

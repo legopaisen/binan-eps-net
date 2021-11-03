@@ -31,22 +31,29 @@
             this.dgvList = new System.Windows.Forms.DataGridView();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvList
             // 
+            this.dgvList.AllowUserToResizeRows = false;
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvList.Location = new System.Drawing.Point(12, 12);
+            this.dgvList.Location = new System.Drawing.Point(19, 15);
+            this.dgvList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvList.MultiSelect = false;
             this.dgvList.Name = "dgvList";
-            this.dgvList.Size = new System.Drawing.Size(510, 209);
+            this.dgvList.Size = new System.Drawing.Size(680, 257);
             this.dgvList.TabIndex = 0;
+            this.dgvList.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellEnter);
+            this.dgvList.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvList_CurrentCellDirtyStateChanged);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(366, 227);
+            this.btnOk.Location = new System.Drawing.Point(488, 279);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.Size = new System.Drawing.Size(100, 28);
             this.btnOk.TabIndex = 1;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -54,24 +61,38 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(447, 227);
+            this.btnCancel.Location = new System.Drawing.Point(596, 279);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(16, 280);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(100, 28);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // frmBuildingUnits
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(534, 261);
+            this.ClientSize = new System.Drawing.Size(712, 321);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.dgvList);
             this.ForeColor = System.Drawing.Color.Black;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmBuildingUnits";
@@ -87,5 +108,6 @@
         private System.Windows.Forms.DataGridView dgvList;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

@@ -145,7 +145,7 @@ namespace Modules.Transactions
             dgvList.Columns.Add("PermitNo", "Permit No.");
 
             if (SourceClass == "NEW_ADD" || SourceClass == "NEW_EDIT" || SourceClass == "NEW_VIEW"
-                || SourceClass == "REN_ADD" || SourceClass == "REN_EDIT" || SourceClass == "REN_VIEW")
+                || SourceClass == "REN_ADD" || SourceClass == "REN_EDIT" || SourceClass == "REN_VIEW" || SourceClass == "NEW_ADD_MECH" || SourceClass == "NEW_ADD_CFEI")
             {
                 dgvList.Columns.Add("StartDate", "Prop. Start Date");
                 dgvList.Columns.Add("CompletionDate", "Prop. Completion Date");
@@ -275,24 +275,24 @@ namespace Modules.Transactions
 
         private void dgvList_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) //AFM 20190906
         {
-            permitIsNull = false;
-            if (e.ColumnIndex == 2) //AFM 20190906 permit no. format validation
-            {
-                if (dgvList[2, e.RowIndex].EditedFormattedValue != null)
-                {
-                    dgvList[2, e.RowIndex].Value = dgvList[2, e.RowIndex].EditedFormattedValue.ToString().ToUpper();
-                    if (dgvList[2, e.RowIndex].Value.ToString() != "")
-                    {
-                        if (Convert.ToString(dgvList[2, e.RowIndex].Value).Length != 11 && Convert.ToString(dgvList[2, e.RowIndex].Value).Length != 12 || !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("BP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("FP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("EP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("DP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("SP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("ECP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("AP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("OP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("WP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("MP"))
-                        {
-                            MessageBox.Show("Invalid Permit Format (e.g. BP-19-00001)");
-                            dgvList[2, e.RowIndex].Value = null;
-                            permitIsNull = true;
-                            return;
-                        }
-                    }
-                }
-            }
+            //permitIsNull = false;
+            //if (e.ColumnIndex == 2) //AFM 20190906 permit no. format validation
+            //{
+            //    if (dgvList[2, e.RowIndex].EditedFormattedValue != null)
+            //    {
+            //        dgvList[2, e.RowIndex].Value = dgvList[2, e.RowIndex].EditedFormattedValue.ToString().ToUpper();
+            //        if (dgvList[2, e.RowIndex].Value.ToString() != "")
+            //        {
+            //            if (Convert.ToString(dgvList[2, e.RowIndex].Value).Length != 11 && Convert.ToString(dgvList[2, e.RowIndex].Value).Length != 12 || !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("BP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("FP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("EP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("DP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("SP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("ECP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("AP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("OP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("WP") && !Convert.ToString(dgvList[2, e.RowIndex].Value).Contains("MP"))
+            //            {
+            //                MessageBox.Show("Invalid Permit Format (e.g. BP-19-00001)");
+            //                dgvList[2, e.RowIndex].Value = null;
+            //                permitIsNull = true;
+            //                return;
+            //            }
+            //        }
+            //    }
+            //}
 
             try
             {
@@ -304,6 +304,13 @@ namespace Modules.Transactions
                 }
             }
             catch { }
+
+            // if (e.ColumnIndex == 3 || e.ColumnIndex == 4)
+            //{ 
+            //    string newValue = e.FormattedValue.ToString();
+            //    string oldValue = ((System.Windows.Forms.DataGridView)(sender)).Rows[e.RowIndex].Cells[e.ColumnIndex].FormattedValue.ToString();
+            //return;
+            //}
         }
 
 
@@ -361,6 +368,20 @@ namespace Modules.Transactions
                         {
                             dgvList.ReadOnly = false;
                         }
+                        break;
+                    case 2:
+                        if((dgvList.Rows[e.RowIndex].Cells[0].Value.ToString().Trim() == "BUILDING PERMIT"))
+                            dgvList.Rows[e.RowIndex].Cells[1].Value = "BP-";
+                        else if ((dgvList.Rows[e.RowIndex].Cells[0].Value.ToString().Trim() == "FENCING PERMIT"))
+                            dgvList.Rows[e.RowIndex].Cells[1].Value = "FP-";
+                        else if ((dgvList.Rows[e.RowIndex].Cells[0].Value.ToString().Trim() == "ELECTRICAL PERMIT"))
+                            dgvList.Rows[e.RowIndex].Cells[1].Value = "EP-";
+                        else if ((dgvList.Rows[e.RowIndex].Cells[0].Value.ToString().Trim() == "DEMOLITION PERMIT"))
+                            dgvList.Rows[e.RowIndex].Cells[1].Value = "DP-";
+                        else if ((dgvList.Rows[e.RowIndex].Cells[0].Value.ToString().Trim() == "SIGN PERMIT"))
+                            dgvList.Rows[e.RowIndex].Cells[1].Value = "SP-";
+                        else if ((dgvList.Rows[e.RowIndex].Cells[0].Value.ToString().Trim() == "ELECTRONICS PERMIT"))
+                            dgvList.Rows[e.RowIndex].Cells[1].Value = "ECP-";
                         break;
                     case 3:
 
@@ -441,7 +462,15 @@ namespace Modules.Transactions
                 string strQuery = string.Empty;
                 var db = new EPSConnection(dbConn);
                 strQuery = $"select max(bldg_no) from building";
-                iNoTmp = db.Database.SqlQuery<Int32>(strQuery).SingleOrDefault();
+                try
+                {
+                    iNoTmp = db.Database.SqlQuery<Int32>(strQuery).SingleOrDefault();
+
+                }
+                catch
+                {
+                    iNoTmp = 0;
+                }
 
                 if (iNoTmp == 0)
                     txtBldgNo.Text = "1";
@@ -463,12 +492,12 @@ namespace Modules.Transactions
                 return false;
             }
 
-            if(string.IsNullOrEmpty(cmbMaterials.Text.ToString()))
-            {
-                MessageBox.Show("Materials used is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+            //if(string.IsNullOrEmpty(cmbMaterials.Text.ToString())) //requested by binan to disable
+            //{
+            //    MessageBox.Show("Materials used is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    return false;
 
-            }
+            //}
 
             for(int i = 0; i < dgvList.Rows.Count; i++)
             {
@@ -571,6 +600,18 @@ namespace Modules.Transactions
         private void dgvList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void txtArea_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar > (char)Keys.D9 || e.KeyChar < (char)Keys.D0) && e.KeyChar != (char)Keys.Back && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
         }
     }
 }

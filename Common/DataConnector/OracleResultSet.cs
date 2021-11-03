@@ -24,6 +24,7 @@ namespace Common.DataConnector
         private bool m_blnHasTransaction;
         private bool m_blnIsRpadIgnore;  //RDO 062408 
 
+
         public OracleResultSet(bool blnIsBlob)
         {
             if (blnIsBlob)
@@ -563,6 +564,24 @@ namespace Common.DataConnector
 
             return true;
         }
-    
+
+        public void CreateBlobConnection()
+        {
+            int intPort = 0;
+            int.TryParse(System.Configuration.ConfigurationManager.AppSettings["BlobPort"], out intPort);
+            objOracleDataConn = new OracleDataConnector(
+                       System.Configuration.ConfigurationManager.AppSettings["BlobHost"],
+                       intPort,
+                       System.Configuration.ConfigurationManager.AppSettings["BlobServiceName"],
+                       System.Configuration.ConfigurationManager.AppSettings["BlobUserId"],
+                       System.Configuration.ConfigurationManager.AppSettings["BlobPassword"]
+                                            );
+
+            objOracleDataConn.OpenConnection();
+
+            this.CreateInstance(objOracleDataConn.Connection);
+        }
+
+
     }
 }

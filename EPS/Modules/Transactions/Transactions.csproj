@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Modules.Transactions</RootNamespace>
     <AssemblyName>Transactions</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,6 +49,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DataConnector">
+      <HintPath>..\..\..\Common\DataConnector\bin\x86\Debug\DataConnector.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -104,17 +108,35 @@
     <Compile Include="frmEngineer.Designer.cs">
       <DependentUpon>frmEngineer.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEngineerModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEngineerModule.Designer.cs">
+      <DependentUpon>frmEngineerModule.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmOtherCert.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmOtherCert.Designer.cs">
       <DependentUpon>frmOtherCert.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPermitSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPermitSelect.Designer.cs">
+      <DependentUpon>frmPermitSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPosting.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPosting.Designer.cs">
       <DependentUpon>frmPosting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRequirementsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRequirementsList.Designer.cs">
+      <DependentUpon>frmRequirementsList.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSearchLot.cs">
       <SubType>Form</SubType>
@@ -174,11 +196,20 @@
     <EmbeddedResource Include="frmEngineer.resx">
       <DependentUpon>frmEngineer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEngineerModule.resx">
+      <DependentUpon>frmEngineerModule.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmOtherCert.resx">
       <DependentUpon>frmOtherCert.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPermitSelect.resx">
+      <DependentUpon>frmPermitSelect.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPosting.resx">
       <DependentUpon>frmPosting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRequirementsList.resx">
+      <DependentUpon>frmRequirementsList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSearchLot.resx">
       <DependentUpon>frmSearchLot.cs</DependentUpon>
@@ -208,9 +239,9 @@
       <Project>{889d88f6-1668-418f-969a-6466670138b6}</Project>
       <Name>AppSettings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Common\DataConnector\DataConnector.csproj">
-      <Project>{7c12da36-676a-49b3-b59d-c07c96539620}</Project>
-      <Name>DataConnector</Name>
+    <ProjectReference Include="..\..\..\Common\ImageViewer\ImageViewer.csproj">
+      <Project>{3510c616-dce8-42f0-94e3-e457909d5381}</Project>
+      <Name>ImageViewer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Common\MultiColumnComboBox\MultiColumnComboBox.csproj">
       <Project>{4DD47A19-1A17-4C59-94BA-575E0C2ECC17}</Project>

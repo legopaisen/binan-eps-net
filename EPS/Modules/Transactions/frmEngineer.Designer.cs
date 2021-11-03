@@ -36,6 +36,8 @@
             this.txtPRC = new System.Windows.Forms.TextBox();
             this.txtTIN = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtVillage = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -133,6 +135,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.txtVillage);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label13);
@@ -152,16 +156,38 @@
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(298, 157);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(272, 228);
+            this.groupBox1.Size = new System.Drawing.Size(272, 259);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " Address ";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(48, 124);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(37, 15);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Subd.";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // txtVillage
+            // 
+            this.txtVillage.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtVillage.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVillage.Location = new System.Drawing.Point(92, 121);
+            this.txtVillage.MaxLength = 200;
+            this.txtVillage.Name = "txtVillage";
+            this.txtVillage.Size = new System.Drawing.Size(170, 23);
+            this.txtVillage.TabIndex = 15;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(28, 200);
+            this.label15.Location = new System.Drawing.Point(28, 231);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(57, 15);
             this.label15.TabIndex = 0;
@@ -172,7 +198,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(27, 175);
+            this.label14.Location = new System.Drawing.Point(27, 206);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(58, 15);
             this.label14.TabIndex = 0;
@@ -183,18 +209,18 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(6, 148);
+            this.label13.Location = new System.Drawing.Point(56, 179);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(81, 15);
+            this.label13.Size = new System.Drawing.Size(31, 15);
             this.label13.TabIndex = 0;
-            this.label13.Text = "Municipality:";
+            this.label13.Text = "City:";
             this.label13.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(24, 122);
+            this.label12.Location = new System.Drawing.Point(24, 153);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(62, 15);
             this.label12.TabIndex = 0;
@@ -205,12 +231,13 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(22, 96);
+            this.label11.Location = new System.Drawing.Point(47, 96);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(64, 15);
+            this.label11.Size = new System.Drawing.Size(38, 15);
             this.label11.TabIndex = 0;
-            this.label11.Text = "St/Ave/Vil:";
+            this.label11.Text = "Street";
             this.label11.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // label10
             // 
@@ -249,17 +276,17 @@
             // 
             this.cmbBrgy.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBrgy.FormattingEnabled = true;
-            this.cmbBrgy.Location = new System.Drawing.Point(92, 119);
+            this.cmbBrgy.Location = new System.Drawing.Point(92, 150);
             this.cmbBrgy.Name = "cmbBrgy";
             this.cmbBrgy.Size = new System.Drawing.Size(170, 23);
-            this.cmbBrgy.TabIndex = 15;
+            this.cmbBrgy.TabIndex = 16;
             // 
             // txtHseNo
             // 
             this.txtHseNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtHseNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHseNo.Location = new System.Drawing.Point(92, 15);
-            this.txtHseNo.MaxLength = 10;
+            this.txtHseNo.MaxLength = 60;
             this.txtHseNo.Name = "txtHseNo";
             this.txtHseNo.Size = new System.Drawing.Size(170, 23);
             this.txtHseNo.TabIndex = 11;
@@ -269,7 +296,7 @@
             this.txtLotNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtLotNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLotNo.Location = new System.Drawing.Point(92, 41);
-            this.txtLotNo.MaxLength = 10;
+            this.txtLotNo.MaxLength = 60;
             this.txtLotNo.Name = "txtLotNo";
             this.txtLotNo.Size = new System.Drawing.Size(170, 23);
             this.txtLotNo.TabIndex = 12;
@@ -279,7 +306,7 @@
             this.txtBlkNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBlkNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBlkNo.Location = new System.Drawing.Point(92, 67);
-            this.txtBlkNo.MaxLength = 10;
+            this.txtBlkNo.MaxLength = 60;
             this.txtBlkNo.Name = "txtBlkNo";
             this.txtBlkNo.Size = new System.Drawing.Size(170, 23);
             this.txtBlkNo.TabIndex = 13;
@@ -289,7 +316,7 @@
             this.txtStreet.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtStreet.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStreet.Location = new System.Drawing.Point(92, 93);
-            this.txtStreet.MaxLength = 60;
+            this.txtStreet.MaxLength = 200;
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.Size = new System.Drawing.Size(170, 23);
             this.txtStreet.TabIndex = 14;
@@ -298,31 +325,31 @@
             // 
             this.txtMun.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMun.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMun.Location = new System.Drawing.Point(92, 145);
+            this.txtMun.Location = new System.Drawing.Point(92, 176);
             this.txtMun.MaxLength = 40;
             this.txtMun.Name = "txtMun";
             this.txtMun.Size = new System.Drawing.Size(170, 23);
-            this.txtMun.TabIndex = 16;
+            this.txtMun.TabIndex = 17;
             // 
             // txtProv
             // 
             this.txtProv.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtProv.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProv.Location = new System.Drawing.Point(92, 171);
+            this.txtProv.Location = new System.Drawing.Point(92, 202);
             this.txtProv.MaxLength = 40;
             this.txtProv.Name = "txtProv";
             this.txtProv.Size = new System.Drawing.Size(170, 23);
-            this.txtProv.TabIndex = 17;
+            this.txtProv.TabIndex = 18;
             // 
             // txtZIP
             // 
             this.txtZIP.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtZIP.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtZIP.Location = new System.Drawing.Point(92, 197);
+            this.txtZIP.Location = new System.Drawing.Point(92, 228);
             this.txtZIP.MaxLength = 20;
             this.txtZIP.Name = "txtZIP";
             this.txtZIP.Size = new System.Drawing.Size(170, 23);
-            this.txtZIP.TabIndex = 18;
+            this.txtZIP.TabIndex = 19;
             // 
             // label1
             // 
@@ -487,7 +514,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Aqua;
-            this.ClientSize = new System.Drawing.Size(582, 392);
+            this.ClientSize = new System.Drawing.Size(582, 428);
             this.ControlBox = false;
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSearch);
@@ -547,5 +574,7 @@
         public System.Windows.Forms.TextBox txtZIP;
         public System.Windows.Forms.ComboBox cmbEngrType;
         public System.Windows.Forms.DataGridView dgvList;
+        public System.Windows.Forms.TextBox txtVillage;
+        private System.Windows.Forms.Label label6;
     }
 }

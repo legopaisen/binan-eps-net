@@ -12,5 +12,6 @@ namespace EPSEntities.Entity
         public string BANK_NM { get; set; }
         public string BANK_BRANCH { get; set; }
         public string BANK_ADD { get; set; }
+        public string BANK_ID { get; set; }
     }
 }

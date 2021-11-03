@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Modules.ARN</RootNamespace>
     <AssemblyName>ARN</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -113,6 +114,10 @@
     <ProjectReference Include="..\..\..\Common\AppSettings\AppSettings.csproj">
       <Project>{889d88f6-1668-418f-969a-6466670138b6}</Project>
       <Name>AppSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\DataConnector\DataConnector.csproj">
+      <Project>{7C12DA36-676A-49B3-B59D-C07C96539620}</Project>
+      <Name>DataConnector</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\EPSEntities\EPSEntities.csproj">
       <Project>{64f894bd-df57-4d82-8c15-4bea4081b870}</Project>

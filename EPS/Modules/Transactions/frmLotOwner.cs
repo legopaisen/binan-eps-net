@@ -139,6 +139,7 @@ namespace Modules.Transactions
             txtProv.Text = form.Province;
             txtStreet.Text = form.Address;
             txtZIP.Text = form.Zip;
+            txtVillage.Text = form.Village;
 
         }
 
@@ -182,22 +183,23 @@ namespace Modules.Transactions
                 OracleResultSet result = new OracleResultSet();
                 result.Query = "INSERT INTO OWNER_TMP ";
                 result.Query += $"VALUES ('{AcctNo}', ";
-                result.Query += $"'{txtLastName.Text}', ";
-                result.Query += $"'{txtFirstName.Text}', ";
-                result.Query += $"'{txtMI.Text}', ";
-                result.Query += $"'{txtHseNo.Text}', ";
-                result.Query += $"'{txtLotNo.Text}', ";
-                result.Query += $"'{txtBlkNo.Text}', ";
-                result.Query += $"'{txtStreet.Text}', ";
-                result.Query += $"'{cmbBrgy.Text}', ";
-                result.Query += $"'{txtMun.Text}', ";
-                result.Query += $"'{txtProv.Text}', ";
-                result.Query += $"'{txtZIP.Text}', ";
-                result.Query += $"'{txtTCT.Text}', ";
-                result.Query += $"'{txtTIN.Text}', ";
-                result.Query += $"'{txtCTC.Text}', ";
-                result.Query += $"'{txtTelNo.Text}', ";
-                result.Query += $"'')";
+                result.Query += $"'{txtLastName.Text.Trim()}', ";
+                result.Query += $"'{txtFirstName.Text.Trim()}', ";
+                result.Query += $"'{txtMI.Text.Trim()}', ";
+                result.Query += $"'{txtHseNo.Text.Trim()}', ";
+                result.Query += $"'{txtLotNo.Text.Trim()}', ";
+                result.Query += $"'{txtBlkNo.Text.Trim()}', ";
+                result.Query += $"'{txtStreet.Text.Trim()}', ";
+                result.Query += $"'{cmbBrgy.Text.Trim()}', ";
+                result.Query += $"'{txtMun.Text.Trim()}', ";
+                result.Query += $"'{txtProv.Text.Trim()}', ";
+                result.Query += $"'{txtZIP.Text.Trim()}', ";
+                result.Query += $"'{txtTCT.Text.Trim()}', ";
+                result.Query += $"'{txtTIN.Text.Trim()}', ";
+                result.Query += $"'{txtCTC.Text.Trim()}', ";
+                result.Query += $"'{txtTelNo.Text.Trim()}', ";
+                result.Query += $"'', ";
+                result.Query += $"'{txtVillage.Text.Trim()}') ";
                 result.ExecuteNonQuery();
                 result.Close();
             }
@@ -232,6 +234,7 @@ namespace Modules.Transactions
                             txtTCT.Text = result.GetString("acct_tct");
                             txtCTC.Text = result.GetString("acct_ctc");
                             txtTelNo.Text = result.GetString("acct_telno");
+                            txtVillage.Text = result.GetString("acct_vill"); // requested subdivision data
                         }
                     }
             }
@@ -270,14 +273,76 @@ namespace Modules.Transactions
 
         public bool ValidateData()
         {
+            if (string.IsNullOrEmpty(txtLastName.Text.ToString().Trim()))
+            {
+                MessageBox.Show("Lot owner's name is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtFirstName.Text.ToString().Trim()))
+            {
+                MessageBox.Show("Lot owner's First name is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtMI.Text.ToString().Trim()))
+            {
+                MessageBox.Show("Lot owner's Middle Inital is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(txtTCT.Text.ToString().Trim()))
+            {
+                MessageBox.Show("Lot owner's TCT/OCT no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(txtCTC.Text.ToString().Trim()))
+            {
+                MessageBox.Show("Lot owner's CTC no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(txtCTC.Text.ToString().Trim()))
+            {
+                MessageBox.Show("Lot owner's CTC no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtHseNo.Text.ToString().Trim()))
+            {
+                MessageBox.Show("House No owner's Lot no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(txtLotNo.Text.ToString().Trim()))
+            {
+                MessageBox.Show("Lot owner's Lot no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(txtBlkNo.Text.ToString().Trim()))
+            {
+                MessageBox.Show("Lot owner's Blk no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(txtStreet.Text.ToString().Trim()))
+            {
+                MessageBox.Show("Lot owner's Street is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtVillage.Text.ToString().Trim()))
+            {
+                MessageBox.Show("Lot owner's Subdivision is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+
             if (string.IsNullOrEmpty(LotAcctNo))
             {
                 Accounts account = new Accounts();
                 account.CreateAccount(txtLastName.Text.ToString(), txtFirstName.Text.ToString(),
                     txtMI.Text.ToString(), txtStreet.Text.ToString(), txtHseNo.Text.ToString(),
-                    txtLotNo.Text.ToString(), txtBlkNo.Text.ToString(), cmbBrgy.Text.ToString(),
+                    txtLotNo.Text.ToString(), txtBlkNo.Text.ToString(), cmbBrgy.Text.ToString().ToUpper(),
                     txtMun.Text.ToString(), txtProv.Text.ToString(), txtZIP.Text.ToString(),
-                    txtTIN.Text.ToString(), txtTCT.Text.ToString(), txtCTC.Text.ToString(), txtTelNo.Text.ToString());
+                    txtTIN.Text.ToString(), txtTCT.Text.ToString(), txtCTC.Text.ToString(), txtTelNo.Text.ToString(), txtVillage.Text.ToString().Trim());
 
                 LotAcctNo = account.OwnerCode;
 
@@ -308,9 +373,9 @@ namespace Modules.Transactions
             EnableControls(blnEnable);
         }
 
-        private void cmbBrgy_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
+        //private void cmbBrgy_KeyPress(object sender, KeyPressEventArgs e) // removed to allow input for owners outside binan
+        //{ 
+        //    e.Handled = true;
+        //}
     }
 }

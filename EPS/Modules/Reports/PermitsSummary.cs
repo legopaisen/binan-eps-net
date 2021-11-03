@@ -56,7 +56,10 @@ namespace Modules.Reports
                 new Microsoft.Reporting.WinForms.ReportParameter("Province", ConfigurationAttributes.ProvinceName),
                 new Microsoft.Reporting.WinForms.ReportParameter("DateRange", ReportForm.dtFrom.ToShortDateString() + " - " + ReportForm.dtTo.ToShortDateString()),
            };
+
             ReportForm.reportViewer1.LocalReport.SetParameters(para);
+           
+
 
             dtSetRES = new ObservableCollection<Model.PermitsSummaryMODEL>();
             dtSetCOM = new ObservableCollection<Model.PermitsSummaryMODEL>();

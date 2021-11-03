@@ -25,5 +25,7 @@ namespace EPSEntities.Entity
         public string ACCT_CTC { get; set; }
         public string ACCT_TELNO { get; set; }
         public string ACCT_TCT_LOT { get; set; }
+        public string ACCT_VILL { get; set; }
+
     }
 }

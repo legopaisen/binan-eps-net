@@ -60,6 +60,7 @@ namespace Modules.Utilities
             this.txtProv.Text = string.Empty;
             this.txtZIP.Text = string.Empty;
             this.dtpValidDt.Value = AppSettingsManager.GetSystemDate();
+            this.txtVillage.Text = string.Empty;
         }
 
         private void EnableControls(bool blnEnable)
@@ -82,6 +83,7 @@ namespace Modules.Utilities
             this.cmbEngrType.Enabled = blnEnable;
             this.dtpValidDt.Enabled = blnEnable;
             this.dgvList.Enabled = !blnEnable;
+            this.txtVillage.ReadOnly = !blnEnable; //requested subdivision
         }
 
         private void PopulateBrgy()
@@ -112,14 +114,24 @@ namespace Modules.Utilities
 
         private void txtFirstName_Leave(object sender, EventArgs e)
         {
-            if (!RecordClass.SearchAccount())
-                return;
+            //if (!RecordClass.SearchAccount())
+            if(txtFirstName.Text.Trim() != "") //AFM 20200826
+            {
+                if (!RecordClass.SearchAccount())
+                    return;
+            }
+
         }
 
         private void txtLastName_Leave(object sender, EventArgs e)
         {
-            if (!RecordClass.SearchAccount())
-                return;
+            //if (!RecordClass.SearchAccount())
+            if(txtLastName.Text.Trim() != "") //AFM 20200826
+            {
+                if (!RecordClass.SearchAccount())
+                    return;
+            }
+            
         }
 
         
@@ -134,6 +146,11 @@ namespace Modules.Utilities
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = false;
                 txtLastName.Focus();
+
+                //AFM 20200826
+                txtMun.Text = AppSettingsManager.GetConfigValue("02");
+                txtProv.Text = AppSettingsManager.GetConfigValue("03");
+                txtZIP.Text = AppSettingsManager.GetConfigValue("26");
             }
             else
             {
@@ -201,6 +218,11 @@ namespace Modules.Utilities
             if(btnCancel.Text == "Cancel")
             {
                 btnCancel.Text = "Exit";
+                btnAdd.Text = "Add";
+                btnEdit.Text = "Edit";
+                btnAdd.Enabled = true;
+                btnDelete.Enabled = true;
+                btnEdit.Enabled = true;
                 ClearControls();
                 EnableControls(false);
             }

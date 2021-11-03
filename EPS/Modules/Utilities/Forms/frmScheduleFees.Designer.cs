@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmScheduleFees));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtSubAcctDescNew = new System.Windows.Forms.TextBox();
             this.txtRevenueAcctNew = new System.Windows.Forms.TextBox();
@@ -36,25 +37,20 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cmbType = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblRevAcct = new System.Windows.Forms.Label();
             this.cmbRevenueAcct = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbSubAcctDesc = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkDisplayInOP = new System.Windows.Forms.CheckBox();
+            this.btnChkAllStruc = new System.Windows.Forms.Button();
+            this.btnChkAllCat = new System.Windows.Forms.Button();
+            this.btnChkAllScope = new System.Windows.Forms.Button();
+            this.btnAddRow = new System.Windows.Forms.Button();
             this.dgvCategory = new System.Windows.Forms.DataGridView();
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvMajorFees = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Subsidiaries = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Term = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Means = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Scope = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cumulative = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Area = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Structure = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvStruc = new System.Windows.Forms.DataGridView();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,6 +66,17 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Subsidiaries = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Term = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Means = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Scope = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cumulative = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Area = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Structure = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NeedLM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
@@ -89,14 +96,14 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cmbType);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.lblRevAcct);
             this.groupBox1.Controls.Add(this.cmbRevenueAcct);
             this.groupBox1.Controls.Add(this.cmbSubAcctDesc);
             this.groupBox1.Location = new System.Drawing.Point(16, 7);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(766, 89);
+            this.groupBox1.Size = new System.Drawing.Size(766, 105);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -107,9 +114,10 @@
             this.txtSubAcctDescNew.MaximumSize = new System.Drawing.Size(369, 27);
             this.txtSubAcctDescNew.MinimumSize = new System.Drawing.Size(369, 27);
             this.txtSubAcctDescNew.Name = "txtSubAcctDescNew";
-            this.txtSubAcctDescNew.Size = new System.Drawing.Size(369, 27);
+            this.txtSubAcctDescNew.Size = new System.Drawing.Size(369, 26);
             this.txtSubAcctDescNew.TabIndex = 7;
             this.txtSubAcctDescNew.Visible = false;
+            this.txtSubAcctDescNew.Leave += new System.EventHandler(this.txtSubAcctDescNew_Leave);
             // 
             // txtRevenueAcctNew
             // 
@@ -154,6 +162,7 @@
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(121, 26);
             this.cmbType.TabIndex = 4;
+            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -164,14 +173,14 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Subcategory:";
             // 
-            // label1
+            // lblRevAcct
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Revenue Account:";
+            this.lblRevAcct.AutoSize = true;
+            this.lblRevAcct.Location = new System.Drawing.Point(15, 21);
+            this.lblRevAcct.Name = "lblRevAcct";
+            this.lblRevAcct.Size = new System.Drawing.Size(120, 18);
+            this.lblRevAcct.TabIndex = 0;
+            this.lblRevAcct.Text = "Revenue Account:";
             // 
             // cmbRevenueAcct
             // 
@@ -192,18 +201,87 @@
             this.cmbSubAcctDesc.Size = new System.Drawing.Size(388, 27);
             this.cmbSubAcctDesc.TabIndex = 6;
             this.cmbSubAcctDesc.SelectedIndexChanged += new System.EventHandler(this.cmbSubAcctDesc_SelectedIndexChanged);
+            this.cmbSubAcctDesc.Leave += new System.EventHandler(this.cmbSubAcctDesc_Leave);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkDisplayInOP);
+            this.groupBox2.Controls.Add(this.btnChkAllStruc);
+            this.groupBox2.Controls.Add(this.btnChkAllCat);
+            this.groupBox2.Controls.Add(this.btnChkAllScope);
+            this.groupBox2.Controls.Add(this.btnAddRow);
             this.groupBox2.Controls.Add(this.dgvCategory);
             this.groupBox2.Controls.Add(this.dgvMajorFees);
             this.groupBox2.Controls.Add(this.dgvStruc);
             this.groupBox2.Controls.Add(this.dgvScope);
-            this.groupBox2.Location = new System.Drawing.Point(16, 95);
+            this.groupBox2.Location = new System.Drawing.Point(16, 113);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(766, 318);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            // 
+            // chkDisplayInOP
+            // 
+            this.chkDisplayInOP.AutoSize = true;
+            this.chkDisplayInOP.Enabled = false;
+            this.chkDisplayInOP.Location = new System.Drawing.Point(642, 95);
+            this.chkDisplayInOP.MaximumSize = new System.Drawing.Size(80, 40);
+            this.chkDisplayInOP.MinimumSize = new System.Drawing.Size(0, 60);
+            this.chkDisplayInOP.Name = "chkDisplayInOP";
+            this.chkDisplayInOP.Size = new System.Drawing.Size(80, 60);
+            this.chkDisplayInOP.TabIndex = 11;
+            this.chkDisplayInOP.Text = "Display Only in OP";
+            this.chkDisplayInOP.UseVisualStyleBackColor = true;
+            this.chkDisplayInOP.Visible = false;
+            this.chkDisplayInOP.CheckedChanged += new System.EventHandler(this.chkDisplayInOP_CheckedChanged);
+            // 
+            // btnChkAllStruc
+            // 
+            this.btnChkAllStruc.Enabled = false;
+            this.btnChkAllStruc.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChkAllStruc.Location = new System.Drawing.Point(464, 17);
+            this.btnChkAllStruc.Name = "btnChkAllStruc";
+            this.btnChkAllStruc.Size = new System.Drawing.Size(32, 33);
+            this.btnChkAllStruc.TabIndex = 21;
+            this.btnChkAllStruc.Text = "✓";
+            this.btnChkAllStruc.UseVisualStyleBackColor = true;
+            this.btnChkAllStruc.Click += new System.EventHandler(this.btnChkAllStruc_Click);
+            // 
+            // btnChkAllCat
+            // 
+            this.btnChkAllCat.Enabled = false;
+            this.btnChkAllCat.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChkAllCat.Location = new System.Drawing.Point(235, 17);
+            this.btnChkAllCat.Name = "btnChkAllCat";
+            this.btnChkAllCat.Size = new System.Drawing.Size(32, 33);
+            this.btnChkAllCat.TabIndex = 20;
+            this.btnChkAllCat.Text = "✓";
+            this.btnChkAllCat.UseVisualStyleBackColor = true;
+            this.btnChkAllCat.Click += new System.EventHandler(this.btnChkAllCat_Click);
+            // 
+            // btnChkAllScope
+            // 
+            this.btnChkAllScope.Enabled = false;
+            this.btnChkAllScope.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChkAllScope.Location = new System.Drawing.Point(6, 17);
+            this.btnChkAllScope.Name = "btnChkAllScope";
+            this.btnChkAllScope.Size = new System.Drawing.Size(32, 33);
+            this.btnChkAllScope.TabIndex = 19;
+            this.btnChkAllScope.Text = "✓";
+            this.btnChkAllScope.UseVisualStyleBackColor = true;
+            this.btnChkAllScope.Click += new System.EventHandler(this.btnChkAllScope_Click);
+            // 
+            // btnAddRow
+            // 
+            this.btnAddRow.Enabled = false;
+            this.btnAddRow.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddRow.Image = ((System.Drawing.Image)(resources.GetObject("btnAddRow.Image")));
+            this.btnAddRow.Location = new System.Drawing.Point(728, 129);
+            this.btnAddRow.Name = "btnAddRow";
+            this.btnAddRow.Size = new System.Drawing.Size(30, 26);
+            this.btnAddRow.TabIndex = 13;
+            this.btnAddRow.UseVisualStyleBackColor = true;
+            this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
             // 
             // dgvCategory
             // 
@@ -216,13 +294,12 @@
             this.dataGridViewCheckBoxColumn2,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5});
-            this.dgvCategory.Location = new System.Drawing.Point(200, 17);
+            this.dgvCategory.Location = new System.Drawing.Point(273, 17);
             this.dgvCategory.Name = "dgvCategory";
             this.dgvCategory.RowHeadersVisible = false;
             this.dgvCategory.Size = new System.Drawing.Size(185, 138);
             this.dgvCategory.TabIndex = 9;
             this.dgvCategory.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategory_CellEndEdit);
-
             // 
             // dataGridViewCheckBoxColumn2
             // 
@@ -258,7 +335,8 @@
             this.Category,
             this.Cumulative,
             this.Area,
-            this.Structure});
+            this.Structure,
+            this.NeedLM});
             this.dgvMajorFees.Location = new System.Drawing.Point(9, 161);
             this.dgvMajorFees.Name = "dgvMajorFees";
             this.dgvMajorFees.RowHeadersVisible = false;
@@ -267,6 +345,155 @@
             this.dgvMajorFees.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMajorFees_CellClick);
             this.dgvMajorFees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMajorFees_CellContentClick);
             this.dgvMajorFees.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMajorFees_CellEndEdit);
+            // 
+            // dgvStruc
+            // 
+            this.dgvStruc.AllowUserToAddRows = false;
+            this.dgvStruc.AllowUserToDeleteRows = false;
+            this.dgvStruc.AllowUserToResizeColumns = false;
+            this.dgvStruc.AllowUserToResizeRows = false;
+            this.dgvStruc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStruc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewCheckBoxColumn1,
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.dgvStruc.Location = new System.Drawing.Point(502, 17);
+            this.dgvStruc.Name = "dgvStruc";
+            this.dgvStruc.RowHeadersVisible = false;
+            this.dgvStruc.Size = new System.Drawing.Size(127, 138);
+            this.dgvStruc.TabIndex = 10;
+            this.dgvStruc.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStruc_CellEndEdit);
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.HeaderText = " ";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.Width = 30;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Structure";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 90;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Code";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // dgvScope
+            // 
+            this.dgvScope.AllowUserToAddRows = false;
+            this.dgvScope.AllowUserToDeleteRows = false;
+            this.dgvScope.AllowUserToResizeColumns = false;
+            this.dgvScope.AllowUserToResizeRows = false;
+            this.dgvScope.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvScope.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Select,
+            this.Desc,
+            this.Code});
+            this.dgvScope.Location = new System.Drawing.Point(44, 17);
+            this.dgvScope.Name = "dgvScope";
+            this.dgvScope.RowHeadersVisible = false;
+            this.dgvScope.Size = new System.Drawing.Size(185, 138);
+            this.dgvScope.TabIndex = 8;
+            this.dgvScope.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScope_CellEndEdit);
+            // 
+            // Select
+            // 
+            this.Select.HeaderText = " ";
+            this.Select.Name = "Select";
+            this.Select.Width = 30;
+            // 
+            // Desc
+            // 
+            this.Desc.HeaderText = "Scope of Work";
+            this.Desc.Name = "Desc";
+            this.Desc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Desc.Width = 150;
+            // 
+            // Code
+            // 
+            this.Code.HeaderText = "Code";
+            this.Code.Name = "Code";
+            this.Code.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Code.Visible = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dgvSchedule);
+            this.groupBox3.Location = new System.Drawing.Point(16, 432);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(629, 161);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Schedule";
+            // 
+            // dgvSchedule
+            // 
+            this.dgvSchedule.AllowUserToAddRows = false;
+            this.dgvSchedule.AllowUserToDeleteRows = false;
+            this.dgvSchedule.AllowUserToResizeColumns = false;
+            this.dgvSchedule.AllowUserToResizeRows = false;
+            this.dgvSchedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSchedule.Location = new System.Drawing.Point(9, 25);
+            this.dgvSchedule.Name = "dgvSchedule";
+            this.dgvSchedule.RowHeadersVisible = false;
+            this.dgvSchedule.Size = new System.Drawing.Size(612, 126);
+            this.dgvSchedule.TabIndex = 13;
+            this.dgvSchedule.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSchedule_CellEndEdit);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(666, 571);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(97, 33);
+            this.btnExit.TabIndex = 18;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(666, 537);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(97, 33);
+            this.btnPrint.TabIndex = 17;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(666, 503);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(97, 33);
+            this.btnDelete.TabIndex = 16;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(666, 469);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(97, 33);
+            this.btnEdit.TabIndex = 15;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(666, 435);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(97, 33);
+            this.btnAdd.TabIndex = 14;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -320,162 +547,17 @@
             this.Structure.HeaderText = "Structure";
             this.Structure.Name = "Structure";
             // 
-            // dgvStruc
+            // NeedLM
             // 
-            this.dgvStruc.AllowUserToAddRows = false;
-            this.dgvStruc.AllowUserToDeleteRows = false;
-            this.dgvStruc.AllowUserToResizeColumns = false;
-            this.dgvStruc.AllowUserToResizeRows = false;
-            this.dgvStruc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStruc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewCheckBoxColumn1,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-            this.dgvStruc.Location = new System.Drawing.Point(391, 17);
-            this.dgvStruc.Name = "dgvStruc";
-            this.dgvStruc.RowHeadersVisible = false;
-            this.dgvStruc.Size = new System.Drawing.Size(127, 138);
-            this.dgvStruc.TabIndex = 10;
-            this.dgvStruc.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStruc_CellEndEdit);
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.HeaderText = " ";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.Width = 30;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Structure";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 90;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Code";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Visible = false;
-            // 
-            // dgvScope
-            // 
-            this.dgvScope.AllowUserToAddRows = false;
-            this.dgvScope.AllowUserToDeleteRows = false;
-            this.dgvScope.AllowUserToResizeColumns = false;
-            this.dgvScope.AllowUserToResizeRows = false;
-            this.dgvScope.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvScope.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Select,
-            this.Desc,
-            this.Code});
-            this.dgvScope.Location = new System.Drawing.Point(9, 17);
-            this.dgvScope.Name = "dgvScope";
-            this.dgvScope.RowHeadersVisible = false;
-            this.dgvScope.Size = new System.Drawing.Size(185, 138);
-            this.dgvScope.TabIndex = 8;
-            this.dgvScope.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScope_CellEndEdit);
-
-            // 
-            // Select
-            // 
-            this.Select.HeaderText = " ";
-            this.Select.Name = "Select";
-            this.Select.Width = 30;
-            // 
-            // Desc
-            // 
-            this.Desc.HeaderText = "Scope of Work";
-            this.Desc.Name = "Desc";
-            this.Desc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Desc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Desc.Width = 150;
-            // 
-            // Code
-            // 
-            this.Code.HeaderText = "Code";
-            this.Code.Name = "Code";
-            this.Code.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Code.Visible = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.dgvSchedule);
-            this.groupBox3.Location = new System.Drawing.Point(16, 414);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(629, 161);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Schedule";
-            // 
-            // dgvSchedule
-            // 
-            this.dgvSchedule.AllowUserToAddRows = false;
-            this.dgvSchedule.AllowUserToDeleteRows = false;
-            this.dgvSchedule.AllowUserToResizeColumns = false;
-            this.dgvSchedule.AllowUserToResizeRows = false;
-            this.dgvSchedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSchedule.Location = new System.Drawing.Point(9, 25);
-            this.dgvSchedule.Name = "dgvSchedule";
-            this.dgvSchedule.RowHeadersVisible = false;
-            this.dgvSchedule.Size = new System.Drawing.Size(612, 126);
-            this.dgvSchedule.TabIndex = 13;
-            this.dgvSchedule.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSchedule_CellEndEdit);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Location = new System.Drawing.Point(666, 553);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(97, 33);
-            this.btnExit.TabIndex = 18;
-            this.btnExit.Text = "Exit";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Location = new System.Drawing.Point(666, 519);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(97, 33);
-            this.btnPrint.TabIndex = 17;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(666, 485);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(97, 33);
-            this.btnDelete.TabIndex = 16;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(666, 451);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(97, 33);
-            this.btnEdit.TabIndex = 15;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(666, 417);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(97, 33);
-            this.btnAdd.TabIndex = 14;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.NeedLM.HeaderText = "Need L.M.";
+            this.NeedLM.Name = "NeedLM";
             // 
             // frmScheduleFees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(793, 592);
+            this.ClientSize = new System.Drawing.Size(793, 617);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnAdd);
@@ -485,6 +567,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnDelete);
             this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -495,6 +578,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMajorFees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStruc)).EndInit();
@@ -511,7 +595,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbType;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblRevAcct;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvStruc;
         private System.Windows.Forms.DataGridView dgvMajorFees;
@@ -530,6 +614,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.TextBox txtSubAcctDescNew;
         private System.Windows.Forms.TextBox txtRevenueAcctNew;
+        private System.Windows.Forms.DataGridView dgvCategory;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private MultiColumnComboBoxDemo.MultiColumnComboBox cmbRevenueAcct;
+        private MultiColumnComboBoxDemo.MultiColumnComboBox cmbSubAcctDesc;
+        public System.Windows.Forms.Button btnAddRow;
+        private System.Windows.Forms.Button btnChkAllStruc;
+        private System.Windows.Forms.Button btnChkAllCat;
+        private System.Windows.Forms.Button btnChkAllScope;
+        private System.Windows.Forms.CheckBox chkDisplayInOP;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subsidiaries;
         private System.Windows.Forms.DataGridViewTextBoxColumn Term;
@@ -540,14 +638,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cumulative;
         private System.Windows.Forms.DataGridViewTextBoxColumn Area;
         private System.Windows.Forms.DataGridViewTextBoxColumn Structure;
-        private System.Windows.Forms.DataGridView dgvCategory;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private MultiColumnComboBoxDemo.MultiColumnComboBox cmbRevenueAcct;
-        private MultiColumnComboBoxDemo.MultiColumnComboBox cmbSubAcctDesc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NeedLM;
     }
 }
