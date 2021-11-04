@@ -78,7 +78,8 @@ namespace Modules.Transactions
             else if (RecordFrm.SourceClass == "NEW_VIEW")
             {
                 RecordFrm.arn1.Enabled = true;
-                RecordFrm.arn1.ArnCode.Enabled = true;
+                //RecordFrm.arn1.ArnCode.Enabled = true;
+                RecordFrm.arn1.ArnCode.Enabled = false;
                 RecordFrm.Text = "New Application - View";
             }
             else if (RecordFrm.SourceClass == "NEW_CANCEL")
@@ -209,6 +210,12 @@ namespace Modules.Transactions
                 RecordFrm.ButtonAdd.Enabled = false;
                 RecordFrm.ButtonEdit.Enabled = false;
                 RecordFrm.ButtonSearch.Enabled = true;
+
+                RecordFrm.formBldgDate.btnAdd.Enabled = false;
+                RecordFrm.formBldgDate.btnRemove.Enabled = false;
+                RecordFrm.formStrucOwn.btnCopy.Enabled = false;
+                RecordFrm.formLotOwn.btnCopy.Enabled = false;
+
             }
             else if (RecordFrm.SourceClass == "NEW_CANCEL")
             {
@@ -1052,6 +1059,9 @@ namespace Modules.Transactions
                         }
                     }
                     catch { }
+
+                    if (RecordFrm.SourceClass.Contains("NEW_VIEW")) // get only one record from viewing to avoid repeated engineers displaying
+                        break;
 
                 }
             }

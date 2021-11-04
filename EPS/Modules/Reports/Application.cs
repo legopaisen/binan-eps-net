@@ -236,7 +236,9 @@ namespace Modules.Reports
                 string sATIN = string.Empty;
 
                 sEngr = item.ENGR_CODE;
+                sEngr = sEngr?.Split('|')[0]; //AFM 20211104 get first id if multiple engr applied
                 sArch = item.ARCHITECT;
+                sArch = sArch?.Split('|')[0]; //AFM 20211104 get first id if multiple engr applied
 
                 Engineers engineer = new Engineers();
                 engineer.GetOwner(sEngr);
