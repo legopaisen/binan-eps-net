@@ -512,7 +512,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnCopy;
+        public System.Windows.Forms.Button btnCopy;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

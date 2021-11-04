@@ -153,7 +153,7 @@ namespace Modules.Transactions
             acct.GetOwner(txtLastName.Text.Trim(), txtFirstName.Text.Trim(),txtMI.Text.Trim());
             sAcctNo = acct.OwnerCode;
 
-            if (!string.IsNullOrEmpty(sAcctNo))
+            if (!string.IsNullOrEmpty(sAcctNo) && SourceClass != "NEW_VIEW")
             {
                 if (string.IsNullOrEmpty(StrucAcctNo))
                 {

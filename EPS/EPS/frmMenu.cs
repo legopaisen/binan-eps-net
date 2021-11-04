@@ -892,5 +892,16 @@ namespace EPS
                 form.ShowDialog();
             }
         }
+
+        private void viewApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TVA"))
+            {
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_VIEW";
+
+                form.ShowDialog();
+            }
+        }
     }
 }

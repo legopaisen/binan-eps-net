@@ -327,6 +327,10 @@ namespace Modules.Transactions
         {
             RecordClass.ClearControl();
 
+            this.arn1.Enabled = true;
+            this.arn1.GetAn();
+            this.arn1.GetTaxYear = "";
+
         }
 
         private void btnClear_Click(object sender, EventArgs e)

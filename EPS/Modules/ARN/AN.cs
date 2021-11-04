@@ -62,9 +62,9 @@ namespace Modules.ARN
 
         private void AN_Load(object sender, EventArgs e)
         {
-            //txtCode.Text = "BP"; // AFM 20200629 hardcoded exclusive for Binan /
-            txtCode.Text = ""; //AFM 20201027 for requested new arn for binan
-            txtCode.MaxLength = 3; // AFM 20201027 for requested new arn for binan
+            //txtCode.Text = "BP"; // AFM 20200629 hardcoded exclusive for Binan as per PM /
+            txtCode.Text = "AN"; //AFM 20201027 for requested new arn for binan
+            txtCode.MaxLength = 2; // AFM 20201027 for requested new arn for binan //AFM 20211104 reverted back to 2 as requested again by PM
             txtCode.Enabled = false; //AFM 20200811
             //txtYear.Text = AppSettingsManager.GetSystemDate().Year.ToString(); //AFM 20200629 fixed based on current year
             //txtMonth.Focus(); // disabled for new arn of binan
@@ -75,8 +75,8 @@ namespace Modules.ARN
         {
             if (!string.IsNullOrEmpty(txtCode.Text.ToString()))
             {
-                if (string.IsNullOrEmpty(txtYear.Text.ToString()))
-                    txtYear.Text = string.Format("{0:yyyy}", AppSettingsManager.GetCurrentDate());
+                //if (string.IsNullOrEmpty(txtYear.Text.ToString()))
+                //    txtYear.Text = string.Format("{0:yyyy}", AppSettingsManager.GetCurrentDate()); //AFM 20211104 removed for better input
                 //if (string.IsNullOrEmpty(txtMonth.Text.ToString()))
                 //    txtMonth.Text = string.Format("{0:MM}", AppSettingsManager.GetCurrentDate()); // disabled for new arn of binan
             }
