@@ -51,10 +51,10 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.cmbScope = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbPermit = new MultiColumnComboBoxDemo.MultiColumnComboBox();
-            this.arn1 = new Modules.ARN.AN();
             this.btnImgView = new System.Windows.Forms.Button();
             this.btnImgAttach = new System.Windows.Forms.Button();
             this.btnImgDetach = new System.Windows.Forms.Button();
+            this.arn1 = new Modules.ARN.AN();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -283,18 +283,6 @@
             this.cmbPermit.SelectedIndexChanged += new System.EventHandler(this.cmbPermit_SelectedIndexChanged);
             this.cmbPermit.Leave += new System.EventHandler(this.cmbPermit_Leave);
             // 
-            // arn1
-            // 
-            //this.arn1.GetCode = "BP";
-            //this.arn1.GetMonth = ""; // disabled for new arn of binan
-            this.arn1.GetSeries = "";
-            this.arn1.GetTaxYear = "";
-            this.arn1.Location = new System.Drawing.Point(52, 12);
-            this.arn1.Margin = new System.Windows.Forms.Padding(4);
-            this.arn1.Name = "arn1";
-            this.arn1.Size = new System.Drawing.Size(216, 39);
-            this.arn1.TabIndex = 1;
-            // 
             // btnImgView
             // 
             this.btnImgView.Enabled = false;
@@ -330,6 +318,17 @@
             this.btnImgDetach.UseVisualStyleBackColor = true;
             this.btnImgDetach.Visible = false;
             this.btnImgDetach.Click += new System.EventHandler(this.btnImgDetach_Click);
+            // 
+            // arn1
+            // 
+            this.arn1.GetCode = "AN";
+            this.arn1.GetSeries = "";
+            this.arn1.GetTaxYear = "";
+            this.arn1.Location = new System.Drawing.Point(52, 12);
+            this.arn1.Margin = new System.Windows.Forms.Padding(4);
+            this.arn1.Name = "arn1";
+            this.arn1.Size = new System.Drawing.Size(216, 39);
+            this.arn1.TabIndex = 1;
             // 
             // frmRecords
             // 

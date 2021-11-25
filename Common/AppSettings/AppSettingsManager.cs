@@ -563,6 +563,18 @@ namespace Common.AppSettings
             return sPermit;
         }
 
+        public static string GetPermitCode(string sPermit)
+        {
+            OracleResultSet result = new OracleResultSet();
+            result.Query = "select permit_code from permit_tbl where permit_desc like '%" + sPermit + "%'";
+            if (result.Execute())
+                if (result.Read())
+                    sPermit = result.GetString("permit_code");
+            result.Close();
+
+            return sPermit;
+        }
+
         public static bool GetAreaNeedValue(string sFeesCode)
         {
             OracleResultSet result = new OracleResultSet();

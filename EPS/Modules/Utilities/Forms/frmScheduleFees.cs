@@ -68,6 +68,7 @@ namespace Modules.Utilities.Forms
                 PopulateScope();
                 PopulateCategory();
                 EnableOtherAccountControls(false);
+                chkDisplayInOP.Visible = false;
             }
             InitializeControls();
             try

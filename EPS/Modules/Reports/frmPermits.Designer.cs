@@ -30,23 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPermits));
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.AN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjOwner = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BlkNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Street = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.brgy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.City = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TCT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Scope = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Engr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PermitNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OwnerCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PermitCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DateIssued = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.dtIssued = new System.Windows.Forms.DateTimePicker();
@@ -73,7 +56,6 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.an1 = new Modules.ARN.AN();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.cmbFilter = new System.Windows.Forms.ComboBox();
@@ -93,6 +75,30 @@
             this.txtPermitMonth = new System.Windows.Forms.TextBox();
             this.txtPermitSeries = new System.Windows.Forms.TextBox();
             this.btnEditPermit = new System.Windows.Forms.Button();
+            this.an1 = new Modules.ARN.AN();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtFlrArea = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtStoreys = new System.Windows.Forms.TextBox();
+            this.AN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjOwner = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BlkNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Street = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.brgy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.City = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TCT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FloorArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Storeys = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Scope = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Engr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PermitNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OwnerCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PermitCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateIssued = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -115,6 +121,8 @@
             this.brgy,
             this.City,
             this.TCT,
+            this.FloorArea,
+            this.Storeys,
             this.Scope,
             this.ProjCost,
             this.Engr,
@@ -133,112 +141,12 @@
             this.dgvList.TabIndex = 0;
             this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
             // 
-            // AN
-            // 
-            this.AN.HeaderText = "AN";
-            this.AN.Name = "AN";
-            this.AN.ReadOnly = true;
-            // 
-            // ProjDesc
-            // 
-            this.ProjDesc.HeaderText = "Proj Desc";
-            this.ProjDesc.Name = "ProjDesc";
-            this.ProjDesc.ReadOnly = true;
-            // 
-            // ProjOwner
-            // 
-            this.ProjOwner.HeaderText = "Proj Owner";
-            this.ProjOwner.Name = "ProjOwner";
-            this.ProjOwner.ReadOnly = true;
-            // 
-            // Lot
-            // 
-            this.Lot.HeaderText = "Lot";
-            this.Lot.Name = "Lot";
-            this.Lot.ReadOnly = true;
-            // 
-            // BlkNo
-            // 
-            this.BlkNo.HeaderText = "Blk No";
-            this.BlkNo.Name = "BlkNo";
-            this.BlkNo.ReadOnly = true;
-            // 
-            // Street
-            // 
-            this.Street.HeaderText = "Street";
-            this.Street.Name = "Street";
-            this.Street.ReadOnly = true;
-            // 
-            // brgy
-            // 
-            this.brgy.HeaderText = "Brgy";
-            this.brgy.Name = "brgy";
-            this.brgy.ReadOnly = true;
-            // 
-            // City
-            // 
-            this.City.HeaderText = "City";
-            this.City.Name = "City";
-            this.City.ReadOnly = true;
-            // 
-            // TCT
-            // 
-            this.TCT.HeaderText = "TCT No";
-            this.TCT.Name = "TCT";
-            this.TCT.ReadOnly = true;
-            // 
-            // Scope
-            // 
-            this.Scope.HeaderText = "Scope";
-            this.Scope.Name = "Scope";
-            this.Scope.ReadOnly = true;
-            // 
-            // ProjCost
-            // 
-            this.ProjCost.HeaderText = "Proj Cost";
-            this.ProjCost.Name = "ProjCost";
-            this.ProjCost.ReadOnly = true;
-            // 
-            // Engr
-            // 
-            this.Engr.HeaderText = "Professional In Charge";
-            this.Engr.Name = "Engr";
-            this.Engr.ReadOnly = true;
-            // 
-            // OR
-            // 
-            this.OR.HeaderText = "OR No";
-            this.OR.Name = "OR";
-            this.OR.ReadOnly = true;
-            // 
-            // PermitNo
-            // 
-            this.PermitNo.HeaderText = "Permit No";
-            this.PermitNo.Name = "PermitNo";
-            this.PermitNo.ReadOnly = true;
-            // 
-            // OwnerCode
-            // 
-            this.OwnerCode.HeaderText = "OwnerCode";
-            this.OwnerCode.Name = "OwnerCode";
-            this.OwnerCode.ReadOnly = true;
-            this.OwnerCode.Visible = false;
-            // 
-            // PermitCode
-            // 
-            this.PermitCode.HeaderText = "PermitCode";
-            this.PermitCode.Name = "PermitCode";
-            this.PermitCode.ReadOnly = true;
-            this.PermitCode.Visible = false;
-            // 
-            // DateIssued
-            // 
-            this.DateIssued.HeaderText = "Date Issued";
-            this.DateIssued.Name = "DateIssued";
-            this.DateIssued.ReadOnly = true;
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.txtStoreys);
+            this.groupBox1.Controls.Add(this.label17);
+            this.groupBox1.Controls.Add(this.txtFlrArea);
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.dtIssued);
             this.groupBox1.Controls.Add(this.label12);
@@ -483,17 +391,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "AN:";
             // 
-            // an1
-            // 
-            this.an1.GetCode = "";
-            this.an1.GetSeries = "";
-            this.an1.GetTaxYear = "";
-            this.an1.Location = new System.Drawing.Point(40, 13);
-            this.an1.Name = "an1";
-            this.an1.Size = new System.Drawing.Size(164, 33);
-            this.an1.TabIndex = 2;
-            this.an1.Load += new System.EventHandler(this.an1_Load);
-            // 
             // btnGenerate
             // 
             this.btnGenerate.Location = new System.Drawing.Point(555, 517);
@@ -676,6 +573,167 @@
             this.btnEditPermit.Visible = false;
             this.btnEditPermit.Click += new System.EventHandler(this.btnEditPermit_Click);
             // 
+            // an1
+            // 
+            this.an1.GetCode = "AN";
+            this.an1.GetSeries = "";
+            this.an1.GetTaxYear = "";
+            this.an1.Location = new System.Drawing.Point(40, 13);
+            this.an1.Name = "an1";
+            this.an1.Size = new System.Drawing.Size(164, 33);
+            this.an1.TabIndex = 2;
+            this.an1.Load += new System.EventHandler(this.an1_Load);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(285, 117);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(94, 15);
+            this.label17.TabIndex = 29;
+            this.label17.Text = "Total Floor Area";
+            // 
+            // txtFlrArea
+            // 
+            this.txtFlrArea.Enabled = false;
+            this.txtFlrArea.Location = new System.Drawing.Point(385, 114);
+            this.txtFlrArea.Name = "txtFlrArea";
+            this.txtFlrArea.Size = new System.Drawing.Size(95, 23);
+            this.txtFlrArea.TabIndex = 28;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(285, 146);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(82, 15);
+            this.label18.TabIndex = 31;
+            this.label18.Text = "No. of Storeys";
+            // 
+            // txtStoreys
+            // 
+            this.txtStoreys.Enabled = false;
+            this.txtStoreys.Location = new System.Drawing.Point(385, 143);
+            this.txtStoreys.Name = "txtStoreys";
+            this.txtStoreys.Size = new System.Drawing.Size(95, 23);
+            this.txtStoreys.TabIndex = 30;
+            // 
+            // AN
+            // 
+            this.AN.HeaderText = "AN";
+            this.AN.Name = "AN";
+            this.AN.ReadOnly = true;
+            // 
+            // ProjDesc
+            // 
+            this.ProjDesc.HeaderText = "Proj Desc";
+            this.ProjDesc.Name = "ProjDesc";
+            this.ProjDesc.ReadOnly = true;
+            // 
+            // ProjOwner
+            // 
+            this.ProjOwner.HeaderText = "Proj Owner";
+            this.ProjOwner.Name = "ProjOwner";
+            this.ProjOwner.ReadOnly = true;
+            // 
+            // Lot
+            // 
+            this.Lot.HeaderText = "Lot";
+            this.Lot.Name = "Lot";
+            this.Lot.ReadOnly = true;
+            // 
+            // BlkNo
+            // 
+            this.BlkNo.HeaderText = "Blk No";
+            this.BlkNo.Name = "BlkNo";
+            this.BlkNo.ReadOnly = true;
+            // 
+            // Street
+            // 
+            this.Street.HeaderText = "Street";
+            this.Street.Name = "Street";
+            this.Street.ReadOnly = true;
+            // 
+            // brgy
+            // 
+            this.brgy.HeaderText = "Brgy";
+            this.brgy.Name = "brgy";
+            this.brgy.ReadOnly = true;
+            // 
+            // City
+            // 
+            this.City.HeaderText = "City";
+            this.City.Name = "City";
+            this.City.ReadOnly = true;
+            // 
+            // TCT
+            // 
+            this.TCT.HeaderText = "TCT No";
+            this.TCT.Name = "TCT";
+            this.TCT.ReadOnly = true;
+            // 
+            // FloorArea
+            // 
+            this.FloorArea.HeaderText = "Tota Floor Area";
+            this.FloorArea.Name = "FloorArea";
+            this.FloorArea.ReadOnly = true;
+            // 
+            // Storeys
+            // 
+            this.Storeys.HeaderText = "No. of Storeys";
+            this.Storeys.Name = "Storeys";
+            this.Storeys.ReadOnly = true;
+            // 
+            // Scope
+            // 
+            this.Scope.HeaderText = "Scope";
+            this.Scope.Name = "Scope";
+            this.Scope.ReadOnly = true;
+            // 
+            // ProjCost
+            // 
+            this.ProjCost.HeaderText = "Proj Cost";
+            this.ProjCost.Name = "ProjCost";
+            this.ProjCost.ReadOnly = true;
+            // 
+            // Engr
+            // 
+            this.Engr.HeaderText = "Professional In Charge";
+            this.Engr.Name = "Engr";
+            this.Engr.ReadOnly = true;
+            // 
+            // OR
+            // 
+            this.OR.HeaderText = "OR No";
+            this.OR.Name = "OR";
+            this.OR.ReadOnly = true;
+            // 
+            // PermitNo
+            // 
+            this.PermitNo.HeaderText = "Permit No";
+            this.PermitNo.Name = "PermitNo";
+            this.PermitNo.ReadOnly = true;
+            // 
+            // OwnerCode
+            // 
+            this.OwnerCode.HeaderText = "OwnerCode";
+            this.OwnerCode.Name = "OwnerCode";
+            this.OwnerCode.ReadOnly = true;
+            this.OwnerCode.Visible = false;
+            // 
+            // PermitCode
+            // 
+            this.PermitCode.HeaderText = "PermitCode";
+            this.PermitCode.Name = "PermitCode";
+            this.PermitCode.ReadOnly = true;
+            this.PermitCode.Visible = false;
+            // 
+            // DateIssued
+            // 
+            this.DateIssued.HeaderText = "Date Issued";
+            this.DateIssued.Name = "DateIssued";
+            this.DateIssued.ReadOnly = true;
+            // 
             // frmPermits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -761,6 +819,11 @@
         private System.Windows.Forms.TextBox txtTCT;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DateTimePicker dtIssued;
+        private System.Windows.Forms.Button btnEditPermit;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtStoreys;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtFlrArea;
         private System.Windows.Forms.DataGridViewTextBoxColumn AN;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjDesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjOwner;
@@ -770,6 +833,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn brgy;
         private System.Windows.Forms.DataGridViewTextBoxColumn City;
         private System.Windows.Forms.DataGridViewTextBoxColumn TCT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FloorArea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Storeys;
         private System.Windows.Forms.DataGridViewTextBoxColumn Scope;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn Engr;
@@ -778,6 +843,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OwnerCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn PermitCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateIssued;
-        private System.Windows.Forms.Button btnEditPermit;
     }
 }

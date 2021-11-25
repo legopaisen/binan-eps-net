@@ -54,6 +54,16 @@ namespace EPS
 
             this.Text = "Engineering Permit System - ASSESS | Version: " + AssemblyCreationDate.Value.ToString(); //AFM 20210112
 
+
+            bool blnIsConnectionOpen = false;
+            blnIsConnectionOpen = DataConnectorManager.Instance.OpenConnection();
+            if (!blnIsConnectionOpen)
+            {
+                MessageBox.Show("error connection");
+                Dispose();
+                this.Close();
+            }
+
             frmLogin login = new frmLogin();
             login.ShowDialog();
             LabelPanel();
@@ -900,6 +910,19 @@ namespace EPS
                 frmRecords form = new frmRecords();
                 form.SourceClass = "NEW_VIEW";
 
+                form.ShowDialog();
+            }
+        }
+
+        private void fencingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TNA"))
+            {
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_ADD_OTH";
+                form.PermitApplication = "OTHERS";
+                form.SelectedPermitCode = AppSettingsManager.GetPermitCode(fencingToolStripMenuItem.Text);
+                form.SelectedPermitDesc = fencingToolStripMenuItem.Text;
                 form.ShowDialog();
             }
         }

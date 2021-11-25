@@ -102,19 +102,21 @@ namespace Modules.Reports
             string sScope = string.Empty;
             string sCategory = string.Empty;
             string sArn = string.Empty;
+            string sNoStoreys = string.Empty;
+            double dFlrArea = 0;
 
             OracleResultSet res = new OracleResultSet();
             //permit code = 1 is building permit, change depending on lgu
             if (cmbFilter.Text == "PAID" && rdoWithoutPermit.Checked == true)
-                res.Query = $"select distinct APP.*, PI.fees_amt_due, PI.or_no, PT.permit_desc, null as date_assigned from application APP, payments_info PI, permit_tbl PT where APP.arn = PI.refno and APP.permit_code = PT.permit_code and PT.permit_desc = 'BUILDING PERMIT' and APP.permit_no is null and (APP.arn like 'AN%' and APP.arn like '{An}%') and APP.arn not in (select arn from permit_arn where permit_arn.arn = APP.arn) and APP.permit_code = '01' and PI.permit_code = '01' order by APP.date_applied";
+                res.Query = $"select distinct APP.*, PI.fees_amt_due, PI.or_no, PT.permit_desc, BD.total_flr_area, BD.no_storeys, null as date_assigned from application APP, payments_info PI, permit_tbl PT, building BD where APP.arn = PI.refno and APP.permit_code = PT.permit_code and APP.bldg_no = BD.bldg_no and PT.permit_desc = 'BUILDING PERMIT' and APP.permit_no is null and (APP.arn like 'AN%' and APP.arn like '{An}%') and APP.arn not in (select arn from permit_arn where permit_arn.arn = APP.arn) and APP.permit_code = '01' and PI.permit_code = '01' order by APP.date_applied";
             else if (cmbFilter.Text == "PAID" && rdoWithPermit.Checked == true)
-                res.Query = $"select distinct APP.*, PI.fees_amt_due, PI.or_no, PT.permit_desc, PA.date_assigned from application APP, payments_info PI, permit_tbl PT, permit_arn PA where APP.arn = PI.refno and APP.permit_code = PT.permit_code and APP.arn = PA.arn and PT.permit_desc = 'BUILDING PERMIT' and APP.permit_no is not null and (APP.arn like 'AN%' and APP.arn like '{An}%') and APP.permit_code = '01' and PI.permit_code = '01' order by APP.date_applied";
+                res.Query = $"select distinct APP.*, PI.fees_amt_due, PI.or_no, PT.permit_desc, BD.total_flr_area, BD.no_storeys, PA.date_assigned from application APP, payments_info PI, permit_tbl PT, permit_arn PA, building BD where APP.arn = PI.refno and APP.permit_code = PT.permit_code and APP.arn = PA.arn and APP.bldg_no = BD.bldg_no and PT.permit_desc = 'BUILDING PERMIT' and APP.permit_no is not null and (APP.arn like 'AN%' and APP.arn like '{An}%') and APP.permit_code = '01' and PI.permit_code = '01' order by APP.date_applied";
             else if (cmbFilter.Text == "PAID" && rdoWithPermit.Checked == false && rdoWithoutPermit.Checked == false)
-                res.Query = $"select distinct APP.*, PI.fees_amt_due, PI.or_no, PT.permit_desc, PA.date_assigned from application APP, payments_info PI, permit_tbl PT, permit_arn PA where APP.arn = PI.refno and APP.permit_code = PT.permit_code and APP.arn = PA.arn and PT.permit_desc = 'BUILDING PERMIT' and (APP.arn like 'AN%' and APP.arn like '{An}%') and APP.permit_code = '01' and PI.permit_code = '01' order by APP.date_applied";
+                res.Query = $"select distinct APP.*, PI.fees_amt_due, PI.or_no, PT.permit_desc, BD.total_flr_area, BD.no_storeys, PA.date_assigned from application APP, payments_info PI, permit_tbl PT, permit_arn PA, building BD where APP.arn = PI.refno and APP.permit_code = PT.permit_code and APP.arn = PA.arn and APP.bldg_no = BD.bldg_no and PT.permit_desc = 'BUILDING PERMIT' and (APP.arn like 'AN%' and APP.arn like '{An}%') and APP.permit_code = '01' and PI.permit_code = '01' order by APP.date_applied";
 
             else if (cmbFilter.Text == "UNPAID")
             {
-                res.Query = "select distinct APP.*, PT.permit_desc from application_que APP, permit_tbl PT where APP.permit_code = PT.permit_code and PT.permit_desc = 'BUILDING PERMIT' and APP.arn like 'AN%' and APP.permit_code = '01' and PT.permit_code = '01' order by APP.date_applied";
+                res.Query = "select distinct APP.*, PT.permit_desc, BD.total_flr_area, BD.no_storeys from application_que APP, permit_tbl PT, building BD where APP.permit_code = PT.permit_code and APP.bldg_no = BD.bldg_no and PT.permit_desc = 'BUILDING PERMIT' and APP.arn like 'AN%' and APP.permit_code = '01' and PT.permit_code = '01' order by APP.date_applied";
                 if (res.Execute())
                     while(res.Read())
                     {
@@ -122,6 +124,8 @@ namespace Modules.Reports
                         sTCT = GetTCT(res.GetString("proj_owner"));
                         sArn = res.GetString("arn");
                         sScope = GetApplicationScope(res.GetString("scope_code"));
+                        sNoStoreys = res.GetInt("no_storeys").ToString();
+                        dFlrArea = res.GetDouble("total_flr_area");
 
                         dgvList.Rows.Add(
                             sArn,
@@ -133,6 +137,8 @@ namespace Modules.Reports
                             res.GetString("proj_brgy"),
                             res.GetString("proj_city"),
                             sTCT,
+                            dFlrArea.ToString("#,##0.00"),
+                            sNoStoreys,
                             sScope,
                             "",
                             "",
@@ -155,6 +161,8 @@ namespace Modules.Reports
                     sTCT = GetTCT(res.GetString("proj_owner"));
                     sArn = res.GetString("arn");
                     sScope = GetApplicationScope(res.GetString("scope_code"));
+                    sNoStoreys = res.GetInt("no_storeys").ToString();
+                    dFlrArea = res.GetDouble("total_flr_area");
                     string sDate = string.Empty;
                     try
                     {
@@ -175,6 +183,8 @@ namespace Modules.Reports
                         res.GetString("proj_brgy"),
                         res.GetString("proj_city"),
                         sTCT,
+                        dFlrArea.ToString("#,##0.00"),
+                        sNoStoreys,
                         sScope,
                         res.GetDouble("fees_amt_due").ToString("##,##0.00"),
                         "",
@@ -317,50 +327,62 @@ namespace Modules.Reports
             catch { }
             try
             {
-                txtScope.Text = dgvList[9, e.RowIndex].Value.ToString();
+                txtTCT.Text = AppSettingsManager.GetAcctName("TCT", dgvList[8, e.RowIndex].Value.ToString());
             }
             catch { }
             try
             {
-                txtEngr.Text = dgvList[11, e.RowIndex].Value.ToString();
+                txtFlrArea.Text = dgvList[9, e.RowIndex].Value.ToString();
             }
             catch { }
             try
             {
-                txtProjCost.Text = dgvList[10, e.RowIndex].Value.ToString();
+                txtStoreys.Text = dgvList[10, e.RowIndex].Value.ToString();
             }
             catch { }
             try
             {
-                txtOr.Text = dgvList[12, e.RowIndex].Value.ToString();
+                txtScope.Text = dgvList[11, e.RowIndex].Value.ToString();
             }
             catch { }
             try
             {
-                txtOwnAddr.Text = AppSettingsManager.GetAcctName("addr", dgvList[14, e.RowIndex].Value.ToString());
+                txtProjCost.Text = dgvList[12, e.RowIndex].Value.ToString();
             }
             catch { }
             try
             {
-                txtTCT.Text = AppSettingsManager.GetAcctName("TCT", dgvList[14, e.RowIndex].Value.ToString());
-            }
-            catch { }
-
-            try
-            {
-                SetPermitNo(dgvList[13, e.RowIndex].Value.ToString());
+                txtEngr.Text = dgvList[13, e.RowIndex].Value.ToString();
             }
             catch { }
 
             try
             {
-                m_sPermitCode = dgvList[15, e.RowIndex].Value.ToString();
+                txtOr.Text = dgvList[14, e.RowIndex].Value.ToString();
+            }
+            catch { }
+            try
+            {
+                txtOwnAddr.Text = AppSettingsManager.GetAcctName("addr", dgvList[16, e.RowIndex].Value.ToString());
+            }
+            catch { }
+
+
+            try
+            {
+                SetPermitNo(dgvList[15, e.RowIndex].Value.ToString());
             }
             catch { }
 
             try
             {
-                string sDt = dgvList[16, e.RowIndex].Value.ToString();
+                m_sPermitCode = dgvList[17, e.RowIndex].Value.ToString();
+            }
+            catch { }
+
+            try
+            {
+                string sDt = dgvList[18, e.RowIndex].Value.ToString();
                 DateTime dt;
                 DateTime.TryParse(sDt, out dt);
                 dtIssued.Value = dt;
@@ -370,7 +392,7 @@ namespace Modules.Reports
 
             try
             {
-                if (!string.IsNullOrEmpty(dgvList[13, e.RowIndex].Value.ToString()))
+                if (!string.IsNullOrEmpty(dgvList[15, e.RowIndex].Value.ToString()))
                     btnGenerate.Text = "Print";
                 else
                     btnGenerate.Text = "Generate";
@@ -384,7 +406,7 @@ namespace Modules.Reports
 
             try
             {
-                if (!string.IsNullOrEmpty(dgvList[13, e.RowIndex].Value.ToString()))
+                if (!string.IsNullOrEmpty(dgvList[15, e.RowIndex].Value.ToString()))
                 {
                     btnGenerate.Text = "Print";
                     //btnEditPermit.Enabled = true;
@@ -685,6 +707,8 @@ namespace Modules.Reports
             frmreport.Scope = txtScope.Text;
             frmreport.ProjCost = txtProjCost.Text;
             frmreport.AssignedEngr = sAssignedEngr;
+            frmreport.NoStoreys = txtStoreys.Text;
+            frmreport.FloorArea = txtFlrArea.Text;
             frmreport.An = m_sAN;
             frmreport.ShowDialog();
 

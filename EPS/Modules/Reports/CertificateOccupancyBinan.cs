@@ -109,6 +109,7 @@ namespace Modules.Reports
                 new Microsoft.Reporting.WinForms.ReportParameter("sBldgPermitNo", sBldgPermitNo),
                 new Microsoft.Reporting.WinForms.ReportParameter("dtBldgPermit", sBldgPermitDt),
                 new Microsoft.Reporting.WinForms.ReportParameter("dtToday", AppSettingsManager.GetSystemDate().ToShortDateString()),
+                new Microsoft.Reporting.WinForms.ReportParameter("BldgOfficial", AppSettingsManager.GetConfigValue("08").ToString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("PrePrinted", ReportForm.isPrePrint.ToString())
             };
             ReportForm.reportViewer1.LocalReport.SetParameters(para);

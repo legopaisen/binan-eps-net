@@ -117,10 +117,10 @@ namespace Modules.Transactions
 
         void dgvList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)//AFM 20191017 maxlength of permit
         {
-            if (e.Control is TextBox)
-            {
-                (e.Control as TextBox).MaxLength = 20;
-            }
+            //if (e.Control is TextBox)
+            //{
+            //    (e.Control as TextBox).MaxLength = 20;
+            //}
 
         }
 
@@ -248,9 +248,14 @@ namespace Modules.Transactions
                 if (e.ColumnIndex == 3)
                 {
                     string sStart = string.Empty;
+                    string sDate = string.Empty;
+                    string sYear = string.Empty;
                     try
                     {
-                        sStart = dgvList[e.ColumnIndex, e.RowIndex].Value.ToString();
+                        sStart = dgvList[e.ColumnIndex, e.RowIndex].EditedFormattedValue.ToString();
+                        sDate = sStart.Substring(0, sStart.LastIndexOf("/") + 1);
+                        sYear = sStart.Substring(sStart.LastIndexOf("/") + 1, 4);
+                        sStart = sDate + sYear;
                         dgvList[e.ColumnIndex, e.RowIndex].Value = sStart;
                     }
                     catch {
@@ -260,9 +265,14 @@ namespace Modules.Transactions
                 if (e.ColumnIndex == 4)
                 {
                     string sComplete = string.Empty;
+                    string sDate = string.Empty;
+                    string sYear = string.Empty;
                     try
                     {
-                        sComplete = dgvList[e.ColumnIndex, e.RowIndex].Value.ToString();
+                        sComplete = dgvList[e.ColumnIndex, e.RowIndex].EditedFormattedValue.ToString();
+                        sDate = sComplete.Substring(0, sComplete.LastIndexOf("/") + 1);
+                        sYear = sComplete.Substring(sComplete.LastIndexOf("/") + 1, 4);
+                        sComplete = sDate + sYear;
                         dgvList[e.ColumnIndex, e.RowIndex].Value = sComplete;
                     }
                     catch {

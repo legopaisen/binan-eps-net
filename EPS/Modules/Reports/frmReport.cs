@@ -46,6 +46,8 @@ namespace Modules.Reports
         public string ProjCost { get; set; }
         public string AssignedEngr { get; set; }
         public bool isPrePrint { get; set; }
+        public string NoStoreys { get; set; } //AFM 20211122 new format as requested
+        public string FloorArea { get; set; } //AFM 20211122 new format as requested
 
         //cert occupancy
         public string CertNo { get; set; }

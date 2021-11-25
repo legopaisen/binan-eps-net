@@ -62,6 +62,12 @@ namespace Modules.Transactions
         {
 
         }
+        
+        public virtual void ButtonSeparateAdd(string sender)
+        {
+
+        }
+
         public virtual void ButtonEditClick(string sender)
         {
 

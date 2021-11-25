@@ -289,6 +289,21 @@ namespace Modules.Transactions
             //MessageBox.Show("Record saved", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
 
+        public override void ButtonSeparateAdd(string sender)
+        {
+            EnableRecordEntry();
+
+            RecordFrm.ButtonAdd.Enabled = true;
+            RecordFrm.ButtonEdit.Enabled = false;
+            RecordFrm.cmbPermit.Enabled = true;
+            RecordFrm.cmbScope.Enabled = true;
+            RecordFrm.btnSearch.Enabled = false;
+            RecordFrm.btnClear.Enabled = false;
+            RecordFrm.arn1.Enabled = false;
+            RecordFrm.cmbPermit.Enabled = false;
+            RecordFrm.cmbScope.Enabled = false;
+        }
+
         public override void ButtonEditClick(string sender)
         {
             if (RecordFrm.ValidateData())

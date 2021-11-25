@@ -230,36 +230,38 @@ namespace Modules.Reports
             string sPermitCode = string.Empty;
             bool IsOk = false;
 
-            foreach (var items in record)
+            if(record == null)
             {
-                myDataRow = dtTable.NewRow();
-                myDataRow["FeesDesc"] = items.FEES_DESC;
-                myDataRow["Fees"] = items.FEES_AMT;
-                //sFees = items.FEES_CODE;
-                sPermitCode = items.PERMIT_CODE;
+                foreach (var items in record)
+                {
+                    myDataRow = dtTable.NewRow();
+                    myDataRow["FeesDesc"] = items.FEES_DESC;
+                    myDataRow["Fees"] = items.FEES_AMT;
+                    //sFees = items.FEES_CODE;
+                    sPermitCode = items.PERMIT_CODE;
 
-                //surcharge
-                result.Query = $"select sum(TD.fees_amt) as fees_amt from other_major_fees OM, taxdues TD ";
-                result.Query += $"where fees_desc = 'SURCHARGE' ";
-                result.Query += $"AND substr(TD.fees_code,1,2) = OM.fees_code and TD.arn = '{ReportForm.An}' ";
-                result.Query += $"AND TD.fees_category = 'OTHERS' ";
-                result.Query += $"AND TD.permit_code = '{sPermitCode}' ";
-                float.TryParse(result.ExecuteScalar().ToString(), out fSurch);
-                result.Close();
+                    //surcharge
+                    result.Query = $"select sum(TD.fees_amt) as fees_amt from other_major_fees OM, taxdues TD ";
+                    result.Query += $"where fees_desc = 'SURCHARGE' ";
+                    result.Query += $"AND substr(TD.fees_code,1,2) = OM.fees_code and TD.arn = '{ReportForm.An}' ";
+                    result.Query += $"AND TD.fees_category = 'OTHERS' ";
+                    result.Query += $"AND TD.permit_code = '{sPermitCode}' ";
+                    float.TryParse(result.ExecuteScalar().ToString(), out fSurch);
+                    result.Close();
 
-                //additional
-                result.Query = "select sum(taxdues.fees_amt) as fees_amt ";
-                result.Query += "from taxdues ";
-                result.Query += $"where taxdues.arn = '{ReportForm.An}' ";
-                result.Query += $"AND TAXDUES.FEES_CATEGORY = 'ADDITIONAL' ";
-                result.Query += $"AND taxdues.permit_code = '{sPermitCode}' ";
-                float.TryParse(result.ExecuteScalar().ToString(), out fAddl);
-                result.Close();
+                    //additional
+                    result.Query = "select sum(taxdues.fees_amt) as fees_amt ";
+                    result.Query += "from taxdues ";
+                    result.Query += $"where taxdues.arn = '{ReportForm.An}' ";
+                    result.Query += $"AND TAXDUES.FEES_CATEGORY = 'ADDITIONAL' ";
+                    result.Query += $"AND taxdues.permit_code = '{sPermitCode}' ";
+                    float.TryParse(result.ExecuteScalar().ToString(), out fAddl);
+                    result.Close();
 
-                //add others value to total if is not tagged for display
+                    //add others value to total if is not tagged for display
 
-                //if(IsOk == false)
-                //{
+                    //if(IsOk == false)
+                    //{
                     result.Query = "select O.fees_desc, sum(taxdues.fees_amt) as fees_amt, taxdues.fees_code as fees_code ";
                     result.Query += "from taxdues, other_major_fees O ";
                     result.Query += $"where substr(taxdues.fees_code,1,2) = O.fees_code and taxdues.arn = '{ReportForm.An}' ";
@@ -279,22 +281,49 @@ namespace Modules.Reports
                         }
                     IsOk = true;
                     result.Close();
-                //}
-               
+                    //}
 
 
-                myDataRow["Surcharge"] = fSurch; //pending value nito
 
-                items.FEES_AMT += fSurch;
-                items.FEES_AMT += fAddl;
+                    myDataRow["Surcharge"] = fSurch; //pending value nito
 
-                myDataRow["AdminFine"] = 0; //pending value nito
-                myDataRow["Total"] = items.FEES_AMT;
+                    items.FEES_AMT += fSurch;
+                    items.FEES_AMT += fAddl;
 
-                dtTable.Rows.Add(myDataRow);
+                    myDataRow["AdminFine"] = 0; //pending value nito
+                    myDataRow["Total"] = items.FEES_AMT;
 
-                dAllTotalAmt += items.FEES_AMT;
+                    dtTable.Rows.Add(myDataRow);
+
+                    dAllTotalAmt += items.FEES_AMT;
+                }
             }
+            else //AFM 20211123 requested by binan as per rj - allow billing of additional fees only on any permit
+            // proceeding this condition means additional fees are only billed on permit
+            {
+                result.Query = "select sum(taxdues.fees_amt) as fees_amt ";
+                result.Query += "from taxdues ";
+                result.Query += $"where taxdues.arn = '{ReportForm.An}' ";
+                result.Query += $"AND TAXDUES.FEES_CATEGORY = 'ADDITIONAL' ";
+                //result.Query += $"AND taxdues.permit_code = '{sPermitCode}' ";
+                sQuery = result.Query;
+                record = db.Database.SqlQuery<SOA_TBL>(sQuery);
+                
+                foreach(var items in record)
+                {
+                    myDataRow = dtTable.NewRow();
+                    myDataRow["FeesDesc"] = "ADDITIONAL FEES";
+                    myDataRow["Fees"] = items.FEES_AMT;
+                    sPermitCode = items.PERMIT_CODE;
+
+                    myDataRow["Total"] = items.FEES_AMT;
+
+                    dtTable.Rows.Add(myDataRow);
+                    dAllTotalAmt += items.FEES_AMT;
+                }
+
+            }
+           
 
             // for other fees
             string sDisplay = string.Empty;

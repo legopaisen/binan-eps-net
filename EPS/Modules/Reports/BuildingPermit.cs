@@ -13,7 +13,7 @@ using EPSEntities.Entity;
 using Common.DataConnector;
 
 namespace Modules.Reports
-{
+{ //AFM 20211122 format/design of certificate updated as requested
     public class BuildingPermit : FormReportClass
     {
         public BuildingPermit(frmReport Form) : base(Form)
@@ -21,7 +21,7 @@ namespace Modules.Reports
 
         public override void LoadForm()
         {
-
+            string sAddr = string.Empty;
             OracleResultSet res = new OracleResultSet();
             OracleResultSet res2 = new OracleResultSet();
             DateTime dtOR = AppSettingsManager.GetSystemDate();
@@ -48,6 +48,7 @@ namespace Modules.Reports
                 }
             res.Close();
 
+            sAddr = ReportForm.LotNo + " " + ReportForm.BlkNo + " " + ReportForm.Street + " " + ReportForm.Brgy + " " + ReportForm.City; // AFM 20211122 new format as requested
 
             Microsoft.Reporting.WinForms.ReportParameter[] para = new Microsoft.Reporting.WinForms.ReportParameter[]
             {
@@ -57,16 +58,11 @@ namespace Modules.Reports
                 new Microsoft.Reporting.WinForms.ReportParameter("DatePaid", dtOR.ToShortDateString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("OwnerName", ReportForm.OwnerName),
                 new Microsoft.Reporting.WinForms.ReportParameter("ProjName", ReportForm.ProjName),
-                new Microsoft.Reporting.WinForms.ReportParameter("LotNo", ReportForm.LotNo),
-                new Microsoft.Reporting.WinForms.ReportParameter("BlkNo", ReportForm.BlkNo),
-                new Microsoft.Reporting.WinForms.ReportParameter("TCT", ReportForm.TCT),
-                new Microsoft.Reporting.WinForms.ReportParameter("Street", ReportForm.Street),
-                new Microsoft.Reporting.WinForms.ReportParameter("Brgy", ReportForm.Brgy),
-                new Microsoft.Reporting.WinForms.ReportParameter("City", ReportForm.City),
-                new Microsoft.Reporting.WinForms.ReportParameter("Zip", AppSettingsManager.GetConfigValue("28")),
+                new Microsoft.Reporting.WinForms.ReportParameter("Address", sAddr),
                 new Microsoft.Reporting.WinForms.ReportParameter("Occupancy", sOccu),
-                new Microsoft.Reporting.WinForms.ReportParameter("Scope", ReportForm.Scope),
                 new Microsoft.Reporting.WinForms.ReportParameter("ProjCost", ReportForm.ProjCost),
+                new Microsoft.Reporting.WinForms.ReportParameter("NoStoreys", ReportForm.NoStoreys),
+                new Microsoft.Reporting.WinForms.ReportParameter("FloorArea", ReportForm.FloorArea),
                 new Microsoft.Reporting.WinForms.ReportParameter("PrePrinted", ReportForm.isPrePrint.ToString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("AssignedPro", ReportForm.AssignedEngr)
             };

@@ -75,8 +75,8 @@ namespace Modules.ARN
         {
             if (!string.IsNullOrEmpty(txtCode.Text.ToString()))
             {
-                //if (string.IsNullOrEmpty(txtYear.Text.ToString()))
-                //    txtYear.Text = string.Format("{0:yyyy}", AppSettingsManager.GetCurrentDate()); //AFM 20211104 removed for better input
+                if (string.IsNullOrEmpty(txtYear.Text.ToString()))
+                    txtYear.Text = string.Format("{0:yyyy}", AppSettingsManager.GetCurrentDate());
                 //if (string.IsNullOrEmpty(txtMonth.Text.ToString()))
                 //    txtMonth.Text = string.Format("{0:MM}", AppSettingsManager.GetCurrentDate()); // disabled for new arn of binan
             }

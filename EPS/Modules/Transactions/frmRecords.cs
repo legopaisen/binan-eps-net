@@ -113,7 +113,7 @@ namespace Modules.Transactions
         {
             get { return this.arn1.GetAn(); }
         }
-        
+
         public Button ButtonImgView
         {
             get { return this.btnImgView; }
@@ -131,7 +131,6 @@ namespace Modules.Transactions
             get { return this.btnImgDetach; }
             set { this.btnImgDetach = value; }
         }
-
 
 
         public frmRecords()
@@ -558,5 +557,7 @@ namespace Modules.Transactions
         {
             RecordClass.ButtonImgDetach();
         }
+
+
     }
 }

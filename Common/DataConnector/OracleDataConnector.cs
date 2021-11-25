@@ -130,6 +130,7 @@ namespace Common.DataConnector
 
         public override bool OpenConnection()
         {
+            
 
             Encryption decrypt = new Encryption();
             if (string.IsNullOrEmpty(m_strPassword))
@@ -195,7 +196,12 @@ namespace Common.DataConnector
                 m_strErrorDescription = ex.Message.ToString();
                 return false;
             }
-            
+
+            if (m_strUserId.Substring(m_strUserId.Length - 1) == "t")
+            {
+                System.Windows.Forms.MessageBox.Show("You are connected in test database!");
+            }
+
             return true;
         }
 

@@ -249,9 +249,16 @@ namespace Modules.Billing
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtAmtDue.Text == "0.00" || txtAmtDue.Text == "" || txtAmtDue.Text == string.Empty) //AFM 20191015 uncomputed fees validation
+            if((txtAddOnTotAmTDue.Text != "0.00" || txtAddOnTotAmTDue.Text != "") && (txtAmtDue.Text == "0.00" || txtAmtDue.Text == "")) //AFM 20211123 requested by client as per rj - allow to bill only additional fees on any permit
             {
-                MessageBox.Show("No fees computed");
+                if (MessageBox.Show("Only additional fees are detected! Would you like to proceed?", "No Main Fees", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                {
+                    return;
+                }
+            }
+            else if (txtAmtDue.Text == "0.00" || txtAmtDue.Text == "" || txtAmtDue.Text == string.Empty) //AFM 20191015 uncomputed fees validation
+            {
+                MessageBox.Show("No fees computed", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
             RecordClass.Save();
@@ -383,10 +390,59 @@ namespace Modules.Billing
             }
             foreach (var s in feesCode)
             {
-                sQuery = $"delete from bill_tmp where arn = '{m_sAN}' and fees_code = '{s}'";
+                sQuery = $"delete from bill_tmp where arn = '{m_sAN}' and fees_code = '{s}' and fees_category = 'MAIN'";
                 db.Database.ExecuteSqlCommand(sQuery);
                 remove = true;
             }
+
+            feesCode = new List<string>();
+            for (int cnt = 0; cnt < dgvPermit.Rows.Count; cnt++)
+            {
+                if ((bool)dgvPermit[0, cnt].Value == false)
+                {
+                    if (dgvPermit[0, cnt].Selected == true)
+                    {
+                        for (int list = 0; list < dgvAddOnFees.Rows.Count; list++)
+                        {
+                            if ((bool)dgvAddOnFees[0, list].Value == true)
+                            {
+                                feesCode.Add(dgvAddOnFees[2, list].Value.ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            foreach (var s in feesCode)
+            {
+                sQuery = $"delete from bill_tmp where arn = '{m_sAN}' and fees_code = '{s}' and fees_category = 'ADDITIONAL'";
+                db.Database.ExecuteSqlCommand(sQuery);
+                remove = true;
+            }
+
+            feesCode = new List<string>();
+            for (int cnt = 0; cnt < dgvPermit.Rows.Count; cnt++)
+            {
+                if ((bool)dgvPermit[0, cnt].Value == false)
+                {
+                    if (dgvPermit[0, cnt].Selected == true)
+                    {
+                        for (int list = 0; list < dgvOtherFees.Rows.Count; list++)
+                        {
+                            if ((bool)dgvOtherFees[0, list].Value == true)
+                            {
+                                feesCode.Add(dgvOtherFees[2, list].Value.ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            foreach (var s in feesCode)
+            {
+                sQuery = $"delete from bill_tmp where arn = '{m_sAN}' and fees_code = '{s}' and fees_category = 'OTHERS'";
+                db.Database.ExecuteSqlCommand(sQuery);
+                remove = true;
+            }
+
             dgvPermit.Refresh();
             if (remove == true)
             {
@@ -396,6 +452,24 @@ namespace Modules.Billing
                     dgvAssessment[7, i].Value = "0";
                     dgvAssessment[8, i].Value = "0";
                     dgvAssessment[11, i].Value = "0";
+
+                }
+
+                for (int i = 0; i < dgvAddOnFees.Rows.Count; i++)
+                {
+                    dgvAddOnFees[0, i].Value = false;
+                    dgvAddOnFees[7, i].Value = "0";
+                    dgvAddOnFees[8, i].Value = "0";
+                    dgvAddOnFees[11, i].Value = "0";
+
+                }
+
+                for (int i = 0; i < dgvOtherFees.Rows.Count; i++)
+                {
+                    dgvOtherFees[0, i].Value = false;
+                    dgvOtherFees[7, i].Value = "0";
+                    dgvOtherFees[8, i].Value = "0";
+                    dgvOtherFees[11, i].Value = "0";
 
                 }
             }
@@ -555,7 +629,7 @@ namespace Modules.Billing
             RecordClass.OtherFeesAddAddOn(sender, e);
         }
       
-        private void txtAddOnAmt_KeyUp(object sender, KeyEventArgs e) //requested by binan - override will trigger when pressed ctrl+F
+        private void txtAddOnAmt_KeyUp(object sender, KeyEventArgs e) //requested by binan - override will trigger when pressed "ctrl+F"
         {
             if (e.KeyCode == Keys.F && CtrlPressed == true)
             {
