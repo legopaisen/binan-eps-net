@@ -58,7 +58,6 @@
             this.mECHANICALToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cFEIToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.viewApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.evaluationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.assessmentOfFeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.permitBillingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mechanicalPermitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,6 +122,7 @@
             this.lblDesc = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.fencingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dOLEBillingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MS.SuspendLayout();
             this.pnlButton.SuspendLayout();
             this.SuspendLayout();
@@ -135,7 +135,6 @@
             this.MS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.recordsToolStripMenuItem,
             this.applicationsToolStripMenuItem,
-            this.evaluationToolStripMenuItem,
             this.assessmentOfFeesToolStripMenuItem,
             this.reportsToolStripMenuItem,
             this.permitNoMonitoringToolStripMenuItem,
@@ -379,21 +378,14 @@
             this.viewApplicationToolStripMenuItem.Text = "View Application";
             this.viewApplicationToolStripMenuItem.Click += new System.EventHandler(this.viewApplicationToolStripMenuItem_Click);
             // 
-            // evaluationToolStripMenuItem
-            // 
-            this.evaluationToolStripMenuItem.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.evaluationToolStripMenuItem.Name = "evaluationToolStripMenuItem";
-            this.evaluationToolStripMenuItem.Size = new System.Drawing.Size(84, 22);
-            this.evaluationToolStripMenuItem.Text = "Evaluation";
-            this.evaluationToolStripMenuItem.Visible = false;
-            // 
             // assessmentOfFeesToolStripMenuItem
             // 
             this.assessmentOfFeesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.permitBillingToolStripMenuItem,
             this.reassessmentOfPermitToolStripMenuItem,
             this.toolStripSeparator2,
-            this.certificationBillingToolStripMenuItem});
+            this.certificationBillingToolStripMenuItem,
+            this.dOLEBillingToolStripMenuItem});
             this.assessmentOfFeesToolStripMenuItem.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.assessmentOfFeesToolStripMenuItem.Name = "assessmentOfFeesToolStripMenuItem";
             this.assessmentOfFeesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
@@ -967,6 +959,13 @@
             this.fencingToolStripMenuItem.Text = "Fencing Permit";
             this.fencingToolStripMenuItem.Click += new System.EventHandler(this.fencingToolStripMenuItem_Click);
             // 
+            // dOLEBillingToolStripMenuItem
+            // 
+            this.dOLEBillingToolStripMenuItem.Name = "dOLEBillingToolStripMenuItem";
+            this.dOLEBillingToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.dOLEBillingToolStripMenuItem.Text = "DOLE Billing";
+            this.dOLEBillingToolStripMenuItem.Click += new System.EventHandler(this.dOLEBillingToolStripMenuItem_Click);
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -1083,7 +1082,6 @@
         private System.Windows.Forms.ToolStripMenuItem buildingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem electricalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem occupancyToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem evaluationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mechanicalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cFEIToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem otherPermitsToolStripMenuItem;
@@ -1094,6 +1092,7 @@
         private System.Windows.Forms.ToolStripMenuItem cFEIToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem viewApplicationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fencingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dOLEBillingToolStripMenuItem;
     }
 }
 

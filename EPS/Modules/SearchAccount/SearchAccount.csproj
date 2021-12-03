@@ -83,6 +83,12 @@
     <Compile Include="frmSearchARN.Designer.cs">
       <DependentUpon>frmSearchARN.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSearchDOLE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSearchDOLE.Designer.cs">
+      <DependentUpon>frmSearchDOLE.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSearchARN.resx">
       <DependentUpon>frmSearchARN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSearchDOLE.resx">
+      <DependentUpon>frmSearchDOLE.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -85,6 +85,12 @@
     <Compile Include="frmAddOn.Designer.cs">
       <DependentUpon>frmAddOn.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDOLEBilling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDOLEBilling.Designer.cs">
+      <DependentUpon>frmDOLEBilling.cs</DependentUpon>
+    </Compile>
     <Compile Include="OtherPermit.cs" />
     <Compile Include="Building.cs" />
     <Compile Include="Class1.cs" />
@@ -103,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBilling.resx">
       <DependentUpon>frmBilling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDOLEBilling.resx">
+      <DependentUpon>frmDOLEBilling.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

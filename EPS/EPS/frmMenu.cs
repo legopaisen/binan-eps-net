@@ -926,5 +926,20 @@ namespace EPS
                 form.ShowDialog();
             }
         }
+
+        private void dOLEBillingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TB-B"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("DOLE-BILLING", "", ""))
+                {
+                    frmDOLEBilling form = new frmDOLEBilling();
+                    form.ShowDialog();
+
+                    taskman.IsObjectLock("DOLE-BILLING", "DELETE", "");
+                }
+            }
+        }
     }
 }

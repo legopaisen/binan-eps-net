@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRequirement));
             this.dgvList = new System.Windows.Forms.DataGridView();
+            this.ReqID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Application = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblSubject = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -40,9 +43,6 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.ReqID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Application = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbFilter = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
@@ -67,6 +67,26 @@
             this.dgvList.Size = new System.Drawing.Size(386, 150);
             this.dgvList.TabIndex = 0;
             this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
+            // 
+            // ReqID
+            // 
+            this.ReqID.HeaderText = "Req ID";
+            this.ReqID.Name = "ReqID";
+            this.ReqID.ReadOnly = true;
+            this.ReqID.Width = 50;
+            // 
+            // Desc
+            // 
+            this.Desc.HeaderText = "Description";
+            this.Desc.Name = "Desc";
+            this.Desc.ReadOnly = true;
+            this.Desc.Width = 230;
+            // 
+            // Application
+            // 
+            this.Application.HeaderText = "Application";
+            this.Application.Name = "Application";
+            this.Application.ReadOnly = true;
             // 
             // lblSubject
             // 
@@ -102,7 +122,7 @@
             this.txtDesc.Enabled = false;
             this.txtDesc.Location = new System.Drawing.Point(97, 230);
             this.txtDesc.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDesc.MaxLength = 120;
+            this.txtDesc.MaxLength = 500;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(298, 26);
             this.txtDesc.TabIndex = 15;
@@ -164,26 +184,6 @@
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // ReqID
-            // 
-            this.ReqID.HeaderText = "Req ID";
-            this.ReqID.Name = "ReqID";
-            this.ReqID.ReadOnly = true;
-            this.ReqID.Width = 50;
-            // 
-            // Desc
-            // 
-            this.Desc.HeaderText = "Description";
-            this.Desc.Name = "Desc";
-            this.Desc.ReadOnly = true;
-            this.Desc.Width = 230;
-            // 
-            // Application
-            // 
-            this.Application.HeaderText = "Application";
-            this.Application.Name = "Application";
-            this.Application.ReadOnly = true;
             // 
             // label2
             // 

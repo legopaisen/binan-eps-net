@@ -207,7 +207,13 @@ namespace Modules.Utilities.Forms
                 catch { }
                 try
                 {
-                    sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}%'";
+                    if(ScheduleMode == "OTHERS")
+                        sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}%' and fees_category = 'OTHERS'";
+                    else if (ScheduleMode == "ADDITIONAL")
+                        sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}%' and fees_category = 'ADDITIONAL'";
+                    else
+                        sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}%' and fees_category = 'MAIN'";
+
                     iPayCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
                 }
                 catch { }
@@ -225,7 +231,13 @@ namespace Modules.Utilities.Forms
 
                 try
                 {
-                    sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}%'";
+                    if(ScheduleMode == "OTHERS")
+                        sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}%' and fees_category = 'OTHERS'";
+                    else if (ScheduleMode == "ADDITIONAL")
+                        sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}%' and fees_category = 'ADDITIONAL'";
+                    else
+                        sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}%' and fees_category = 'MAIN'";
+
                     iPayCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
                 }
                 catch { }
@@ -241,7 +253,13 @@ namespace Modules.Utilities.Forms
                 catch { }
                 try
                 {
-                    sQuery = $"select count(*) from payments_info where fees_code = '{sFeesCode}'";
+                    if(ScheduleMode == "OTHERS")
+                        sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}' and fees_category = 'OTHERS'";
+                    else if (ScheduleMode == "ADDITIONAL")
+                        sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}' and fees_category = 'ADDITIONAL'";
+                    else
+                        sQuery = $"select count(*) from payments_info where fees_code like '{sFeesCode}' and fees_category = 'MAIN'";
+
                     iPayCnt = db.Database.SqlQuery<Int32>(sQuery).SingleOrDefault();
                 }
                 catch { }
