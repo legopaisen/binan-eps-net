@@ -135,6 +135,7 @@
             this.cmbApplication.Name = "cmbApplication";
             this.cmbApplication.Size = new System.Drawing.Size(161, 26);
             this.cmbApplication.TabIndex = 17;
+            this.cmbApplication.Visible = false;
             // 
             // label1
             // 
@@ -144,6 +145,7 @@
             this.label1.Size = new System.Drawing.Size(78, 18);
             this.label1.TabIndex = 18;
             this.label1.Text = "Application";
+            this.label1.Visible = false;
             // 
             // btnDelete
             // 
@@ -193,6 +195,7 @@
             this.label2.Size = new System.Drawing.Size(41, 18);
             this.label2.TabIndex = 24;
             this.label2.Text = "Filter";
+            this.label2.Visible = false;
             // 
             // cmbFilter
             // 
@@ -202,6 +205,7 @@
             this.cmbFilter.Name = "cmbFilter";
             this.cmbFilter.Size = new System.Drawing.Size(112, 26);
             this.cmbFilter.TabIndex = 23;
+            this.cmbFilter.Visible = false;
             this.cmbFilter.SelectedIndexChanged += new System.EventHandler(this.cmbFilter_SelectedIndexChanged);
             // 
             // frmRequirement

@@ -108,7 +108,7 @@ namespace Modules.Tables
             }
             else
             {
-                if(string.IsNullOrEmpty(txtDesc.Text.Trim()) || string.IsNullOrEmpty(cmbApplication.Text.Trim()))
+                if(string.IsNullOrEmpty(txtDesc.Text.Trim()))
                 {
                     MessageBox.Show("Incomplete details!", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     return;
@@ -120,9 +120,10 @@ namespace Modules.Tables
                     res.Query = "INSERT INTO REQUIREMENTS_TBL VALUES(";
                     res.Query += $"'{GetNextID()}', ";
                     res.Query += $"'{txtDesc.Text.Trim()}', ";
-                    res.Query += $"'{cmbApplication.Text.Trim()}')";
+                    res.Query += $"'')";
+                    //res.Query += $"'{cmbApplication.Text.Trim()}')";
 
-                    if(res.ExecuteNonQuery() == 0)
+                    if (res.ExecuteNonQuery() == 0)
                     { }
 
                     ClearControls();
@@ -225,7 +226,7 @@ namespace Modules.Tables
             }
             else
             {
-                if (string.IsNullOrEmpty(txtDesc.Text.Trim()) && string.IsNullOrEmpty(cmbApplication.Text.Trim()))
+                if (string.IsNullOrEmpty(txtDesc.Text.Trim()))
                 {
                     MessageBox.Show("Incomplete details!", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     return;
@@ -235,8 +236,8 @@ namespace Modules.Tables
                 {
                     OracleResultSet res = new OracleResultSet();
                     res.Query = "UPDATE REQUIREMENTS_TBL SET ";
-                    res.Query += $"REQ_DESC = '{txtDesc.Text.Trim()}', ";
-                    res.Query += $"REQ_APPL = '{cmbApplication.Text.Trim()}' ";
+                    res.Query += $"REQ_DESC = '{txtDesc.Text.Trim()}' ";
+                    //res.Query += $"REQ_APPL = '{cmbApplication.Text.Trim()}' ";
                     res.Query += $"WHERE REQ_ID = '{txtID.Text.Trim()}'";
                     if (res.ExecuteNonQuery() == 0)
                     { }

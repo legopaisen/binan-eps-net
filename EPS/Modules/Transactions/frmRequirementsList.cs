@@ -34,7 +34,8 @@ namespace Modules.Transactions
 
             OracleResultSet res = new OracleResultSet();
             string[] arrPermit = Permit.Split(' ');
-            res.Query = $"select * from requirements_tbl where req_appl like '%{arrPermit[0]}%' order by req_id";
+            //res.Query = $"select * from requirements_tbl where req_appl like '%{arrPermit[0]}%' order by req_id";
+            res.Query = $"select * from requirements_tbl order by req_id"; // AFM 20211206 all requirements will show regardless of permit
             if (res.Execute())
                 while (res.Read())
                 {
@@ -46,7 +47,8 @@ namespace Modules.Transactions
             {
                 int cnt = 0;
                 string sID = string.Empty;
-                res.Query = $"select * from requirements_tbl where req_appl like '%{arrPermit[0]}%' order by req_id";
+                //res.Query = $"select * from requirements_tbl where req_appl like '%{arrPermit[0]}%' order by req_id";
+                res.Query = $"select * from requirements_tbl order by req_id";
                 if (res.Execute())
                     while (res.Read())
                     {
@@ -71,7 +73,8 @@ namespace Modules.Transactions
             if(ViewMode == false)
             {
                 OracleResultSet res = new OracleResultSet();
-                res.Query = $"DELETE FROM REQUIREMENTS_QUE a WHERE a.ARN = '{ARN}' AND a.REQ_ID IN (SELECT b.REQ_ID FROM REQUIREMENTS_TBL b WHERE a.REQ_ID = b.REQ_ID AND b.REQ_APPL LIKE '%{Permit}%')";
+                //res.Query = $"DELETE FROM REQUIREMENTS_QUE a WHERE a.ARN = '{ARN}' AND a.REQ_ID IN (SELECT b.REQ_ID FROM REQUIREMENTS_TBL b WHERE a.REQ_ID = b.REQ_ID AND b.REQ_APPL LIKE '%{Permit}%')";
+                res.Query = $"DELETE FROM REQUIREMENTS_QUE a WHERE a.ARN = '{ARN}' AND a.REQ_ID IN (SELECT b.REQ_ID FROM REQUIREMENTS_TBL b WHERE a.REQ_ID = b.REQ_ID)";
                 if (res.ExecuteNonQuery() == 0)
                 { }
                 res.Close();
