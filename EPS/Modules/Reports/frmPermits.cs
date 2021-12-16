@@ -639,6 +639,11 @@ namespace Modules.Reports
             if (form.m_isCancel == true)
                 return;
 
+            frmFSECSelect frmfsecselect = new frmFSECSelect();
+            frmfsecselect.ShowDialog();
+            if (frmfsecselect.m_isCancel == true)
+                return;
+
             m_sPermitNo = GetPermitNo();
             //if (string.IsNullOrEmpty(m_sPermitNo) && btnEditPermit.Text == "Save")
             if (string.IsNullOrEmpty(m_sPermitNo)) //set permit as always automated as per maam mitch
@@ -710,6 +715,8 @@ namespace Modules.Reports
             frmreport.NoStoreys = txtStoreys.Text;
             frmreport.FloorArea = txtFlrArea.Text;
             frmreport.An = m_sAN;
+            frmreport.FsecNo = frmfsecselect.m_sFsecNo;
+            frmreport.FsecDate = frmfsecselect.m_sDateFsec;
             frmreport.ShowDialog();
 
             int iCnt = 0;

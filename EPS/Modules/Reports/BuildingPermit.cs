@@ -64,7 +64,9 @@ namespace Modules.Reports
                 new Microsoft.Reporting.WinForms.ReportParameter("NoStoreys", ReportForm.NoStoreys),
                 new Microsoft.Reporting.WinForms.ReportParameter("FloorArea", ReportForm.FloorArea),
                 new Microsoft.Reporting.WinForms.ReportParameter("PrePrinted", ReportForm.isPrePrint.ToString()),
-                new Microsoft.Reporting.WinForms.ReportParameter("AssignedPro", ReportForm.AssignedEngr)
+                new Microsoft.Reporting.WinForms.ReportParameter("AssignedPro", ReportForm.AssignedEngr),
+                new Microsoft.Reporting.WinForms.ReportParameter("FsecNo", ReportForm.FsecNo),
+                new Microsoft.Reporting.WinForms.ReportParameter("FsecDate", ReportForm.FsecDate)
             };
             ReportForm.reportViewer1.LocalReport.SetParameters(para);
 

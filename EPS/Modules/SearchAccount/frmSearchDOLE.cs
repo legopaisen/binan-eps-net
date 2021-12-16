@@ -46,7 +46,7 @@ namespace Modules.SearchAccount
         {
             dgvList.Rows.Clear();
             OracleResultSet res = new OracleResultSet();
-            res.Query = $"select * from billing_dole where bill_no like '%{txtBillNo.Text.Trim()}%' and applicant name like '%{txtApplicant.Text.Trim()}%' order by bill_no";
+            res.Query = $"select distinct bd.bill_no, da.applicant_name  from billing_dole bd, dole_applicant da where bd.applicant_no = da.applicant_no and bd.bill_no like '%{txtBillNo.Text.Trim()}%' and da.applicant_name like '%{txtApplicant.Text.Trim()}%' order by bill_no";
             if(res.Execute())
             {
                 if (res.Read())

@@ -27,7 +27,7 @@ namespace Modules.Billing
 
         private void frmDOLEBilling_Load(object sender, EventArgs e)
         {
-            ClearControls();
+            ClearControls(true);
             OracleResultSet res = new OracleResultSet();
             res.Query = "select fees_code from SUBCATEGORIES where fees_desc = 'DOLE' and fees_term <> 'SUBCATEGORY'"; // get fees code of DOLE
             if (res.Execute())
@@ -35,26 +35,71 @@ namespace Modules.Billing
                     m_sFeesCode = res.GetString(0);
         }
 
-        private void ClearControls()
+        private void ClearControls(bool bln)
         {
-            foreach (Control c in gbInfo.Controls)
-            {
-                if (c is TextBox)
-                {
-                    c.Text = "";
-                }
-            }
-            foreach (Control c in gbAmount.Controls)
-            {
-                if (c is TextBox)
-                {
-                    c.Text = "";
-                }
-            }
-
+            btnSearch.Enabled = bln;
             txtBillNo.Text = "";
             m_sBillNo = "";
 
+            txtBillNo.Enabled = bln;
+
+            gbAmount.Enabled = bln;
+            gbInfo.Enabled = bln;
+            txtLineGrade.Enabled = bln;
+            txtBuilding.Enabled = bln;
+            txtPlumbing.Enabled = bln;
+            txtWiring.Enabled = bln;
+            txtMech.Enabled = bln;
+            txtOccu.Enabled = bln;
+            txtFencing.Enabled = bln;
+            txtSign.Enabled = bln;
+            txtAnnual.Enabled = bln;
+            txtCivil.Enabled = bln;
+            txtElec.Enabled = bln;
+            txtMech2.Enabled = bln;
+            txtPlumb.Enabled = bln;
+            txtCfei.Enabled = bln;
+            txtFiling.Enabled = bln;
+            txtOthers.Enabled = bln;
+            txtFire.Enabled = bln;
+
+            txtTotal.Enabled = !bln;
+            txt80.Enabled = !bln;
+            txt20.Enabled = !bln;
+            txtAllTotal.Enabled = !bln;
+
+            txtBillNo.Enabled = bln;
+
+            gbAmount.Text = "";
+            gbInfo.Text = "";
+            txtApplicant.Text = "";
+            txtAddress.Text = "";
+            txtCategory.Text = "";
+            txtStoreys.Text = "";
+            txtArea.Text = "";
+            txtConstCost.Text = "";
+            txtLineGrade.Text = "";
+            txtBuilding.Text = "";
+            txtPlumbing.Text = "";
+            txtWiring.Text = "";
+            txtMech.Text = "";
+            txtOccu.Text = "";
+            txtFencing.Text = "";
+            txtSign.Text = "";
+            txtAnnual.Text = "";
+            txtCivil.Text = "";
+            txtElec.Text = "";
+            txtMech2.Text = "";
+            txtPlumb.Text = "";
+            txtCfei.Text = ""; ;
+            txtFiling.Text = "";
+            txtOthers.Text = "";
+            txtFire.Text = "";
+
+            txtTotal.Text = "";
+            txt80.Text = "";
+            txt20.Text = "";
+            txtAllTotal.Text = "";
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -94,7 +139,7 @@ namespace Modules.Billing
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            ClearControls();
+            ClearControls(true);
         }
 
         private void EnableControls(bool bln)
@@ -554,9 +599,8 @@ namespace Modules.Billing
         private void txtConstCost_Leave(object sender, EventArgs e)
         {
             double dAmt = 0;
-            double.TryParse(txtOthers.Text, out dAmt);
-            txtOthers.Text = string.Format("{0:#,##0.00}", dAmt);
-            ComputeTotal();
+            double.TryParse(txtConstCost.Text, out dAmt);
+            txtConstCost.Text = string.Format("{0:#,##0.00}", dAmt);
         }
 
         private void txtStoreys_KeyPress(object sender, KeyPressEventArgs e)
@@ -583,6 +627,13 @@ namespace Modules.Billing
             {
                 e.Handled = true;
             }
+        }
+
+        private void txtArea_Leave(object sender, EventArgs e)
+        {
+            double dAmt = 0;
+            double.TryParse(txtArea.Text, out dAmt);
+            txtArea.Text = string.Format("{0:#,##0.00}", dAmt);
         }
 
         private void txtFire_KeyPress(object sender, KeyPressEventArgs e)
@@ -658,7 +709,7 @@ namespace Modules.Billing
             txt80.Text = string.Format("{0:#,##0.00}", d80);
             txt20.Text = string.Format("{0:#,##0.00}", d20);
 
-            txtAllTotal.Text = string.Format("{0:#,##0.00}", (dTotalAmt + d80 + d20 + dFire));
+            txtAllTotal.Text = string.Format("{0:#,##0.00}", (dTotalAmt + dFire));
         }
 
         private string GenerateApplicantNo()
@@ -673,10 +724,10 @@ namespace Modules.Billing
             {
                 switch (iCnt)
                 {
-                    case 1: sSeries = "000" + iCnt.ToString(); break;
-                    case 2: sSeries = "00" + iCnt.ToString(); break;
-                    case 3: sSeries = "0" + iCnt.ToString(); break;
-                    case 4: sSeries = iCnt.ToString(); break;
+                    case 1: sSeries = "000" + (iCnt + 1).ToString(); break;
+                    case 2: sSeries = "00" + (iCnt + 1).ToString(); break;
+                    case 3: sSeries = "0" + (iCnt + 1).ToString(); break;
+                    case 4: sSeries = (iCnt + 1).ToString(); break;
                 }
             }
             else
@@ -711,6 +762,8 @@ namespace Modules.Billing
             double dFire = 0;
             double d80 = 0;
             double d20 = 0;
+            double dArea = 0;
+            double dConstCost = 0;
             double.TryParse(string.Format("{0:###}", txtLineGrade.Text), out dLineGrade);
             double.TryParse(string.Format("{0:###}", txtBuilding.Text), out dBuilding);
             double.TryParse(string.Format("{0:###}", txtPlumbing.Text), out dPlumbing);
@@ -732,6 +785,8 @@ namespace Modules.Billing
             double.TryParse(string.Format("{0:###}", txtAllTotal.Text), out dAllTotalAmt);
             double.TryParse(string.Format("{0:###}", txt80.Text), out d80);
             double.TryParse(string.Format("{0:###}", txt20.Text), out d20);
+            double.TryParse(string.Format("{0:###}", txtArea.Text), out dArea);
+            double.TryParse(string.Format("{0:###}", txtConstCost.Text), out dConstCost);
             OracleResultSet res = new OracleResultSet();
 
             res.Query = "select acct_code from account where acct_ln = 'DOLE'";
@@ -749,7 +804,7 @@ namespace Modules.Billing
 
             res.Query = "INSERT INTO BILL_DOLE_INFO VALUES(";
             res.Query += $"'{sBillNo}', ";
-            res.Query += $"{m_sFeesCode}, ";
+            res.Query += $"'{m_sFeesCode}', ";
             res.Query += $"{dLineGrade}, ";
             res.Query += $"{dBuilding}, ";
             res.Query += $"{dPlumbing}, ";
@@ -780,9 +835,9 @@ namespace Modules.Billing
             res.Query += $"'{txtApplicant.Text.Trim()}', ";
             res.Query += $"'{txtAddress.Text.Trim()}', ";
             res.Query += $"'{txtCategory.Text.Trim()}', ";
-            res.Query += $"{txtStoreys.Text.Trim()}, ";
-            res.Query += $"{txtArea.Text.Trim()}, ";
-            res.Query += $"{txtConstCost.Text.Trim()})";
+            res.Query += $"'{txtStoreys.Text.Trim()}', ";
+            res.Query += $"{dArea}, ";
+            res.Query += $"{dConstCost})";
             if (res.ExecuteNonQuery() == 0)
             { }
             res.Commit();
@@ -833,5 +888,12 @@ namespace Modules.Billing
             res.Close();
             return sBillNo;
         }
+
+        private void txtStoreys_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
 }

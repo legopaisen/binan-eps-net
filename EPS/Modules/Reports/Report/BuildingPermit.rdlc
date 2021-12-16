@@ -31,9 +31,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>PermitNo</rd:DefaultName>
-        <Top>2.63763in</Top>
+        <Top>2.60013in</Top>
         <Left>3.39458in</Left>
-        <Height>0.25in</Height>
+        <Height>0.22222in</Height>
         <Width>1.21875in</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -63,7 +63,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>PermitDtIssued</rd:DefaultName>
-        <Top>2.88763in</Top>
+        <Top>2.82235in</Top>
         <Left>2.75916in</Left>
         <Height>0.21875in</Height>
         <Width>1.35417in</Width>
@@ -453,6 +453,66 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="FsecNo">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!FsecNo.Value</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>FsecNo</rd:DefaultName>
+        <Top>3.0411in</Top>
+        <Left>2.55084in</Left>
+        <Height>0.22222in</Height>
+        <Width>1.56249in</Width>
+        <ZIndex>15</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="FsecDate">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!FsecDate.Value</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>FsecDate</rd:DefaultName>
+        <Top>3.27721in</Top>
+        <Left>2.75916in</Left>
+        <Height>0.20833in</Height>
+        <Width>1.35417in</Width>
+        <ZIndex>16</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>17.03472in</Height>
     <Style />
@@ -518,6 +578,18 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="FloorArea">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FsecNo">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FsecDate">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>

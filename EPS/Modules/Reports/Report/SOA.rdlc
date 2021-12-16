@@ -527,7 +527,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1028,10 +1027,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=(ReportItems!Textbox11.Value) * 0.8</Value>
+                <Value>="Php " &amp; FormatNumber(((ReportItems!Textbox11.Value)) * 0.8, 2)</Value>
                 <Style>
                   <FontWeight>Normal</FontWeight>
-                  <Format>Php #,0.00;(#,0.00)</Format>
+                  <Format>#,0.00;(#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1063,10 +1062,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Php " &amp; (ReportItems!Textbox11.Value) * 0.2</Value>
+                <Value>="Php " &amp; FormatNumber(((ReportItems!Textbox11.Value) * 0.2), 2)</Value>
                 <Style>
                   <FontWeight>Normal</FontWeight>
-                  <Format>Php #,0.00;(#,0.00)</Format>
+                  <Format>#,0.00;(#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -2186,6 +2185,8 @@
     </ReportParameter>
     <ReportParameter Name="ConsCost">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="Province">

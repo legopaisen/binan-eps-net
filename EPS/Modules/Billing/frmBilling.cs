@@ -390,7 +390,7 @@ namespace Modules.Billing
             }
             foreach (var s in feesCode)
             {
-                sQuery = $"delete from bill_tmp where arn = '{m_sAN}' and fees_code = '{s}' and fees_category = 'MAIN'";
+                sQuery = $"delete from ` where arn = '{m_sAN}' and fees_code = '{s}' and fees_category = 'MAIN'";
                 db.Database.ExecuteSqlCommand(sQuery);
                 remove = true;
             }

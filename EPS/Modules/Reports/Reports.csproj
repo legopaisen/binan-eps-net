@@ -159,6 +159,12 @@
     <Compile Include="frmEngrAssigned.Designer.cs">
       <DependentUpon>frmEngrAssigned.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmFSECSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFSECSelect.Designer.cs">
+      <DependentUpon>frmFSECSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPaymentHist.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEngrAssigned.resx">
       <DependentUpon>frmEngrAssigned.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFSECSelect.resx">
+      <DependentUpon>frmFSECSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPaymentHist.resx">
       <DependentUpon>frmPaymentHist.cs</DependentUpon>

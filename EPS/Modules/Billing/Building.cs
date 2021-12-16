@@ -403,8 +403,9 @@ namespace Modules.Billing
 		{
 			OracleResultSet res = new OracleResultSet();
 			OracleResultSet res2 = new OracleResultSet();
-            int iCnt = 0;
-			string sFeesCode = string.Empty;
+            double dPrevAmt = 0;
+            double dNewAmt = 0;
+            string sFeesCode = string.Empty;
 			string sFeesDesc = string.Empty;
 			string sPermitCode = string.Empty;
 			string sFeesCategory = string.Empty;
@@ -412,11 +413,23 @@ namespace Modules.Billing
 			double dOrigAmt = 0;
 			bool isForApproval = false;
 
-            res.Query = $"select count(*) from application_approval where  ARN = '{RecordFrm.m_sAN.Trim()}' and status = 'APPROVED'";
-            int.TryParse(res.ExecuteScalar(), out iCnt);
-            if (iCnt > 0)
+            res.Query = $"select sum(fees_amt) from tax_details where ARN = '{RecordFrm.m_sAN.Trim()}' and fees_category = 'ADDITIONAL'";
+            double.TryParse(res.ExecuteScalar(), out dNewAmt);
+
+            res.Query = $"select sum(amount) from application_approval where  ARN = '{RecordFrm.m_sAN.Trim()}' and status = 'APPROVED'";
+            double.TryParse(res.ExecuteScalar(), out dPrevAmt);
+
+            if (dNewAmt == dPrevAmt) //if same amount, skip approval
                 return false;
 
+            if(dNewAmt == 0) //remove approval if additional fees are 0
+            {
+                res.Query = $"DELETE FROM APPLICATION_APPROVAL WHERE ARN = '{RecordFrm.m_sAN.Trim()}'";
+                if (res.ExecuteNonQuery() == 0)
+                { }
+                res.Close();
+                return false;
+            }
             res.Query = $"DELETE FROM APPLICATION_APPROVAL WHERE ARN = '{RecordFrm.m_sAN.Trim()}'";
             if (res.ExecuteNonQuery() == 0)
             { }

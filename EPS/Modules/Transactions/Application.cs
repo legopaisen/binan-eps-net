@@ -730,12 +730,24 @@ namespace Modules.Transactions
                 else
                     strWhereCond += $" and status_code = 'REN'";
 
+                int iCnt = 0;
                 if (RecordFrm.SourceClass.Contains("NEW_ADD_")) //AFM 20210315 for electrical, occupancy etc
                 {
                     result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
                              select a;
+
+                    foreach (var item in result)
+                    {
+                        iCnt++;
+                    }
                 }
                 else
+                {
+                    result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
+                             select a;
+                }
+
+                if(iCnt == 0) //if application table is null, will get que
                 {
                     result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
                              select a;
@@ -743,6 +755,8 @@ namespace Modules.Transactions
                     
             }
             int iBldgNo = 0;
+
+
 
             foreach (var item in result)
             {

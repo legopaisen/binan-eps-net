@@ -134,7 +134,7 @@
             this.txtConstCost.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtConstCost.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtConstCost.Location = new System.Drawing.Point(450, 79);
-            this.txtConstCost.MaxLength = 40;
+            this.txtConstCost.MaxLength = 100;
             this.txtConstCost.Name = "txtConstCost";
             this.txtConstCost.Size = new System.Drawing.Size(90, 23);
             this.txtConstCost.TabIndex = 5;
@@ -159,13 +159,14 @@
             this.txtArea.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtArea.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtArea.Location = new System.Drawing.Point(450, 50);
-            this.txtArea.MaxLength = 40;
+            this.txtArea.MaxLength = 100;
             this.txtArea.Name = "txtArea";
             this.txtArea.Size = new System.Drawing.Size(90, 23);
             this.txtArea.TabIndex = 4;
             this.txtArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtArea.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             this.txtArea.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtArea_KeyPress);
+            this.txtArea.Leave += new System.EventHandler(this.txtArea_Leave);
             // 
             // label2
             // 
@@ -183,12 +184,13 @@
             this.txtStoreys.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtStoreys.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStoreys.Location = new System.Drawing.Point(450, 20);
-            this.txtStoreys.MaxLength = 40;
+            this.txtStoreys.MaxLength = 100;
             this.txtStoreys.Name = "txtStoreys";
             this.txtStoreys.Size = new System.Drawing.Size(90, 23);
             this.txtStoreys.TabIndex = 3;
             this.txtStoreys.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.txtStoreys.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStoreys_KeyPress);
+            this.txtStoreys.Leave += new System.EventHandler(this.txtStoreys_Leave);
             // 
             // label1
             // 
@@ -205,7 +207,7 @@
             this.txtCategory.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCategory.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCategory.Location = new System.Drawing.Point(100, 79);
-            this.txtCategory.MaxLength = 40;
+            this.txtCategory.MaxLength = 500;
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.Size = new System.Drawing.Size(257, 23);
             this.txtCategory.TabIndex = 2;
@@ -225,7 +227,7 @@
             this.txtApplicant.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtApplicant.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtApplicant.Location = new System.Drawing.Point(100, 21);
-            this.txtApplicant.MaxLength = 40;
+            this.txtApplicant.MaxLength = 500;
             this.txtApplicant.Name = "txtApplicant";
             this.txtApplicant.Size = new System.Drawing.Size(257, 23);
             this.txtApplicant.TabIndex = 0;
@@ -235,7 +237,7 @@
             this.txtAddress.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtAddress.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAddress.Location = new System.Drawing.Point(100, 50);
-            this.txtAddress.MaxLength = 40;
+            this.txtAddress.MaxLength = 500;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(257, 23);
             this.txtAddress.TabIndex = 1;
@@ -321,6 +323,7 @@
             this.txtAllTotal.Location = new System.Drawing.Point(399, 384);
             this.txtAllTotal.MaxLength = 40;
             this.txtAllTotal.Name = "txtAllTotal";
+            this.txtAllTotal.ReadOnly = true;
             this.txtAllTotal.Size = new System.Drawing.Size(141, 23);
             this.txtAllTotal.TabIndex = 58;
             this.txtAllTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -686,7 +689,7 @@
             this.txtWiring.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtWiring.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtWiring.Location = new System.Drawing.Point(122, 108);
-            this.txtWiring.MaxLength = 40;
+            this.txtWiring.MaxLength = 100;
             this.txtWiring.Name = "txtWiring";
             this.txtWiring.Size = new System.Drawing.Size(141, 23);
             this.txtWiring.TabIndex = 9;
@@ -732,7 +735,7 @@
             this.txtPlumbing.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPlumbing.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPlumbing.Location = new System.Drawing.Point(122, 79);
-            this.txtPlumbing.MaxLength = 40;
+            this.txtPlumbing.MaxLength = 100;
             this.txtPlumbing.Name = "txtPlumbing";
             this.txtPlumbing.Size = new System.Drawing.Size(141, 23);
             this.txtPlumbing.TabIndex = 8;
@@ -755,7 +758,7 @@
             this.txtLineGrade.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtLineGrade.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLineGrade.Location = new System.Drawing.Point(122, 21);
-            this.txtLineGrade.MaxLength = 40;
+            this.txtLineGrade.MaxLength = 100;
             this.txtLineGrade.Name = "txtLineGrade";
             this.txtLineGrade.Size = new System.Drawing.Size(141, 23);
             this.txtLineGrade.TabIndex = 6;
@@ -769,7 +772,7 @@
             this.txtBuilding.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBuilding.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBuilding.Location = new System.Drawing.Point(122, 50);
-            this.txtBuilding.MaxLength = 40;
+            this.txtBuilding.MaxLength = 100;
             this.txtBuilding.Name = "txtBuilding";
             this.txtBuilding.Size = new System.Drawing.Size(141, 23);
             this.txtBuilding.TabIndex = 7;
