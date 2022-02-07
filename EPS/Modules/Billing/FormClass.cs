@@ -885,7 +885,7 @@ namespace Modules.Billing
 
         public void CellEndEditAdditional(object sender, DataGridViewCellEventArgs e)
         {
-            double.TryParse(RecordFrm.dgvOtherFees[RecordFrm.dgvAddOnFees.CurrentCell.ColumnIndex, RecordFrm.dgvAddOnFees.CurrentCell.RowIndex].EditedFormattedValue.ToString(), out m_dInputValue);
+            double.TryParse(RecordFrm.dgvAddOnFees[RecordFrm.dgvAddOnFees.CurrentCell.ColumnIndex, RecordFrm.dgvAddOnFees.CurrentCell.RowIndex].EditedFormattedValue.ToString(), out m_dInputValue);
 
             if (e.ColumnIndex == 8)
             {
