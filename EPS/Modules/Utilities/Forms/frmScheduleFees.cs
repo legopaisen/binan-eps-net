@@ -334,9 +334,10 @@ namespace Modules.Utilities.Forms
                 btnChkAllCat.Enabled = true;
                 btnChkAllStruc.Enabled = true;
             }
-            else if ((ScheduleMode == "OTHERS" || ScheduleMode == "ADDITIONAL") && (btnEdit.Text == "Update" || btnAdd.Text == "Save"))
+            else if ((ScheduleMode == "OTHERS" || ScheduleMode == "ADDITIONAL")) //&& (btnEdit.Text == "Update" || btnAdd.Text == "Save"))
             {
-                chkDisplayInOP.Enabled = true;
+                if (btnEdit.Text == "Update" || btnAdd.Text == "Save")
+                    chkDisplayInOP.Enabled = true;
                 if (ScheduleMode == "OTHERS")
                     GetOtherFeeDisplay(m_sFeesCode);
                 else if (ScheduleMode == "ADDITIONAL")

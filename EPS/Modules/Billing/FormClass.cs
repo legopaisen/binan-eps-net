@@ -704,7 +704,7 @@ namespace Modules.Billing
 
                     }
                 }
-                else if (e.ColumnIndex == 7 || (e.ColumnIndex == 8 && dUnitAmtTmp > 0)) //AFM 20220202 moved overrding of amount to datagridview from separate textbox
+                else if (e.ColumnIndex == 7 || (e.ColumnIndex == 8)) //AFM 20220202 moved overrding of amount to datagridview from separate textbox
                 {
                     RecordFrm.dgvAssessment.ReadOnly = false; //AFM 20210302
                 }
