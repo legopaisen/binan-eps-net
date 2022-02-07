@@ -719,6 +719,21 @@ namespace Modules.Utilities.Forms
 
                     if (sFeesMeans == "FA")
                         sFeesMeans = "FIXED AMOUNT";
+                    else
+                    if (sFeesMeans == "FR")
+                        sFeesMeans = "FIXED RATE";
+                    else
+                    if (sFeesMeans == "QN")
+                        sFeesMeans = "QUANTITY NO";
+                    else
+                    if (sFeesMeans == "QR")
+                        sFeesMeans = "QUANTITY RANGE";
+                    else
+                    if (sFeesMeans == "RR")
+                        sFeesMeans = "RATE RANGE";
+                    else
+                    if (sFeesMeans == "AR")
+                        sFeesMeans = "AREA RANGE";
 
                     if (sFeesTerm != "SUBCATEGORY")
                     {
@@ -866,8 +881,17 @@ namespace Modules.Utilities.Forms
                 comboMeans.Items.Add("RATE RANGE");
                 comboMeans.Items.Add("AREA RANGE");
             }
-            else if (ScheduleMode == "OTHERS" || ScheduleMode == "ADDITIONAL")
+            else if (ScheduleMode == "ADDITIONAL")
                 comboMeans.Items.Add("FIXED AMOUNT");
+            else if(ScheduleMode == "OTHERS")
+            {
+                comboMeans.Items.Add("FIXED AMOUNT");
+                comboMeans.Items.Add("FIXED RATE");
+                comboMeans.Items.Add("QUANTITY NO");
+                comboMeans.Items.Add("QUANTITY RANGE");
+                comboMeans.Items.Add("RATE RANGE");
+                comboMeans.Items.Add("AREA RANGE");
+            }
         }
 
         private void PopulateNeedArea()

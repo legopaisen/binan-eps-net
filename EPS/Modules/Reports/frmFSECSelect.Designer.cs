@@ -109,6 +109,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmFSECSelect";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FSEC";
             this.ResumeLayout(false);
             this.PerformLayout();

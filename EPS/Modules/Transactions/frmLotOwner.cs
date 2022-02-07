@@ -273,66 +273,67 @@ namespace Modules.Transactions
 
         public bool ValidateData()
         {
+            //AFM 20220202 requested by cient - disabled some validations
             if (string.IsNullOrEmpty(txtLastName.Text.ToString().Trim()))
             {
-                MessageBox.Show("Lot owner's name is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Lot owner's Last name is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return false;
             }
             if (string.IsNullOrEmpty(txtFirstName.Text.ToString().Trim()))
             {
-                MessageBox.Show("Lot owner's First name is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Lot owner's First name is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
             if (string.IsNullOrEmpty(txtMI.Text.ToString().Trim()))
             {
-                MessageBox.Show("Lot owner's Middle Inital is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Lot owner's Middle Inital is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtTCT.Text.ToString().Trim()))
             {
-                MessageBox.Show("Lot owner's TCT/OCT no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Lot owner's TCT/OCT no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtCTC.Text.ToString().Trim()))
             {
-                MessageBox.Show("Lot owner's CTC no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Lot owner's CTC no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtCTC.Text.ToString().Trim()))
             {
-                MessageBox.Show("Lot owner's CTC no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Lot owner's CTC no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
             if (string.IsNullOrEmpty(txtHseNo.Text.ToString().Trim()))
             {
-                MessageBox.Show("House No owner's Lot no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("House No owner's Lot no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtLotNo.Text.ToString().Trim()))
             {
-                MessageBox.Show("Lot owner's Lot no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Lot owner's Lot no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtBlkNo.Text.ToString().Trim()))
             {
-                MessageBox.Show("Lot owner's Blk no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Lot owner's Blk no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtStreet.Text.ToString().Trim()))
             {
-                MessageBox.Show("Lot owner's Street is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Lot owner's Street is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
             if (string.IsNullOrEmpty(txtVillage.Text.ToString().Trim()))
             {
-                MessageBox.Show("Lot owner's Subdivision is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Lot owner's Subdivision is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(LotAcctNo))

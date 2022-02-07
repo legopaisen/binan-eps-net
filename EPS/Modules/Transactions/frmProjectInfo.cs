@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Common.AppSettings;
 using Modules.Utilities;
 using RPTEntities;
+using System.Diagnostics;
 
 namespace Modules.Transactions
 {
@@ -406,6 +407,15 @@ namespace Modules.Transactions
         {
             //cmbBrgyCode.Text = this.cmbBrgy.GetItemText(this.cmbBrgy.SelectedItem);
             sBrgyCode = cmbBrgy.SelectedValue?.ToString();
+        }
+
+        private void txtHseNo_Leave(object sender, EventArgs e)
+        {
+        }
+
+        private void btnIRR_Click(object sender, EventArgs e)
+        {
+            Process.Start("IRR.pdf");
         }
     }
 }

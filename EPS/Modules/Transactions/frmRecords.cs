@@ -49,6 +49,9 @@ namespace Modules.Transactions
         public string Province { get; set; }
         public string ZIP { get; set; }
 
+        public bool blnSetDefaultStruc = false;
+        public bool blnSetDefaultOwn = false;
+
         public enum PostingState
         {
             Add, Edit, View, Delete, Print
@@ -558,6 +561,37 @@ namespace Modules.Transactions
             RecordClass.ButtonImgDetach();
         }
 
-
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //AFM 20220202 copy address info from project as default
+            if (this.SourceClass == "NEW_ADD" || this.SourceClass == "NEW_ADD_MECH" || this.SourceClass == "NEW_ADD_CFEI")
+            {
+                if (tabControl1.SelectedTab == tabControl1.TabPages[2] && blnSetDefaultStruc == false) //struc own
+                {
+                    formStrucOwn.txtHseNo.Text = formProject.txtHseNo.Text;
+                    formStrucOwn.txtLotNo.Text = formProject.txtLotNo.Text;
+                    formStrucOwn.txtBlkNo.Text = formProject.txtBlkNo.Text;
+                    formStrucOwn.txtStreet.Text = formProject.txtStreet.Text;
+                    formStrucOwn.txtVillage.Text = formProject.txtVillage.Text;
+                    formStrucOwn.txtMun.Text = formProject.txtMun.Text;
+                    formStrucOwn.txtProv.Text = formProject.txtProv.Text;
+                    formStrucOwn.txtZIP.Text = formProject.txtZIP.Text;
+                    blnSetDefaultStruc = true;
+                }
+                if (tabControl1.SelectedTab == tabControl1.TabPages[3] && blnSetDefaultOwn == false) //lot own
+                {
+                    formLotOwn.txtHseNo.Text = formProject.txtHseNo.Text;
+                    formLotOwn.txtLotNo.Text = formProject.txtLotNo.Text;
+                    formLotOwn.txtBlkNo.Text = formProject.txtBlkNo.Text;
+                    formLotOwn.txtStreet.Text = formProject.txtStreet.Text;
+                    formLotOwn.txtVillage.Text = formProject.txtVillage.Text;
+                    formLotOwn.txtMun.Text = formProject.txtMun.Text;
+                    formLotOwn.txtProv.Text = formProject.txtProv.Text;
+                    formLotOwn.txtZIP.Text = formProject.txtZIP.Text;
+                    blnSetDefaultOwn = true;
+                }
+            }
+           
+        }
     }
 }

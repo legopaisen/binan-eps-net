@@ -94,6 +94,7 @@ namespace Modules.Billing
                 txtBillNo.ReadOnly = true;
                 btnImgView.Visible = false;
             }
+
         }
 
         public void EnableControls(bool bln)
@@ -225,7 +226,7 @@ namespace Modules.Billing
             //    if ((bool)dgvPermit[0, row].Value == true)
             //    {
             //    }
-            //}
+            //}           
             RecordClass.CellClick(sender, e);
         }
 
@@ -390,7 +391,7 @@ namespace Modules.Billing
             }
             foreach (var s in feesCode)
             {
-                sQuery = $"delete from ` where arn = '{m_sAN}' and fees_code = '{s}' and fees_category = 'MAIN'";
+                sQuery = $"delete from bill_tmp where arn = '{m_sAN}' and fees_code = '{s}' and fees_category = 'MAIN'";
                 db.Database.ExecuteSqlCommand(sQuery);
                 remove = true;
             }
@@ -1017,6 +1018,24 @@ namespace Modules.Billing
         private void dgvPermit_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
             m_sPrevPermit = dgvPermit[2, e.RowIndex].Value.ToString();
+        }
+
+        private void dgvOtherFees_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (m_sCurrPermit == m_sPrevPermit)
+                RecordClass.CellLeaveOther(sender, e);
+        }
+
+        private void dgvOtherFees_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            RecordClass.CellEndEditOther(sender, e);
+            if (dgvOtherFees.CurrentCell.ColumnIndex == 7)
+                RecordClass.ComputeCellOther();
+        }
+
+        private void dgvAddOnFees_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            RecordClass.CellEndEditAdditional(sender, e);
         }
     }
 }

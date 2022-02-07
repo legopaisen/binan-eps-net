@@ -67,7 +67,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -310,6 +309,7 @@
             this.txtHseNo.Name = "txtHseNo";
             this.txtHseNo.Size = new System.Drawing.Size(170, 23);
             this.txtHseNo.TabIndex = 9;
+            this.txtHseNo.Leave += new System.EventHandler(this.txtHseNo_Leave);
             // 
             // txtLotNo
             // 
@@ -463,18 +463,6 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Red;
-            this.label17.Location = new System.Drawing.Point(12, 351);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(196, 15);
-            this.label17.TabIndex = 19;
-            this.label17.Text = "Note: Put period (.) if not applicable";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // frmStrucOwner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -482,7 +470,6 @@
             this.BackColor = System.Drawing.Color.Aqua;
             this.ClientSize = new System.Drawing.Size(582, 375);
             this.ControlBox = false;
-            this.Controls.Add(this.label17);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label16);
@@ -549,6 +536,5 @@
         public System.Windows.Forms.TextBox txtZIP;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.TextBox txtVillage;
-        private System.Windows.Forms.Label label17;
     }
 }

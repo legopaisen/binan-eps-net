@@ -78,6 +78,11 @@ namespace Modules.Transactions
             dgvList.Columns.Add("PTR", "PTR");
             dgvList.Columns.Add("PRC", "PRC");
             dgvList.Columns.Add("Vill", "Village");
+
+            foreach (DataGridViewColumn column in dgvList.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         private void PopulateBrgy()

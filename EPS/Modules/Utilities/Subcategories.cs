@@ -115,7 +115,7 @@ namespace Modules.Utilities
             dataTable.Columns.Add("Unit", typeof(String));
             dataTable.Columns.Add("Area", typeof(String));
             dataTable.Columns.Add("Cumulative", typeof(String));
-            dataTable.Columns.Add("UnitValue", typeof(String));
+            dataTable.Columns.Add("Input Value", typeof(String));
             dataTable.Columns.Add("Amount", typeof(String));
             dataTable.Columns.Add("Category", typeof(String));
             dataTable.Columns.Add("Scope", typeof(String));

@@ -419,6 +419,18 @@ namespace Modules.Billing
             res.Query = $"select sum(amount) from application_approval where  ARN = '{RecordFrm.m_sAN.Trim()}' and status = 'APPROVED'";
             double.TryParse(res.ExecuteScalar(), out dPrevAmt);
 
+            res.Query = $"select sum(fees_amt) from tax_details where ARN = '{RecordFrm.m_sAN.Trim()}' and fees_category = 'OTHERS'";
+            double.TryParse(res.ExecuteScalar(), out dNewAmt);
+
+            res.Query = $"select sum(amount) from application_approval where  ARN = '{RecordFrm.m_sAN.Trim()}' and status = 'APPROVED'";
+            double.TryParse(res.ExecuteScalar(), out dPrevAmt);
+
+            res.Query = $"select sum(fees_amt) from tax_details where ARN = '{RecordFrm.m_sAN.Trim()}' and fees_category = 'MAIN'";
+            double.TryParse(res.ExecuteScalar(), out dNewAmt);
+
+            res.Query = $"select sum(amount) from application_approval where  ARN = '{RecordFrm.m_sAN.Trim()}' and status = 'APPROVED'";
+            double.TryParse(res.ExecuteScalar(), out dPrevAmt);
+
             if (dNewAmt == dPrevAmt) //if same amount, skip approval
                 return false;
 
@@ -435,7 +447,7 @@ namespace Modules.Billing
             { }
             res.Close();
 
-			res.Query = $"select * from bill_tmp where arn = '{RecordFrm.m_sAN.Trim()}' and fees_category <> 'MAIN'";
+			res.Query = $"select * from bill_tmp where arn = '{RecordFrm.m_sAN.Trim()}'";
 			if(res.Execute())
 				while(res.Read())
 				{
@@ -445,6 +457,28 @@ namespace Modules.Billing
 					sFeesDesc = GetFeesDesc(res.GetString("fees_code"), sFeesCategory);
 					dAmt = res.GetDouble("fees_amt");
 					dOrigAmt = res.GetDouble("orig_amt");
+
+                    if(sFeesCategory == "MAIN" && dAmt != 0)
+                    {
+                        if (dAmt != dOrigAmt)
+                        {
+                            res2.Query = "INSERT INTO APPLICATION_APPROVAL VALUES(";
+                            res2.Query += $"'{RecordFrm.m_sAN.Trim()}', ";
+                            res2.Query += $"'{sFeesCode}', ";
+                            res2.Query += $"'{sFeesDesc}', ";
+                            res2.Query += $"'{sFeesCategory}', ";
+                            res2.Query += $"'{sPermitCode}', ";
+                            res2.Query += $"{dAmt}, ";
+                            res2.Query += $"{dOrigAmt}, ";
+                            res2.Query += $"to_date('{AppSettingsManager.GetSystemDate().ToShortDateString()}','MM/dd/yyyy'), ";
+                            res2.Query += $"'PENDING', ";
+                            res2.Query += $"null) ";
+                            if (res2.ExecuteNonQuery() == 0)
+                            { }
+                            res2.Close();
+                            isForApproval = true;
+                        }
+                    }
 
 					if (sFeesCategory == "ADDITIONAL" && dAmt != 0)
 					{

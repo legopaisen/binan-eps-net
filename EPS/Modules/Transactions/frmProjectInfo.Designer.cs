@@ -63,6 +63,7 @@
             this.cmbBussKind = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbOccupancy = new MultiColumnComboBoxDemo.MultiColumnComboBox();
             this.cmbCategory = new MultiColumnComboBoxDemo.MultiColumnComboBox();
+            this.btnIRR = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,7 +83,7 @@
             this.txtMemo.Location = new System.Drawing.Point(354, 72);
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
-            this.txtMemo.Size = new System.Drawing.Size(228, 110);
+            this.txtMemo.Size = new System.Drawing.Size(228, 80);
             this.txtMemo.TabIndex = 7;
             // 
             // btnSearchLot
@@ -105,6 +106,7 @@
             this.txtHseNo.Name = "txtHseNo";
             this.txtHseNo.Size = new System.Drawing.Size(170, 23);
             this.txtHseNo.TabIndex = 10;
+            this.txtHseNo.Leave += new System.EventHandler(this.txtHseNo_Leave);
             // 
             // txtLotNo
             // 
@@ -452,6 +454,17 @@
             this.cmbCategory.SelectedValueChanged += new System.EventHandler(this.cmbCategory_SelectedValueChanged);
             this.cmbCategory.Leave += new System.EventHandler(this.cmbCategory_Leave);
             // 
+            // btnIRR
+            // 
+            this.btnIRR.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIRR.Location = new System.Drawing.Point(354, 158);
+            this.btnIRR.Name = "btnIRR";
+            this.btnIRR.Size = new System.Drawing.Size(98, 26);
+            this.btnIRR.TabIndex = 53;
+            this.btnIRR.Text = "IRR Code";
+            this.btnIRR.UseVisualStyleBackColor = true;
+            this.btnIRR.Click += new System.EventHandler(this.btnIRR_Click);
+            // 
             // frmProjectInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -459,6 +472,7 @@
             this.BackColor = System.Drawing.Color.Aqua;
             this.ClientSize = new System.Drawing.Size(596, 375);
             this.ControlBox = false;
+            this.Controls.Add(this.btnIRR);
             this.Controls.Add(this.cmbOwnership);
             this.Controls.Add(this.cmbStrucType);
             this.Controls.Add(this.cmbBussKind);
@@ -521,5 +535,6 @@
         public System.Windows.Forms.ComboBox cmbOwnership;
         private System.Windows.Forms.Label label16;
         public System.Windows.Forms.TextBox txtVillage;
+        public System.Windows.Forms.Button btnIRR;
     }
 }

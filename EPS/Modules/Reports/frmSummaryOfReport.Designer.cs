@@ -56,7 +56,6 @@ namespace Modules.Reports
             // 
             this.cmbReportType.FormattingEnabled = true;
             this.cmbReportType.Items.AddRange(new object[] {
-            "BUILDING INFORMATION",
             "LIST OF APPROVED PERMIT APPLICATION",
             "ISSUED PERMITS SUMMARY"});
             this.cmbReportType.Location = new System.Drawing.Point(12, 39);

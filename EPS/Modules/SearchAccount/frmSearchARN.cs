@@ -688,19 +688,19 @@ namespace Modules.SearchAccount
                 strWhereCond += $"application_que.arn like '{arn1.GetAn()}%' ";
                 strWhereCond += $" and application_que.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 if (!string.IsNullOrEmpty(cmbBrgy.Text.ToString()))
-                    strWhereCond += $" and application_que.proj_brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
+                    strWhereCond += $" and (application_que.proj_brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' OR application_que.proj_brgy is null) ";
                 strWhereCond += $" and application_que.proj_lot_owner in (select acct_code from account where acct_ln like '{StringUtilities.HandleApostrophe(txtLotLastName.Text.ToString())}%' ";
-                strWhereCond += $" and acct_fn like '{StringUtilities.HandleApostrophe(txtLotFirstName.Text.ToString())}%' ";
-                strWhereCond += $" and acct_mi like '{StringUtilities.HandleApostrophe(txtLotMI.Text.ToString())}%') ";
+                strWhereCond += $" and (acct_fn like '{StringUtilities.HandleApostrophe(txtLotFirstName.Text.ToString())}%' OR acct_fn is null) ";
+                strWhereCond += $" and (acct_mi like '{StringUtilities.HandleApostrophe(txtLotMI.Text.ToString())}%' OR acct_mi is null)) ";
                 strWhereCond += $" and application_que.proj_owner in (select acct_code from account where acct_ln like '{StringUtilities.HandleApostrophe(txtOwnLastName.Text.ToString())}%' ";
-                strWhereCond += $" and acct_fn like '{StringUtilities.HandleApostrophe(txtOwnFirstName.Text.ToString())}%' ";
-                strWhereCond += $" and acct_mi like '{StringUtilities.HandleApostrophe(txtOwnMI.Text.ToString())}%' ";
+                strWhereCond += $" and (acct_fn like '{StringUtilities.HandleApostrophe(txtOwnFirstName.Text.ToString())}%' OR acct_fn is null) ";
+                strWhereCond += $" and (acct_mi like '{StringUtilities.HandleApostrophe(txtOwnMI.Text.ToString())}%' OR acct_mi is null) ";
                 //requested on site by RJ (s)
-                strWhereCond += $" and acct_hse_no like '{StringUtilities.HandleApostrophe(txtProjHseNo.Text.ToString())}%' ";
-                strWhereCond += $" and acct_lot_no like '{StringUtilities.HandleApostrophe(txtProjLotNo.Text.ToString())}%' ";
-                strWhereCond += $" and acct_blk_no like '{StringUtilities.HandleApostrophe(txtProjBlkNo.Text.ToString())}%' ";
-                strWhereCond += $" and acct_addr like '{StringUtilities.HandleApostrophe(txtProjStreet.Text.ToString())}%' ";
-                strWhereCond += $" and acct_vill like '{StringUtilities.HandleApostrophe(txtProjVill.Text.ToString())}%') ";
+                strWhereCond += $" and (acct_hse_no like '{StringUtilities.HandleApostrophe(txtProjHseNo.Text.ToString())}%' OR acct_hse_no is null) ";
+                strWhereCond += $" and (acct_lot_no like '{StringUtilities.HandleApostrophe(txtProjLotNo.Text.ToString())}%' OR acct_lot_no is null) ";
+                strWhereCond += $" and (acct_blk_no like '{StringUtilities.HandleApostrophe(txtProjBlkNo.Text.ToString())}%' OR acct_blk_no is null) ";
+                strWhereCond += $" and (acct_addr like '{StringUtilities.HandleApostrophe(txtProjStreet.Text.ToString())}%' OR acct_addr is null) ";
+                strWhereCond += $" and (acct_vill like '{StringUtilities.HandleApostrophe(txtProjVill.Text.ToString())}%' OR acct_vill is null)) ";
                 //requested on site by RJ (e)
 
                 var result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
@@ -759,20 +759,20 @@ namespace Modules.SearchAccount
                 strWhereCond += $" and application.arn like '{arn1.GetAn()}%' ";
                 strWhereCond += $" and application.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
                 if (!string.IsNullOrEmpty(cmbBrgy.Text.ToString()))
-                    strWhereCond += $" and application.proj_brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' ";
+                    strWhereCond += $" and (application.proj_brgy like '{((DataRowView)cmbBrgy.SelectedItem)["Desc"].ToString()}%' OR application.proj_brgy is null) ";
                 strWhereCond += $" and application.proj_lot_owner in (select acct_code from account where acct_ln like '{StringUtilities.HandleApostrophe(txtLotLastName.Text.ToString())}%' ";
-                strWhereCond += $" and acct_fn like '{StringUtilities.HandleApostrophe(txtLotFirstName.Text.ToString())}%' ";
-                strWhereCond += $" and acct_mi like '{StringUtilities.HandleApostrophe(txtLotMI.Text.ToString())}%') ";
+                strWhereCond += $" and (acct_fn like '{StringUtilities.HandleApostrophe(txtLotFirstName.Text.ToString())}%' OR acct_fn is null) ";
+                strWhereCond += $" and (acct_mi like '{StringUtilities.HandleApostrophe(txtLotMI.Text.ToString())}%'OR acct_mi is null)) ";
 
                 strWhereCond += $" and application.proj_owner in (select acct_code from account where acct_ln like '{StringUtilities.HandleApostrophe(txtOwnLastName.Text.ToString())}%' ";
-                strWhereCond += $" and acct_fn like '{StringUtilities.HandleApostrophe(txtOwnFirstName.Text.ToString())}%' ";
-                strWhereCond += $" and acct_mi like '{StringUtilities.HandleApostrophe(txtOwnMI.Text.ToString())}%' ";
+                strWhereCond += $" and (acct_fn like '{StringUtilities.HandleApostrophe(txtOwnFirstName.Text.ToString())}%' OR acct_fn is null) ";
+                strWhereCond += $" and (acct_mi like '{StringUtilities.HandleApostrophe(txtOwnMI.Text.ToString())}%' OR acct_mi is null) ";
                 //requested on site by RJ (s)
-                strWhereCond += $" and acct_hse_no like '{StringUtilities.HandleApostrophe(txtProjHseNo.Text.ToString())}%' ";
-                strWhereCond += $" and acct_lot_no like '{StringUtilities.HandleApostrophe(txtProjLotNo.Text.ToString())}%' ";
-                strWhereCond += $" and acct_blk_no like '{StringUtilities.HandleApostrophe(txtProjBlkNo.Text.ToString())}%' ";
-                strWhereCond += $" and acct_addr like '{StringUtilities.HandleApostrophe(txtProjStreet.Text.ToString())}%' ";
-                strWhereCond += $" and acct_vill like '{StringUtilities.HandleApostrophe(txtProjVill.Text.ToString())}%') ";
+                strWhereCond += $" and (acct_hse_no like '{StringUtilities.HandleApostrophe(txtProjHseNo.Text.ToString())}%' OR acct_hse_no is null) ";
+                strWhereCond += $" and (acct_lot_no like '{StringUtilities.HandleApostrophe(txtProjLotNo.Text.ToString())}%' OR acct_lot_no is null) ";
+                strWhereCond += $" and (acct_blk_no like '{StringUtilities.HandleApostrophe(txtProjBlkNo.Text.ToString())}%' OR acct_blk_no is null) ";
+                strWhereCond += $" and (acct_addr like '{StringUtilities.HandleApostrophe(txtProjStreet.Text.ToString())}%' OR acct_addr is null) ";
+                strWhereCond += $" and (acct_vill like '{StringUtilities.HandleApostrophe(txtProjVill.Text.ToString())}%' OR acct_vill is null)) ";
                 //requested on site by RJ (e)
 
                 var result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)

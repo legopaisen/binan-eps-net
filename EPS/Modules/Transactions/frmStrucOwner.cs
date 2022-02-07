@@ -308,6 +308,7 @@ namespace Modules.Transactions
 
         public bool ValidateData()
         {
+            //AFM 20220202 requested by cient - disabled some validations
             if (string.IsNullOrEmpty(txtLastName.Text.ToString().Trim()))
             {
                 MessageBox.Show("Structure owner's Last name is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -315,61 +316,61 @@ namespace Modules.Transactions
             }
             if (string.IsNullOrEmpty(txtFirstName.Text.ToString().Trim()))
             {
-                MessageBox.Show("Structure owner's First name is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Structure owner's First name is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
             if (string.IsNullOrEmpty(txtMI.Text.ToString().Trim()))
             {
-                MessageBox.Show("Structure owner's Middle Inital is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Structure owner's Middle Inital is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtTCT.Text.ToString().Trim()))
             {
-                MessageBox.Show("Structure owner's TCT/OCT no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Structure owner's TCT/OCT no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtCTC.Text.ToString().Trim()))
             {
-                MessageBox.Show("Structure owner's CTC no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Structure owner's CTC no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtCTC.Text.ToString().Trim()))
             {
-                MessageBox.Show("Structure owner's CTC no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Structure owner's CTC no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtHseNo.Text.ToString().Trim()))
             {
-                MessageBox.Show("Structure owner's House no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Structure owner's House no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
 
             if (string.IsNullOrEmpty(txtLotNo.Text.ToString().Trim()))
             {
-                MessageBox.Show("Structure owner's Lot no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Structure owner's Lot no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtBlkNo.Text.ToString().Trim()))
             {
-                MessageBox.Show("Structure owner's Blk no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Structure owner's Blk no. is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(txtStreet.Text.ToString().Trim()))
             {
-                MessageBox.Show("Structure owner's Street is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Structure owner's Street is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
             if (string.IsNullOrEmpty(txtVillage.Text.ToString().Trim()))
             {
-                MessageBox.Show("Structure owner's Subdivision is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                //MessageBox.Show("Structure owner's Subdivision is required", DialogText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return false;
             }
 
             if (string.IsNullOrEmpty(StrucAcctNo))
@@ -407,6 +408,11 @@ namespace Modules.Transactions
         public void EnableFormControls(bool blnEnable)
         {
             EnableControls(blnEnable);
+        }
+
+        private void txtHseNo_Leave(object sender, EventArgs e)
+        {
+
         }
         //private void cmbBrgy_KeyPress(object sender, KeyPressEventArgs e) //removed to allow input for owners outside binan
         //{
