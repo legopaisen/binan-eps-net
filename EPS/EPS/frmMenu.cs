@@ -955,5 +955,19 @@ namespace EPS
                 form.ShowDialog();
             }
         }
+
+        private void FormofOwnershipToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("STFO"))
+            {
+                TaskManager taskman = new TaskManager();
+                if (!taskman.IsObjectLock("OWNERSHIP", "", ""))
+                {
+                    frmFormOwnership form = new frmFormOwnership();
+                    form.ShowDialog();
+                    taskman.IsObjectLock("OWNERSHIP", "DELETE", "");
+                }
+            }
+        }
     }
 }

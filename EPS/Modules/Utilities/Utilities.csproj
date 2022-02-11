@@ -107,6 +107,12 @@
     <Compile Include="Forms\frmEngineerTypes.Designer.cs">
       <DependentUpon>frmEngineerTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmFormOwnership.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmFormOwnership.Designer.cs">
+      <DependentUpon>frmFormOwnership.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmPermitType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +177,7 @@
     <Compile Include="MajorFees.cs" />
     <Compile Include="AddlMajorFees.cs" />
     <Compile Include="OtherMajorFees.cs" />
+    <Compile Include="Ownership.cs" />
     <Compile Include="Structure.cs" />
     <Compile Include="Occupancy.cs" />
     <Compile Include="Category.cs" />
@@ -224,6 +231,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEngineerTypes.resx">
       <DependentUpon>frmEngineerTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmFormOwnership.resx">
+      <DependentUpon>frmFormOwnership.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPermitType.resx">
       <DependentUpon>frmPermitType.cs</DependentUpon>

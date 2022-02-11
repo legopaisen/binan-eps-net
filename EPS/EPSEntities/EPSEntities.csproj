@@ -104,6 +104,7 @@
     <Compile Include="Entity\OTHER_SUBCATEGORIES.cs" />
     <Compile Include="Entity\ADDL_SUBCATEGORIES_X.cs" />
     <Compile Include="Entity\OTHER_SUBCATEGORIES_X.cs" />
+    <Compile Include="Entity\OWNERSHIP_TBL.cs" />
     <Compile Include="Entity\RIGHTS.cs" />
     <Compile Include="Entity\MAJOR_FEES.cs" />
     <Compile Include="Entity\PERMIT_FEES_TBL_TMP.cs" />
