@@ -66,7 +66,7 @@ namespace Modules.Reports
         private void frmReport_Load(object sender, EventArgs e)
         {
             var db = new EPSConnection(dbConn);
-            if (ReportName == "ORDER OF PAYMENT")
+            if (ReportName == "ORDER OF PAYMENT" || ReportName == "ELECTRICAL ASSESSMENT") //AFM added electrical assessment - 20220211 adjustments binan meeting 20220209
             {
                 string sQuery = string.Empty;
                 string sBillNo = string.Empty;

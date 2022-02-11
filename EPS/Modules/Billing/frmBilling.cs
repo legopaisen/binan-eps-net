@@ -509,7 +509,11 @@ namespace Modules.Billing
                 return;
             }
             frmReport form = new frmReport();
-            form.ReportName = "ORDER OF PAYMENT";
+            if(cmbPermit.Text.Contains("ELECTRICAL PERMIT")) //AFM 20220211 adjustments binan meeting 20220209
+                form.ReportName = "ELECTRICAL ASSESSMENT"; 
+            else
+                form.ReportName = "ORDER OF PAYMENT";
+
             form.An = m_sAN;
             form.ShowDialog();
         }
