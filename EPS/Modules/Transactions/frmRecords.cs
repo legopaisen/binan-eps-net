@@ -155,7 +155,7 @@ namespace Modules.Transactions
                 btnImgDetach.Visible = true;
             }
             else if (this.SourceClass == "NEW_ADD" || this.SourceClass == "NEW_EDIT"
-                || this.SourceClass == "NEW_VIEW" || this.SourceClass == "NEW_CANCEL" || this.SourceClass.Contains("NEW_ADD_")) //AFM 20210316 added condition for other applications
+                || this.SourceClass == "NEW_VIEW" || this.SourceClass == "NEW_CANCEL" || this.SourceClass.Contains("NEW_ADD_") || this.SourceClass == "NEW_EDIT_OTH") //AFM 20210316 added condition for other applications
             {
                 this.Status = "NEW";
                 RecordClass = new Application(this);
@@ -221,17 +221,25 @@ namespace Modules.Transactions
 
             RecordClass.PopulatePermit();
             if (PermitApplication.Contains("BUILDING") || PermitApplication.Contains("MECHANICAL") || PermitApplication.Contains("CFEI"))
+            {
+                if (PermitApplication.Contains("BUILDING"))
+                    this.btnSearch.Enabled = false;
+                else
+                    this.btnSearch.Enabled = true; //AFM 20220209 adjustments binan meeting 20220209
                 cmbPermit.SelectedIndex = 1;
+            }
             PopulateScope();
 
-            if(PermitApplication.Contains("ELECTRICAL") || PermitApplication.Contains("OCCUPANCY") || PermitApplication.Contains("OTHERS"))
+            if((PermitApplication.Contains("ELECTRICAL") || PermitApplication.Contains("OCCUPANCY") || PermitApplication.Contains("OTHERS")) && this.SourceClass != "NEW_EDIT_OTH")
             {
                 this.btnSearch.Enabled = true;
-                this.arn1.Enabled = true;
+                //this.arn1.Enabled = true;
+                this.arn1.Enabled = false; ////AFM 20220209 adjustments binan meeting 20220209
                 this.btnEdit.Enabled = false;
                 this.btnAdd.Enabled = false;
+                cmbPermit.SelectedIndex = 1;
             }
-            else if(SourceClass == "NEW_EDIT")
+            else if(SourceClass == "NEW_EDIT" || SourceClass == "NEW_EDIT_OTH")
             {
                 this.btnSearch.Enabled = true;
                 this.arn1.Enabled = true;
@@ -353,8 +361,8 @@ namespace Modules.Transactions
                 return false;
             }
 
-            if (!RecordClass.ValidateData())
-                return false;
+            //if (!RecordClass.ValidateData()) //AFM 20220209 DISABLED - adjustments binan meeting 20220209
+            //return false;
 
             if (!formProject.ValidateData())
                 return false;

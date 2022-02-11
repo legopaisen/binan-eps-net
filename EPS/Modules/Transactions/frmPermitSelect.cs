@@ -22,6 +22,7 @@ namespace Modules.Transactions
         private PermitList m_lstPermit;
         public string m_sPermitCode = string.Empty;
         public string m_sPermitDesc = string.Empty;
+        public bool isCancel = false;
 
         private void frmPermitSelect_Load(object sender, EventArgs e)
         {
@@ -61,6 +62,7 @@ namespace Modules.Transactions
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            isCancel = true;
             this.Close();
         }
     }

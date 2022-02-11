@@ -784,10 +784,12 @@ namespace Modules.Billing
             double dHeight = 0;
             double dFlrArea = 0;
             double dEstCost = 0;
+            double dUnits = 0;
 
             double.TryParse(txtHeight.Text.Trim(), out dHeight);
             double.TryParse(txtFlrArea.Text.Trim(), out dFlrArea);
             double.TryParse(txtBldgCost.Text.Trim(), out dEstCost);
+            double.TryParse(txtUnits.Text.Trim(), out dUnits);
 
             sCatCode = category.GetCategoryCode(cmbCategory.Text);
             sStrucCode = structure.GetStructureCode(cmbStructure.Text);
@@ -800,8 +802,8 @@ namespace Modules.Billing
             { }
             res.Close();
 
-            res.Query = $"UPDATE BUILDING SET BLDG_HEIGHT = {dHeight}, TOTAL_FLR_AREA = {dFlrArea}, EST_COST = {dEstCost} where bldg_no in (select bldg_no from application_que where arn = '{m_sAN}')";
-            if(res.ExecuteNonQuery() == 0)
+            res.Query = $"UPDATE BUILDING SET BLDG_HEIGHT = {dHeight}, TOTAL_FLR_AREA = {dFlrArea}, EST_COST = {dEstCost}, NO_UNITS = '{dUnits}' where bldg_no in (select bldg_no from application_que where arn = '{m_sAN}')"; //AFM 20220210 added units - adjustments binan meeting 20220209
+            if (res.ExecuteNonQuery() == 0)
             { }
             res.Close();
         }
@@ -864,6 +866,7 @@ namespace Modules.Billing
             txtFlrArea.Enabled = bln;
             txtHeight.Enabled = bln;
             txtBldgCost.Enabled = bln;
+            txtUnits.Enabled = bln;
 
             dgvPermit.Enabled = !bln;
             dgvAssessment.Enabled = !bln;
@@ -1036,6 +1039,19 @@ namespace Modules.Billing
         private void dgvAddOnFees_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             RecordClass.CellEndEditAdditional(sender, e);
+        }
+
+        private void txtUnits_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

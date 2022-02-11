@@ -807,12 +807,15 @@ namespace EPS
                 frmPermitSelect frmpermitselect = new frmPermitSelect();
                 frmpermitselect.ShowDialog();
 
-                frmRecords form = new frmRecords();
-                form.SourceClass = "NEW_ADD_OTH";
-                form.PermitApplication = "OTHERS";
-                form.SelectedPermitCode = frmpermitselect.m_sPermitCode;
-                form.SelectedPermitDesc = frmpermitselect.m_sPermitDesc;
-                form.ShowDialog();
+                if(frmpermitselect.isCancel == false)
+                {
+                    frmRecords form = new frmRecords();
+                    form.SourceClass = "NEW_ADD_OTH";
+                    form.PermitApplication = "OTHERS";
+                    form.SelectedPermitCode = frmpermitselect.m_sPermitCode;
+                    form.SelectedPermitDesc = frmpermitselect.m_sPermitDesc;
+                    form.ShowDialog();
+                }
             }
         }
 
@@ -939,6 +942,17 @@ namespace EPS
 
                     taskman.IsObjectLock("DOLE-BILLING", "DELETE", "");
                 }
+            }
+        }
+
+        private void oTHERPERMITSToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (AppSettingsManager.Granted("TNA"))
+            {
+                frmRecords form = new frmRecords();
+                form.SourceClass = "NEW_EDIT_OTH";
+                form.PermitApplication = "OTHERS";
+                form.ShowDialog();
             }
         }
     }

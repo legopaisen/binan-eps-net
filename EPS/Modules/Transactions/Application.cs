@@ -66,10 +66,11 @@ namespace Modules.Transactions
             }
             else if (RecordFrm.SourceClass == "NEW_ADD_OTH")
             {
-                RecordFrm.arn1.Enabled = true;
+                //RecordFrm.arn1.Enabled = true;
+                RecordFrm.arn1.Enabled = false; //AFM 20220209 adjustments binan meeting 20220209
                 RecordFrm.Text = "New Application - " + RecordFrm.SelectedPermitDesc;
             }
-            else if (RecordFrm.SourceClass == "NEW_EDIT")
+            else if (RecordFrm.SourceClass == "NEW_EDIT" || RecordFrm.SourceClass == "NEW_EDIT_OTH")
             {
                 RecordFrm.arn1.Enabled = true;
                 RecordFrm.arn1.ArnCode.Enabled = true;
@@ -114,13 +115,14 @@ namespace Modules.Transactions
 
             ClearControl();
 
-            if(RecordFrm.PermitApplication.Contains("OCCUPANCY"))
-            {
-                RecordFrm.ButtonAdd.Enabled = false;
-                RecordFrm.ButtonSearch.Enabled = true;
-                RecordFrm.cmbPermit.Enabled = false;
-                RecordFrm.cmbScope.Enabled = false;
-            }
+            //if(RecordFrm.PermitApplication.Contains("OCCUPANCY")) //AFM 20220209 disabled - adjustments binan meeting 20220209
+            //{
+            //    //RecordFrm.ButtonAdd.Enabled = false; //AFM 20220209 adjustments binan meeting 20220209
+            //    RecordFrm.ButtonAdd.Enabled = true;
+            //    RecordFrm.ButtonSearch.Enabled = true;
+            //    RecordFrm.cmbPermit.Enabled = true;
+            //    RecordFrm.cmbScope.Enabled = true;
+            //}
         }
 
         public override void PopulatePermit()
@@ -141,8 +143,16 @@ namespace Modules.Transactions
             {
                 m_lstPermit = new PermitList("where other_type = 'FALSE' and permit_desc like '%CFEI%'");
             }
+            else if (RecordFrm.PermitApplication.Contains("OCCUPANCY")) //AFM 20220209 adjustments binan meeting 20220209
+            {
+                m_lstPermit = new PermitList("where other_type = 'FALSE' and permit_desc like '%OCCUPANCY%'");
+            }
+            else if (RecordFrm.PermitApplication.Contains("ELECTRICAL"))
+            {
+                m_lstPermit = new PermitList("where other_type = 'FALSE' and permit_desc like '%ELECTRICAL%'");
+            }
             else
-                m_lstPermit = new PermitList("where other_type = 'FALSE'");
+                m_lstPermit = new PermitList("where other_type = 'FALSE' and permit_desc like '%"+ RecordFrm.SelectedPermitDesc.ToUpper() + "%'"); //AFM 20220209 adjustments binan meeting 20220209
             int iCnt = m_lstPermit.PermitLst.Count;
 
             DataTable dataTable = new DataTable("Permit");
@@ -186,16 +196,19 @@ namespace Modules.Transactions
             RecordFrm.formStrucOwn.ClearControls();
             RecordFrm.formLotOwn.ClearControls();
             RecordFrm.formEngr.ClearControls();
-            if (RecordFrm.SourceClass == "NEW_ADD" || RecordFrm.SourceClass == "NEW_ADD_MECH" || RecordFrm.SourceClass == "NEW_ADD_CFEI")
+            if (RecordFrm.SourceClass == "NEW_ADD" || RecordFrm.SourceClass == "NEW_ADD_MECH" || RecordFrm.SourceClass == "NEW_ADD_CFEI" || RecordFrm.SourceClass.Contains("NEW_ADD_")) //AFM 20220209 added OTHERS - adjustments binan meeting 20220209
             {
                 RecordFrm.ButtonAdd.Enabled = true;
                 RecordFrm.ButtonEdit.Enabled = false;
-                RecordFrm.cmbPermit.Enabled = true;
+                if(RecordFrm.SourceClass.Contains("NEW_ADD_"))
+                    RecordFrm.cmbPermit.Enabled = false;
+                else
+                    RecordFrm.cmbPermit.Enabled = true;
                 RecordFrm.cmbScope.Enabled = true;
                 RecordFrm.btnSearch.Enabled = false;
                 RecordFrm.btnClear.Enabled = false;
             }
-            else if(RecordFrm.SourceClass == "NEW_EDIT")
+            else if(RecordFrm.SourceClass == "NEW_EDIT" || RecordFrm.SourceClass == "NEW_EDIT_OTH")
             {
                 RecordFrm.cmbPermit.Enabled = false;
                 RecordFrm.cmbScope.Enabled = false;
@@ -322,7 +335,7 @@ namespace Modules.Transactions
 
             //if (string.IsNullOrEmpty(RecordFrm.ARN))
 
-            if (RecordFrm.SourceClass == "NEW_ADD" || RecordFrm.SourceClass == "NEW_ADD_MECH" || RecordFrm.SourceClass == "NEW_ADD_CFEI")
+            if (RecordFrm.SourceClass == "NEW_ADD" || RecordFrm.SourceClass == "NEW_ADD_MECH" || RecordFrm.SourceClass == "NEW_ADD_CFEI" || RecordFrm.SourceClass.Contains("NEW_ADD_")) //AFM 20220209 added contains others - adjustments binan meeting 20220209
                 //RecordFrm.arn1.CreateAN(RecordFrm.cmbPermit.Text.ToString());
                 //RecordFrm.arn1.CreateAN(((DataRowView)RecordFrm.cmbPermit.SelectedItem)["PermitCode"].ToString()); // requested new eps format
                 RecordFrm.arn1.CreateAN("AN"); //AFM 20201204 REQUESTED BY BINAN AS PER MITCH - FIXED "AN" FOR NEW APPLICATION
@@ -439,7 +452,8 @@ namespace Modules.Transactions
                     //    iMainApp = 1;
                     if((RecordFrm.PermitApplication.Contains("BUILDING") && AppSettingsManager.GetPermitDesc(RecordFrm.formBldgDate.dgvList[0, i].Value.ToString()).Contains("BUILDING PERMIT")) ||
                         (RecordFrm.PermitApplication.Contains("MECHANICAL") && AppSettingsManager.GetPermitDesc(RecordFrm.formBldgDate.dgvList[0, i].Value.ToString()).Contains("MECHANICAL PERMIT")) ||
-                        (RecordFrm.PermitApplication.Contains("CFEI")))
+                        (RecordFrm.PermitApplication.Contains("CFEI")) ||
+                        (RecordFrm.SourceClass.Contains("NEW_ADD_")))  //AFM 20220209 adjustments binan meeting 20220209
                         iMainApp = 1;
 
                     string sStruc = string.Empty;
@@ -634,12 +648,12 @@ namespace Modules.Transactions
         {
             //if (string.IsNullOrEmpty(RecordFrm.arn1.GetTaxYear) && string.IsNullOrEmpty(RecordFrm.arn1.GetSeries))
             //if (string.IsNullOrEmpty(RecordFrm.arn1.GetMonth) && string.IsNullOrEmpty(RecordFrm.arn1.GetSeries)) // disabled for new arn of binan
-            if (string.IsNullOrEmpty(RecordFrm.arn1.GetTaxYear) && string.IsNullOrEmpty(RecordFrm.arn1.GetSeries)) // disabled for new arn of binan
+            if (string.IsNullOrEmpty(RecordFrm.arn1.GetTaxYear) || (string.IsNullOrEmpty(RecordFrm.arn1.GetSeries) && (RecordFrm.SourceClass.Contains("NEW_ADD_") || RecordFrm.SourceClass.Contains("NEW_EDIT_OTH")))) // disabled for new arn of binan
             {
                 SearchAccount.frmSearchARN form = new SearchAccount.frmSearchARN();
 
                 //if (RecordFrm.SourceClass == "NEW_EDIT" || RecordFrm.SourceClass == "NEW_VIEW" || RecordFrm.SourceClass == "NEW_CANCEL")
-                if (RecordFrm.SourceClass == "NEW_EDIT") //AFM 20211103
+                if (RecordFrm.SourceClass == "NEW_EDIT" || RecordFrm.SourceClass == "NEW_EDIT_OTH") //AFM 20211103
                 {
                     form.SearchCriteria = "QUE-EDIT";
                     form.SelectedPermit = RecordFrm.SelectedPermitCode;
@@ -648,7 +662,8 @@ namespace Modules.Transactions
                     form.SearchCriteria = "QUE-VIEW";
                 else if (RecordFrm.SourceClass == "REN_EDIT" || RecordFrm.SourceClass == "REN_VIEW" || RecordFrm.SourceClass == "REN_CANCEL")
                     form.SearchCriteria = "QUE-REN";
-                else if (RecordFrm.SourceClass == "NEW_ADD_OTH")
+                //else if (RecordFrm.SourceClass == "NEW_ADD_OTH")
+                else if (RecordFrm.SourceClass.Contains("NEW_ADD_")) //AFM 20220209 adjustments binan meeting 20220209
                 {
                     form.SearchCriteria = "APP-NEW-OTH"; //AFM 2021015
                     form.SelectedPermit = RecordFrm.SelectedPermitCode;
@@ -690,11 +705,18 @@ namespace Modules.Transactions
 
             if((RecordFrm.PermitApplication.Contains("ELECTRICAL") && RecordFrm.SourceClass.Contains("NEW_ADD_")) || (RecordFrm.PermitApplication.Contains("OCCUPANCY") && RecordFrm.SourceClass.Contains("NEW_ADD_")) || (RecordFrm.PermitApplication.Contains("OTHERS") && RecordFrm.SourceClass.Contains("NEW_ADD_"))) //AFM 20210316
             {
-                RecordFrm.formProject.EnableFormControls(false);
-                RecordFrm.formBldgDate.EnableFormControls(false);
-                RecordFrm.formStrucOwn.EnableFormControls(false);
-                RecordFrm.formLotOwn.EnableFormControls(false);
-                RecordFrm.formEngr.EnableFormControls(false);
+                //RecordFrm.formProject.EnableFormControls(false);
+                //RecordFrm.formBldgDate.EnableFormControls(false);
+                //RecordFrm.formStrucOwn.EnableFormControls(false);
+                //RecordFrm.formLotOwn.EnableFormControls(false);
+                //RecordFrm.formEngr.EnableFormControls(false);
+
+                //AFM 20220209 adjustments binan meeting 20220209
+                RecordFrm.formProject.EnableFormControls(true); 
+                RecordFrm.formBldgDate.EnableFormControls(true);
+                RecordFrm.formStrucOwn.EnableFormControls(true);
+                RecordFrm.formLotOwn.EnableFormControls(true);
+                RecordFrm.formEngr.EnableFormControls(true);
 
                 RecordFrm.ButtonAdd.Enabled = true;
             }
@@ -719,12 +741,20 @@ namespace Modules.Transactions
             else
             {
                 strWhereCond = $" where arn = '{RecordFrm.AN}' and main_application = 1";
-                if (RecordFrm.SourceClass == "NEW_EDIT" || RecordFrm.SourceClass == "NEW_VIEW" || RecordFrm.SourceClass == "NEW_CANCEL" || RecordFrm.SourceClass.Contains("NEW_ADD_")) //AFM 20210315 added new add for other applications
+                if (RecordFrm.SourceClass == "NEW_EDIT" || RecordFrm.SourceClass == "NEW_VIEW" || RecordFrm.SourceClass == "NEW_CANCEL" || RecordFrm.SourceClass.Contains("NEW_ADD_") || RecordFrm.SourceClass == "NEW_EDIT_OTH") //AFM 20210315 added new add for other applications
                 {
                     strWhereCond += $" and status_code = 'NEW'";
                     if (RecordFrm.PermitApplication == "ELECTRICAL" || RecordFrm.PermitApplication == "OCCUPANCY" || RecordFrm.PermitApplication == "OTHERS")
                     {
-                        strWhereCond += $" and status_code = 'NEW' and permit_code = '01'";
+                        if(RecordFrm.SourceClass == "NEW_EDIT_OTH")
+                            strWhereCond += $" and status_code = 'NEW' ";
+                        else
+                            strWhereCond += $" and status_code = 'NEW' and permit_code = '01'";
+                    }
+
+                    if (RecordFrm.SourceClass.Contains("NEW_ADD_"))
+                    {
+                        strWhereCond += $" UNION ALL select * from application_que where arn = '{RecordFrm.AN}' and main_application = 1 and status_code = 'NEW'";
                     }
                 }
                 else
@@ -834,7 +864,7 @@ namespace Modules.Transactions
                 ClearControl();
                 return;
             }
-            
+
             DisplayBuilding(iBldgNo);
             DisplayOwners();
             DisplayEngrArch();
@@ -854,6 +884,13 @@ namespace Modules.Transactions
             {
                 RecordFrm.cmbScope.Enabled = true;
                 RecordFrm.cmbPermit.Enabled = true;
+            }
+
+            if (RecordFrm.SourceClass.Contains("NEW_ADD_")) //AFM 20220209 adjustments binan meeting 20220209
+            {
+                RecordFrm.arn1.Clear();
+                RecordFrm.arn1.GetTaxYear = AppSettingsManager.GetSystemDate().Year.ToString();
+                RecordFrm.arn1.GetCode = "AN";
             }
         }
 
@@ -899,34 +936,38 @@ namespace Modules.Transactions
                                select a;
                     RecordFrm.formBldgDate.LoadGrid();
 
-                    foreach (var item in pset)
-                    {
-                        string sPermitNo = string.Empty;
-                        string sPermitName = string.Empty;
-                        string sStart = string.Empty;
-                        string sComplete = string.Empty;
-                        string sPermitID = string.Empty;
-                        sPermitID = item.PERMIT_NO;
-                        sPermitNo = item.PERMIT_CODE;
-                        string sWhereClause = string.Empty;
-                        DateTime dtTmp;
+                    //AFM 20220209 DISABLED - adjustments binan meeting 20220209
+                    //foreach (var item in pset)
+                    //{
+                    //    string sPermitNo = string.Empty;
+                    //    string sPermitName = string.Empty;
+                    //    string sStart = string.Empty;
+                    //    string sComplete = string.Empty;
+                    //    string sPermitID = string.Empty;
+                    //    sPermitID = item.PERMIT_NO;
+                    //    sPermitNo = item.PERMIT_CODE;
+                    //    string sWhereClause = string.Empty;
+                    //    DateTime dtTmp;
 
-                        if (!string.IsNullOrEmpty(sPermitNo))
-                        {
-                            sWhereClause = " where permit_code = '";
-                            sWhereClause += sPermitNo;
-                            sWhereClause += "'";
-                        }
-                        PermitList permitlist = new PermitList(sWhereClause);
-                        sPermitName = permitlist.PermitLst[0].PermitDesc;
+                    //    if (!string.IsNullOrEmpty(sPermitNo))
+                    //    {
+                    //        sWhereClause = " where permit_code = '";
+                    //        sWhereClause += sPermitNo;
+                    //        sWhereClause += "'";
+                    //    }
+                    //    PermitList permitlist = new PermitList(sWhereClause);
+                    //    sPermitName = permitlist.PermitLst[0].PermitDesc;
 
-                        DateTime.TryParse(item.PROP_START.ToString(), out dtTmp);
-                        sStart = dtTmp.ToShortDateString();
-                        DateTime.TryParse(item.PROP_COMPLETE.ToString(), out dtTmp);
-                        sComplete = dtTmp.ToShortDateString();
+                    //    DateTime.TryParse(item.PROP_START.ToString(), out dtTmp);
+                    //    sStart = dtTmp.ToShortDateString();
+                    //    DateTime.TryParse(item.PROP_COMPLETE.ToString(), out dtTmp);
+                    //    sComplete = dtTmp.ToShortDateString();
 
-                        RecordFrm.formBldgDate.dgvList.Rows.Add(sPermitNo, sPermitName, sPermitID, sStart, sComplete);
-                    }
+                    //    RecordFrm.formBldgDate.dgvList.Rows.Add(sPermitNo, sPermitName, sPermitID, sStart, sComplete);
+                    //}
+
+                    RecordFrm.formBldgDate.dgvList.Rows.Add(((DataRowView)RecordFrm.cmbPermit.SelectedItem)["PermitCode"].ToString(), ((DataRowView)RecordFrm.cmbPermit.SelectedItem)["PermitDesc"].ToString(), null, null, null); //AFM 20220209 adjustments binan meeting 20220209
+
                 }
                 else
                 {
@@ -972,9 +1013,14 @@ namespace Modules.Transactions
             string sArchNo = string.Empty;
 
             if ((RecordFrm.PermitApplication.Contains("ELECTRICAL") && RecordFrm.SourceClass.Contains("NEW_ADD_")) || (RecordFrm.PermitApplication.Contains("OCCUPANCY") && RecordFrm.SourceClass.Contains("NEW_ADD_")) || (RecordFrm.PermitApplication.Contains("OTHERS") && RecordFrm.SourceClass.Contains("NEW_ADD_")))
-                strWhereCond = $" where arn = '{RecordFrm.AN}' and permit_code = '01' order by main_application desc"; //get building application
+            {
+                strWhereCond = $" where arn = '{RecordFrm.AN}' and permit_code = '01' "; //get building application
+                strWhereCond += $" UNION ALL select * from application_que where arn = '{RecordFrm.AN}' and permit_code = '01'  "; //get building application
+
+            }
             else if ((RecordFrm.SourceClass.Contains("NEW_EDIT"))) //AFM 20211103
-                strWhereCond = $" where arn = '{RecordFrm.AN}' and permit_code = '{RecordFrm.SelectedPermitCode}' order by main_application desc"; //get building application
+                //strWhereCond = $" where arn = '{RecordFrm.AN}' and permit_code = '{RecordFrm.SelectedPermitCode}' order by main_application desc"; //get building application
+                strWhereCond = $" where arn = '{RecordFrm.AN}' and permit_code = '{((DataRowView)RecordFrm.cmbPermit.SelectedItem)["PermitCode"].ToString()}' order by main_application desc"; //AFM //AFM 20220209 adjustments binan meeting 20220209
             else
                 strWhereCond = $" where arn = '{RecordFrm.AN}' order by main_application desc";
 

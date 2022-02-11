@@ -47,6 +47,7 @@
             this.electricalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.occupancyToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.cFEIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fencingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherPermitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renewalApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,6 +70,7 @@
             this.certificationBillingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.occupancyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.annualInspectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dOLEBillingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listOfSummaryPermitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printCertificationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,8 +123,7 @@
             this.lblCode = new System.Windows.Forms.Label();
             this.lblDesc = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
-            this.fencingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dOLEBillingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oTHERPERMITSToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MS.SuspendLayout();
             this.pnlButton.SuspendLayout();
             this.SuspendLayout();
@@ -292,6 +293,13 @@
             this.cFEIToolStripMenuItem.Text = "CFEI";
             this.cFEIToolStripMenuItem.Click += new System.EventHandler(this.cFEIToolStripMenuItem_Click);
             // 
+            // fencingToolStripMenuItem
+            // 
+            this.fencingToolStripMenuItem.Name = "fencingToolStripMenuItem";
+            this.fencingToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.fencingToolStripMenuItem.Text = "Fencing Permit";
+            this.fencingToolStripMenuItem.Click += new System.EventHandler(this.fencingToolStripMenuItem_Click);
+            // 
             // otherPermitsToolStripMenuItem
             // 
             this.otherPermitsToolStripMenuItem.Name = "otherPermitsToolStripMenuItem";
@@ -314,28 +322,28 @@
             // addToolStripMenuItem1
             // 
             this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
-            this.addToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.addToolStripMenuItem1.Text = "Add";
             this.addToolStripMenuItem1.Click += new System.EventHandler(this.addToolStripMenuItem1_Click);
             // 
             // editToolStripMenuItem1
             // 
             this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
-            this.editToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
+            this.editToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.editToolStripMenuItem1.Text = "Edit";
             this.editToolStripMenuItem1.Click += new System.EventHandler(this.editToolStripMenuItem1_Click);
             // 
             // viewToolStripMenuItem1
             // 
             this.viewToolStripMenuItem1.Name = "viewToolStripMenuItem1";
-            this.viewToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
+            this.viewToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.viewToolStripMenuItem1.Text = "View";
             this.viewToolStripMenuItem1.Click += new System.EventHandler(this.viewToolStripMenuItem1_Click);
             // 
             // cancelToolStripMenuItem1
             // 
             this.cancelToolStripMenuItem1.Name = "cancelToolStripMenuItem1";
-            this.cancelToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
+            this.cancelToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.cancelToolStripMenuItem1.Text = "Cancel";
             this.cancelToolStripMenuItem1.Click += new System.EventHandler(this.cancelToolStripMenuItem1_Click);
             // 
@@ -344,7 +352,8 @@
             this.editApplicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bUILDINGToolStripMenuItem1,
             this.mECHANICALToolStripMenuItem1,
-            this.cFEIToolStripMenuItem1});
+            this.cFEIToolStripMenuItem1,
+            this.oTHERPERMITSToolStripMenuItem1});
             this.editApplicationToolStripMenuItem.Name = "editApplicationToolStripMenuItem";
             this.editApplicationToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.editApplicationToolStripMenuItem.Text = "Edit Application";
@@ -353,21 +362,21 @@
             // bUILDINGToolStripMenuItem1
             // 
             this.bUILDINGToolStripMenuItem1.Name = "bUILDINGToolStripMenuItem1";
-            this.bUILDINGToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
+            this.bUILDINGToolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
             this.bUILDINGToolStripMenuItem1.Text = "BUILDING";
             this.bUILDINGToolStripMenuItem1.Click += new System.EventHandler(this.bUILDINGToolStripMenuItem1_Click_1);
             // 
             // mECHANICALToolStripMenuItem1
             // 
             this.mECHANICALToolStripMenuItem1.Name = "mECHANICALToolStripMenuItem1";
-            this.mECHANICALToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
+            this.mECHANICALToolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
             this.mECHANICALToolStripMenuItem1.Text = "MECHANICAL";
             this.mECHANICALToolStripMenuItem1.Click += new System.EventHandler(this.mECHANICALToolStripMenuItem1_Click);
             // 
             // cFEIToolStripMenuItem1
             // 
             this.cFEIToolStripMenuItem1.Name = "cFEIToolStripMenuItem1";
-            this.cFEIToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
+            this.cFEIToolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
             this.cFEIToolStripMenuItem1.Text = "CFEI";
             this.cFEIToolStripMenuItem1.Click += new System.EventHandler(this.cFEIToolStripMenuItem1_Click);
             // 
@@ -472,6 +481,13 @@
             this.annualInspectionToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.annualInspectionToolStripMenuItem.Text = "Annual Inspection";
             this.annualInspectionToolStripMenuItem.Click += new System.EventHandler(this.annualInspectionToolStripMenuItem_Click);
+            // 
+            // dOLEBillingToolStripMenuItem
+            // 
+            this.dOLEBillingToolStripMenuItem.Name = "dOLEBillingToolStripMenuItem";
+            this.dOLEBillingToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.dOLEBillingToolStripMenuItem.Text = "DOLE Billing";
+            this.dOLEBillingToolStripMenuItem.Click += new System.EventHandler(this.dOLEBillingToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -952,19 +968,12 @@
             this.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblDate.Visible = false;
             // 
-            // fencingToolStripMenuItem
+            // oTHERPERMITSToolStripMenuItem1
             // 
-            this.fencingToolStripMenuItem.Name = "fencingToolStripMenuItem";
-            this.fencingToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.fencingToolStripMenuItem.Text = "Fencing Permit";
-            this.fencingToolStripMenuItem.Click += new System.EventHandler(this.fencingToolStripMenuItem_Click);
-            // 
-            // dOLEBillingToolStripMenuItem
-            // 
-            this.dOLEBillingToolStripMenuItem.Name = "dOLEBillingToolStripMenuItem";
-            this.dOLEBillingToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.dOLEBillingToolStripMenuItem.Text = "DOLE Billing";
-            this.dOLEBillingToolStripMenuItem.Click += new System.EventHandler(this.dOLEBillingToolStripMenuItem_Click);
+            this.oTHERPERMITSToolStripMenuItem1.Name = "oTHERPERMITSToolStripMenuItem1";
+            this.oTHERPERMITSToolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
+            this.oTHERPERMITSToolStripMenuItem1.Text = "OTHER PERMITS";
+            this.oTHERPERMITSToolStripMenuItem1.Click += new System.EventHandler(this.oTHERPERMITSToolStripMenuItem1_Click);
             // 
             // frmMenu
             // 
@@ -1093,6 +1102,7 @@
         private System.Windows.Forms.ToolStripMenuItem viewApplicationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fencingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dOLEBillingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oTHERPERMITSToolStripMenuItem1;
     }
 }
 

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBilling));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtStatus = new System.Windows.Forms.TextBox();
@@ -53,7 +53,6 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.grpAddlFee = new System.Windows.Forms.TextBox();
-            this.an1 = new Modules.ARN.AN();
             this.label5 = new System.Windows.Forms.Label();
             this.txtOccupancy = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -110,34 +109,6 @@
             this.txtAmtDue = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dgvAssessment = new System.Windows.Forms.DataGridView();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnImgView = new System.Windows.Forms.Button();
-            this.lblTotAmtDue = new System.Windows.Forms.Label();
-            this.txtAllTotAmtDue = new System.Windows.Forms.TextBox();
-            this.dgvOtherFees = new System.Windows.Forms.DataGridView();
-            this.grpOtherAmt = new System.Windows.Forms.GroupBox();
-            this.txtOtherAmt = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.txtOtherFeesDesc = new System.Windows.Forms.TextBox();
-            this.btnOtherAdd = new System.Windows.Forms.Button();
-            this.label20 = new System.Windows.Forms.Label();
-            this.txtOtherTotAmtDue = new System.Windows.Forms.TextBox();
-            this.grpOther = new System.Windows.Forms.GroupBox();
-            this.dgvAddOnFees = new System.Windows.Forms.DataGridView();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtAddOnTotAmTDue = new System.Windows.Forms.TextBox();
-            this.grpAddonAmt = new System.Windows.Forms.GroupBox();
-            this.txtAddOnAmt = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtAddOnFeesDesc = new System.Windows.Forms.TextBox();
-            this.btnAddOnAmt = new System.Windows.Forms.Button();
-            this.grpAddOn = new System.Windows.Forms.GroupBox();
-            this.lblAddOn = new System.Windows.Forms.Label();
-            this.btnRequirements = new System.Windows.Forms.Button();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Fees = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FeesCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -150,6 +121,13 @@
             this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Scope = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrigAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnImgView = new System.Windows.Forms.Button();
+            this.lblTotAmtDue = new System.Windows.Forms.Label();
+            this.txtAllTotAmtDue = new System.Windows.Forms.TextBox();
+            this.dgvOtherFees = new System.Windows.Forms.DataGridView();
             this.dataGridViewCheckBoxColumn3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -162,6 +140,16 @@
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grpOtherAmt = new System.Windows.Forms.GroupBox();
+            this.txtOtherAmt = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtOtherFeesDesc = new System.Windows.Forms.TextBox();
+            this.btnOtherAdd = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txtOtherTotAmtDue = new System.Windows.Forms.TextBox();
+            this.grpOther = new System.Windows.Forms.GroupBox();
+            this.dgvAddOnFees = new System.Windows.Forms.DataGridView();
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -174,6 +162,20 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtAddOnTotAmTDue = new System.Windows.Forms.TextBox();
+            this.grpAddonAmt = new System.Windows.Forms.GroupBox();
+            this.txtAddOnAmt = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtAddOnFeesDesc = new System.Windows.Forms.TextBox();
+            this.btnAddOnAmt = new System.Windows.Forms.Button();
+            this.grpAddOn = new System.Windows.Forms.GroupBox();
+            this.lblAddOn = new System.Windows.Forms.Label();
+            this.btnRequirements = new System.Windows.Forms.Button();
+            this.an1 = new Modules.ARN.AN();
+            this.txtUnits = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPermit)).BeginInit();
@@ -383,16 +385,6 @@
             this.grpAddlFee.Size = new System.Drawing.Size(90, 21);
             this.grpAddlFee.TabIndex = 112;
             // 
-            // an1
-            // 
-            this.an1.GetCode = "AN";
-            this.an1.GetSeries = "";
-            this.an1.GetTaxYear = "";
-            this.an1.Location = new System.Drawing.Point(121, 15);
-            this.an1.Name = "an1";
-            this.an1.Size = new System.Drawing.Size(207, 31);
-            this.an1.TabIndex = 1;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -408,7 +400,7 @@
             this.txtOccupancy.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtOccupancy.Enabled = false;
             this.txtOccupancy.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOccupancy.Location = new System.Drawing.Point(675, 35);
+            this.txtOccupancy.Location = new System.Drawing.Point(675, 33);
             this.txtOccupancy.Name = "txtOccupancy";
             this.txtOccupancy.ReadOnly = true;
             this.txtOccupancy.Size = new System.Drawing.Size(116, 23);
@@ -418,7 +410,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(587, 38);
+            this.label6.Location = new System.Drawing.Point(587, 36);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(58, 13);
             this.label6.TabIndex = 11;
@@ -490,6 +482,8 @@
             // 
             // grpAssessment
             // 
+            this.grpAssessment.Controls.Add(this.txtUnits);
+            this.grpAssessment.Controls.Add(this.label36);
             this.grpAssessment.Controls.Add(this.label35);
             this.grpAssessment.Controls.Add(this.label34);
             this.grpAssessment.Controls.Add(this.label33);
@@ -588,9 +582,9 @@
             this.label30.AutoSize = true;
             this.label30.Location = new System.Drawing.Point(800, 17);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(105, 13);
+            this.label30.Size = new System.Drawing.Size(78, 13);
             this.label30.TabIndex = 143;
-            this.label30.Text = "For Electrical Permit:";
+            this.label30.Text = "Line and Grade";
             this.label30.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txtElecTotal
@@ -704,7 +698,7 @@
             this.cmbOccupancy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOccupancy.Enabled = false;
             this.cmbOccupancy.FormattingEnabled = true;
-            this.cmbOccupancy.Location = new System.Drawing.Point(675, 35);
+            this.cmbOccupancy.Location = new System.Drawing.Point(675, 33);
             this.cmbOccupancy.Name = "cmbOccupancy";
             this.cmbOccupancy.Size = new System.Drawing.Size(116, 21);
             this.cmbOccupancy.TabIndex = 132;
@@ -733,7 +727,7 @@
             // btnCancelEdit
             // 
             this.btnCancelEdit.Enabled = false;
-            this.btnCancelEdit.Location = new System.Drawing.Point(736, 165);
+            this.btnCancelEdit.Location = new System.Drawing.Point(736, 182);
             this.btnCancelEdit.Name = "btnCancelEdit";
             this.btnCancelEdit.Size = new System.Drawing.Size(55, 23);
             this.btnCancelEdit.TabIndex = 128;
@@ -744,7 +738,7 @@
             // btnEdit
             // 
             this.btnEdit.Enabled = false;
-            this.btnEdit.Location = new System.Drawing.Point(675, 165);
+            this.btnEdit.Location = new System.Drawing.Point(675, 182);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(55, 23);
             this.btnEdit.TabIndex = 126;
@@ -756,7 +750,7 @@
             // 
             this.txtBldgCost.Enabled = false;
             this.txtBldgCost.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBldgCost.Location = new System.Drawing.Point(675, 138);
+            this.txtBldgCost.Location = new System.Drawing.Point(675, 132);
             this.txtBldgCost.Name = "txtBldgCost";
             this.txtBldgCost.Size = new System.Drawing.Size(116, 23);
             this.txtBldgCost.TabIndex = 127;
@@ -766,7 +760,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(588, 135);
+            this.label23.Location = new System.Drawing.Point(588, 131);
             this.label23.MaximumSize = new System.Drawing.Size(80, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(67, 26);
@@ -777,7 +771,7 @@
             // 
             this.txtHeight.Enabled = false;
             this.txtHeight.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHeight.Location = new System.Drawing.Point(675, 112);
+            this.txtHeight.Location = new System.Drawing.Point(675, 107);
             this.txtHeight.Name = "txtHeight";
             this.txtHeight.Size = new System.Drawing.Size(116, 23);
             this.txtHeight.TabIndex = 125;
@@ -787,7 +781,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(588, 117);
+            this.label22.Location = new System.Drawing.Point(588, 111);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(55, 13);
             this.label22.TabIndex = 124;
@@ -798,7 +792,7 @@
             // 
             this.txtFlrArea.Enabled = false;
             this.txtFlrArea.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFlrArea.Location = new System.Drawing.Point(675, 86);
+            this.txtFlrArea.Location = new System.Drawing.Point(675, 81);
             this.txtFlrArea.Name = "txtFlrArea";
             this.txtFlrArea.Size = new System.Drawing.Size(116, 23);
             this.txtFlrArea.TabIndex = 123;
@@ -808,7 +802,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(588, 91);
+            this.label21.Location = new System.Drawing.Point(588, 86);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(71, 13);
             this.label21.TabIndex = 122;
@@ -820,7 +814,7 @@
             this.cmbStructure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStructure.Enabled = false;
             this.cmbStructure.FormattingEnabled = true;
-            this.cmbStructure.Location = new System.Drawing.Point(675, 61);
+            this.cmbStructure.Location = new System.Drawing.Point(675, 58);
             this.cmbStructure.Name = "cmbStructure";
             this.cmbStructure.Size = new System.Drawing.Size(116, 21);
             this.cmbStructure.TabIndex = 121;
@@ -828,7 +822,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(588, 64);
+            this.label15.Location = new System.Drawing.Point(588, 62);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(51, 13);
             this.label15.TabIndex = 120;
@@ -985,8 +979,8 @@
             // 
             // Value
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.Value.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.Value.DefaultCellStyle = dataGridViewCellStyle8;
             this.Value.HeaderText = "Value";
             this.Value.Name = "Value";
             // 
@@ -1045,6 +1039,87 @@
             this.dgvAssessment.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssessment_CellContentClick);
             this.dgvAssessment.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssessment_CellEndEdit);
             this.dgvAssessment.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssessment_CellLeave);
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.HeaderText = " ";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.Width = 30;
+            // 
+            // Fees
+            // 
+            this.Fees.HeaderText = "Fees Description";
+            this.Fees.Name = "Fees";
+            this.Fees.ReadOnly = true;
+            this.Fees.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Fees.Width = 200;
+            // 
+            // FeesCode
+            // 
+            this.FeesCode.HeaderText = "Code";
+            this.FeesCode.Name = "FeesCode";
+            this.FeesCode.Visible = false;
+            this.FeesCode.Width = 70;
+            // 
+            // Means
+            // 
+            this.Means.HeaderText = "Means";
+            this.Means.Name = "Means";
+            this.Means.Visible = false;
+            // 
+            // Unit
+            // 
+            this.Unit.HeaderText = "Unit";
+            this.Unit.Name = "Unit";
+            this.Unit.ReadOnly = true;
+            this.Unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Area
+            // 
+            this.Area.HeaderText = "Area";
+            this.Area.Name = "Area";
+            this.Area.Visible = false;
+            // 
+            // Cumulative
+            // 
+            this.Cumulative.HeaderText = "Cumulative";
+            this.Cumulative.Name = "Cumulative";
+            this.Cumulative.Visible = false;
+            // 
+            // UnitValue
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.UnitValue.DefaultCellStyle = dataGridViewCellStyle9;
+            this.UnitValue.HeaderText = "Input Value";
+            this.UnitValue.Name = "UnitValue";
+            this.UnitValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Amount
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.Amount.DefaultCellStyle = dataGridViewCellStyle10;
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
+            this.Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Category
+            // 
+            this.Category.HeaderText = "Category";
+            this.Category.Name = "Category";
+            this.Category.Visible = false;
+            // 
+            // Scope
+            // 
+            this.Scope.HeaderText = "Scope";
+            this.Scope.Name = "Scope";
+            this.Scope.Visible = false;
+            // 
+            // OrigAmt
+            // 
+            this.OrigAmt.HeaderText = "OrigAmt";
+            this.OrigAmt.Name = "OrigAmt";
+            this.OrigAmt.Visible = false;
             // 
             // btnSave
             // 
@@ -1142,6 +1217,84 @@
             this.dgvOtherFees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOtherFees_CellContentClick);
             this.dgvOtherFees.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOtherFees_CellEndEdit);
             this.dgvOtherFees.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOtherFees_CellLeave);
+            // 
+            // dataGridViewCheckBoxColumn3
+            // 
+            this.dataGridViewCheckBoxColumn3.HeaderText = " ";
+            this.dataGridViewCheckBoxColumn3.Name = "dataGridViewCheckBoxColumn3";
+            this.dataGridViewCheckBoxColumn3.Width = 30;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "Fees Description";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn12.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "Code";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.Visible = false;
+            this.dataGridViewTextBoxColumn13.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.HeaderText = "Means";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.HeaderText = "Unit";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.HeaderText = "Area";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.HeaderText = "Cumulative";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle11;
+            this.dataGridViewTextBoxColumn18.HeaderText = "Unit Value";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle12;
+            this.dataGridViewTextBoxColumn19.HeaderText = "Amount";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.HeaderText = "Category";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.HeaderText = "Scope";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            this.dataGridViewTextBoxColumn21.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.HeaderText = "OrigAmt";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            this.dataGridViewTextBoxColumn22.Visible = false;
             // 
             // grpOtherAmt
             // 
@@ -1281,6 +1434,84 @@
             this.dgvAddOnFees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAddOn_CellContentClick);
             this.dgvAddOnFees.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAddOnFees_CellEndEdit);
             // 
+            // dataGridViewCheckBoxColumn2
+            // 
+            this.dataGridViewCheckBoxColumn2.HeaderText = " ";
+            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
+            this.dataGridViewCheckBoxColumn2.Width = 30;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Fees Description";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Code";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Visible = false;
+            this.dataGridViewTextBoxColumn2.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Means";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Unit";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Area";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Cumulative";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle13;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Unit Value";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle14;
+            this.dataGridViewTextBoxColumn8.HeaderText = "Amount";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Category";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "Scope";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "OrigAmt";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Visible = false;
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -1409,242 +1640,36 @@
             this.btnRequirements.UseVisualStyleBackColor = true;
             this.btnRequirements.Click += new System.EventHandler(this.btnRequirements_Click);
             // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.HeaderText = " ";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.Width = 30;
-            // 
-            // Fees
-            // 
-            this.Fees.HeaderText = "Fees Description";
-            this.Fees.Name = "Fees";
-            this.Fees.ReadOnly = true;
-            this.Fees.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Fees.Width = 200;
-            // 
-            // FeesCode
-            // 
-            this.FeesCode.HeaderText = "Code";
-            this.FeesCode.Name = "FeesCode";
-            this.FeesCode.Visible = false;
-            this.FeesCode.Width = 70;
-            // 
-            // Means
-            // 
-            this.Means.HeaderText = "Means";
-            this.Means.Name = "Means";
-            this.Means.Visible = false;
-            // 
-            // Unit
-            // 
-            this.Unit.HeaderText = "Unit";
-            this.Unit.Name = "Unit";
-            this.Unit.ReadOnly = true;
-            this.Unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Area
-            // 
-            this.Area.HeaderText = "Area";
-            this.Area.Name = "Area";
-            this.Area.Visible = false;
-            // 
-            // Cumulative
-            // 
-            this.Cumulative.HeaderText = "Cumulative";
-            this.Cumulative.Name = "Cumulative";
-            this.Cumulative.Visible = false;
-            // 
-            // UnitValue
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.UnitValue.DefaultCellStyle = dataGridViewCellStyle2;
-            this.UnitValue.HeaderText = "Input Value";
-            this.UnitValue.Name = "UnitValue";
-            this.UnitValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Amount
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.Amount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
-            this.Amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Category
-            // 
-            this.Category.HeaderText = "Category";
-            this.Category.Name = "Category";
-            this.Category.Visible = false;
-            // 
-            // Scope
-            // 
-            this.Scope.HeaderText = "Scope";
-            this.Scope.Name = "Scope";
-            this.Scope.Visible = false;
-            // 
-            // OrigAmt
-            // 
-            this.OrigAmt.HeaderText = "OrigAmt";
-            this.OrigAmt.Name = "OrigAmt";
-            this.OrigAmt.Visible = false;
-            // 
-            // dataGridViewCheckBoxColumn3
-            // 
-            this.dataGridViewCheckBoxColumn3.HeaderText = " ";
-            this.dataGridViewCheckBoxColumn3.Name = "dataGridViewCheckBoxColumn3";
-            this.dataGridViewCheckBoxColumn3.Width = 30;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "Fees Description";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn12.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "Code";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.Visible = false;
-            this.dataGridViewTextBoxColumn13.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.HeaderText = "Means";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.HeaderText = "Unit";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.HeaderText = "Area";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.HeaderText = "Cumulative";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewTextBoxColumn18.HeaderText = "Unit Value";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            this.dataGridViewTextBoxColumn18.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewTextBoxColumn19.HeaderText = "Amount";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.HeaderText = "Category";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.HeaderText = "Scope";
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            this.dataGridViewTextBoxColumn21.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.HeaderText = "OrigAmt";
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            this.dataGridViewTextBoxColumn22.Visible = false;
-            // 
-            // dataGridViewCheckBoxColumn2
-            // 
-            this.dataGridViewCheckBoxColumn2.HeaderText = " ";
-            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
-            this.dataGridViewCheckBoxColumn2.Width = 30;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Fees Description";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn1.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Code";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Visible = false;
-            this.dataGridViewTextBoxColumn2.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Means";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Unit";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Area";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Cumulative";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Unit Value";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dataGridViewTextBoxColumn8.HeaderText = "Amount";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "Category";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "Scope";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "OrigAmt";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.Visible = false;
+            // an1
+            // 
+            this.an1.GetCode = "AN";
+            this.an1.GetSeries = "";
+            this.an1.GetTaxYear = "";
+            this.an1.Location = new System.Drawing.Point(121, 15);
+            this.an1.Name = "an1";
+            this.an1.Size = new System.Drawing.Size(207, 31);
+            this.an1.TabIndex = 1;
+            // 
+            // txtUnits
+            // 
+            this.txtUnits.Enabled = false;
+            this.txtUnits.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUnits.Location = new System.Drawing.Point(675, 158);
+            this.txtUnits.Name = "txtUnits";
+            this.txtUnits.Size = new System.Drawing.Size(116, 23);
+            this.txtUnits.TabIndex = 147;
+            this.txtUnits.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtUnits.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUnits_KeyPress);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(588, 163);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(61, 13);
+            this.label36.TabIndex = 146;
+            this.label36.Text = "No. of Units";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // frmBilling
             // 
@@ -1841,5 +1866,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        public System.Windows.Forms.TextBox txtUnits;
+        private System.Windows.Forms.Label label36;
     }
 }

@@ -662,20 +662,22 @@ namespace Modules.SearchAccount
 
             sPermitAcro = arn1.ANCodeGenerator(PermitCode);
 
-            if (SearchCriteria == "QUE-NEW" || SearchCriteria == "QUE-REN" || SearchCriteria == "QUE" || SearchCriteria.Contains("QUE-"))
+            if (SearchCriteria == "QUE-NEW" || SearchCriteria == "QUE-REN" || SearchCriteria == "QUE" || SearchCriteria.Contains("QUE-") || SearchCriteria == "QUE-OTH")
             {
                 //strWhereCond = $" where application_que.main_application = 1 and ";
-                if(SearchCriteria == "QUE-OCC")
-                    strWhereCond = $" where application_que.main_application = 0 and arn like 'AN%' and application_que.arn not in(select arn from application_que where arn = application_que.arn and permit_code = '01') and "; //AFM 20201204 REQUESTED BY BINAN AS PER MITCH - FIXED "AN" FOR NEW APPLICATION
-                else if (SearchCriteria == "QUE-ELEC")
-                    strWhereCond = $" where application_que.main_application = 0 and arn like 'AN%' and application_que.arn not in(select arn from application_que where arn = application_que.arn and permit_code = '01') and "; //AFM 20201204 REQUESTED BY BINAN AS PER MITCH - FIXED "AN" FOR NEW APPLICATION 
-                else if (SearchCriteria == "QUE-MECH")
-                    strWhereCond = $" where application_que.main_application = 1 and arn like 'AN%' and application_que.arn not in(select arn from application_que where arn = application_que.arn and permit_code = '01') and "; //AFM 20201204 REQUESTED BY BINAN AS PER MITCH - FIXED "AN" FOR NEW APPLICATION //mechanical main application set to 1 because it has unique arn and not dependent on building application
-                else if (SearchCriteria == "QUE-CFEI")
-                    strWhereCond = $" where application_que.main_application = 1 and arn like 'AN%' and application_que.arn not in(select arn from application_que where arn = application_que.arn and permit_code = '01') and "; //AFM 20201204 REQUESTED BY BINAN AS PER MITCH - FIXED "AN" FOR NEW APPLICATION //CFEI main application set to 1 because it has unique arn and not dependent on building application
-                else if (SearchCriteria == "QUE-OTH")
-                    strWhereCond = $" where application_que.main_application = 0 and arn like 'AN%' and permit_code = '{PermitCode}' and application_que.arn not in(select arn from application_que where arn = application_que.arn and permit_code = '01') and ";
-                else if (SearchCriteria == "QUE-EDIT") //AFM 20211103
+                if (SearchCriteria == "QUE-OCC" || SearchCriteria == "QUE-ELEC" || SearchCriteria == "QUE-MECH" || SearchCriteria == "QUE-CFEI") //AFM 20220210 adjustments binan meeting 20220209
+                    strWhereCond = $" where application_que.main_application = 1 and arn like 'AN%' and permit_code = '{PermitCode}' and "; 
+                //else if (SearchCriteria == "QUE-ELEC")
+                //    strWhereCond = $" where application_que.main_application = 1 and arn like 'AN%' and application_que.arn not in(select arn from application_que where arn = application_que.arn and permit_code = '01') and "; //AFM 20201204 REQUESTED BY BINAN AS PER MITCH - FIXED "AN" FOR NEW APPLICATION 
+                //else if (SearchCriteria == "QUE-MECH")
+                //    strWhereCond = $" where application_que.main_application = 1 and arn like 'AN%' and application_que.arn not in(select arn from application_que where arn = application_que.arn and permit_code = '01') and "; //AFM 20201204 REQUESTED BY BINAN AS PER MITCH - FIXED "AN" FOR NEW APPLICATION //mechanical main application set to 1 because it has unique arn and not dependent on building application
+                //else if (SearchCriteria == "QUE-CFEI")
+                //    strWhereCond = $" where application_que.main_application = 1 and arn like 'AN%' and application_que.arn not in(select arn from application_que where arn = application_que.arn and permit_code = '01') and "; //AFM 20201204 REQUESTED BY BINAN AS PER MITCH - FIXED "AN" FOR NEW APPLICATION //CFEI main application set to 1 because it has unique arn and not dependent on building application
+                //else if (SearchCriteria == "QUE-OTH")
+                //    strWhereCond = $" where application_que.main_application = 1 and arn like 'AN%' and permit_code = '{PermitCode}' and application_que.arn not in(select arn from application_que where arn = application_que.arn and permit_code = '01') and ";
+                else if (SearchCriteria == "QUE-EDIT" && SelectedPermit != "01") //AFM 20211103
+                    strWhereCond = $" where application_que.main_application = 1 and arn like 'AN%' and permit_code <> '01' and "; //AFM 20220209 get all other permits - adjustments binan meeting 20220209
+                else if (SearchCriteria == "QUE-EDIT")
                     strWhereCond = $" where application_que.main_application = 1 and arn like 'AN%' and permit_code = '{SelectedPermit}' and ";
                 else
                     strWhereCond = $" where application_que.main_application = 1 and arn like 'AN%' and "; //AFM 20201204 REQUESTED BY BINAN AS PER MITCH - FIXED "AN" FOR NEW APPLICATION
@@ -743,7 +745,8 @@ namespace Modules.SearchAccount
                 else if(SearchCriteria == "APP-NEW-OCC")
                     strWhereCond = $" where application.main_application = 1 and arn like 'AN%' and permit_code = '01' and (application.arn not in (select arn from application where arn = application.arn and permit_code = '10') and application.arn not in (select arn from application_que where arn = application.arn and permit_code = '10')) and permit_code = '01' and "; //change permit code depending on occupancy permit on lgu // for occupancy, will get building permit application only //permit code = 01 is building permit default
                 else if(SearchCriteria == "APP-NEW-OTH")
-                    strWhereCond = $" where application.main_application = 1 and arn like 'AN%' and permit_code = '01' and (application.arn not in (select arn from application where arn = application.arn and permit_code = '{SelectedPermit}') and application.arn not in (select arn from application_que where arn = application.arn and permit_code = '{SelectedPermit}')) and permit_code = '01' and "; //change permit code depending on occupancy permit on lgu // for occupancy, will get building permit application only //permit code = 01 is building permit default
+                    //strWhereCond = $" where application.main_application = 1 and arn like 'AN%' and permit_code = '01' and (application.arn not in (select arn from application where arn = application.arn and permit_code = '{SelectedPermit}') and application.arn not in (select arn from application_que where arn = application.arn and permit_code = '{SelectedPermit}')) and permit_code = '01' and "; //change permit code depending on occupancy permit on lgu // for occupancy, will get building permit application only //permit code = 01 is building permit default
+                    strWhereCond = $" where application.main_application = 1 and arn like 'AN%' and permit_code = '01' and "; //change permit code depending on occupancy permit on lgu // for occupancy, will get building permit application only //permit code = 01 is building permit default  //AFM 20220209 adjustments binan meeting 20220209
                 else if (SearchCriteria == "CERTIFICATE") //AFM 20210408 for certificate of occupancy, filters occupancy applications that are paid
                 {
                     strWhereCond = $" where application.main_application = 0 and arn like 'AN%' and (application.arn in (select arn from application where arn = application.arn and permit_code = '{PermitCode}') and application.arn not in (select arn from application_que where arn = application.arn and permit_code = '{PermitCode}')) and ";
@@ -774,6 +777,25 @@ namespace Modules.SearchAccount
                 strWhereCond += $" and (acct_addr like '{StringUtilities.HandleApostrophe(txtProjStreet.Text.ToString())}%' OR acct_addr is null) ";
                 strWhereCond += $" and (acct_vill like '{StringUtilities.HandleApostrophe(txtProjVill.Text.ToString())}%' OR acct_vill is null)) ";
                 //requested on site by RJ (e)
+
+                if(SearchCriteria == "APP-NEW-OTH") //AFM 20220209 adjustments binan meeting 20220209
+                {
+                    strWhereCond += $" UNION ALL select * from application_que where application_que.main_application = 1 and arn like 'AN%' and permit_code = '01' and "; //change permit code depending on occupancy permit on lgu // for occupancy, will get building permit application only //permit code = 01 is building permit default  //AFM 20220209 adjustments binan meeting 20220209
+                    strWhereCond += $" permit_code like '{PermitCode}%' and application_que.arn like '{sPermitAcro}%' "; //AFM 20201104 REQUESTED BY BINAN AND RJ 20201103 - NEW BILLING DESIGN AND FLOW
+                    strWhereCond += $" and application_que.arn like '{arn1.GetAn()}%' ";
+                    strWhereCond += $" and application_que.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
+                    strWhereCond += $" and application_que.proj_lot_owner in (select acct_code from account where acct_ln like '{StringUtilities.HandleApostrophe(txtLotLastName.Text.ToString())}%' ";
+                    strWhereCond += $" and (acct_fn like '{StringUtilities.HandleApostrophe(txtLotFirstName.Text.ToString())}%' OR acct_fn is null) ";
+                    strWhereCond += $" and (acct_mi like '{StringUtilities.HandleApostrophe(txtLotMI.Text.ToString())}%'OR acct_mi is null)) ";
+                    strWhereCond += $" and application_que.proj_owner in (select acct_code from account where acct_ln like '{StringUtilities.HandleApostrophe(txtOwnLastName.Text.ToString())}%' ";
+                    strWhereCond += $" and (acct_fn like '{StringUtilities.HandleApostrophe(txtOwnFirstName.Text.ToString())}%' OR acct_fn is null) ";
+                    strWhereCond += $" and (acct_mi like '{StringUtilities.HandleApostrophe(txtOwnMI.Text.ToString())}%' OR acct_mi is null) ";
+                    strWhereCond += $" and (acct_hse_no like '{StringUtilities.HandleApostrophe(txtProjHseNo.Text.ToString())}%' OR acct_hse_no is null) ";
+                    strWhereCond += $" and (acct_lot_no like '{StringUtilities.HandleApostrophe(txtProjLotNo.Text.ToString())}%' OR acct_lot_no is null) ";
+                    strWhereCond += $" and (acct_blk_no like '{StringUtilities.HandleApostrophe(txtProjBlkNo.Text.ToString())}%' OR acct_blk_no is null) ";
+                    strWhereCond += $" and (acct_addr like '{StringUtilities.HandleApostrophe(txtProjStreet.Text.ToString())}%' OR acct_addr is null) ";
+                    strWhereCond += $" and (acct_vill like '{StringUtilities.HandleApostrophe(txtProjVill.Text.ToString())}%' OR acct_vill is null)) ";
+                }
 
                 var result = from a in Records.ApplicationTblList.GetRecord(strWhereCond)
                              select a;

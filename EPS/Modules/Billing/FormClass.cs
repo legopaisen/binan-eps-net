@@ -186,6 +186,7 @@ namespace Modules.Billing
                         RecordFrm.txtFlrArea.Text = string.Format("{0:#,###.00}", res.GetDouble("total_flr_area"));
                         RecordFrm.txtHeight.Text = string.Format("{0:#,###.00}", res.GetDouble("bldg_height"));
                         RecordFrm.txtBldgCost.Text = string.Format("{0:#,###.00}", res.GetDouble("est_cost"));
+                        RecordFrm.txtUnits.Text = res.GetDouble("no_units").ToString(); //AFM 20220210 adjustments binan meeting 20220209
                     }
                 res.Close();
                 //AFM 20210308 (e)
@@ -533,6 +534,25 @@ namespace Modules.Billing
             return sValue;
         }
 
+        private string GetAddOnFeesValue(string sValue)
+        {
+            OracleResultSet result = new OracleResultSet();
+            double dValue = 0;
+            result.Query = $"select amount1 from addl_schedules where fees_code = '{sValue}'";
+            if (result.Execute())
+                if (result.Read())
+                {
+                    dValue = result.GetDouble("amount1");
+                    sValue = dValue.ToString();
+                }
+                else
+                    sValue = "0";
+            else
+                sValue = "0";
+            return sValue;
+        }
+
+
         public void CellClickOthersCELL(object sender, DataGridViewCellEventArgs e)
         {
             m_sFeesCode = string.Empty;
@@ -613,6 +633,16 @@ namespace Modules.Billing
                         sValue = GetOtherFeesValue(Convert.ToString(RecordFrm.dgvOtherFees[2, m_iAssessmentRow].Value));
                         RecordFrm.dgvOtherFees[8, m_iAssessmentRow].Value = sValue;
 
+                        if (!string.IsNullOrEmpty(RecordFrm.txtUnits.Text.Trim())) //AFM 20220210 multiple amount of fees per unit - adjustments binan meeting 20220209
+                        {
+                            double dUnits = 0;
+                            double dAmountDue = 0;
+                            double.TryParse(RecordFrm.dgvOtherFees[8, m_iAssessmentRow].Value.ToString(), out dAmountDue);
+                            double.TryParse(RecordFrm.txtUnits.Text.Trim(), out dUnits);
+                            if (dUnits > 0)
+                                RecordFrm.dgvOtherFees[8, m_iAssessmentRow].Value = dAmountDue * Convert.ToDouble(Decimal.Truncate(Convert.ToDecimal(dUnits)));
+                        }
+
                         RecordFrm.dgvOtherFees.BeginEdit(true);
                         RecordFrm.dgvOtherFees.EndEdit();
 
@@ -680,8 +710,19 @@ namespace Modules.Billing
                     bSelect = (bool)RecordFrm.dgvAddOnFees[0, m_iAssessmentRow].Value;
                     if (!bSelect)
                     {
-                        sValue = GetOtherFeesValue(Convert.ToString(RecordFrm.dgvAddOnFees[2, m_iAssessmentRow].Value));
+                        sValue = GetAddOnFeesValue(Convert.ToString(RecordFrm.dgvAddOnFees[2, m_iAssessmentRow].Value));
                         RecordFrm.dgvAddOnFees[8, m_iAssessmentRow].Value = sValue;
+
+                        if (!string.IsNullOrEmpty(RecordFrm.txtUnits.Text.Trim())) //AFM 20220210 multiple amount of fees per unit - adjustments binan meeting 20220209
+                        {
+                            double dUnits = 0;
+                            double dAmountDue = 0;
+                            double.TryParse(RecordFrm.dgvAddOnFees[8, m_iAssessmentRow].Value.ToString(), out dAmountDue);
+                            double.TryParse(RecordFrm.txtUnits.Text.Trim(), out dUnits);
+                            if (dUnits > 0)
+                                RecordFrm.dgvAddOnFees[8, m_iAssessmentRow].Value = dAmountDue * Convert.ToDouble(Decimal.Truncate(Convert.ToDecimal(dUnits)));
+                        }
+
 
                         RecordFrm.dgvAddOnFees.BeginEdit(true);
                         RecordFrm.dgvAddOnFees.EndEdit();
@@ -890,6 +931,338 @@ namespace Modules.Billing
             if (e.ColumnIndex == 8)
             {
                 AdditionalFeesAddAddOn(sender, e);
+            }
+        }
+
+        public void ComputeAddonALL()
+        {
+            //AFM 20210321 if computation is based on area/LM(electrical) and if fees code is set to need area
+            string sComputeValue = string.Empty;
+            bool blnNeedArea = false;
+            bool blnNeedLM = false;
+            OracleResultSet res = new OracleResultSet();
+            string sQuery = string.Empty;
+            var db = new EPSConnection(dbConn);
+            foreach (DataGridViewRow row in RecordFrm.dgvAddOnFees.Rows)
+            {
+
+                double dAmountDue = 0;
+                res.Query = $"select area_needed, lm_needed from addl_subcategories where fees_code = '{m_sFeesCode}'";
+                if (res.Execute())
+                    if (res.Read())
+                    {
+                        if (res.GetString("area_needed") == "Y")
+                            blnNeedArea = true;
+                        else
+                            blnNeedArea = false;
+
+                        if (res.GetString("lm_needed") == "Y")
+                            blnNeedLM = true;
+                        else
+                            blnNeedLM = false;
+                    }
+                res.Close();
+
+                if (m_sFeesMeans == "FA") //AFM 20210405
+                {
+                    double dAmount1 = 0;
+                    sQuery = $"select amount1 from addl_schedules where fees_code = '{m_sFeesCode}'";
+                    var epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
+
+                    foreach (var items in epsrec)
+                    {
+                        double.TryParse(items.AMOUNT1.ToString(), out dAmount1);
+                    }
+                    dAmountDue = dAmount1;
+                }
+
+                RecordFrm.txtAmount.Text = string.Format("{0:#,###.00}", dAmountDue);
+                ButtonOkAddOn(sComputeValue);
+            }
+
+        }
+
+        public void ComputeOtherALL()
+        {
+            //AFM 20210321 if computation is based on area/LM(electrical) and if fees code is set to need area
+            string sComputeValue = string.Empty;
+            bool blnNeedArea = false;
+            bool blnNeedLM = false;
+            OracleResultSet res = new OracleResultSet();
+            foreach (DataGridViewRow row in RecordFrm.dgvOtherFees.Rows)
+            {
+                res.Query = $"select area_needed, lm_needed from other_subcategories where fees_code = '{m_sFeesCode}'";
+                if (res.Execute())
+                    if (res.Read())
+                    {
+                        if (res.GetString("area_needed") == "Y")
+                            blnNeedArea = true;
+                        else
+                            blnNeedArea = false;
+
+                        if (res.GetString("lm_needed") == "Y")
+                            blnNeedLM = true;
+                        else
+                            blnNeedLM = false;
+                    }
+                res.Close();
+
+                //same computation with Compute() function
+                // computation here
+                string sQuery = string.Empty;
+                var db = new EPSConnection(dbConn);
+                double dAmountDue = 0;
+
+                if (m_sFeesMeans == "FA") //AFM 20210405
+                {
+                    double dAmount1 = 0;
+                    sQuery = $"select amount1 from other_schedules where fees_code = '{m_sFeesCode}'";
+                    var epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
+
+                    foreach (var items in epsrec)
+                    {
+                        double.TryParse(items.AMOUNT1.ToString(), out dAmount1);
+                    }
+                    dAmountDue = dAmount1;
+                }
+
+                else if (m_sFeesMeans == "FR")
+                {
+                    double dRate = 0;
+
+                    sQuery = $"select coalesce(rate1,0) as rate1 from other_schedules where fees_code = '{m_sFeesCode}'";
+                    var epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
+
+                    foreach (var items in epsrec)
+                    {
+                        double.TryParse(items.RATE1.ToString(), out dRate);
+                    }
+                    if (blnNeedArea)
+                    {
+                        dAmountDue = dRate * m_dArea;
+                        sComputeValue = "AREA";
+                    }
+                    else if (blnNeedLM)
+                    {
+                        dAmountDue = dRate * m_LMTotal; //AFM 20210323 compute due based on electrical LM total
+                        sComputeValue = "LM";
+                    }
+                    else
+                        dAmountDue = dRate * m_dInputValue;
+
+
+                }
+                else if (m_sFeesMeans == "QN")
+                {
+                    double dAmt1 = 0;
+                    double dAmt2 = 0;
+
+                    sQuery = $"select coalesce(amount1,0) as amount1, coalesce(amount2,0) as amount2 from other_schedules where fees_code = '{m_sFeesCode}'";
+                    var epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
+
+                    foreach (var items in epsrec)
+                    {
+                        double.TryParse(items.AMOUNT1.ToString(), out dAmt1);
+                        double.TryParse(items.AMOUNT2.ToString(), out dAmt2);
+                    }
+                    if (blnNeedArea)
+                    {
+                        dAmountDue = dAmt1 * m_dArea;
+                        sComputeValue = "AREA";
+                    }
+                    else if (blnNeedLM)
+                    {
+                        dAmountDue = dAmt1 * m_LMTotal; //AFM 20210323 compute due based on electrical LM total
+                        sComputeValue = "LM";
+                    }
+                    else
+                        dAmountDue = dAmt1 * m_dInputValue;
+
+                    if (dAmountDue < dAmt2)
+                        dAmountDue = dAmt2;
+
+                }
+                else if (m_sFeesMeans == "QR")
+                {
+                    double dAmt1 = 0;
+                    double dRate2 = 0;
+                    double dQty1 = 0;
+                    double dQty = 0;
+
+                    var epsrec = db.Database.SqlQuery<SCHEDULES>("select * from other_schedules"); //instantiate
+
+                    if (blnNeedArea == true) //AFM 20210323
+                    {
+                        sQuery = $"select coalesce(amount1,0) as amount1, coalesce(rate2,0) as rate2, coalesce(qty1,0) as qty1 from other_schedules where  ";
+                        sQuery += $"qty1 <= {m_dArea} and qty2 >= {m_dArea} and fees_code = '{m_sFeesCode}'";
+                        epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
+                    }
+                    else if (blnNeedLM == true) //AFM 20210323
+                    {
+                        sQuery = $"select coalesce(amount1,0) as amount1, coalesce(rate2,0) as rate2, coalesce(qty1,0) as qty1 from other_schedules where  ";
+                        sQuery += $"qty1 <= {m_LMTotal} and qty2 >= {m_LMTotal} and fees_code = '{m_sFeesCode}'";
+                        epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
+                    }
+                    else
+                    {
+                        sQuery = $"select coalesce(amount1,0) as amount1, coalesce(rate2,0) as rate2, coalesce(qty1,0) as qty1 from other_schedules where  ";
+                        sQuery += $"qty1 <= {m_dInputValue} and qty2 >= {m_dInputValue} and fees_code = '{m_sFeesCode}'";
+                        epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
+                    }
+
+
+                    foreach (var items in epsrec)
+                    {
+                        if (m_sCumulative == "N")
+                        {
+                            double.TryParse(items.AMOUNT1.ToString(), out dAmt1);
+                            double.TryParse(items.RATE2.ToString(), out dRate2);
+                            double.TryParse(items.QTY1.ToString(), out dQty1);
+
+                            if (dRate2 > 0)
+                            {
+                                if (blnNeedArea)
+                                {
+                                    dQty = m_dArea - (dQty1 - .01);
+                                    sComputeValue = "AREA";
+                                }
+                                else if (blnNeedLM)
+                                {
+                                    dQty = m_LMTotal - (dQty1 - .01); //AFM 20210323 compute due based on electrical LM total
+                                    sComputeValue = "LM";
+                                }
+                                else
+                                    dQty = m_dInputValue - (dQty1 - .01);
+
+                                dAmountDue = (dQty * dRate2) + dAmt1;
+                            }
+                            else
+                            {
+                                dAmountDue = dAmt1;
+                            }
+
+                        }
+                        else
+                            dAmountDue = ComputeCumulative(m_sFeesCode, m_dArea);
+                    }
+                }
+                else if (m_sFeesMeans == "RR")
+                {
+                    var epsrec = db.Database.SqlQuery<SCHEDULES>("select * from other_schedules"); //instantiate
+                    if (blnNeedArea)
+                    {
+                        sQuery = $"select coalesce(amount1,0) as amount1,coalesce(rate1,0) as rate1 from other_schedules where range1 <= ";
+                        sQuery += $"{m_dArea} and range2 >= {m_dArea} and fees_code = '{m_sFeesCode}'";
+                        epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
+                    }
+                    else
+                    {
+                        sQuery = $"select coalesce(amount1,0) as amount1,coalesce(rate1,0) as rate1 from other_schedules where range1 <= ";
+                        sQuery += $"{m_dInputValue} and range2 >= {m_dInputValue} and fees_code = '{m_sFeesCode}'";
+                        epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
+                    }
+
+
+
+                    foreach (var items in epsrec)
+                    {
+                        if (m_sCumulative == "N")
+                        {
+                            double dRate = 0;
+                            double dTemp = 0;
+                            double.TryParse(items.RATE1.ToString(), out dRate);
+                            double.TryParse(items.AMOUNT1.ToString(), out dTemp);
+
+                            if (dRate != 0)
+                            {
+                                if (blnNeedArea)
+                                {
+                                    dAmountDue = dTemp * m_dArea * dRate;
+                                    sComputeValue = "AREA";
+                                }
+                                else if (blnNeedLM)
+                                {
+                                    dAmountDue = dTemp * m_LMTotal * dRate;
+                                    sComputeValue = "LM";
+                                }
+                                else
+                                    dAmountDue = dTemp * m_dInputValue * dRate;
+                            }
+                            else
+                            {
+                                if (blnNeedArea)
+                                {
+                                    dAmountDue = dTemp * m_dArea;
+                                    sComputeValue = "AREA";
+                                }
+                                else if (blnNeedLM)
+                                {
+                                    dAmountDue = dTemp * m_LMTotal;
+                                    sComputeValue = "LM";
+                                }
+                                else
+                                    dAmountDue = dTemp * m_dInputValue;
+                            }
+
+                        }
+                        else
+                            dAmountDue = ComputeCumulative(m_sFeesCode, m_dArea);
+                    }
+                }
+                else if (m_sFeesMeans == "AR")
+                {
+                    sQuery = $"select coalesce(amount1,0) as AMOUNT1, coalesce(rate2,0) as RATE2, coalesce(range1,0) as RANGE1 from other_schedules where range1 <= ";
+                    sQuery += $"{m_dArea} and range2 >= {m_dArea} and fees_code = '{m_sFeesCode}'";
+                    var epsrec = db.Database.SqlQuery<SCHEDULES>(sQuery);
+
+                    foreach (var items in epsrec)
+                    {
+                        if (m_sCumulative == "N")
+                        {
+                            double dAmt1 = 0;
+                            double dRate2 = 0;
+                            double dRange1 = 0;
+                            double.TryParse(items.AMOUNT1.ToString(), out dAmt1);
+                            double.TryParse(items.RATE2.ToString(), out dRate2);
+                            double.TryParse(items.RANGE1.ToString(), out dRange1);
+
+                            if (dRate2 > 0)
+                            {
+                                dRange1 = m_dArea - (dRange1 - .01);
+                                dAmountDue = (dRange1 * dRate2) + dAmt1;
+                                dAmountDue = dAmountDue * m_dMonths;
+                            }
+                            else
+                                dAmountDue = dAmt1 * m_dArea;
+                        }
+                        else
+                            dAmountDue = ComputeCumulative(m_sFeesCode, m_dArea);
+                        sComputeValue = "AREA";
+                    }
+                }
+                else if (m_sFeesMeans == "Override")
+                {
+                    dAmountDue = m_dArea;
+                }
+                else
+                    dAmountDue = m_dArea;
+
+                if (dAmountDue <= 0)
+                {
+                    MessageBox.Show("Invalid Amount/Rate, Pls. Check!", "Billing", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(RecordFrm.txtUnits.Text.Trim())) //AFM 20220210 multiple amount of fees per unit - adjustments binan meeting 20220209
+                {
+                    double dUnits = 0;
+                    double.TryParse(RecordFrm.txtUnits.Text.Trim(), out dUnits);
+                    if (dUnits > 0)
+                        dAmountDue = dAmountDue * Convert.ToDouble(Decimal.Truncate(Convert.ToDecimal(dUnits)));
+                }
+
+                RecordFrm.txtAmount.Text = string.Format("{0:#,###.00}", dAmountDue);
+                ButtonOkOther(sComputeValue);
             }
         }
 
@@ -1195,6 +1568,14 @@ namespace Modules.Billing
                 return;
             }
 
+            if (!string.IsNullOrEmpty(RecordFrm.txtUnits.Text.Trim())) //AFM 20220210 multiple amount of fees per unit - adjustments binan meeting 20220209
+            {
+                double dUnits = 0;
+                double.TryParse(RecordFrm.txtUnits.Text.Trim(), out dUnits);
+                if (dUnits > 0)
+                    dAmountDue = dAmountDue * Convert.ToDouble(Decimal.Truncate(Convert.ToDecimal(dUnits)));
+            }
+
             RecordFrm.txtAmount.Text = string.Format("{0:#,###.00}", dAmountDue);
             ButtonOkOther(sComputeValue);
         }
@@ -1335,6 +1716,8 @@ namespace Modules.Billing
                 double dRate2 = 0;
                 double dQty1 = 0;
                 double dQty = 0;
+                double dmod = 0;
+                int iMultiplier = 1;
 
                 var epsrec = db.Database.SqlQuery<SCHEDULES>("select * from schedules"); //instantiate
 
@@ -1372,16 +1755,26 @@ namespace Modules.Billing
                             {
                                 dQty = m_dArea - (dQty1 - .01);
                                 sComputeValue = "AREA";
+                                dAmountDue = (dQty * dRate2) + dAmt1;
+
                             }
                             else if (blnNeedLM)
                             {
                                 dQty = m_LMTotal - (dQty1 - .01); //AFM 20210323 compute due based on electrical LM total
                                 sComputeValue = "LM";
+                                dAmountDue = (dQty * dRate2) + dAmt1;
                             }
-                            else
-                                dQty = m_dInputValue - (dQty1 - .01);
+                            else //AFM 20220210 - ADJUSTED computation of QR means as per binan - adjustments binan meeting 20220209
+                            {
+                                dQty = m_dInputValue - (dQty1);
+                                if (dQty >= dQty1)
+                                {
+                                    dmod = dQty / dQty1; //divide input value by minimum range
+                                    iMultiplier = Convert.ToInt32(Decimal.Truncate(Convert.ToDecimal(dmod)));
+                                }
+                                dAmountDue = dAmt1 + (dAmt1 * iMultiplier); //apply plus rate for every 1200000
+                            }
 
-                            dAmountDue = (dQty * dRate2) + dAmt1;
                         }
                         else
                         {
@@ -1498,6 +1891,14 @@ namespace Modules.Billing
             {
                 MessageBox.Show("Invalid Amount/Rate, Pls. Check!", "Billing", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
+            }
+
+            if(!string.IsNullOrEmpty(RecordFrm.txtUnits.Text.Trim())) //AFM 20220210 multiple amount of fees per unit - adjustments binan meeting 20220209
+            {
+                double dUnits = 0;
+                double.TryParse(RecordFrm.txtUnits.Text.Trim(), out dUnits);
+                if (dUnits > 0)
+                    dAmountDue = dAmountDue * Convert.ToDouble(Decimal.Truncate(Convert.ToDecimal(dUnits)));
             }
 
             RecordFrm.txtAmount.Text = string.Format("{0:#,###.00}", dAmountDue);
@@ -1749,15 +2150,19 @@ namespace Modules.Billing
                         return;
                     }
 
+                    if (!string.IsNullOrEmpty(RecordFrm.txtUnits.Text.Trim())) //AFM 20220210 multiple amount of fees per unit - adjustments binan meeting 20220209
+                    {
+                        double dUnits = 0;
+                        double.TryParse(RecordFrm.txtUnits.Text.Trim(), out dUnits);
+                        if (dUnits > 0)
+                            dAmountDue = dAmountDue * Convert.ToDouble(Decimal.Truncate(Convert.ToDecimal(dUnits)));
+                    }
+
                     RecordFrm.txtAmount.Text = string.Format("{0:#,###.00}", dAmountDue);
                     ButtonOkALL (sComputeValue, dInputAreaLM, sFeesCode);
                     RecordFrm.txtAmount.TextAlign = HorizontalAlignment.Left; //should be right, but left somehow aligns to right
                 }
             }
-      
-           
-           
-            
         }
 
         public bool Compute()
@@ -1959,6 +2364,31 @@ namespace Modules.Billing
                 {
                     RecordFrm.dgvAssessment[0, m_iAssessmentRow].Value = true;
                     SaveBillTmp(RecordFrm.dgvAssessment[2, m_iAssessmentRow].Value.ToString(), dAmountDue);
+                    RecordFrm.txtAmount.Text = "";  // initialize
+                }
+            }
+            catch { }
+        }
+
+        public void ButtonOkAddOn(string sVal)
+        {
+            try
+            {
+                if (sVal == "AREA")
+                    RecordFrm.dgvAddOnFees[7, m_iAssessmentRow].Value = m_dArea;
+                else if (sVal == "LM")
+                    RecordFrm.dgvAddOnFees[7, m_iAssessmentRow].Value = m_LMTotal;
+
+                double dAmountDue = 0;
+
+                RecordFrm.dgvAddOnFees[8, m_iAssessmentRow].Value = RecordFrm.txtAmount.Text;
+                RecordFrm.dgvAddOnFees[11, m_iAssessmentRow].Value = RecordFrm.txtAmount.Text;
+                double.TryParse(RecordFrm.txtAmount.Text.ToString(), out dAmountDue);
+
+                if (dAmountDue > 0)
+                {
+                    RecordFrm.dgvOtherFees[0, m_iAssessmentRow].Value = true;
+                    SaveBillAddOnTmp(RecordFrm.dgvAddOnFees[2, m_iAssessmentRow].Value.ToString(), dAmountDue);
                     RecordFrm.txtAmount.Text = "";  // initialize
                 }
             }
@@ -2215,8 +2645,8 @@ namespace Modules.Billing
 
 
             RecordFrm.txtAllTotAmtDue.Text = string.Format("{0:#,##0.#0}", dTotalAmt);
-            RecordFrm.txtAllTotAmtDue.TextAlign = HorizontalAlignment.Left; //should be right, but left appear to align to right
-           
+            RecordFrm.txtAllTotAmtDue.TextAlign = HorizontalAlignment.Left; //should be right, but left appears to align  right
+
 
             //MAIN TOTAL
             dTotalAmt = 0;
@@ -2231,7 +2661,7 @@ namespace Modules.Billing
             }
             catch { }
             RecordFrm.txtAmtDue.Text = string.Format("{0:#,##0.#0}", dTotalAmt);
-            RecordFrm.txtAmtDue.TextAlign = HorizontalAlignment.Left; //should be right, but left appear to align to right
+            RecordFrm.txtAmtDue.TextAlign = HorizontalAlignment.Left; //should be right, but left appears to align  right
 
             //ADDITIONAL TOTAL
             dTotalAmt = 0;
@@ -2246,7 +2676,7 @@ namespace Modules.Billing
             }
             catch { }
             RecordFrm.txtAddOnTotAmTDue.Text = string.Format("{0:#,##0.#0}", dTotalAmt);
-            RecordFrm.txtAddOnTotAmTDue.TextAlign = HorizontalAlignment.Left; //should be right, but left appear to align to right
+            RecordFrm.txtAddOnTotAmTDue.TextAlign = HorizontalAlignment.Left; //should be right, but left appears to align  right
 
             //OTHERS TOTAL
             dTotalAmt = 0;
@@ -2260,7 +2690,7 @@ namespace Modules.Billing
             }
             catch { }
             RecordFrm.txtOtherTotAmtDue.Text = string.Format("{0:#,##0.#0}", dTotalAmt);
-            RecordFrm.txtOtherTotAmtDue.TextAlign = HorizontalAlignment.Left; //should be right, but left appear to align to right
+            RecordFrm.txtOtherTotAmtDue.TextAlign = HorizontalAlignment.Left; //should be right, but left appears to align right
         }
 
         private bool ValidateTaggedDisplay(string sFees) //check if fees is for display only and not computed to total amount
