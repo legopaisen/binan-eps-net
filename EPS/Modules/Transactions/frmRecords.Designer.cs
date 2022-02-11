@@ -55,6 +55,7 @@
             this.btnImgAttach = new System.Windows.Forms.Button();
             this.btnImgDetach = new System.Windows.Forms.Button();
             this.arn1 = new Modules.ARN.AN();
+            this.lblPaid = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -331,6 +332,20 @@
             this.arn1.Size = new System.Drawing.Size(216, 39);
             this.arn1.TabIndex = 1;
             // 
+            // lblPaid
+            // 
+            this.lblPaid.AutoSize = true;
+            this.lblPaid.BackColor = System.Drawing.Color.Transparent;
+            this.lblPaid.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPaid.ForeColor = System.Drawing.Color.Red;
+            this.lblPaid.Location = new System.Drawing.Point(807, 134);
+            this.lblPaid.Name = "lblPaid";
+            this.lblPaid.Size = new System.Drawing.Size(48, 23);
+            this.lblPaid.TabIndex = 16;
+            this.lblPaid.Text = "PAID";
+            this.lblPaid.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblPaid.Visible = false;
+            // 
             // frmRecords
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -338,6 +353,7 @@
             this.BackColor = System.Drawing.Color.Aqua;
             this.ClientSize = new System.Drawing.Size(880, 547);
             this.ControlBox = false;
+            this.Controls.Add(this.lblPaid);
             this.Controls.Add(this.btnImgDetach);
             this.Controls.Add(this.btnImgAttach);
             this.Controls.Add(this.btnImgView);
@@ -401,5 +417,6 @@
         private System.Windows.Forms.Button btnImgView;
         private System.Windows.Forms.Button btnImgAttach;
         private System.Windows.Forms.Button btnImgDetach;
+        public System.Windows.Forms.Label lblPaid;
     }
 }

@@ -66,7 +66,8 @@ namespace Modules.Reports
                 new Microsoft.Reporting.WinForms.ReportParameter("PrePrinted", ReportForm.isPrePrint.ToString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("AssignedPro", ReportForm.AssignedEngr),
                 new Microsoft.Reporting.WinForms.ReportParameter("FsecNo", ReportForm.FsecNo),
-                new Microsoft.Reporting.WinForms.ReportParameter("FsecDate", ReportForm.FsecDate)
+                new Microsoft.Reporting.WinForms.ReportParameter("FsecDate", ReportForm.FsecDate),
+                new Microsoft.Reporting.WinForms.ReportParameter("Status", ReportForm.Scope)
             };
             ReportForm.reportViewer1.LocalReport.SetParameters(para);
 

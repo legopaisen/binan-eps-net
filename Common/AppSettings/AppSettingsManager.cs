@@ -15,7 +15,7 @@ namespace Common.AppSettings
         public static SystemUser g_objSystemUser;
         private static int m_intYear;
         private static string m_strValidityInMonth;
-        
+
         /*
         static readonly AppSettingsManager instance = new AppSettingsManager();
 
@@ -50,7 +50,7 @@ namespace Common.AppSettings
         /// <returns>the current date/time</returns>
         public static DateTime GetSystemDate() // ALJ 20090902 change to public // pending cosder freeze date
         {
-            
+
             DateTime dtSystemDate = DateTime.Now;
             OracleResultSet result = new OracleResultSet();
             result.Query = "SELECT SYSDATE FROM DUAL";
@@ -63,7 +63,7 @@ namespace Common.AppSettings
             }
             result.Close();
             return dtSystemDate;
-            
+
             //return new DateTime(2009, 01, 13);
         }
         /// <summary>
@@ -163,7 +163,7 @@ namespace Common.AppSettings
             return AppSettingsManager.GetValue("error_tbl", "error_code", "error_desc");
         }
          */
-        
+
         /*
         public static string GetConfigValueByDescription(string strConfigDescription)
         {
@@ -186,9 +186,9 @@ namespace Common.AppSettings
         public static string GetConfigValue(string strConfigCode)
         {
             return AppSettingsManager.GetConfigValue("VALUE_FLD", "config", "subj_code",
-                ":1", strConfigCode);  
+                ":1", strConfigCode);
         }
-        
+
         public static string GetConfigValueByDescription(string strConfigDescription)
         {
             return AppSettingsManager.GetConfigValue("VALUE_FLD", "config", "subj_desc",
@@ -201,23 +201,23 @@ namespace Common.AppSettings
                 "RPAD(:1, 2)", strAuctionCode);
         }
 
-        
+
         public static string GetConfigObject(string sCode)
         {
-            
+
             OracleResultSet xxx = new OracleResultSet();
             xxx.Query = "SELECT OBJECT FROM CONFIG WHERE TRIM(CODE) = :1";
             xxx.AddParameter(":1", sCode);
-            if(xxx.Execute())
+            if (xxx.Execute())
             {
-                if(xxx.Read()==true)
+                if (xxx.Read() == true)
                 {
                     sObject = xxx.GetString("object").Trim();
                 }
             }
             xxx.Close();
             return sObject;
-            
+
         }
 
         public static string GetConfigDescription(string strConfigCode)
@@ -226,14 +226,14 @@ namespace Common.AppSettings
                 "RPAD(:1, 2)", strConfigCode);
         }
 
-        public static string GetConfigValue(string strValueField, string strConfigTable, 
+        public static string GetConfigValue(string strValueField, string strConfigTable,
             string strSubjectField, string strFormatField, string strConfigCode)
         {
             string strConfigValue = string.Empty;
             OracleResultSet result = new OracleResultSet();
             result.Query = string.Format("SELECT {0} FROM {1} WHERE {2} = {3}", strValueField,
                 strConfigTable, strSubjectField, strFormatField);
-                //"SELECT value_fld FROM config_table WHERE subj_code = RPAD(:1, 3)";
+            //"SELECT value_fld FROM config_table WHERE subj_code = RPAD(:1, 3)";
             result.AddParameter(":1", strConfigCode);
             if (result.Execute())
             {
@@ -290,7 +290,7 @@ namespace Common.AppSettings
         }
         //RDO 04302008 (e) get municipal code
 
-        
+
         //for compatibility with older version
         public static string GetDistrictCode()
         {
@@ -397,7 +397,7 @@ namespace Common.AppSettings
             {
                 return sAcctName;
             }
-            else if(p_sReturnValue == "TCT")
+            else if (p_sReturnValue == "TCT")
             {
                 return sTCT;
             }
@@ -410,7 +410,7 @@ namespace Common.AppSettings
         public static DateTime ComputeExpiryDate(string p_sTRN, DateTime p_odtDateReg)
         {
             // RMC 20130214 added function in appsettingsmanager to avoid circular dependencies error when adding reference in projects
-            
+
             DateTime odtDateToExpire;
             DateTime odtDateReg;
 
@@ -491,7 +491,7 @@ namespace Common.AppSettings
             string strDistCode = string.Empty;
 
             result.Query = "select distinct dist_code from brgy order by dist_code";
-            if(result.Execute())
+            if (result.Execute())
             {
                 if (result.Read())
                     strDistCode = result.GetString(0);
@@ -589,6 +589,18 @@ namespace Common.AppSettings
                 }
             result.Close();
             return false;
+        }
+
+        public static bool GetPaidStatus(string sARN)
+        {
+            OracleResultSet result = new OracleResultSet();
+            int cnt = 0;
+            result.Query = $"select count(*) from payments where arn = '{sARN}'";
+            int.TryParse(result.ExecuteScalar(), out cnt);
+            if (cnt > 0)
+                return true;
+            else
+                return false; 
         }
     }
 }

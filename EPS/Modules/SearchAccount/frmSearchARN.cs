@@ -705,6 +705,25 @@ namespace Modules.SearchAccount
                 strWhereCond += $" and (acct_vill like '{StringUtilities.HandleApostrophe(txtProjVill.Text.ToString())}%' OR acct_vill is null)) ";
                 //requested on site by RJ (e)
 
+                if (SearchCriteria == "QUE-VIEW") //AFM 20220211 allow viewing of paid applications - adjustments binan meeting 20220209
+                {
+                    strWhereCond += $" UNION ALL select * from application where application.main_application = 1 and arn like 'AN%' and "; 
+                    strWhereCond += $" permit_code like '{PermitCode}%' and application.arn like '{sPermitAcro}%' ";
+                    strWhereCond += $" and application.arn like '{arn1.GetAn()}%' ";
+                    strWhereCond += $" and application.proj_desc like '{StringUtilities.HandleApostrophe(txtProjDesc.Text.ToString())}%' ";
+                    strWhereCond += $" and application.proj_lot_owner in (select acct_code from account where acct_ln like '{StringUtilities.HandleApostrophe(txtLotLastName.Text.ToString())}%' ";
+                    strWhereCond += $" and (acct_fn like '{StringUtilities.HandleApostrophe(txtLotFirstName.Text.ToString())}%' OR acct_fn is null) ";
+                    strWhereCond += $" and (acct_mi like '{StringUtilities.HandleApostrophe(txtLotMI.Text.ToString())}%'OR acct_mi is null)) ";
+                    strWhereCond += $" and application.proj_owner in (select acct_code from account where acct_ln like '{StringUtilities.HandleApostrophe(txtOwnLastName.Text.ToString())}%' ";
+                    strWhereCond += $" and (acct_fn like '{StringUtilities.HandleApostrophe(txtOwnFirstName.Text.ToString())}%' OR acct_fn is null) ";
+                    strWhereCond += $" and (acct_mi like '{StringUtilities.HandleApostrophe(txtOwnMI.Text.ToString())}%' OR acct_mi is null) ";
+                    strWhereCond += $" and (acct_hse_no like '{StringUtilities.HandleApostrophe(txtProjHseNo.Text.ToString())}%' OR acct_hse_no is null) ";
+                    strWhereCond += $" and (acct_lot_no like '{StringUtilities.HandleApostrophe(txtProjLotNo.Text.ToString())}%' OR acct_lot_no is null) ";
+                    strWhereCond += $" and (acct_blk_no like '{StringUtilities.HandleApostrophe(txtProjBlkNo.Text.ToString())}%' OR acct_blk_no is null) ";
+                    strWhereCond += $" and (acct_addr like '{StringUtilities.HandleApostrophe(txtProjStreet.Text.ToString())}%' OR acct_addr is null) ";
+                    strWhereCond += $" and (acct_vill like '{StringUtilities.HandleApostrophe(txtProjVill.Text.ToString())}%' OR acct_vill is null)) ";
+                }
+
                 var result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
                              select a;
                 foreach (var item in result)

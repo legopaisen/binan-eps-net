@@ -282,6 +282,8 @@ namespace Modules.Transactions
             taskman.RemTask(RecordFrm.AN);
             //RecordFrm.arn1.GetMonth = ""; // disabled for new arn of binan
             RecordFrm.arn1.GetSeries = "";
+            if(RecordFrm.SourceClass.Contains("NEW_EDIT") || RecordFrm.SourceClass.Contains("NEW_VIEW"))
+                RecordFrm.arn1.GetTaxYear = "";
             //RecordFrm.arn1.Clear();
         }
 
@@ -607,10 +609,13 @@ namespace Modules.Transactions
                     printdlg.DoModal();
                 }*/
 
-                frmRequirementsList frmrequirementslist = new frmRequirementsList();
-                frmrequirementslist.Permit = RecordFrm.PermitApplication;
-                frmrequirementslist.ARN = RecordFrm.AN;
-                frmrequirementslist.ShowDialog();
+                if(!RecordFrm.SourceClass.Contains("NEW_EDIT"))
+                {
+                    frmRequirementsList frmrequirementslist = new frmRequirementsList();
+                    frmrequirementslist.Permit = RecordFrm.PermitApplication;
+                    frmrequirementslist.ARN = RecordFrm.AN;
+                    frmrequirementslist.ShowDialog();
+                }
             }
             else
                 MessageBox.Show("ARN: " + RecordFrm.AN + "  is not saved.", RecordFrm.DialogText, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -743,7 +748,7 @@ namespace Modules.Transactions
                 strWhereCond = $" where arn = '{RecordFrm.AN}' and main_application = 1";
                 if (RecordFrm.SourceClass == "NEW_EDIT" || RecordFrm.SourceClass == "NEW_VIEW" || RecordFrm.SourceClass == "NEW_CANCEL" || RecordFrm.SourceClass.Contains("NEW_ADD_") || RecordFrm.SourceClass == "NEW_EDIT_OTH") //AFM 20210315 added new add for other applications
                 {
-                    strWhereCond += $" and status_code = 'NEW'";
+                    //strWhereCond += $" and status_code = 'NEW'";
                     if (RecordFrm.PermitApplication == "ELECTRICAL" || RecordFrm.PermitApplication == "OCCUPANCY" || RecordFrm.PermitApplication == "OTHERS")
                     {
                         if(RecordFrm.SourceClass == "NEW_EDIT_OTH")
@@ -754,7 +759,12 @@ namespace Modules.Transactions
 
                     if (RecordFrm.SourceClass.Contains("NEW_ADD_"))
                     {
-                        strWhereCond += $" UNION ALL select * from application_que where arn = '{RecordFrm.AN}' and main_application = 1 and status_code = 'NEW'";
+                        strWhereCond += $" UNION ALL select * from application_que where arn = '{RecordFrm.AN}' and main_application = 1 ";
+                    }
+
+                    if (RecordFrm.SourceClass == "NEW_VIEW") //AFM 20220211 allow viewing of paid applications - adjustments binan meeting 20220209
+                    {
+                        strWhereCond += $" UNION ALL select * from application where arn = '{RecordFrm.AN}' and main_application = 1 ";
                     }
                 }
                 else
@@ -770,6 +780,12 @@ namespace Modules.Transactions
                     {
                         iCnt++;
                     }
+
+                    if (iCnt == 0) //if application table is null, will get que
+                    {
+                        result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
+                                 select a;
+                    }
                 }
                 else
                 {
@@ -777,11 +793,7 @@ namespace Modules.Transactions
                              select a;
                 }
 
-                if(iCnt == 0) //if application table is null, will get que
-                {
-                    result = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
-                             select a;
-                }
+               
                     
             }
             int iBldgNo = 0;
@@ -868,6 +880,9 @@ namespace Modules.Transactions
             DisplayBuilding(iBldgNo);
             DisplayOwners();
             DisplayEngrArch();
+
+            if (AppSettingsManager.GetPaidStatus(RecordFrm.AN)) //AFM 20220211 adjustments binan meeting 20220209
+                RecordFrm.lblPaid.Visible = true;
 
             if (RecordFrm.SourceClass == "REN_ADD")
             {
@@ -971,6 +986,13 @@ namespace Modules.Transactions
                 }
                 else
                 {
+
+                    if(RecordFrm.SourceClass == "NEW_VIEW") //AFM 20220211 adjustments binan meeting 20220209
+                    {
+                        strWhereCond = $" where arn = '{RecordFrm.AN}' ";
+                        strWhereCond += $" UNION ALL select * from application where arn = '{RecordFrm.AN}' ";
+                    }
+
                     var pset = from a in Records.ApplicationQueList.GetApplicationQue(strWhereCond)
                                select a;
                     RecordFrm.formBldgDate.LoadGrid();
@@ -1021,7 +1043,13 @@ namespace Modules.Transactions
             else if ((RecordFrm.SourceClass.Contains("NEW_EDIT"))) //AFM 20211103
                 //strWhereCond = $" where arn = '{RecordFrm.AN}' and permit_code = '{RecordFrm.SelectedPermitCode}' order by main_application desc"; //get building application
                 strWhereCond = $" where arn = '{RecordFrm.AN}' and permit_code = '{((DataRowView)RecordFrm.cmbPermit.SelectedItem)["PermitCode"].ToString()}' order by main_application desc"; //AFM //AFM 20220209 adjustments binan meeting 20220209
-            else
+            else if(RecordFrm.SourceClass == "NEW_VIEW")
+            {
+                strWhereCond = $" where arn = '{RecordFrm.AN}' ";
+                strWhereCond += $" UNION ALL select * from application where arn = '{RecordFrm.AN}' ";
+
+            }
+            else 
                 strWhereCond = $" where arn = '{RecordFrm.AN}' order by main_application desc";
 
             RecordFrm.formEngr.LoadGrid();
