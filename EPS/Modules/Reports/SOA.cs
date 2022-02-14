@@ -20,6 +20,13 @@ namespace Modules.Reports
         private DataSet dtSet2;
         private double dAllTotalAmt = 0;
 
+        double dLineGradeAmtTot = 0;
+        double dBldgFeeAmtTot = 0;
+        double dSanitaryAmtTot = 0;
+        double dElecFeeTot = 0;
+        double dConstFeeTot = 0;
+        double dFilingFeeTot = 0;
+
         public SOA(frmReport Form) : base(Form)
         { }
 
@@ -213,15 +220,16 @@ namespace Modules.Reports
             string sPres = string.Empty;
             string sNoMember = string.Empty;
 
-            sQuery = "SELECT fees_desc, SUM(fees_amt) as fees_amt, permit_code from (";
+            //AFM 20220214 added feescode - adjustments binan meeting 2/8/22
+            sQuery = "SELECT fees_desc, SUM(fees_amt) as fees_amt, permit_code, FEES_CODE from (";
             sQuery += "select major_fees.fees_desc as fees_desc,";
-            sQuery += "sum(taxdues.fees_amt) as fees_amt, taxdues.permit_code from taxdues,major_fees ";
+            sQuery += "sum(taxdues.fees_amt) as fees_amt, taxdues.permit_code from taxdues,major_fees , taxdues.FEES_CODE ";
             sQuery += "where substr(taxdues.fees_code,1,2) = major_fees.fees_code and ";
             sQuery += $"taxdues.arn = '{ReportForm.An}' ";
             sQuery += $"and taxdues.FEES_CATEGORY <> 'OTHERS' ";
             sQuery += $"and taxdues.FEES_CATEGORY <> 'ADDITIONAL' ";
-            sQuery += $" group by major_fees.fees_desc, taxdues.fees_code, taxdues.permit_code ";
-            sQuery += $" ) group by  fees_desc, permit_code ";
+            sQuery += $" group by major_fees.fees_desc, taxdues.fees_code, taxdues.permit_code, taxdues.FEES_CODE ";
+            sQuery += $" ) group by  fees_desc, permit_code, fees_code ";
 
 
             var record = db.Database.SqlQuery<SOA_TBL>(sQuery);
@@ -237,6 +245,24 @@ namespace Modules.Reports
                 myDataRow = dtTable.NewRow();
                 //sFees = items.FEES_CODE;
                 sPermitCode = items.PERMIT_CODE;
+
+                //AFM 20220214 - adjustments binan meeting 2/8/22 (s)
+                if(ReportForm.SOAPermit.Contains("BUILDING PERMIT")) //format for building permit
+                {
+                    if (items.FEES_DESC == "BUILDING FEE") //line and grade
+                    {
+                        dLineGradeAmtTot += items.FEES_AMT;
+                    }
+                }
+                else if (ReportForm.SOAPermit.Contains("ELECTRICAL PERMIT")) //format for electrical permit
+                {
+
+                }
+                else //format for other permits
+                {
+
+                }
+                //AFM 20220214 - adjustments binan meeting 2/8/22 (e)
 
                 //surcharge
                 result.Query = $"select sum(TD.fees_amt) as fees_amt from other_major_fees OM, taxdues TD ";
@@ -298,7 +324,27 @@ namespace Modules.Reports
 
                 dAllTotalAmt += items.FEES_AMT;
             }
-            
+
+            //BLDG FEE (addl fees etc.)
+            result.Query = "select taxdues.fees_code, taxdues.fees_amt, addl_subcategories.FEES_DESC from taxdues, addl_subcategories ";
+            result.Query += "from taxdues ";
+            result.Query += $"where taxdues.arn = '{ReportForm.An}' ";
+            result.Query += $"and taxdues.fees_code = addl_subcategories.fees_code ";
+            result.Query += $"AND TAXDUES.FEES_CATEGORY = 'ADDITIONAL' ";
+            result.Query += $"AND taxdues.permit_code = '{sPermitCode}' ";
+            if(result.Execute())
+            {
+                while(result.Read())
+                {
+                    string sFeesDesc = result.GetString("fees_desc");
+                    if(sFeesDesc.Contains("FILING FEE"))
+                    {
+
+                    }
+
+                }
+            }
+
             if (iCnt == 0) //AFM 20211123 requested by binan as per rj - allow billing of additional fees only on any permit
             // proceeding this condition means additional fees are only billed on permit
             {

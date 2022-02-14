@@ -57,6 +57,8 @@ namespace Modules.Reports
         public string FSICNo { get; set; }
         public DateTime FSICDtIssued { get; set; }
 
+        //AFM 20220214 - adjustments binan meeting 2/8/22
+        public string sSOAPermit { get; set; }
 
         public frmReport()
         {

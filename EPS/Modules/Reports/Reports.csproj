@@ -284,6 +284,7 @@
     <EmbeddedResource Include="Report\BuildingInformation.rdlc" />
     <EmbeddedResource Include="Report\BuildingPermit.rdlc" />
     <EmbeddedResource Include="Report\CertAnnualInsp.rdlc" />
+    <EmbeddedResource Include="Report\CertAnnualInspBinan.rdlc" />
     <EmbeddedResource Include="Report\CertOccupancy.rdlc" />
     <EmbeddedResource Include="Report\CertOccupancyBinan.rdlc" />
     <EmbeddedResource Include="Report\EncoderLog.rdlc" />

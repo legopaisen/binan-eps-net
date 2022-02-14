@@ -471,7 +471,7 @@ namespace Modules.Utilities
 
                 sQuery = $"select * from engineer_tbl where 1=1 ";
                 if(!string.IsNullOrEmpty(sAcctNo))
-                    sQuery += $" engr_code like '{sAcctNo}%'";
+                    sQuery += $" and engr_code like '{sAcctNo}%'";
                 if(!string.IsNullOrEmpty(sLastName))
                     sQuery += $" and engr_ln like '{sLastName}%'";
                 if(!string.IsNullOrEmpty(sFirstName))
