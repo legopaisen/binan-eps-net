@@ -287,6 +287,7 @@
     <EmbeddedResource Include="Report\CertAnnualInspBinan.rdlc" />
     <EmbeddedResource Include="Report\CertOccupancy.rdlc" />
     <EmbeddedResource Include="Report\CertOccupancyBinan.rdlc" />
+    <EmbeddedResource Include="Report\CertofUse.rdlc" />
     <EmbeddedResource Include="Report\EncoderLog.rdlc" />
     <EmbeddedResource Include="Report\PermitsSummary.rdlc" />
     <EmbeddedResource Include="Report\SOA.rdlc" />
