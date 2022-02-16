@@ -113,7 +113,13 @@ namespace Modules.Reports
                 new Microsoft.Reporting.WinForms.ReportParameter("LGUName", ConfigurationAttributes.LguName2),
                 new Microsoft.Reporting.WinForms.ReportParameter("Province", ConfigurationAttributes.ProvinceName),
                 new Microsoft.Reporting.WinForms.ReportParameter("PrintBy", AppSettingsManager.SystemUser.UserName),
-                new Microsoft.Reporting.WinForms.ReportParameter("AllTotalAmt", dAllTotalAmt.ToString())
+                new Microsoft.Reporting.WinForms.ReportParameter("AllTotalAmt", dAllTotalAmt.ToString("##,##0.00")),
+                new Microsoft.Reporting.WinForms.ReportParameter("LineGradeAmt", dLineGradeAmtTot.ToString("##,##0.00")),
+                new Microsoft.Reporting.WinForms.ReportParameter("BldgAmt", dBldgFeeAmtTot.ToString("##,##0.00")),
+                new Microsoft.Reporting.WinForms.ReportParameter("SanitaryAmt", dSanitaryAmtTot.ToString("##,##0.00")),
+                new Microsoft.Reporting.WinForms.ReportParameter("ElecFee", dElecFeeTot.ToString("##,##0.00")),
+                new Microsoft.Reporting.WinForms.ReportParameter("ConstFee", dConstFeeTot.ToString("##,##0.00")),
+                new Microsoft.Reporting.WinForms.ReportParameter("FilingFee", dFilingFeeTot.ToString("##,##0.00"))
      };
             ReportForm.reportViewer1.LocalReport.SetParameters(para);
 
@@ -223,7 +229,7 @@ namespace Modules.Reports
             //AFM 20220214 added feescode - adjustments binan meeting 2/8/22
             sQuery = "SELECT fees_desc, SUM(fees_amt) as fees_amt, permit_code, FEES_CODE from (";
             sQuery += "select major_fees.fees_desc as fees_desc,";
-            sQuery += "sum(taxdues.fees_amt) as fees_amt, taxdues.permit_code from taxdues,major_fees , taxdues.FEES_CODE ";
+            sQuery += "sum(taxdues.fees_amt) as fees_amt, taxdues.permit_code, taxdues.FEES_CODE from taxdues,major_fees ";
             sQuery += "where substr(taxdues.fees_code,1,2) = major_fees.fees_code and ";
             sQuery += $"taxdues.arn = '{ReportForm.An}' ";
             sQuery += $"and taxdues.FEES_CATEGORY <> 'OTHERS' ";
@@ -247,11 +253,22 @@ namespace Modules.Reports
                 sPermitCode = items.PERMIT_CODE;
 
                 //AFM 20220214 - adjustments binan meeting 2/8/22 (s)
-                if(ReportForm.SOAPermit.Contains("BUILDING PERMIT")) //format for building permit
+                if(ReportForm.SOAPermit.Contains("BUILDING")) //format for building permit
                 {
-                    if (items.FEES_DESC == "BUILDING FEE") //line and grade
+                    if (items.FEES_DESC == "BUILDING FEES" || sPermitCode == "01") //line and grade
                     {
                         dLineGradeAmtTot += items.FEES_AMT;
+                        dAllTotalAmt += items.FEES_AMT;
+                    }
+                    if(items.FEES_DESC == "ELECTRICAL FEES")
+                    {
+                        dElecFeeTot += items.FEES_AMT;
+                        dAllTotalAmt += items.FEES_AMT;
+                    }
+                    if (items.FEES_DESC == "PLUMBING FEES")
+                    {
+                        dSanitaryAmtTot += items.FEES_AMT;
+                        dAllTotalAmt += items.FEES_AMT;
                     }
                 }
                 else if (ReportForm.SOAPermit.Contains("ELECTRICAL PERMIT")) //format for electrical permit
@@ -311,39 +328,55 @@ namespace Modules.Reports
 
                 myDataRow["Surcharge"] = fSurch; //pending value nito
 
-                items.FEES_AMT += fSurch;
-                items.FEES_AMT += fAddl;
+                if ((ReportForm.SOAPermit.Contains("BUILDING") && sPermitCode != "01") && (ReportForm.SOAPermit.Contains("BUILDING") && sPermitCode != "02") && (ReportForm.SOAPermit.Contains("BUILDING") && items.FEES_DESC != "PLUMBING FEES")) //format for building permit
+                {
+                    {
+                        //items.FEES_AMT += fSurch;
+                        //items.FEES_AMT += fAddl;
 
-                myDataRow["FeesDesc"] = items.FEES_DESC;
-                myDataRow["Fees"] = items.FEES_AMT;
+                        //myDataRow["FeesDesc"] = items.FEES_DESC;
+                        myDataRow["FeesDesc"] = AppSettingsManager.GetPermitDesc(sPermitCode).Substring(0, AppSettingsManager.GetPermitDesc(sPermitCode).Length - 6) + "FEES";
+                        myDataRow["Fees"] = items.FEES_AMT;
 
-                myDataRow["AdminFine"] = 0; //pending value nito
-                myDataRow["Total"] = items.FEES_AMT;
+                        myDataRow["AdminFine"] = 0; //pending value nito
+                        myDataRow["Total"] = items.FEES_AMT;
 
-                dtTable.Rows.Add(myDataRow);
+                        dtTable.Rows.Add(myDataRow);
 
-                dAllTotalAmt += items.FEES_AMT;
+                        dAllTotalAmt += items.FEES_AMT;
+                    }
+                }
             }
 
-            //BLDG FEE (addl fees etc.)
+
+            //AFM 20220214 - adjustments binan meeting 2/8/22
+            //BLDG FEE (addl fees, filing fee etc.)
             result.Query = "select taxdues.fees_code, taxdues.fees_amt, addl_subcategories.FEES_DESC from taxdues, addl_subcategories ";
-            result.Query += "from taxdues ";
             result.Query += $"where taxdues.arn = '{ReportForm.An}' ";
             result.Query += $"and taxdues.fees_code = addl_subcategories.fees_code ";
             result.Query += $"AND TAXDUES.FEES_CATEGORY = 'ADDITIONAL' ";
-            result.Query += $"AND taxdues.permit_code = '{sPermitCode}' ";
+            //result.Query += $"AND taxdues.permit_code = '{sPermitCode}' ";
             if(result.Execute())
             {
                 while(result.Read())
                 {
-                    string sFeesDesc = result.GetString("fees_desc");
-                    if(sFeesDesc.Contains("FILING FEE"))
+                    string sFeesdesc = result.GetString("fees_desc");
+                    double dAmt = 0;
+                    double.TryParse(result.GetDouble("fees_amt").ToString(), out dAmt);
+
+                    if (sFeesdesc.Contains("FILLING FEE")) //filing fee is separate
                     {
-
+                        dFilingFeeTot += dAmt;
+                        dAllTotalAmt += dAmt;
                     }
-
+                    else
+                    {
+                        dAllTotalAmt += dAmt;
+                        dBldgFeeAmtTot += dAmt;
+                    }
                 }
             }
+            result.Close();
 
             if (iCnt == 0) //AFM 20211123 requested by binan as per rj - allow billing of additional fees only on any permit
             // proceeding this condition means additional fees are only billed on permit
