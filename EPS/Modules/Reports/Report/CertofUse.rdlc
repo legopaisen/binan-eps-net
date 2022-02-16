@@ -2,11 +2,12 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
-      <Image Name="Image3">
+      <Image Name="Image4">
         <Source>Embedded</Source>
-        <Value>page00011</Value>
+        <Value>page0002</Value>
         <Sizing>FitProportional</Sizing>
-        <Height>11.03in</Height>
+        <Top>11.04389in</Top>
+        <Height>10.96528in</Height>
         <Width>8.47917in</Width>
         <Style>
           <Border>
@@ -14,12 +15,11 @@
           </Border>
         </Style>
       </Image>
-      <Image Name="Image4">
+      <Image Name="Image3">
         <Source>Embedded</Source>
-        <Value>page0002</Value>
+        <Value>page00011</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>11.05778in</Top>
-        <Height>10.97222in</Height>
+        <Height>11.03in</Height>
         <Width>8.47917in</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -341,7 +341,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Parameters!sCharacterofOccupancy.Value</Value>
+                <Value>=Parameters!sCharacterOccupancy.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -353,8 +353,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>sCharacterofOccupancy</rd:DefaultName>
-        <Top>5.01264in</Top>
-        <Left>3.53in</Left>
+        <Top>4.99876in</Top>
+        <Left>3.53001in</Left>
         <Height>0.18056in</Height>
         <Width>3.80208in</Width>
         <ZIndex>11</ZIndex>
@@ -422,9 +422,9 @@
         </Paragraphs>
         <rd:DefaultName>sBuildingOfficial</rd:DefaultName>
         <Top>8.23833in</Top>
-        <Left>5.10292in</Left>
+        <Left>5.06125in</Left>
         <Height>0.25in</Height>
-        <Width>2.38542in</Width>
+        <Width>2.61458in</Width>
         <ZIndex>13</ZIndex>
         <Style>
           <Border>
@@ -546,7 +546,9 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!dtChiefIED.Value</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style>
@@ -555,9 +557,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>dtChiefIED</rd:DefaultName>
-        <Top>20.70708in</Top>
+        <Top>20.69666in</Top>
         <Left>1.94667in</Left>
-        <Height>0.1875in</Height>
+        <Height>0.17708in</Height>
         <Width>1.40625in</Width>
         <ZIndex>17</ZIndex>
         <Style>
@@ -578,7 +580,9 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!dtChiefPED.Value</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style>
@@ -587,9 +591,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>dtChiefPED</rd:DefaultName>
-        <Top>20.70708in</Top>
+        <Top>20.69666in</Top>
         <Left>5.83208in</Left>
-        <Height>0.1875in</Height>
+        <Height>0.17708in</Height>
         <Width>1.5in</Width>
         <ZIndex>18</ZIndex>
         <Style>
@@ -766,16 +770,172 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="cb1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!cb1.Value</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>cb1</rd:DefaultName>
+        <Top>13.31472in</Top>
+        <Left>1.06125in</Left>
+        <Height>0.16667in</Height>
+        <Width>0.16667in</Width>
+        <ZIndex>24</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="cb2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!cb2.Value</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>cb2</rd:DefaultName>
+        <Top>13.49528in</Top>
+        <Left>1.06125in</Left>
+        <Height>0.16667in</Height>
+        <Width>0.16667in</Width>
+        <ZIndex>25</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="cb3">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!cb3.Value</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>cb3</rd:DefaultName>
+        <Top>13.33903in</Top>
+        <Left>4.49875in</Left>
+        <Height>0.16667in</Height>
+        <Width>0.16667in</Width>
+        <ZIndex>26</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="cb4">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!cb4.Value</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>cb4</rd:DefaultName>
+        <Top>13.49528in</Top>
+        <Left>4.49875in</Left>
+        <Height>0.16667in</Height>
+        <Width>0.16667in</Width>
+        <ZIndex>27</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="sSpecify">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!sSpecify.Value</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>sSpecify</rd:DefaultName>
+        <Top>13.49528in</Top>
+        <Left>5.41542in</Left>
+        <Height>0.16667in</Height>
+        <Width>1.11458in</Width>
+        <ZIndex>28</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>22.03in</Height>
+    <Height>22.00917in</Height>
     <Style />
   </Body>
   <Width>8.47917in</Width>
   <Page>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
@@ -820,12 +980,6 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="sOccupancyNo">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="sChiefIED">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
@@ -860,8 +1014,9 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="dtPermitIssued">
-      <DataType>DateTime</DataType>
+      <DataType>String</DataType>
       <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="sSignPermitNo">
@@ -878,6 +1033,7 @@
     </ReportParameter>
     <ReportParameter Name="sProfessional">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
@@ -887,7 +1043,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="sCharacterofOccupancy">
+    <ReportParameter Name="sCharacterOccupancy">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -906,6 +1062,36 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="dtBuildingOfficial">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cb1">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cb2">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cb3">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cb4">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="sSpecify">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>

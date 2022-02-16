@@ -117,6 +117,8 @@
     <Compile Include="BuildingPermit.cs" />
     <Compile Include="CertAnnualInsp.cs" />
     <Compile Include="CertificateOccupancyBinan.cs" />
+    <Compile Include="CertofAnnualInsBinan.cs" />
+    <Compile Include="CertofUse.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -146,6 +148,12 @@
     </Compile>
     <Compile Include="frmCertification.Designer.cs">
       <DependentUpon>frmCertification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCertificationBinan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCertificationBinan.Designer.cs">
+      <DependentUpon>frmCertificationBinan.cs</DependentUpon>
     </Compile>
     <Compile Include="frmEncoderLog.cs">
       <SubType>Form</SubType>
@@ -256,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCertification.resx">
       <DependentUpon>frmCertification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCertificationBinan.resx">
+      <DependentUpon>frmCertificationBinan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEncoderLog.resx">
       <DependentUpon>frmEncoderLog.cs</DependentUpon>

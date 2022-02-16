@@ -57,6 +57,28 @@ namespace Modules.Reports
         public string FSICNo { get; set; }
         public DateTime FSICDtIssued { get; set; }
 
+
+        // JAA 20220216 - other certification (s)
+        public string sFeepaid { get; set; }
+        public string sOccupancyNo { get; set; }
+        public string sCharacterOccupancy{ get; set; }
+        public string sGroup { get; set; }
+        public string sLocated { get; set; }
+        public DateTime dtPaid { get; set; }
+
+
+        public string sProfession { get; set; }
+        public string SignPermitNo { get; set; } 
+        public DateTime dtPermitIssued { get; set; }
+        public string cb1 { get; set; }
+        public string cb2 { get; set; }
+        public string cb3 { get; set; }
+        public string cb4 { get; set; }
+        public string Specify { get; set; }
+
+        // JAA 20220216 (e)
+
+
         //AFM 20220214 - adjustments binan meeting 2/8/22
         public string SOAPermit { get; set; }
 
@@ -196,6 +218,26 @@ namespace Modules.Reports
 
                 ReportClass = new CertOccupancyBinan(this);
             }
+            // JAA 20220216 (s)
+            else if (ReportName == "CERTIFICATE OF USE")
+            {
+                report_desc = "CERTIFICATE OF USE";
+                this.reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
+                this.reportViewer1.LocalReport.ReportEmbeddedResource = "Modules.Reports.Report.CertofUse.rdlc";
+                this.Text = ReportName;
+
+                ReportClass = new CertofUse(this);
+            }
+            else if (ReportName == "CERTIFICATE OF ANNUAL INSPECTION")
+            {
+                report_desc = "CERTIFICATE OF ANNUAL INSPECTION";
+                this.reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
+                this.reportViewer1.LocalReport.ReportEmbeddedResource = "Modules.Reports.Report.CertAnnualInspBinan.rdlc";
+                this.Text = ReportName;
+
+                ReportClass = new CertofAnnualInsBinan(this);
+            }
+            // JAA 20220216 (e)
 
             ReportClass.LoadForm();
 

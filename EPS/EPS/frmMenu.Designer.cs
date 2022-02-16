@@ -89,6 +89,7 @@
             this.categoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.occupancyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.scopeOfWorkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FormofOwnershipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.typesOfMaterialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.usersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,7 +125,8 @@
             this.lblCode = new System.Windows.Forms.Label();
             this.lblDesc = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
-            this.FormofOwnershipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cERTIFICATEOFOCCUPANCYToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oTHERCERTIFICATIONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MS.SuspendLayout();
             this.pnlButton.SuspendLayout();
             this.SuspendLayout();
@@ -517,10 +519,12 @@
             // 
             // printCertificationToolStripMenuItem
             // 
+            this.printCertificationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cERTIFICATEOFOCCUPANCYToolStripMenuItem,
+            this.oTHERCERTIFICATIONToolStripMenuItem});
             this.printCertificationToolStripMenuItem.Name = "printCertificationToolStripMenuItem";
             this.printCertificationToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.printCertificationToolStripMenuItem.Text = "Print Certification";
-            this.printCertificationToolStripMenuItem.Click += new System.EventHandler(this.printCertificationToolStripMenuItem_Click);
             // 
             // paymentHistoryToolStripMenuItem
             // 
@@ -651,6 +655,13 @@
             this.scopeOfWorkToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.scopeOfWorkToolStripMenuItem.Text = "Scope of Work";
             this.scopeOfWorkToolStripMenuItem.Click += new System.EventHandler(this.scopeOfWorkToolStripMenuItem_Click);
+            // 
+            // FormofOwnershipToolStripMenuItem
+            // 
+            this.FormofOwnershipToolStripMenuItem.Name = "FormofOwnershipToolStripMenuItem";
+            this.FormofOwnershipToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.FormofOwnershipToolStripMenuItem.Text = "Form of Ownership";
+            this.FormofOwnershipToolStripMenuItem.Click += new System.EventHandler(this.FormofOwnershipToolStripMenuItem_Click);
             // 
             // typesOfMaterialsToolStripMenuItem
             // 
@@ -977,12 +988,19 @@
             this.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblDate.Visible = false;
             // 
-            // FormofOwnershipToolStripMenuItem
+            // cERTIFICATEOFOCCUPANCYToolStripMenuItem
             // 
-            this.FormofOwnershipToolStripMenuItem.Name = "FormofOwnershipToolStripMenuItem";
-            this.FormofOwnershipToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.FormofOwnershipToolStripMenuItem.Text = "Form of Ownership";
-            this.FormofOwnershipToolStripMenuItem.Click += new System.EventHandler(this.FormofOwnershipToolStripMenuItem_Click);
+            this.cERTIFICATEOFOCCUPANCYToolStripMenuItem.Name = "cERTIFICATEOFOCCUPANCYToolStripMenuItem";
+            this.cERTIFICATEOFOCCUPANCYToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.cERTIFICATEOFOCCUPANCYToolStripMenuItem.Text = "CERTIFICATE OF OCCUPANCY";
+            this.cERTIFICATEOFOCCUPANCYToolStripMenuItem.Click += new System.EventHandler(this.cERTIFICATEOFOCCUPANCYToolStripMenuItem_Click);
+            // 
+            // oTHERCERTIFICATIONToolStripMenuItem
+            // 
+            this.oTHERCERTIFICATIONToolStripMenuItem.Name = "oTHERCERTIFICATIONToolStripMenuItem";
+            this.oTHERCERTIFICATIONToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.oTHERCERTIFICATIONToolStripMenuItem.Text = "OTHER CERTIFICATION";
+            this.oTHERCERTIFICATIONToolStripMenuItem.Click += new System.EventHandler(this.oTHERCERTIFICATIONToolStripMenuItem_Click);
             // 
             // frmMenu
             // 
@@ -1113,6 +1131,8 @@
         private System.Windows.Forms.ToolStripMenuItem dOLEBillingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem oTHERPERMITSToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem FormofOwnershipToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cERTIFICATEOFOCCUPANCYToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oTHERCERTIFICATIONToolStripMenuItem;
     }
 }
 

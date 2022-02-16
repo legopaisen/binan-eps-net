@@ -969,5 +969,17 @@ namespace EPS
                 }
             }
         }
+
+        private void cERTIFICATEOFOCCUPANCYToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCertification frmcertification = new frmCertification();
+            frmcertification.ShowDialog();
+        }
+
+        private void oTHERCERTIFICATIONToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCertificationBinan frmcertification = new frmCertificationBinan();
+            frmcertification.ShowDialog();
+        }
     }
 }
