@@ -18,14 +18,25 @@ namespace Modules.Reports
     {
         private DataSet dtSet;
         private DataSet dtSet2;
+        private DataSet dtSet3;
         private double dAllTotalAmt = 0;
 
+        //building
         double dLineGradeAmtTot = 0;
         double dBldgFeeAmtTot = 0;
         double dSanitaryAmtTot = 0;
         double dElecFeeTot = 0;
         double dConstFeeTot = 0;
         double dFilingFeeTot = 0;
+
+        //electrical
+        double dWiring = 0;
+        double dCFEI = 0;
+        double dLoad = 0;
+        double dInspect = 0;
+
+        //other permit
+        double dOtherPermitFee = 0;
 
         public SOA(frmReport Form) : base(Form)
         { }
@@ -94,6 +105,7 @@ namespace Modules.Reports
 
             dtSet = new DataSet();
             dtSet2 = new DataSet();
+            dtSet3 = new DataSet();
 
             CreateDataSet();
 
@@ -113,25 +125,27 @@ namespace Modules.Reports
                 new Microsoft.Reporting.WinForms.ReportParameter("LGUName", ConfigurationAttributes.LguName2),
                 new Microsoft.Reporting.WinForms.ReportParameter("Province", ConfigurationAttributes.ProvinceName),
                 new Microsoft.Reporting.WinForms.ReportParameter("PrintBy", AppSettingsManager.SystemUser.UserName),
-                new Microsoft.Reporting.WinForms.ReportParameter("AllTotalAmt", dAllTotalAmt.ToString("##,##0.00")),
-                new Microsoft.Reporting.WinForms.ReportParameter("LineGradeAmt", dLineGradeAmtTot.ToString("##,##0.00")),
-                new Microsoft.Reporting.WinForms.ReportParameter("BldgAmt", dBldgFeeAmtTot.ToString("##,##0.00")),
-                new Microsoft.Reporting.WinForms.ReportParameter("SanitaryAmt", dSanitaryAmtTot.ToString("##,##0.00")),
-                new Microsoft.Reporting.WinForms.ReportParameter("ElecFee", dElecFeeTot.ToString("##,##0.00")),
-                new Microsoft.Reporting.WinForms.ReportParameter("ConstFee", dConstFeeTot.ToString("##,##0.00")),
-                new Microsoft.Reporting.WinForms.ReportParameter("FilingFee", dFilingFeeTot.ToString("##,##0.00"))
+                new Microsoft.Reporting.WinForms.ReportParameter("AllTotalAmt", dAllTotalAmt.ToString("##,##0.00"))
+                //new Microsoft.Reporting.WinForms.ReportParameter("LineGradeAmt", dLineGradeAmtTot.ToString("##,##0.00")),
+                //new Microsoft.Reporting.WinForms.ReportParameter("BldgAmt", dBldgFeeAmtTot.ToString("##,##0.00")),
+                //new Microsoft.Reporting.WinForms.ReportParameter("SanitaryAmt", dSanitaryAmtTot.ToString("##,##0.00")),
+                //new Microsoft.Reporting.WinForms.ReportParameter("ElecFee", dElecFeeTot.ToString("##,##0.00")),
+                //new Microsoft.Reporting.WinForms.ReportParameter("ConstFee", dConstFeeTot.ToString("##,##0.00")),
+                //new Microsoft.Reporting.WinForms.ReportParameter("FilingFee", dFilingFeeTot.ToString("##,##0.00"))
      };
             ReportForm.reportViewer1.LocalReport.SetParameters(para);
 
 
             ReportDataSource ds = new ReportDataSource("DataSet1", dtSet.Tables[0]);
             ReportDataSource ds2 = new ReportDataSource("DataSet2", dtSet2.Tables[0]);
+            ReportDataSource ds3 = new ReportDataSource("DataSet3", dtSet3.Tables[0]);
             this.ReportForm.reportViewer1.LocalReport.DataSources.Clear();
             this.ReportForm.reportViewer1.LocalReport.DataSources.Add(ds);
             this.ReportForm.reportViewer1.LocalReport.DataSources.Add(ds2);
+            this.ReportForm.reportViewer1.LocalReport.DataSources.Add(ds3);
 
 
-           
+
 
         }
 
@@ -143,6 +157,7 @@ namespace Modules.Reports
 
             DataTable dtTable = new DataTable("List");
             DataTable dtTable2 = new DataTable("List");
+            DataTable dtTable3 = new DataTable("List");
             DataColumn dtColumn;
             DataRow myDataRow;
             OracleResultSet result = new OracleResultSet();
@@ -214,14 +229,49 @@ namespace Modules.Reports
             dtColumn.ReadOnly = false;
             dtTable2.Columns.Add(dtColumn);
 
+            ////////
+
+            dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(String);
+            dtColumn.ColumnName = "FeesDesc";
+            dtColumn.ReadOnly = false;
+            dtColumn.Unique = false;
+            dtTable3.Columns.Add(dtColumn);
+
+            dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(Double);
+            dtColumn.ColumnName = "Fees";
+            dtColumn.ReadOnly = false;
+            dtTable3.Columns.Add(dtColumn);
+
+            dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(Double);
+            dtColumn.ColumnName = "Surcharge";
+            dtColumn.ReadOnly = false;
+            dtTable3.Columns.Add(dtColumn);
+
+            dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(Double);
+            dtColumn.ColumnName = "AdminFine";
+            dtColumn.ReadOnly = false;
+            dtTable3.Columns.Add(dtColumn);
+
+            dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(Double);
+            dtColumn.ColumnName = "Total";
+            dtColumn.ReadOnly = false;
+            dtTable3.Columns.Add(dtColumn);
+
             //DataColumn[] PrimaryKeyColumns = new DataColumn[1];
             //PrimaryKeyColumns[0] = dtTable.Columns["FeesDesc"];
             //dtTable.PrimaryKey = PrimaryKeyColumns;
 
             dtSet = new DataSet();
             dtSet2 = new DataSet();
+            dtSet3 = new DataSet();
             dtSet.Tables.Add(dtTable);
             dtSet2.Tables.Add(dtTable2);
+            dtSet3.Tables.Add(dtTable3);
             string sValue = string.Empty;
             string sPres = string.Empty;
             string sNoMember = string.Empty;
@@ -253,14 +303,14 @@ namespace Modules.Reports
                 sPermitCode = items.PERMIT_CODE;
 
                 //AFM 20220214 - adjustments binan meeting 2/8/22 (s)
-                if(ReportForm.SOAPermit.Contains("BUILDING")) //format for building permit
+                if (ReportForm.SOAPermit.Contains("BUILDING")) //format for building permit
                 {
                     if (items.FEES_DESC == "BUILDING FEES" || sPermitCode == "01") //line and grade
                     {
                         dLineGradeAmtTot += items.FEES_AMT;
                         dAllTotalAmt += items.FEES_AMT;
                     }
-                    if(items.FEES_DESC == "ELECTRICAL FEES")
+                    if (items.FEES_DESC == "ELECTRICAL FEES")
                     {
                         dElecFeeTot += items.FEES_AMT;
                         dAllTotalAmt += items.FEES_AMT;
@@ -271,13 +321,18 @@ namespace Modules.Reports
                         dAllTotalAmt += items.FEES_AMT;
                     }
                 }
-                else if (ReportForm.SOAPermit.Contains("ELECTRICAL PERMIT")) //format for electrical permit
+                else if (ReportForm.SOAPermit.Contains("ELECTRICAL")) //format for electrical permit
                 {
-
+                    if (items.FEES_DESC == "ELECTRICAL FEES") //total connected load
+                    {
+                        dLoad += items.FEES_AMT;
+                        dAllTotalAmt += items.FEES_AMT;
+                    }
                 }
                 else //format for other permits
                 {
-
+                    dAllTotalAmt += items.FEES_AMT;
+                    dOtherPermitFee += items.FEES_AMT;
                 }
                 //AFM 20220214 - adjustments binan meeting 2/8/22 (e)
 
@@ -324,55 +379,86 @@ namespace Modules.Reports
                 result.Close();
                 //}
 
-
-
                 myDataRow["Surcharge"] = fSurch; //pending value nito
 
                 if ((ReportForm.SOAPermit.Contains("BUILDING") && sPermitCode != "01") && (ReportForm.SOAPermit.Contains("BUILDING") && sPermitCode != "02") && (ReportForm.SOAPermit.Contains("BUILDING") && items.FEES_DESC != "PLUMBING FEES")) //format for building permit
                 {
-                    {
-                        //items.FEES_AMT += fSurch;
-                        //items.FEES_AMT += fAddl;
+                    //items.FEES_AMT += fSurch;
+                    //items.FEES_AMT += fAddl;
 
-                        //myDataRow["FeesDesc"] = items.FEES_DESC;
-                        myDataRow["FeesDesc"] = AppSettingsManager.GetPermitDesc(sPermitCode).Substring(0, AppSettingsManager.GetPermitDesc(sPermitCode).Length - 6) + "FEES";
-                        myDataRow["Fees"] = items.FEES_AMT;
+                    //myDataRow["FeesDesc"] = items.FEES_DESC;
+                    myDataRow["FeesDesc"] = AppSettingsManager.GetPermitDesc(sPermitCode).Substring(0, AppSettingsManager.GetPermitDesc(sPermitCode).Length - 6) + "FEE";
+                    myDataRow["Fees"] = items.FEES_AMT;
 
-                        myDataRow["AdminFine"] = 0; //pending value nito
-                        myDataRow["Total"] = items.FEES_AMT;
+                    myDataRow["AdminFine"] = 0; //pending value nito
+                    myDataRow["Total"] = items.FEES_AMT;
 
-                        dtTable.Rows.Add(myDataRow);
+                    dtTable.Rows.Add(myDataRow);
 
-                        dAllTotalAmt += items.FEES_AMT;
-                    }
+                    dAllTotalAmt += items.FEES_AMT;
                 }
             }
 
 
             //AFM 20220214 - adjustments binan meeting 2/8/22
-            //BLDG FEE (addl fees, filing fee etc.)
+            //addl fees, other fee, filing fee etc.
             result.Query = "select taxdues.fees_code, taxdues.fees_amt, addl_subcategories.FEES_DESC from taxdues, addl_subcategories ";
             result.Query += $"where taxdues.arn = '{ReportForm.An}' ";
             result.Query += $"and taxdues.fees_code = addl_subcategories.fees_code ";
-            result.Query += $"AND TAXDUES.FEES_CATEGORY = 'ADDITIONAL' ";
+            result.Query += $"AND (TAXDUES.FEES_CATEGORY = 'ADDITIONAL' OR TAXDUES.FEES_CATEGORY = 'OTHERS')";
             //result.Query += $"AND taxdues.permit_code = '{sPermitCode}' ";
-            if(result.Execute())
+            if (result.Execute())
             {
-                while(result.Read())
+                while (result.Read())
                 {
                     string sFeesdesc = result.GetString("fees_desc");
                     double dAmt = 0;
                     double.TryParse(result.GetDouble("fees_amt").ToString(), out dAmt);
 
-                    if (sFeesdesc.Contains("FILLING FEE")) //filing fee is separate
+                    if (ReportForm.SOAPermit.Contains("BUILDING"))
                     {
-                        dFilingFeeTot += dAmt;
-                        dAllTotalAmt += dAmt;
+                        if (sFeesdesc.Contains("FILLING FEE")) //filing fee is separate
+                        {
+                            dFilingFeeTot += dAmt;
+                            dAllTotalAmt += dAmt;
+                        }
+                        else
+                        {
+                            dAllTotalAmt += dAmt;
+                            dBldgFeeAmtTot += dAmt;
+                        }
                     }
-                    else
+                    else if (ReportForm.SOAPermit.Contains("ELECTRICAL"))
                     {
-                        dAllTotalAmt += dAmt;
-                        dBldgFeeAmtTot += dAmt;
+                        if (sFeesdesc.Contains("CFEI"))
+                        {
+                            dAllTotalAmt += dAmt;
+                            dCFEI += dAmt;
+                        }
+                        else if (sFeesdesc.Contains("INSPECTION"))
+                        {
+                            dAllTotalAmt += dAmt;
+                            dInspect += dAmt;
+                        }
+                        else
+                        {
+                            dAllTotalAmt += dAmt;
+                            dWiring += dAmt;
+                        }
+
+                    }
+                    else //other permits
+                    {
+                        if (sFeesdesc.Contains("FILLING FEE")) //filing fee is separate
+                        {
+                            dFilingFeeTot += dAmt;
+                            dAllTotalAmt += dAmt;
+                        }
+                        else
+                        {
+                            dOtherPermitFee += dAmt;
+                            dAllTotalAmt += dAmt;
+                        }
                     }
                 }
             }
@@ -384,12 +470,12 @@ namespace Modules.Reports
                 result.Query = "select sum(taxdues.fees_amt) as fees_amt, permit_code ";
                 result.Query += "from taxdues ";
                 result.Query += $"where taxdues.arn = '{ReportForm.An}' ";
-                result.Query += $"AND TAXDUES.FEES_CATEGORY = 'ADDITIONAL' group by permit_code "; 
+                result.Query += $"AND TAXDUES.FEES_CATEGORY = 'ADDITIONAL' group by permit_code ";
                 //result.Query += $"AND taxdues.permit_code = '{sPermitCode}' ";
                 sQuery = result.Query;
                 record = db.Database.SqlQuery<SOA_TBL>(sQuery);
-                
-                foreach(var items in record)
+
+                foreach (var items in record)
                 {
                     sPermitCode = items.PERMIT_CODE;
                     myDataRow = dtTable.NewRow();
@@ -404,7 +490,7 @@ namespace Modules.Reports
                 }
 
             }
-           
+
 
             // for other fees
             string sDisplay = string.Empty;
@@ -414,11 +500,11 @@ namespace Modules.Reports
             result.Query += $"AND O.FEES_DESC <> 'SURCHARGE' ";
             result.Query += $"AND taxdues.fees_category = 'OTHERS' ";
             result.Query += $"group by O.fees_desc, OS.display_amt ";
-            if(result.Execute())
-                while(result.Read())
+            if (result.Execute())
+                while (result.Read())
                 {
                     sDisplay = result.GetString("display_amt");
-                    if(sDisplay == "Y")
+                    if (sDisplay == "Y")
                     {
                         myDataRow = dtTable2.NewRow();
                         myDataRow["FeesDesc"] = result.GetString("fees_desc");
@@ -429,6 +515,89 @@ namespace Modules.Reports
                 }
             result.Close();
 
+
+            //AFM 20220216 - adjustments binan meeting 2/8/22
+            if (iCnt > 0)
+            {
+                if (ReportForm.SOAPermit.Contains("BUILDING"))
+                {
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = "LINE & GRADE";
+                    myDataRow["Fees"] = dLineGradeAmtTot;
+                    myDataRow["Total"] = dLineGradeAmtTot;
+                    dtTable3.Rows.Add(myDataRow);
+
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = "BUILDING FEE";
+                    myDataRow["Fees"] = dBldgFeeAmtTot;
+                    myDataRow["Total"] = dBldgFeeAmtTot;
+                    dtTable3.Rows.Add(myDataRow);
+
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = "SANITARY/PLUMBING FEE";
+                    myDataRow["Fees"] = dSanitaryAmtTot;
+                    myDataRow["Total"] = dSanitaryAmtTot;
+                    dtTable3.Rows.Add(myDataRow);
+
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = "ELECTRICAL FEE";
+                    myDataRow["Fees"] = dElecFeeTot;
+                    myDataRow["Total"] = dElecFeeTot;
+                    dtTable3.Rows.Add(myDataRow);
+
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = "CONSTRUCTION FEE";
+                    myDataRow["Fees"] = dConstFeeTot;
+                    myDataRow["Total"] = dConstFeeTot;
+                    dtTable3.Rows.Add(myDataRow);
+
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = "FILING FEE";
+                    myDataRow["Fees"] = dFilingFeeTot;
+                    myDataRow["Total"] = dFilingFeeTot;
+                    dtTable3.Rows.Add(myDataRow);
+                }
+                else if (ReportForm.SOAPermit.Contains("ELECTRICAL"))
+                {
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = "WIRING PERMIT";
+                    myDataRow["Fees"] = dWiring;
+                    myDataRow["Total"] = dWiring;
+                    dtTable3.Rows.Add(myDataRow);
+
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = "CFEI";
+                    myDataRow["Fees"] = dCFEI;
+                    myDataRow["Total"] = dCFEI;
+                    dtTable3.Rows.Add(myDataRow);
+
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = "TOTAL CONNECTED LOAD";
+                    myDataRow["Fees"] = dLoad;
+                    myDataRow["Total"] = dLoad;
+                    dtTable3.Rows.Add(myDataRow);
+
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = "INSPECTION";
+                    myDataRow["Fees"] = dInspect;
+                    myDataRow["Total"] = dInspect;
+                    dtTable3.Rows.Add(myDataRow);
+                }
+                else //other permits
+                {
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = AppSettingsManager.GetPermitDesc(sPermitCode).Substring(0, AppSettingsManager.GetPermitDesc(sPermitCode).Length - 6) + "FEE";
+                    myDataRow["Fees"] = dOtherPermitFee;
+                    myDataRow["Total"] = dOtherPermitFee;
+                    dtTable3.Rows.Add(myDataRow);
+
+                    myDataRow = dtTable3.NewRow();
+                    myDataRow["FeesDesc"] = "FILING FEE";
+                    myDataRow["Fees"] = dFilingFeeTot;
+                    myDataRow["Total"] = dFilingFeeTot;
+                    dtTable3.Rows.Add(myDataRow);
+                }
+            }
 
         }
 

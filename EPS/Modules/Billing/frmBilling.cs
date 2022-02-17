@@ -514,11 +514,16 @@ namespace Modules.Billing
                 form.ReportName = "ELECTRICAL ASSESSMENT";
                 form.SOAPermit = "ELECTRICAL";  //AFM 20220214 - adjustments binan meeting 2/8/22
             }
-            else
+            else if(cmbPermit.Text.Contains("BUILDING PERMIT"))
             {
                 form.ReportName = "ORDER OF PAYMENT";
                 if (cmbPermit.Text.Contains("BUILDING PERMIT")) //AFM 20220214 - adjustments binan meeting 2/8/22
                     form.SOAPermit = "BUILDING";
+            }
+            else //other permit
+            {
+                form.ReportName = "ORDER OF PAYMENT";
+                form.SOAPermit = "OTHERS";
             }
 
             form.An = m_sAN;
